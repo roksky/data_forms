@@ -53,7 +53,7 @@ import 'fields/location_tree_field.dart';
 import 'fields/multi_image_picker_field.dart';
 
 // ignore: must_be_immutable
-class GSField extends StatefulWidget {
+class DataFormField extends StatefulWidget {
   GSFieldModel? model;
   Widget? child;
   GSFormStyle? formStyle;
@@ -65,7 +65,7 @@ class GSField extends StatefulWidget {
     onUpdate!.call();
   }
 
-  GSField.imagePicker({
+  DataFormField.imagePicker({
     Key? key,
     required String tag,
     required Widget iconWidget,
@@ -114,7 +114,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.multiImagePicker({
+  DataFormField.multiImagePicker({
     Key? key,
     required String tag,
     required Widget iconWidget,
@@ -165,7 +165,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.spinner({
+  DataFormField.spinner({
     Key? key,
     required String tag,
     String? title,
@@ -201,7 +201,7 @@ class GSField extends StatefulWidget {
         dependsOn: dependsOn);
   }
 
-  GSField.radioGroup(
+  DataFormField.radioGroup(
       {Key? key,
       required String tag,
       String? title,
@@ -256,7 +256,7 @@ class GSField extends StatefulWidget {
         searchBoxDecoration: searchBoxDecoration);
   }
 
-  GSField.checkList({
+  DataFormField.checkList({
     Key? key,
     required String tag,
     required bool searchable,
@@ -317,7 +317,7 @@ class GSField extends StatefulWidget {
         requiredCheckListEnum: requiredCheckListEnum);
   }
 
-  GSField.text(
+  DataFormField.text(
       {Key? key,
       required String tag,
       String? title,
@@ -362,7 +362,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.password({
+  DataFormField.password({
     Key? key,
     required String tag,
     String? title,
@@ -402,7 +402,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.textPlain({
+  DataFormField.textPlain({
     Key? key,
     required String tag,
     String? title,
@@ -447,7 +447,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.mobile({
+  DataFormField.mobile({
     Key? key,
     required String tag,
     String? title,
@@ -486,7 +486,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.number({
+  DataFormField.number({
     Key? key,
     required String tag,
     String? title,
@@ -527,7 +527,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.datePicker({
+  DataFormField.datePicker({
     Key? key,
     required String tag,
     String? title,
@@ -570,7 +570,7 @@ class GSField extends StatefulWidget {
         availableTo: availableTo);
   }
 
-  GSField.dateRangePicker({
+  DataFormField.dateRangePicker({
     Key? key,
     required String tag,
     String? title,
@@ -619,7 +619,7 @@ class GSField extends StatefulWidget {
         dependsOn: dependsOn);
   }
 
-  GSField.time({
+  DataFormField.time({
     Key? key,
     required String tag,
     String? title,
@@ -655,7 +655,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.email({
+  DataFormField.email({
     Key? key,
     required String tag,
     String? title,
@@ -694,7 +694,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.price({
+  DataFormField.price({
     Key? key,
     required String tag,
     String? title,
@@ -736,7 +736,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.bankCard(
+  DataFormField.bankCard(
       {Key? key,
       required String tag,
       String? title,
@@ -773,7 +773,7 @@ class GSField extends StatefulWidget {
     );
   }
 
-  GSField.locationTree({
+  DataFormField.locationTree({
     Key? key,
     required String tag,
     String? title,
@@ -813,7 +813,7 @@ class GSField extends StatefulWidget {
         dependsOn: dependsOn);
   }
 
-  GSField.location(
+  DataFormField.location(
       {Key? key,
       required String tag,
       String? title,
@@ -853,12 +853,12 @@ class GSField extends StatefulWidget {
   //</editor-fold>
 
   @override
-  State<GSField> createState() => _GSFieldState();
+  State<DataFormField> createState() => _GSFieldState();
 }
 
-class _GSFieldState extends State<GSField> {
+class _GSFieldState extends State<DataFormField> {
   @override
-  void didUpdateWidget(covariant GSField oldWidget) {
+  void didUpdateWidget(covariant DataFormField oldWidget) {
     _fillChild();
     super.didUpdateWidget(oldWidget);
   }

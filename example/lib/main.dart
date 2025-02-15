@@ -122,7 +122,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                       style: GSFormStyle(titleStyle: const TextStyle(color: Colors.black87, fontSize: 16.0)),
                       context,
                       fields: [
-                        GSField.email(
+                        DataFormField.email(
                           tag: 'email',
                           title: 'login',
                           weight: 12,
@@ -131,7 +131,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                           errorMessage: 'erro',
                           value: 'dastras.saeed@gmail.com',
                         ),
-                        GSField.spinner(
+                        DataFormField.spinner(
                           tag: 'customer_type',
                           required: false,
                           weight: 12,
@@ -155,7 +155,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                             ),
                           ],
                         ),
-                        GSField.spinner(
+                        DataFormField.spinner(
                           tag: 'customer_type',
                           required: false,
                           weight: 6,
@@ -222,21 +222,21 @@ class MultiSectionForm extends StatelessWidget {
               child: SingleChildScrollView(
                 child: form = GSForm.multiSection(context, sections: [
                   GSSection(sectionTitle: 'User information', fields: [
-                    GSField.text(
+                    DataFormField.text(
                       value: 'Some text',
                       tag: 'name',
                       title: 'Name',
                       minLine: 1,
                       maxLine: 1,
                     ),
-                    GSField.text(
+                    DataFormField.text(
                       value: 'Some text',
                       tag: 'name',
                       title: 'Name',
                       minLine: 1,
                       maxLine: 1,
                     ),
-                    GSField.radioGroup(
+                    DataFormField.radioGroup(
                       hint: 'Radio Group',
                       tag: 'radio',
                       showScrollBar: true,
@@ -263,7 +263,7 @@ class MultiSectionForm extends StatelessWidget {
                       ],
                       callBack: (data) {},
                     ),
-                    GSField.datePicker(
+                    DataFormField.datePicker(
                       tag: 'licenceExpireDate',
                       title: 'DatePicker',
                       weight: 12,
@@ -271,7 +271,7 @@ class MultiSectionForm extends StatelessWidget {
                       initialDate: GSDate(day: 10, month: 5, year: 2023),
                       errorMessage: 'please enter a name',
                     ),
-                    GSField.text(
+                    DataFormField.text(
                       value: 'سعید دسترس3',
                       tag: 'lastName',
                       title: 'Last name',
@@ -280,7 +280,7 @@ class MultiSectionForm extends StatelessWidget {
                       weight: 12,
                       required: true,
                     ),
-                    GSField.spinner(
+                    DataFormField.spinner(
                       tag: 'customer_type',
                       required: false,
                       weight: 6,
@@ -305,7 +305,7 @@ class MultiSectionForm extends StatelessWidget {
                         ),
                       ],
                     ),
-                    GSField.mobile(
+                    DataFormField.mobile(
                       tag: 'mobile',
                       title: 'Phone number',
                       maxLength: 11,
@@ -318,7 +318,7 @@ class MultiSectionForm extends StatelessWidget {
                   GSSection(
                     sectionTitle: 'Market information',
                     fields: [
-                      GSField.text(
+                      DataFormField.text(
                         tag: 'name',
                         title: 'Market name',
                         minLine: 1,
@@ -327,7 +327,7 @@ class MultiSectionForm extends StatelessWidget {
                         required: false,
                         errorMessage: 'please enter a name',
                       ),
-                      GSField.textPlain(
+                      DataFormField.textPlain(
                         hint: 'sds',
                         tag: 'lastName',
                         title: 'Market address',
@@ -338,7 +338,7 @@ class MultiSectionForm extends StatelessWidget {
                         prefixWidget: const Icon(Icons.location_city, color: Colors.blue),
                         required: true,
                       ),
-                      GSField.spinner(
+                      DataFormField.spinner(
                         tag: 'customer_type',
                         required: false,
                         weight: 6,
@@ -354,7 +354,7 @@ class MultiSectionForm extends StatelessWidget {
                           ),
                         ],
                       ),
-                      GSField.mobile(
+                      DataFormField.mobile(
                         tag: 'mobile',
                         title: 'Telephone',
                         maxLength: 11,

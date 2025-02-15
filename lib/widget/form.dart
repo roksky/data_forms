@@ -49,7 +49,7 @@ class GSForm extends StatelessWidget {
       element.style = style;
 
       for (var field in element.fields) {
-        if (field is GSField) {
+        if (field is DataFormField) {
           field.stateManager = stateManager;
         }
       }
@@ -70,7 +70,7 @@ class GSForm extends StatelessWidget {
     bool isValid = true;
     for (var section in sections) {
       for (var field in section.fields) {
-        if (field is GSField) {
+        if (field is DataFormField) {
           bool fieldValidation = (field.child as GSFieldCallBack).isValid();
           field.model?.status = fieldValidation
               ? GSFieldStatusEnum.success
@@ -87,7 +87,7 @@ class GSForm extends StatelessWidget {
     Map<String, dynamic> data = {};
     for (var section in sections) {
       for (var filed in section.fields) {
-        if (filed is GSField) {
+        if (filed is DataFormField) {
           data[filed.model?.tag ?? ''] =
               (filed.child as GSFieldCallBack).getValue();
         }

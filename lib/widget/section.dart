@@ -26,10 +26,10 @@ class GSSection extends StatelessWidget {
     int weightSum = 0;
 
     while (i < fields.length) {
-      if (fields[i] is GSField) {
+      if (fields[i] is DataFormField) {
         List<Widget> childrenAtRow = []; // children in each row
         while (weightSum < 12 && i <= fields.length - 1) {
-          GSField field = fields[i] as GSField;
+          DataFormField field = fields[i] as DataFormField;
           childrenAtRow.add(
             Expanded(
               flex: field.model?.weight ?? 12,
@@ -39,10 +39,10 @@ class GSSection extends StatelessWidget {
 
           weightSum += field.model?.weight ?? 12;
           if (i < fields.length - 1 &&
-              fields[i + 1] is GSField &&
+              fields[i + 1] is DataFormField &&
               fields[i + 1] is! GSTextPlainField) {
             field.model?.nextFocusNode =
-                (fields[i + 1] as GSField).model?.focusNode;
+                (fields[i + 1] as DataFormField).model?.focusNode;
           }
           field.formStyle = style!;
           i++;
