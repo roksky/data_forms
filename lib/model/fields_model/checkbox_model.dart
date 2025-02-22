@@ -4,7 +4,7 @@ import 'package:data_forms/model/data_model/check_data_model.dart';
 
 import 'field_model.dart';
 
-class GSCheckBoxModel extends GSFieldModel {
+class FormCheckBoxModel extends FormFieldModel {
   List<CheckDataModel> items;
   String? hint;
   Widget? selectedIcon;
@@ -22,7 +22,7 @@ class GSCheckBoxModel extends GSFieldModel {
 
   final ValueChanged<CheckDataModel> callBack;
 
-  GSCheckBoxModel({
+  FormCheckBoxModel({
     type,
     tag,
     title,

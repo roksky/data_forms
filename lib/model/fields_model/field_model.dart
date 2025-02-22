@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import '../../enums/field_status.dart';
 import '../../enums/filed_type.dart';
 
-abstract class GSFieldModel {
-  GSFieldTypeEnum? type;
+abstract class FormFieldModel {
+  FormFieldTypeEnum? type;
   String? title;
   String tag;
   String? dependsOn;
@@ -14,7 +14,7 @@ abstract class GSFieldModel {
   Widget? postfixWidget;
   bool? required;
   bool? showTitle;
-  GSFieldStatusEnum status;
+  FormFieldStatusEnum status;
   RegExp? validateRegEx;
   int? weight;
   FocusNode? focusNode;
@@ -23,7 +23,7 @@ abstract class GSFieldModel {
   bool? enableReadOnly;
   VoidCallback? onTap;
 
-  GSFieldModel({
+  FormFieldModel({
     this.type,
     required this.tag,
     this.dependsOn,
@@ -40,8 +40,8 @@ abstract class GSFieldModel {
     this.focusNode,
     this.nextFocusNode,
     this.onTap,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     bool? enableReadOnly,
-  })  : status = status ?? GSFieldStatusEnum.normal,
+  })  : status = status ?? FormFieldStatusEnum.normal,
         enableReadOnly = enableReadOnly ?? false;
 }

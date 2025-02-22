@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'field_model.dart';
 
-class GSLocationModel extends GSFieldModel {
+class FormLocationModel extends FormFieldModel {
   String? hint;
   Widget? iconWidget;
 
-  GSLocationModel({
+  FormLocationModel({
     type,
     tag,
     title,

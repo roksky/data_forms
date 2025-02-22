@@ -2,53 +2,53 @@ import 'package:flutter/material.dart';
 
 import 'colors.dart';
 
-class GSFormTheme {
+class FormTheme {
   static TextTheme textThemeStyle = const TextTheme(
     displayLarge: TextStyle(
-        color: GSFormColors.textColorHeader,
+        color: FormColors.textColorHeader,
         fontWeight: FontWeight.w700,
         fontSize: 12.0),
     displayMedium: TextStyle(
-        color: GSFormColors.textColor,
+        color: FormColors.textColor,
         fontWeight: FontWeight.w700,
         fontSize: 11.0),
     displaySmall: TextStyle(
-        color: GSFormColors.hintTextColor,
+        color: FormColors.hintTextColor,
         fontWeight: FontWeight.w500,
         fontSize: 9.0),
     headlineMedium: TextStyle(
-        color: GSFormColors.hintTextColor,
+        color: FormColors.hintTextColor,
         fontWeight: FontWeight.w400,
         fontSize: 7.0),
     headlineSmall: TextStyle(
-        color: GSFormColors.red, fontWeight: FontWeight.w400, fontSize: 7.0),
+        color: FormColors.red, fontWeight: FontWeight.w400, fontSize: 7.0),
     bodyMedium: TextStyle(
-        color: GSFormColors.hintTextColor,
+        color: FormColors.hintTextColor,
         fontWeight: FontWeight.w400,
         fontSize: 11.0),
   );
 
   static TextTheme textThemeDarkStyle = const TextTheme(
     displayLarge: TextStyle(
-        color: GSFormColors.textDarkColorHeader,
+        color: FormColors.textDarkColorHeader,
         fontWeight: FontWeight.w700,
         fontSize: 12.0),
     displayMedium: TextStyle(
-        color: GSFormColors.textColorDark,
+        color: FormColors.textColorDark,
         fontWeight: FontWeight.w700,
         fontSize: 11.0),
     displaySmall: TextStyle(
-        color: GSFormColors.hintTextDarkColor,
+        color: FormColors.hintTextDarkColor,
         fontWeight: FontWeight.w500,
         fontSize: 9.0),
     headlineMedium: TextStyle(
-        color: GSFormColors.hintTextDarkColor,
+        color: FormColors.hintTextDarkColor,
         fontWeight: FontWeight.w400,
         fontSize: 7.0),
     headlineSmall: TextStyle(
-        color: GSFormColors.red, fontWeight: FontWeight.w400, fontSize: 7.0),
+        color: FormColors.red, fontWeight: FontWeight.w400, fontSize: 7.0),
     bodyMedium: TextStyle(
-        color: GSFormColors.hintTextDarkColor,
+        color: FormColors.hintTextDarkColor,
         fontWeight: FontWeight.w400,
         fontSize: 11.0),
   );

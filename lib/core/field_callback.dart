@@ -1,4 +1,4 @@
-abstract class GSFieldCallBack {
+abstract class FormFieldCallBack {
   bool isValid();
 
   dynamic getValue();

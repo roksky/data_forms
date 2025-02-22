@@ -9,15 +9,15 @@ import '../../model/fields_model/price_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSPriceField extends NotifiableStatefulWidget implements GSFieldCallBack {
-  late GSPriceModel model;
-  GSFormStyle formStyle;
+class FormPriceField extends NotifiableStatefulWidget implements FormFieldCallBack {
+  late FormPriceModel model;
+  FormStyle formStyle;
   TextEditingController? controller;
 
-  GSPriceField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormPriceField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSPriceField> createState() => _GSPriceFieldState();
+  State<FormPriceField> createState() => _GSPriceFieldState();
 
   @override
   getValue() {
@@ -41,7 +41,7 @@ class GSPriceField extends NotifiableStatefulWidget implements GSFieldCallBack {
       NumberFormat.decimalPattern().format(int.parse(s));
 }
 
-class _GSPriceFieldState extends State<GSPriceField> {
+class _GSPriceFieldState extends State<FormPriceField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -58,7 +58,7 @@ class _GSPriceFieldState extends State<GSPriceField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSPriceField oldWidget) {
+  void didUpdateWidget(covariant FormPriceField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;

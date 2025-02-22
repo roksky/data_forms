@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'field_model.dart';
 
-class GSPasswordModel extends GSFieldModel {
+class FormPasswordModel extends FormFieldModel {
   int? maxLength;
   String? hint;
 
-  GSPasswordModel(
+  FormPasswordModel(
       {type,
       tag,
       title,

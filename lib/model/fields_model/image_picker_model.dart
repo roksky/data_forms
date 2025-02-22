@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'field_model.dart';
 
-class GSImagePickerModel extends GSFieldModel {
+class FormImagePickerModel extends FormFieldModel {
   String? hint;
   Widget iconWidget;
   String? cameraPopupTitle;
@@ -14,7 +14,7 @@ class GSImagePickerModel extends GSFieldModel {
   double? maximumSizePerImageInBytes;
   VoidCallback? onErrorSizeItem;
 
-  GSImagePickerModel({
+  FormImagePickerModel({
     type,
     tag,
     title,

@@ -10,18 +10,18 @@ import 'package:data_forms/model/state_manager.dart';
 import 'package:provider/provider.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSSpinnerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
+class FormSpinnerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   final hintIndex = -1;
 
-  GSSpinnerModel model;
-  GSFormStyle formStyle;
+  FormSpinnerModel model;
+  FormStyle formStyle;
   SpinnerDataModel? returnedData;
 
-  GSSpinnerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormSpinnerField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSSpinnerField> createState() => _GSSpinnerFieldState();
+  State<FormSpinnerField> createState() => _GSSpinnerFieldState();
 
   @override
   getValue() {
@@ -42,7 +42,7 @@ class GSSpinnerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSSpinnerFieldState extends State<GSSpinnerField> {
+class _GSSpinnerFieldState extends State<FormSpinnerField> {
   @override
   void initState() {
     if (widget.model.items.isNotEmpty) {
@@ -74,7 +74,7 @@ class _GSSpinnerFieldState extends State<GSSpinnerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSSpinnerField oldWidget) {
+  void didUpdateWidget(covariant FormSpinnerField oldWidget) {
     widget.returnedData = null;
     for (var element in widget.model.items) {
       if (element.isSelected ?? false) {

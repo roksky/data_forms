@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class GSFormColors {
+class FormColors {
   static const white = Color(0xffffffff);
   static const redOpacity = Color(0x1aef5350);
   static const greenOpacity = Color(0x1a6cd38b);

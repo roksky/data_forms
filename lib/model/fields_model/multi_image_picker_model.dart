@@ -3,7 +3,7 @@ import 'package:data_forms/model/fields_model/image_picker_model.dart';
 
 import 'field_model.dart';
 
-class GSMultiImagePickerModel extends GSFieldModel {
+class FormMultiImagePickerModel extends FormFieldModel {
   String? hint;
   Widget iconWidget;
   String? cameraPopupTitle;
@@ -17,7 +17,7 @@ class GSMultiImagePickerModel extends GSFieldModel {
   double? maximumImageCount;
   VoidCallback? onErrorSizeItem;
 
-  GSMultiImagePickerModel({
+  FormMultiImagePickerModel({
     type,
     tag,
     title,

@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 
 import 'field_model.dart';
 
-class GSTextPlainModel extends GSFieldModel {
+class FormTextPlainModel extends FormFieldModel {
   int? maxLength;
   int? maxLine;
   int? minLine;
   String? hint;
   bool? showCounter;
 
-  GSTextPlainModel(
+  FormTextPlainModel(
       {type,
       tag,
       title,

@@ -14,16 +14,16 @@ import 'package:data_forms/widget/squircle/smooth_radius.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSImagePickerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSImagePickerModel model;
-  final GSFormStyle formStyle;
+class FormImagePickerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormImagePickerModel model;
+  final FormStyle formStyle;
 
-  GSImagePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormImagePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
   String? _croppedFilePath;
 
   @override
-  State<GSImagePickerField> createState() => _GSImagePickerFieldState();
+  State<FormImagePickerField> createState() => _GSImagePickerFieldState();
 
   @override
   getValue() {
@@ -40,7 +40,7 @@ class GSImagePickerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSImagePickerFieldState extends State<GSImagePickerField> {
+class _GSImagePickerFieldState extends State<FormImagePickerField> {
   @override
   void initState() {
     super.initState();
@@ -52,7 +52,7 @@ class _GSImagePickerFieldState extends State<GSImagePickerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSImagePickerField oldWidget) {
+  void didUpdateWidget(covariant FormImagePickerField oldWidget) {
     if (widget.model.value != null) {
       widget._croppedFilePath = widget.model.value;
     } else {
@@ -139,7 +139,7 @@ class _GSImagePickerFieldState extends State<GSImagePickerField> {
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'ویرایش تصویر',
-            toolbarColor: GSFormColors.white,
+            toolbarColor: FormColors.white,
             toolbarWidgetColor: Colors.black,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),
@@ -168,8 +168,8 @@ class _GSImagePickerFieldState extends State<GSImagePickerField> {
 class NormalView extends StatelessWidget {
   const NormalView({required this.model, required this.formStyle, Key? key})
       : super(key: key);
-  final GSImagePickerModel model;
-  final GSFormStyle formStyle;
+  final FormImagePickerModel model;
+  final FormStyle formStyle;
 
   @override
   Widget build(BuildContext context) {
@@ -191,7 +191,7 @@ class NormalView extends StatelessWidget {
                   child: Text(
                     formStyle.requiredText,
                     style: const TextStyle(
-                      color: GSFormColors.red,
+                      color: FormColors.red,
                       fontSize: 10,
                     ),
                   ),
@@ -217,8 +217,8 @@ class NormalView extends StatelessWidget {
 // ignore: must_be_immutable
 class ImagePickedView extends StatelessWidget {
   String croppedFilePath;
-  final GSImagePickerModel model;
-  final GSFormStyle formStyle;
+  final FormImagePickerModel model;
+  final FormStyle formStyle;
   final VoidCallback onDeleteImage;
 
   ImagePickedView(

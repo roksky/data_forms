@@ -3,7 +3,7 @@ import 'package:data_forms/values/theme.dart';
 import 'package:flutter/material.dart';
 
 
-class GSFormStyle {
+class FormStyle {
   TextStyle titleTextStyle;
   TextStyle fieldHintStyle;
   TextStyle fieldTextStyle;
@@ -21,7 +21,7 @@ class GSFormStyle {
   double sectionCardPadding;
   String requiredText;
 
-  GSFormStyle({
+  FormStyle({
     TextStyle? titleStyle,
     Color? backgroundFieldColor,
     Color? backgroundSectionColor,
@@ -37,87 +37,87 @@ class GSFormStyle {
     TextStyle? helpTextStyle,
     String? requiredText,
     TextStyle? sectionTitleStyle,
-  })  : backgroundSectionColor = backgroundSectionColor ?? GSFormColors.white,
+  })  : backgroundSectionColor = backgroundSectionColor ?? FormColors.white,
         backgroundFieldColor =
-            backgroundFieldColor ?? GSFormColors.colorBackground,
+            backgroundFieldColor ?? FormColors.colorBackground,
         backgroundFieldColorDisable =
-            backgroundFieldColorDisable ?? GSFormColors.colorBackgroundDisable,
+            backgroundFieldColorDisable ?? FormColors.colorBackgroundDisable,
         titleTextStyle =
-            titleStyle ?? GSFormTheme.textThemeStyle.displayMedium!,
+            titleStyle ?? FormTheme.textThemeStyle.displayMedium!,
         fieldRadius = fieldRadius ?? 10.0,
         sectionRadius = sectionRadius ?? 4.0,
         sectionCardElevation = sectionCardElevation ?? 2.0,
         sectionCardPadding = sectionCardPadding ?? 2.0,
         requiredText = requiredText ?? '',
         fieldHintStyle =
-            fieldHintStyle ?? GSFormTheme.textThemeStyle.bodyMedium!,
+            fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
         fieldTextStyle =
-            fieldTextStyle ?? GSFormTheme.textThemeStyle.displayMedium!,
+            fieldTextStyle ?? FormTheme.textThemeStyle.displayMedium!,
         errorTextStyle =
-            errorTextStyle ?? GSFormTheme.textThemeStyle.headlineSmall!,
+            errorTextStyle ?? FormTheme.textThemeStyle.headlineSmall!,
         helpTextStyle =
-            helpTextStyle ?? GSFormTheme.textThemeStyle.headlineMedium!,
+            helpTextStyle ?? FormTheme.textThemeStyle.headlineMedium!,
         sectionTitleStyle =
-            sectionTitleStyle ?? GSFormTheme.textThemeStyle.displayLarge!,
-        fieldBorderColor = fieldBorderColor ?? GSFormColors.white;
+            sectionTitleStyle ?? FormTheme.textThemeStyle.displayLarge!,
+        fieldBorderColor = fieldBorderColor ?? FormColors.white;
 
-  static GSFormStyle singleSectionFormDefaultStyle = GSFormStyle(
-    backgroundFieldColor: GSFormColors.white,
+  static FormStyle singleSectionFormDefaultStyle = FormStyle(
+    backgroundFieldColor: FormColors.white,
     sectionCardElevation: 0.0,
     backgroundSectionColor: Colors.transparent,
     sectionCardPadding: 0.0,
-    titleStyle: GSFormTheme.textThemeStyle.displayMedium,
-    fieldTextStyle: GSFormTheme.textThemeStyle.displayMedium,
-    fieldHintStyle: GSFormTheme.textThemeStyle.bodyMedium!,
-    errorTextStyle: GSFormTheme.textThemeStyle.headlineSmall,
-    helpTextStyle: GSFormTheme.textThemeStyle.headlineMedium,
-    sectionTitleStyle: GSFormTheme.textThemeStyle.displayLarge,
+    titleStyle: FormTheme.textThemeStyle.displayMedium,
+    fieldTextStyle: FormTheme.textThemeStyle.displayMedium,
+    fieldHintStyle: FormTheme.textThemeStyle.bodyMedium!,
+    errorTextStyle: FormTheme.textThemeStyle.headlineSmall,
+    helpTextStyle: FormTheme.textThemeStyle.headlineMedium,
+    sectionTitleStyle: FormTheme.textThemeStyle.displayLarge,
     sectionRadius: 8,
     fieldRadius: 8,
     fieldBorderColor: Colors.white,
   );
 
-  static GSFormStyle singleSectionFormDefaultDarkStyle = GSFormStyle(
-    backgroundFieldColor: GSFormColors.black,
+  static FormStyle singleSectionFormDefaultDarkStyle = FormStyle(
+    backgroundFieldColor: FormColors.black,
     sectionCardElevation: 0.0,
     backgroundSectionColor: Colors.transparent,
     sectionCardPadding: 0.0,
-    sectionTitleStyle: GSFormTheme.textThemeDarkStyle.displayLarge,
-    titleStyle: GSFormTheme.textThemeDarkStyle.displayMedium,
-    fieldTextStyle: GSFormTheme.textThemeDarkStyle.displayMedium,
-    fieldHintStyle: GSFormTheme.textThemeDarkStyle.bodyMedium,
-    errorTextStyle: GSFormTheme.textThemeDarkStyle.headlineSmall,
-    helpTextStyle: GSFormTheme.textThemeDarkStyle.headlineMedium,
+    sectionTitleStyle: FormTheme.textThemeDarkStyle.displayLarge,
+    titleStyle: FormTheme.textThemeDarkStyle.displayMedium,
+    fieldTextStyle: FormTheme.textThemeDarkStyle.displayMedium,
+    fieldHintStyle: FormTheme.textThemeDarkStyle.bodyMedium,
+    errorTextStyle: FormTheme.textThemeDarkStyle.headlineSmall,
+    helpTextStyle: FormTheme.textThemeDarkStyle.headlineMedium,
     sectionRadius: 8,
     fieldRadius: 8,
     fieldBorderColor: Colors.white,
   );
 
-  static GSFormStyle multiSectionFormDefaultStyle = GSFormStyle(
-    backgroundFieldColor: GSFormColors.colorBackground,
+  static FormStyle multiSectionFormDefaultStyle = FormStyle(
+    backgroundFieldColor: FormColors.colorBackground,
     sectionCardElevation: 2.0,
-    backgroundSectionColor: GSFormColors.white,
+    backgroundSectionColor: FormColors.white,
     sectionCardPadding: 8.0,
-    titleStyle: GSFormTheme.textThemeStyle.displayMedium,
-    fieldTextStyle: GSFormTheme.textThemeStyle.displayMedium,
-    fieldHintStyle: GSFormTheme.textThemeStyle.bodyMedium,
-    errorTextStyle: GSFormTheme.textThemeStyle.headlineSmall,
-    helpTextStyle: GSFormTheme.textThemeStyle.headlineMedium,
-    sectionTitleStyle: GSFormTheme.textThemeStyle.displayLarge,
+    titleStyle: FormTheme.textThemeStyle.displayMedium,
+    fieldTextStyle: FormTheme.textThemeStyle.displayMedium,
+    fieldHintStyle: FormTheme.textThemeStyle.bodyMedium,
+    errorTextStyle: FormTheme.textThemeStyle.headlineSmall,
+    helpTextStyle: FormTheme.textThemeStyle.headlineMedium,
+    sectionTitleStyle: FormTheme.textThemeStyle.displayLarge,
     sectionRadius: 8,
     fieldRadius: 8,
     fieldBorderColor: Colors.white,
   );
 
-  static GSFormStyle multiSectionFormDefaultDarkStyle = GSFormStyle(
-    backgroundFieldColor: GSFormColors.colorBackgroundDark,
-    backgroundSectionColor: GSFormColors.black,
-    titleStyle: GSFormTheme.textThemeDarkStyle.displayMedium,
-    fieldTextStyle: GSFormTheme.textThemeDarkStyle.displayMedium,
-    fieldHintStyle: GSFormTheme.textThemeDarkStyle.bodyMedium,
-    errorTextStyle: GSFormTheme.textThemeDarkStyle.headlineSmall,
-    helpTextStyle: GSFormTheme.textThemeDarkStyle.headlineMedium,
-    sectionTitleStyle: GSFormTheme.textThemeDarkStyle.displayLarge,
+  static FormStyle multiSectionFormDefaultDarkStyle = FormStyle(
+    backgroundFieldColor: FormColors.colorBackgroundDark,
+    backgroundSectionColor: FormColors.black,
+    titleStyle: FormTheme.textThemeDarkStyle.displayMedium,
+    fieldTextStyle: FormTheme.textThemeDarkStyle.displayMedium,
+    fieldHintStyle: FormTheme.textThemeDarkStyle.bodyMedium,
+    errorTextStyle: FormTheme.textThemeDarkStyle.headlineSmall,
+    helpTextStyle: FormTheme.textThemeDarkStyle.headlineMedium,
+    sectionTitleStyle: FormTheme.textThemeDarkStyle.displayLarge,
     sectionRadius: 8,
     sectionCardElevation: 2.0,
     sectionCardPadding: 8.0,

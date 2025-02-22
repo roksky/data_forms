@@ -19,31 +19,31 @@ class GSFormUtils {
   }
 
   static Decoration getFieldDecoration(
-      GSFormStyle style, GSFieldStatusEnum? status,
+      FormStyle style, FormFieldStatusEnum? status,
       {double? borderWidth = 1.0}) {
     Color backgroundColor;
     Color borderColor;
 
     switch (status) {
-      case GSFieldStatusEnum.error:
-        backgroundColor = GSFormColors.redOpacity;
-        borderColor = GSFormColors.red;
+      case FormFieldStatusEnum.error:
+        backgroundColor = FormColors.redOpacity;
+        borderColor = FormColors.red;
         break;
-      case GSFieldStatusEnum.success:
-        backgroundColor = GSFormColors.greenOpacity;
-        borderColor = GSFormColors.green;
+      case FormFieldStatusEnum.success:
+        backgroundColor = FormColors.greenOpacity;
+        borderColor = FormColors.green;
         break;
-      case GSFieldStatusEnum.normal:
+      case FormFieldStatusEnum.normal:
         backgroundColor = style.backgroundFieldColor;
         borderColor = style.fieldBorderColor;
         break;
-      case GSFieldStatusEnum.disabled:
+      case FormFieldStatusEnum.disabled:
         backgroundColor = style.backgroundFieldColorDisable;
         borderColor = style.fieldBorderColor;
         break;
       default:
-        backgroundColor = GSFormColors.white;
-        borderColor = GSFormColors.white;
+        backgroundColor = FormColors.white;
+        borderColor = FormColors.white;
     }
     return ShapeDecoration(
       color: backgroundColor,
@@ -113,7 +113,7 @@ class GSFormUtils {
                               const SizedBox(height: 10.0),
                               Text(
                                 cameraName ?? 'Camera',
-                                style: GSFormStyle().titleTextStyle,
+                                style: FormStyle().titleTextStyle,
                               )
                             ],
                           ),
@@ -146,7 +146,7 @@ class GSFormUtils {
                               const SizedBox(height: 10.0),
                               Text(
                                 galleryName ?? 'Gallery',
-                                style: GSFormStyle().titleTextStyle,
+                                style: FormStyle().titleTextStyle,
                               )
                             ],
                           ),

@@ -6,15 +6,15 @@ import 'package:data_forms/model/fields_model/text_filed_model.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSTextField extends NotifiableStatefulWidget implements GSFieldCallBack {
-  final GSTextModel model;
-  final GSFormStyle formStyle;
+class FormTextField extends NotifiableStatefulWidget implements FormFieldCallBack {
+  final FormTextModel model;
+  final FormStyle formStyle;
   TextEditingController? controller;
 
-  GSTextField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormTextField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSTextField> createState() => _GSTextFieldState();
+  State<FormTextField> createState() => _GSTextFieldState();
 
   @override
   getValue() {
@@ -35,7 +35,7 @@ class GSTextField extends NotifiableStatefulWidget implements GSFieldCallBack {
   }
 }
 
-class _GSTextFieldState extends State<GSTextField> {
+class _GSTextFieldState extends State<FormTextField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -46,7 +46,7 @@ class _GSTextFieldState extends State<GSTextField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSTextField oldWidget) {
+  void didUpdateWidget(covariant FormTextField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;
