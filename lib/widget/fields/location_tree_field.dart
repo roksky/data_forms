@@ -10,16 +10,16 @@ import '../../util/value_util.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSLocationTreeField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSLocationTreeModel model;
-  final GSFormStyle formStyle;
+class FormLocationTreeField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormLocationTreeModel model;
+  final FormStyle formStyle;
   LocationItem? result = null;
 
-  GSLocationTreeField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormLocationTreeField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSLocationTreeField> createState() => _GSLocationTreeFieldState();
+  State<FormLocationTreeField> createState() => _GSLocationTreeFieldState();
 
   @override
   getValue() {
@@ -36,7 +36,7 @@ class GSLocationTreeField extends NotifiableStatefulWidget
   }
 }
 
-class _GSLocationTreeFieldState extends State<GSLocationTreeField> {
+class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
   @override
   Widget build(BuildContext context) {
     final stateManager = Provider.of<StateManager>(context);

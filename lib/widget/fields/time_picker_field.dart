@@ -8,10 +8,10 @@ import 'package:data_forms/model/fields_model/time_picker_model.dart';
 
 import 'notifyable_stateful_widget.dart';
 
-class GSTimePickerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  late GSTimePickerModel model;
-  GSFormStyle formStyle;
+class FormTimePickerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  late FormTimePickerModel model;
+  FormStyle formStyle;
 
   String? selectedTimeText;
 
@@ -19,12 +19,12 @@ class GSTimePickerField extends NotifiableStatefulWidget
   TimeOfDay? selectedTime;
   late BuildContext context;
 
-  GSTimePickerField(this.model, this.formStyle, {Key? key}) : super(key: key) {
+  FormTimePickerField(this.model, this.formStyle, {Key? key}) : super(key: key) {
     selectedTimeText = model.hint ?? 'Choose the time';
   }
 
   @override
-  State<GSTimePickerField> createState() => _GSTimePickerFieldState();
+  State<FormTimePickerField> createState() => _GSTimePickerFieldState();
 
   @override
   getValue() {
@@ -54,7 +54,7 @@ class GSTimePickerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSTimePickerFieldState extends State<GSTimePickerField> {
+class _GSTimePickerFieldState extends State<FormTimePickerField> {
   @override
   void initState() {
     super.initState();
@@ -66,7 +66,7 @@ class _GSTimePickerFieldState extends State<GSTimePickerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSTimePickerField oldWidget) {
+  void didUpdateWidget(covariant FormTimePickerField oldWidget) {
     if (widget.model.initialTime != null && oldWidget.selectedTime == null) {
       widget.selectedTime = widget.model.initialTime;
     } else {

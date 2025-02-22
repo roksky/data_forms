@@ -10,10 +10,10 @@ import 'package:intl/intl.dart';
 import '../../core/form_style.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSDateRangePickerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSDateRangePickerModel model;
-  final GSFormStyle formStyle;
+class FormDateRangePickerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormDateRangePickerModel model;
+  final FormStyle formStyle;
 
   String selectedDateText = '';
   DateTime? selectedStartDate;
@@ -30,11 +30,11 @@ class GSDateRangePickerField extends NotifiableStatefulWidget
 
   bool isDateSelected = false;
 
-  GSDateRangePickerField(this.model, this.formStyle, {Key? key})
+  FormDateRangePickerField(this.model, this.formStyle, {Key? key})
       : super(key: key);
 
   @override
-  State<GSDateRangePickerField> createState() => _GSDateRangePickerFieldState();
+  State<FormDateRangePickerField> createState() => _GSDateRangePickerFieldState();
 
   @override
   getValue() {
@@ -66,7 +66,7 @@ class GSDateRangePickerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSDateRangePickerFieldState extends State<GSDateRangePickerField> {
+class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
   @override
   void initState() {
     _initialDates();
@@ -74,7 +74,7 @@ class _GSDateRangePickerFieldState extends State<GSDateRangePickerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSDateRangePickerField oldWidget) {
+  void didUpdateWidget(covariant FormDateRangePickerField oldWidget) {
     _initialDates();
     super.didUpdateWidget(oldWidget);
   }

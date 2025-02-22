@@ -15,17 +15,17 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSMultiImagePickerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSMultiImagePickerModel model;
-  final GSFormStyle formStyle;
+class FormMultiImagePickerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormMultiImagePickerModel model;
+  final FormStyle formStyle;
 
-  GSMultiImagePickerField(this.model, this.formStyle, {Key? key})
+  FormMultiImagePickerField(this.model, this.formStyle, {Key? key})
       : super(key: key);
   List<String> _croppedFilePaths = [];
 
   @override
-  State<GSMultiImagePickerField> createState() =>
+  State<FormMultiImagePickerField> createState() =>
       _GSMultiImagePickerFieldState();
 
   @override
@@ -43,7 +43,7 @@ class GSMultiImagePickerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSMultiImagePickerFieldState extends State<GSMultiImagePickerField> {
+class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
   @override
   void initState() {
     super.initState();
@@ -55,7 +55,7 @@ class _GSMultiImagePickerFieldState extends State<GSMultiImagePickerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSMultiImagePickerField oldWidget) {
+  void didUpdateWidget(covariant FormMultiImagePickerField oldWidget) {
     if ((widget.model.defaultImagePath ?? []).isNotEmpty) {
       widget._croppedFilePaths.addAll(widget.model.defaultImagePath ?? []);
     } else {
@@ -123,8 +123,8 @@ class SelectItem extends StatelessWidget {
       Key? key})
       : super(key: key);
 
-  final GSMultiImagePickerModel model;
-  final GSFormStyle style;
+  final FormMultiImagePickerModel model;
+  final FormStyle style;
   final ValueChanged<String> callBack;
   final bool isEnable;
 
@@ -210,7 +210,7 @@ class SelectItem extends StatelessWidget {
       uiSettings: [
         AndroidUiSettings(
             toolbarTitle: 'ویرایش تصویر',
-            toolbarColor: GSFormColors.white,
+            toolbarColor: FormColors.white,
             toolbarWidgetColor: Colors.black,
             initAspectRatio: CropAspectRatioPreset.original,
             lockAspectRatio: false),

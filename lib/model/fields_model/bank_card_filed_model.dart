@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'field_model.dart';
 
-class GSBankCardModel extends GSFieldModel {
+class FormBankCardModel extends FormFieldModel {
   String? hint;
 
-  GSBankCardModel(
+  FormBankCardModel(
       {type,
       tag,
       title,

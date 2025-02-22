@@ -54,9 +54,9 @@ import 'fields/multi_image_picker_field.dart';
 
 // ignore: must_be_immutable
 class DataFormField extends StatefulWidget {
-  GSFieldModel? model;
+  FormFieldModel? model;
   Widget? child;
-  GSFormStyle? formStyle;
+  FormStyle? formStyle;
   late StateManager stateManager;
 
   VoidCallback? onUpdate;
@@ -75,7 +75,7 @@ class DataFormField extends StatefulWidget {
     String? helpMessage,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     String? hint,
     String? cameraPopupTitle,
@@ -89,8 +89,8 @@ class DataFormField extends StatefulWidget {
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSImagePickerModel(
-      type: GSFieldTypeEnum.imagePicker,
+    model = FormImagePickerModel(
+      type: FormFieldTypeEnum.imagePicker,
       tag: tag,
       showCropper: showCropper ?? true,
       imageSource: imageSource ?? GSImageSource.both,
@@ -124,7 +124,7 @@ class DataFormField extends StatefulWidget {
     String? helpMessage,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     String? hint,
     String? cameraPopupTitle,
@@ -139,8 +139,8 @@ class DataFormField extends StatefulWidget {
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSMultiImagePickerModel(
-      type: GSFieldTypeEnum.multiImagePicker,
+    model = FormMultiImagePickerModel(
+      type: FormFieldTypeEnum.multiImagePicker,
       tag: tag,
       showCropper: showCropper ?? true,
       imageSource: imageSource ?? GSImageSource.both,
@@ -174,7 +174,7 @@ class DataFormField extends StatefulWidget {
     Widget? prefixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateRegEx,
     SpinnerDataModel? value,
@@ -183,8 +183,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSSpinnerModel(
-        type: GSFieldTypeEnum.spinner,
+    model = FormSpinnerModel(
+        type: FormFieldTypeEnum.spinner,
         tag: tag,
         showTitle: showTitle ?? true,
         title: title,
@@ -210,7 +210,7 @@ class DataFormField extends StatefulWidget {
       Widget? prefixWidget,
       bool? required,
       bool? showTitle,
-      GSFieldStatusEnum? status,
+      FormFieldStatusEnum? status,
       int? weight,
       RegExp? validateRegEx,
       String? hint,
@@ -229,8 +229,8 @@ class DataFormField extends StatefulWidget {
         String? dependsOn,
       required ValueChanged<RadioDataModel> callBack})
       : super(key: key) {
-    model = GSRadioModel(
-        type: GSFieldTypeEnum.radioGroup,
+    model = FormRadioModel(
+        type: FormFieldTypeEnum.radioGroup,
         tag: tag,
         showTitle: showTitle ?? true,
         title: title,
@@ -268,7 +268,7 @@ class DataFormField extends StatefulWidget {
     String? helpMessage,
     Widget? prefixWidget,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateRegEx,
     String? hint,
@@ -289,8 +289,8 @@ class DataFormField extends StatefulWidget {
         requiredCheckListEnum != RequiredCheckListEnum.none) {
       isRequired = true;
     }
-    model = GSCheckBoxModel(
-        type: GSFieldTypeEnum.checkList,
+    model = FormCheckBoxModel(
+        type: FormFieldTypeEnum.checkList,
         tag: tag,
         showTitle: showTitle ?? true,
         title: title,
@@ -327,7 +327,7 @@ class DataFormField extends StatefulWidget {
       Widget? postfixWidget,
       bool? required,
       bool? showTitle,
-      GSFieldStatusEnum? status,
+      FormFieldStatusEnum? status,
       String? value,
       int? weight,
       RegExp? validateRegEx,
@@ -340,8 +340,8 @@ class DataFormField extends StatefulWidget {
         String? dependsOn,
       FocusNode? nextFocusNode})
       : super(key: key) {
-    model = GSTextModel(
-      type: GSFieldTypeEnum.text,
+    model = FormTextModel(
+      type: FormFieldTypeEnum.text,
       tag: tag,
       focusNode: focusNode,
       nextFocusNode: nextFocusNode,
@@ -371,7 +371,7 @@ class DataFormField extends StatefulWidget {
     Widget? prefixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateReg,
@@ -383,8 +383,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSPasswordModel(
-      type: GSFieldTypeEnum.password,
+    model = FormPasswordModel(
+      type: FormFieldTypeEnum.password,
       showTitle: showTitle ?? true,
       tag: tag,
       title: title,
@@ -412,7 +412,7 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateRegEx,
@@ -424,8 +424,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSTextPlainModel(
-      type: GSFieldTypeEnum.textPlain,
+    model = FormTextPlainModel(
+      type: FormFieldTypeEnum.textPlain,
       tag: tag,
       title: title,
       showTitle: showTitle ?? true,
@@ -457,7 +457,7 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateRegEx,
@@ -466,8 +466,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSMobileModel(
-      type: GSFieldTypeEnum.mobile,
+    model = FormMobileModel(
+      type: FormFieldTypeEnum.mobile,
       tag: tag,
       title: title,
       errorMessage: errorMessage,
@@ -495,7 +495,7 @@ class DataFormField extends StatefulWidget {
     Widget? prefixWidget,
     Widget? postfixWidget,
     bool? required,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateRegEx,
@@ -506,8 +506,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSNumberModel(
-      type: GSFieldTypeEnum.number,
+    model = FormNumberModel(
+      type: FormFieldTypeEnum.number,
       showTitle: showTitle ?? true,
       tag: tag,
       title: title,
@@ -537,20 +537,20 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateReg,
     int? maxLength,
     String? hint,
     GSDateFormatType? displayDateType,
     bool? isPastAvailable,
-    GSDate? initialDate,
-    GSDate? availableFrom,
-    GSDate? availableTo,
+    DataDate? initialDate,
+    DataDate? availableFrom,
+    DataDate? availableTo,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSDatePickerModel(
-        type: GSFieldTypeEnum.date,
+    model = FormDatePickerModel(
+        type: FormFieldTypeEnum.date,
         tag: tag,
         title: title,
         errorMessage: errorMessage,
@@ -582,21 +582,21 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateReg,
     int? maxLength,
     String? hint,
     GSDateFormatType? displayDateType,
     bool? isPastAvailable,
-    GSDate? initialStartDate,
-    GSDate? initialEndDate,
-    GSDate? availableFrom,
-    GSDate? availableTo,
+    DataDate? initialStartDate,
+    DataDate? initialEndDate,
+    DataDate? availableFrom,
+    DataDate? availableTo,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSDateRangePickerModel(
-        type: GSFieldTypeEnum.dateRage,
+    model = FormDateRangePickerModel(
+        type: FormFieldTypeEnum.dateRage,
         tag: tag,
         title: title,
         errorMessage: errorMessage,
@@ -629,7 +629,7 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? showTitle,
     bool? required,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateReg,
     int? maxLength,
@@ -637,8 +637,8 @@ class DataFormField extends StatefulWidget {
     TimeOfDay? initialTime,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSTimePickerModel(
-      type: GSFieldTypeEnum.time,
+    model = FormTimePickerModel(
+      type: FormFieldTypeEnum.time,
       tag: tag,
       showTitle: showTitle ?? true,
       title: title,
@@ -665,7 +665,7 @@ class DataFormField extends StatefulWidget {
     Widget? postfixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateRegEx,
@@ -674,8 +674,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSEmailModel(
-      type: GSFieldTypeEnum.email,
+    model = FormEmailModel(
+      type: FormFieldTypeEnum.email,
       tag: tag,
       title: title,
       showTitle: showTitle ?? true,
@@ -704,7 +704,7 @@ class DataFormField extends StatefulWidget {
     String? currencyName,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     String? value,
     int? weight,
     RegExp? validateRegEx,
@@ -713,8 +713,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     String? dependsOn,
   }) : super(key: key) {
-    model = GSPriceModel(
-      type: GSFieldTypeEnum.price,
+    model = FormPriceModel(
+      type: FormFieldTypeEnum.price,
       tag: tag,
       title: title,
       showTitle: showTitle ?? true,
@@ -723,7 +723,7 @@ class DataFormField extends StatefulWidget {
       prefixWidget: prefixWidget,
       postfixWidget: Text(
         currencyName ?? '',
-        style: GSFormTheme.textThemeStyle.displaySmall,
+        style: FormTheme.textThemeStyle.displaySmall,
       ),
       required: required,
       status: status,
@@ -746,7 +746,7 @@ class DataFormField extends StatefulWidget {
       Widget? postfixWidget,
       bool? required,
       bool? showTitle,
-      GSFieldStatusEnum? status,
+      FormFieldStatusEnum? status,
       String? value,
       int? weight,
       RegExp? validateRegEx,
@@ -755,8 +755,8 @@ class DataFormField extends StatefulWidget {
         String? dependsOn,
       String? hint})
       : super(key: key) {
-    model = GSBankCardModel(
-      type: GSFieldTypeEnum.bankCard,
+    model = FormBankCardModel(
+      type: FormFieldTypeEnum.bankCard,
       tag: tag,
       title: title,
       errorMessage: errorMessage,
@@ -782,7 +782,7 @@ class DataFormField extends StatefulWidget {
     Widget? prefixWidget,
     bool? required,
     bool? showTitle,
-    GSFieldStatusEnum? status,
+    FormFieldStatusEnum? status,
     int? weight,
     RegExp? validateRegEx,
     LocationItem? value,
@@ -794,8 +794,8 @@ class DataFormField extends StatefulWidget {
     required Future<LocationItem?> Function(String locationId)
     fetchLocationById,
   }) : super(key: key) {
-    model = GSLocationTreeModel(
-        type: GSFieldTypeEnum.locationTree,
+    model = FormLocationTreeModel(
+        type: FormFieldTypeEnum.locationTree,
         tag: tag,
         showTitle: showTitle ?? true,
         title: title,
@@ -823,7 +823,7 @@ class DataFormField extends StatefulWidget {
       Widget? postfixWidget,
       bool? required,
       bool? showTitle,
-      GSFieldStatusEnum? status,
+      FormFieldStatusEnum? status,
       String? value,
       int? weight,
       RegExp? validateRegEx,
@@ -836,8 +836,8 @@ class DataFormField extends StatefulWidget {
       FocusNode? focusNode,
       FocusNode? nextFocusNode})
       : super(key: key) {
-    model = GSLocationModel(
-      type: GSFieldTypeEnum.location,
+    model = FormLocationModel(
+      type: FormFieldTypeEnum.location,
       tag: tag,
       showTitle: showTitle ?? true,
       title: title,
@@ -871,17 +871,17 @@ class _GSFieldState extends State<DataFormField> {
 
   @override
   Widget build(BuildContext context) {
-    widget.formStyle = widget.formStyle ?? GSFormStyle();
+    widget.formStyle = widget.formStyle ?? FormStyle();
     widget.onUpdate = () {
       if (mounted) {
-        if (widget.model?.status != GSFieldStatusEnum.disabled) {
+        if (widget.model?.status != FormFieldStatusEnum.disabled) {
           setState(() {});
         }
       }
     };
 
     return AbsorbPointer(
-      absorbing: widget.model?.status == GSFieldStatusEnum.disabled,
+      absorbing: widget.model?.status == FormFieldStatusEnum.disabled,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -902,7 +902,7 @@ class _GSFieldState extends State<DataFormField> {
                             child: Text(
                               widget.formStyle!.requiredText,
                               style: const TextStyle(
-                                  color: GSFormColors.red, fontSize: 10),
+                                  color: FormColors.red, fontSize: 10),
                             ),
                           ),
                         ],
@@ -928,7 +928,7 @@ class _GSFieldState extends State<DataFormField> {
                             const SizedBox(width: 8.0),
                             Container(
                               height: 30.0,
-                              color: GSFormColors.dividerColor,
+                              color: FormColors.dividerColor,
                               width: 1.0,
                             ),
                           ],
@@ -954,7 +954,7 @@ class _GSFieldState extends State<DataFormField> {
                 ),
                 const SizedBox(height: 4.0),
                 Opacity(
-                  opacity: (widget.model?.status == GSFieldStatusEnum.error &&
+                  opacity: (widget.model?.status == FormFieldStatusEnum.error &&
                               widget.model?.errorMessage != null) ||
                           widget.model?.helpMessage != null
                       ? 1
@@ -965,17 +965,17 @@ class _GSFieldState extends State<DataFormField> {
                         width: 8.0,
                         height: 8.0,
                         child: SvgPicture.asset(
-                          widget.model?.status == GSFieldStatusEnum.error
+                          widget.model?.status == FormFieldStatusEnum.error
                               ? 'packages/gsform/assets/ic_alret.svg'
                               : 'packages/gsform/assets/ic_info.svg',
                         ),
                       ),
                       const SizedBox(width: 1.0),
                       Text(
-                        widget.model?.status == GSFieldStatusEnum.error
+                        widget.model?.status == FormFieldStatusEnum.error
                             ? widget.model?.errorMessage ?? ''
                             : widget.model?.helpMessage ?? '',
-                        style: widget.model?.status == GSFieldStatusEnum.error
+                        style: widget.model?.status == FormFieldStatusEnum.error
                             ? widget.formStyle!.errorTextStyle
                             : widget.formStyle!.helpTextStyle,
                       ),
@@ -993,77 +993,77 @@ class _GSFieldState extends State<DataFormField> {
 
   _fillChild() {
     switch (widget.model?.type) {
-      case GSFieldTypeEnum.text:
+      case FormFieldTypeEnum.text:
         widget.child =
-            GSTextField(widget.model as GSTextModel, widget.formStyle!);
+            FormTextField(widget.model as FormTextModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.number:
+      case FormFieldTypeEnum.number:
         widget.child =
-            GSNumberField(widget.model as GSNumberModel, widget.formStyle!);
+            FormNumberField(widget.model as FormNumberModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.textPlain:
-        widget.child = GSTextPlainField(
-            widget.model as GSTextPlainModel, widget.formStyle!);
+      case FormFieldTypeEnum.textPlain:
+        widget.child = FormTextPlainField(
+            widget.model as FormTextPlainModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.mobile:
+      case FormFieldTypeEnum.mobile:
         widget.child =
-            GSMobileField(widget.model as GSMobileModel, widget.formStyle!);
+            FormMobileField(widget.model as FormMobileModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.password:
+      case FormFieldTypeEnum.password:
         widget.child =
-            GSPasswordField(widget.model as GSPasswordModel, widget.formStyle!);
+            FormPasswordField(widget.model as FormPasswordModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.date:
-        widget.child = GSDatePickerField(
-            widget.model as GSDatePickerModel, widget.formStyle!);
+      case FormFieldTypeEnum.date:
+        widget.child = FormDatePickerField(
+            widget.model as FormDatePickerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.dateRage:
-        widget.child = GSDateRangePickerField(
-            widget.model as GSDateRangePickerModel, widget.formStyle!);
+      case FormFieldTypeEnum.dateRage:
+        widget.child = FormDateRangePickerField(
+            widget.model as FormDateRangePickerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.time:
-        widget.child = GSTimePickerField(
-            widget.model as GSTimePickerModel, widget.formStyle!);
+      case FormFieldTypeEnum.time:
+        widget.child = FormTimePickerField(
+            widget.model as FormTimePickerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.email:
+      case FormFieldTypeEnum.email:
         widget.child =
-            GSEmailField(widget.model as GSEmailModel, widget.formStyle!);
+            FormEmailField(widget.model as FormEmailModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.price:
+      case FormFieldTypeEnum.price:
         widget.child =
-            GSPriceField(widget.model as GSPriceModel, widget.formStyle!);
+            FormPriceField(widget.model as FormPriceModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.bankCard:
+      case FormFieldTypeEnum.bankCard:
         widget.child =
-            GSBankCardField(widget.model as GSBankCardModel, widget.formStyle!);
+            FormBankCardField(widget.model as FormBankCardModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.spinner:
+      case FormFieldTypeEnum.spinner:
         widget.child =
-            GSSpinnerField(widget.model as GSSpinnerModel, widget.formStyle!);
+            FormSpinnerField(widget.model as FormSpinnerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.radioGroup:
+      case FormFieldTypeEnum.radioGroup:
         widget.child =
-            GSRadioGroupField(widget.model as GSRadioModel, widget.formStyle!);
+            FormRadioGroupField(widget.model as FormRadioModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.checkList:
-        widget.child = GSCheckListField(
-            widget.model as GSCheckBoxModel, widget.formStyle!);
+      case FormFieldTypeEnum.checkList:
+        widget.child = FormCheckListField(
+            widget.model as FormCheckBoxModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.imagePicker:
-        widget.child = GSImagePickerField(
-            widget.model as GSImagePickerModel, widget.formStyle!);
+      case FormFieldTypeEnum.imagePicker:
+        widget.child = FormImagePickerField(
+            widget.model as FormImagePickerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.multiImagePicker:
-        widget.child = GSMultiImagePickerField(
-            widget.model as GSMultiImagePickerModel, widget.formStyle!);
+      case FormFieldTypeEnum.multiImagePicker:
+        widget.child = FormMultiImagePickerField(
+            widget.model as FormMultiImagePickerModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.locationTree:
-        widget.child = GSLocationTreeField(
-            widget.model as GSLocationTreeModel, widget.formStyle!);
+      case FormFieldTypeEnum.locationTree:
+        widget.child = FormLocationTreeField(
+            widget.model as FormLocationTreeModel, widget.formStyle!);
         break;
-      case GSFieldTypeEnum.location:
+      case FormFieldTypeEnum.location:
         widget.child =
-            GSLocationField(widget.model as GSLocationModel, widget.formStyle!);
+            FormLocationField(widget.model as FormLocationModel, widget.formStyle!);
         break;
 
       default:

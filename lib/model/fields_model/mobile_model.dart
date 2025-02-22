@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'field_model.dart';
 
-class GSMobileModel extends GSFieldModel {
+class FormMobileModel extends FormFieldModel {
   int? maxLength;
   String? hint;
 
-  GSMobileModel(
+  FormMobileModel(
       {type,
       tag,
       title,

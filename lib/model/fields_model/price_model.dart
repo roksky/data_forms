@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 
 import 'field_model.dart';
 
-class GSPriceModel extends GSFieldModel {
+class FormPriceModel extends FormFieldModel {
   int? maxLength;
 
   String? hint;
 
-  GSPriceModel(
+  FormPriceModel(
       {type,
       tag,
       title,

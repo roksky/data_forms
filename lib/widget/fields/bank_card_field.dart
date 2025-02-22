@@ -9,16 +9,16 @@ import '../../util/util.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSBankCardField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSBankCardModel model;
-  final GSFormStyle formStyle;
+class FormBankCardField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormBankCardModel model;
+  final FormStyle formStyle;
   TextEditingController? controller;
 
-  GSBankCardField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormBankCardField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSBankCardField> createState() => _GSBankCardFieldState();
+  State<FormBankCardField> createState() => _GSBankCardFieldState();
 
   @override
   getValue() {
@@ -39,7 +39,7 @@ class GSBankCardField extends NotifiableStatefulWidget
   }
 }
 
-class _GSBankCardFieldState extends State<GSBankCardField> {
+class _GSBankCardFieldState extends State<FormBankCardField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -50,7 +50,7 @@ class _GSBankCardFieldState extends State<GSBankCardField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSBankCardField oldWidget) {
+  void didUpdateWidget(covariant FormBankCardField oldWidget) {
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;
     } else {

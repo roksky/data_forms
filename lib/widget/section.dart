@@ -7,18 +7,18 @@ import 'package:data_forms/widget/squircle/smooth_border_radius.dart';
 import 'package:data_forms/widget/squircle/smooth_rectangle_border.dart';
 
 // ignore: must_be_immutable
-class GSSection extends StatelessWidget {
+class FormSection extends StatelessWidget {
   late List<Widget> fields;
-  GSFormStyle? style;
+  FormStyle? style;
   String? sectionTitle;
 
-  GSSection(
+  FormSection(
       {Key? key, required this.fields, this.style, required this.sectionTitle})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    style = style ?? GSFormStyle();
+    style = style ?? FormStyle();
 
     List<Row> rows = [];
 
@@ -40,7 +40,7 @@ class GSSection extends StatelessWidget {
           weightSum += field.model?.weight ?? 12;
           if (i < fields.length - 1 &&
               fields[i + 1] is DataFormField &&
-              fields[i + 1] is! GSTextPlainField) {
+              fields[i + 1] is! FormTextPlainField) {
             field.model?.nextFocusNode =
                 (fields[i + 1] as DataFormField).model?.focusNode;
           }
@@ -85,7 +85,7 @@ class GSSection extends StatelessWidget {
                         Text(
                           sectionTitle!,
                           style: style?.sectionTitleStyle ??
-                              GSFormTheme.textThemeStyle.displayLarge,
+                              FormTheme.textThemeStyle.displayLarge,
                         ),
                       ],
                     ),

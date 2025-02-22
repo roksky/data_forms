@@ -33,12 +33,12 @@ enum GSDateFormatType {
   shortText, // 04 تیر ,1401
 }
 
-class GSDate {
+class DataDate {
   int year;
 
   int month;
 
   int day;
 
-  GSDate({required this.year, required this.month, required this.day});
+  DataDate({required this.year, required this.month, required this.day});
 }

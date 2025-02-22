@@ -8,15 +8,15 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSEmailField extends NotifiableStatefulWidget implements GSFieldCallBack {
-  final GSEmailModel model;
-  final GSFormStyle formStyle;
+class FormEmailField extends NotifiableStatefulWidget implements FormFieldCallBack {
+  final FormEmailModel model;
+  final FormStyle formStyle;
   TextEditingController? controller = TextEditingController();
 
-  GSEmailField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormEmailField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSEmailField> createState() => _GSEmailFieldState();
+  State<FormEmailField> createState() => _GSEmailFieldState();
 
   @override
   getValue() {
@@ -27,7 +27,7 @@ class GSEmailField extends NotifiableStatefulWidget implements GSFieldCallBack {
   bool isValid() {
     if (model.validateRegEx == null) {
       if (controller!.text.isNotEmpty) {
-        return RegExp(GSConstant.emailRegEx).hasMatch(controller!.text);
+        return RegExp(FormConstant.emailRegEx).hasMatch(controller!.text);
       }
       if (!(model.required ?? false)) {
         return true;
@@ -38,7 +38,7 @@ class GSEmailField extends NotifiableStatefulWidget implements GSFieldCallBack {
   }
 }
 
-class _GSEmailFieldState extends State<GSEmailField> {
+class _GSEmailFieldState extends State<FormEmailField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -49,7 +49,7 @@ class _GSEmailFieldState extends State<GSEmailField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSEmailField oldWidget) {
+  void didUpdateWidget(covariant FormEmailField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;

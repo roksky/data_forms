@@ -10,38 +10,38 @@ import 'field.dart';
 import 'section.dart';
 
 // ignore: must_be_immutable
-class GSForm extends StatelessWidget {
-  GSFormStyle? style;
-  late List<GSSection> sections;
+class DataForm extends StatelessWidget {
+  FormStyle? style;
+  late List<FormSection> sections;
   late List<Widget> fields;
   StateManager stateManager = StateManager();
 
-  GSForm.singleSection(BuildContext context,
+  DataForm.singleSection(BuildContext context,
       {Key? key, this.style, required this.fields})
       : super(key: key) {
     style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? GSFormStyle.singleSectionFormDefaultDarkStyle
-        : GSFormStyle.singleSectionFormDefaultStyle;
+        ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
+        : FormStyle.singleSectionFormDefaultStyle;
     sections = [
-      GSSection(
+      FormSection(
         style: style,
         sectionTitle: null,
         fields: fields,
       )
     ];
-    GSForm.multiSection(
+    DataForm.multiSection(
       context,
       style: style,
       sections: sections,
     );
   }
 
-  GSForm.multiSection(BuildContext context,
+  DataForm.multiSection(BuildContext context,
       {Key? key, this.style, required this.sections, StateManager? myStateManager})
       : super(key: key) {
     style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? GSFormStyle.multiSectionFormDefaultDarkStyle
-        : GSFormStyle.multiSectionFormDefaultStyle;
+        ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
+        : FormStyle.multiSectionFormDefaultStyle;
     if (myStateManager != null) {
       stateManager = myStateManager;
     }
@@ -71,10 +71,10 @@ class GSForm extends StatelessWidget {
     for (var section in sections) {
       for (var field in section.fields) {
         if (field is DataFormField) {
-          bool fieldValidation = (field.child as GSFieldCallBack).isValid();
+          bool fieldValidation = (field.child as FormFieldCallBack).isValid();
           field.model?.status = fieldValidation
-              ? GSFieldStatusEnum.success
-              : GSFieldStatusEnum.error;
+              ? FormFieldStatusEnum.success
+              : FormFieldStatusEnum.error;
           isValid = isValid && fieldValidation;
           field.update();
         }
@@ -89,7 +89,7 @@ class GSForm extends StatelessWidget {
       for (var filed in section.fields) {
         if (filed is DataFormField) {
           data[filed.model?.tag ?? ''] =
-              (filed.child as GSFieldCallBack).getValue();
+              (filed.child as FormFieldCallBack).getValue();
         }
       }
     }

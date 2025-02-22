@@ -1,18 +1,18 @@
 import 'package:data_forms/model/data_model/date_data_model.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class GSDateRangePickerModel extends GSFieldModel {
+class FormDateRangePickerModel extends FormFieldModel {
   String? hint;
   GSDateFormatType? dateFormatType;
   bool? isPastAvailable;
-  GSDate? initialStartDate;
-  GSDate? initialEndDate;
-  GSDate? availableFrom;
-  GSDate? availableTo;
+  DataDate? initialStartDate;
+  DataDate? initialEndDate;
+  DataDate? availableFrom;
+  DataDate? availableTo;
   String? from;
   String? to;
 
-  GSDateRangePickerModel({
+  FormDateRangePickerModel({
     type,
     tag,
     title,

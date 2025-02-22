@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import '../data_model/spinner_data_model.dart';
 import 'field_model.dart';
 
-class GSSpinnerModel extends GSFieldModel {
+class FormSpinnerModel extends FormFieldModel {
   List<SpinnerDataModel> items;
   String? hint;
   ValueChanged<SpinnerDataModel?>? onChange;
 
-  GSSpinnerModel(
+  FormSpinnerModel(
       {type,
       tag,
       title,

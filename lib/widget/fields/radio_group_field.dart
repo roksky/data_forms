@@ -9,20 +9,20 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSRadioGroupField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSRadioModel model;
-  final GSFormStyle? formStyle;
+class FormRadioGroupField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormRadioModel model;
+  final FormStyle? formStyle;
   TextEditingController textController = TextEditingController();
 
-  GSRadioGroupField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormRadioGroupField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   RadioDataModel? returnedData;
   List<RadioDataModel> filteredItems = [];
   String keyword = "";
 
   @override
-  State<GSRadioGroupField> createState() => _GSRadioGroupFieldState();
+  State<FormRadioGroupField> createState() => _GSRadioGroupFieldState();
 
   @override
   getValue() {
@@ -39,7 +39,7 @@ class GSRadioGroupField extends NotifiableStatefulWidget
   }
 }
 
-class _GSRadioGroupFieldState extends State<GSRadioGroupField> {
+class _GSRadioGroupFieldState extends State<FormRadioGroupField> {
   ScrollController controller = ScrollController();
 
   @override
@@ -55,7 +55,7 @@ class _GSRadioGroupFieldState extends State<GSRadioGroupField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSRadioGroupField oldWidget) {
+  void didUpdateWidget(covariant FormRadioGroupField oldWidget) {
     widget.textController = oldWidget.textController;
     widget.filteredItems = oldWidget.filteredItems;
     widget.returnedData = oldWidget.returnedData;
@@ -123,7 +123,7 @@ class _GSRadioGroupFieldState extends State<GSRadioGroupField> {
                         padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.close,
-                          color: GSFormColors.hintTextColor,
+                          color: FormColors.hintTextColor,
                         ),
                       ),
                     ),
@@ -188,8 +188,8 @@ class _GSRadioGroupFieldState extends State<GSRadioGroupField> {
 
 class RadioItem extends StatelessWidget {
   final RadioDataModel _item;
-  final GSFormStyle formStyle;
-  final GSRadioModel _model;
+  final FormStyle formStyle;
+  final FormRadioModel _model;
 
   const RadioItem(this._item, this._model, this.formStyle, {Key? key})
       : super(key: key);

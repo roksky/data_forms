@@ -8,19 +8,19 @@ import '../../model/fields_model/text_password_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSPasswordField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  late GSPasswordModel model;
-  GSFormStyle formStyle;
+class FormPasswordField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  late FormPasswordModel model;
+  FormStyle formStyle;
   void Function(void Function())? state;
   bool obscured = true;
 
   TextEditingController? controller;
 
-  GSPasswordField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormPasswordField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSPasswordField> createState() => _GSPasswordFieldState();
+  State<FormPasswordField> createState() => _GSPasswordFieldState();
 
   @override
   getValue() {
@@ -41,7 +41,7 @@ class GSPasswordField extends NotifiableStatefulWidget
   }
 }
 
-class _GSPasswordFieldState extends State<GSPasswordField> {
+class _GSPasswordFieldState extends State<FormPasswordField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -53,7 +53,7 @@ class _GSPasswordFieldState extends State<GSPasswordField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSPasswordField oldWidget) {
+  void didUpdateWidget(covariant FormPasswordField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;

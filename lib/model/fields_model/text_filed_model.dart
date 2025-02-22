@@ -1,11 +1,11 @@
 import 'field_model.dart';
 
-class GSTextModel extends GSFieldModel {
+class FormTextModel extends FormFieldModel {
   int? maxLength;
 
   String? hint;
 
-  GSTextModel(
+  FormTextModel(
       {type,
       tag,
       title,

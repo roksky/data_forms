@@ -7,16 +7,16 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSMobileField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSMobileModel model;
-  final GSFormStyle formStyle;
+class FormMobileField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormMobileModel model;
+  final FormStyle formStyle;
   TextEditingController? controller;
 
-  GSMobileField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormMobileField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSMobileField> createState() => _GSMobileFieldState();
+  State<FormMobileField> createState() => _GSMobileFieldState();
 
   @override
   getValue() {
@@ -37,7 +37,7 @@ class GSMobileField extends NotifiableStatefulWidget
   }
 }
 
-class _GSMobileFieldState extends State<GSMobileField> {
+class _GSMobileFieldState extends State<FormMobileField> {
   @override
   void initState() {
     widget.controller ??= TextEditingController();
@@ -49,7 +49,7 @@ class _GSMobileFieldState extends State<GSMobileField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSMobileField oldWidget) {
+  void didUpdateWidget(covariant FormMobileField oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.model.value == widget.model.value) {
       widget.controller = oldWidget.controller;

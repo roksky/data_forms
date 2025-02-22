@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import '../data_model/location_item_model.dart';
 import 'field_model.dart';
 
-class GSLocationTreeModel extends GSFieldModel {
+class FormLocationTreeModel extends FormFieldModel {
   int? maxLength;
 
   String? hint;
@@ -13,7 +13,7 @@ class GSLocationTreeModel extends GSFieldModel {
 
   String? targetLevel;
 
-  GSLocationTreeModel(
+  FormLocationTreeModel(
       {type,
       tag,
       title,

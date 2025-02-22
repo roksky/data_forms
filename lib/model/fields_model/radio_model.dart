@@ -3,7 +3,7 @@ import 'package:data_forms/model/data_model/radio_data_model.dart';
 
 import 'field_model.dart';
 
-class GSRadioModel extends GSFieldModel {
+class FormRadioModel extends FormFieldModel {
   List<RadioDataModel> items;
   String? hint;
   Widget? selectedIcon;
@@ -19,7 +19,7 @@ class GSRadioModel extends GSFieldModel {
   Color? scrollBarColor;
   final ValueChanged<RadioDataModel> callBack;
 
-  GSRadioModel(
+  FormRadioModel(
       {type,
       tag,
       title,

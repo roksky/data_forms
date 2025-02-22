@@ -1,4 +1,4 @@
-enum GSFieldTypeEnum {
+enum FormFieldTypeEnum {
   mobile,
   email,
   password,

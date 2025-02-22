@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class GSEmailModel extends GSFieldModel {
+class FormEmailModel extends FormFieldModel {
   int? maxLength;
 
   String? hint;
 
-  GSEmailModel(
+  FormEmailModel(
       {type,
       tag,
       title,

@@ -10,10 +10,10 @@ import 'package:intl/intl.dart';
 import '../../model/fields_model/date_picker_model.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSDatePickerField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  late GSDatePickerModel model;
-  final GSFormStyle formStyle;
+class FormDatePickerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  late FormDatePickerModel model;
+  final FormStyle formStyle;
 
   String selectedDateText = '';
   DateTime? selectedGregorianDate;
@@ -25,10 +25,10 @@ class GSDatePickerField extends NotifiableStatefulWidget
 
   bool isDateSelected = false;
 
-  GSDatePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormDatePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   @override
-  State<GSDatePickerField> createState() => _GSDatePickerFieldState();
+  State<FormDatePickerField> createState() => _GSDatePickerFieldState();
 
   @override
   getValue() {
@@ -54,7 +54,7 @@ class GSDatePickerField extends NotifiableStatefulWidget
   }
 }
 
-class _GSDatePickerFieldState extends State<GSDatePickerField> {
+class _GSDatePickerFieldState extends State<FormDatePickerField> {
   @override
   void initState() {
     _initialDates();
@@ -62,9 +62,9 @@ class _GSDatePickerFieldState extends State<GSDatePickerField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSDatePickerField oldWidget) {
+  void didUpdateWidget(covariant FormDatePickerField oldWidget) {
     if (oldWidget.selectedGregorianDate != null) {
-      widget.model.initialDate = GSDate(
+      widget.model.initialDate = DataDate(
           year: oldWidget.selectedGregorianDate!.year,
           month: oldWidget.selectedGregorianDate!.month,
           day: oldWidget.selectedGregorianDate!.day);

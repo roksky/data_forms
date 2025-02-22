@@ -11,22 +11,22 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class GSCheckListField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  final GSCheckBoxModel model;
-  final GSFormStyle? formStyle;
+class FormCheckListField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  final FormCheckBoxModel model;
+  final FormStyle? formStyle;
   ScrollController controller = ScrollController();
   TextEditingController textController = TextEditingController();
   List<CheckDataModel> filteredItems = [];
 
   String keyword = "";
 
-  GSCheckListField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormCheckListField(this.model, this.formStyle, {Key? key}) : super(key: key);
 
   List<CheckDataModel> valueObject = [];
 
   @override
-  State<GSCheckListField> createState() => _GSCheckListFieldState();
+  State<FormCheckListField> createState() => _GSCheckListFieldState();
 
   @override
   getValue() {
@@ -47,7 +47,7 @@ class GSCheckListField extends NotifiableStatefulWidget
   }
 }
 
-class _GSCheckListFieldState extends State<GSCheckListField> {
+class _GSCheckListFieldState extends State<FormCheckListField> {
   @override
   void initState() {
     widget.filteredItems = widget.model.items;
@@ -55,7 +55,7 @@ class _GSCheckListFieldState extends State<GSCheckListField> {
   }
 
   @override
-  void didUpdateWidget(covariant GSCheckListField oldWidget) {
+  void didUpdateWidget(covariant FormCheckListField oldWidget) {
     widget.filteredItems = oldWidget.filteredItems;
     widget.valueObject = oldWidget.valueObject;
     widget.textController = oldWidget.textController;
@@ -116,7 +116,7 @@ class _GSCheckListFieldState extends State<GSCheckListField> {
                         padding: EdgeInsets.all(8.0),
                         child: Icon(
                           Icons.close,
-                          color: GSFormColors.hintTextColor,
+                          color: FormColors.hintTextColor,
                         ),
                       ),
                     ),
@@ -185,8 +185,8 @@ class _GSCheckListFieldState extends State<GSCheckListField> {
 
 class CheckBoxItem extends StatelessWidget {
   final CheckDataModel _item;
-  final GSFormStyle formStyle;
-  final GSCheckBoxModel _model;
+  final FormStyle formStyle;
+  final FormCheckBoxModel _model;
 
   const CheckBoxItem(this._item, this._model, this.formStyle, {Key? key})
       : super(key: key);

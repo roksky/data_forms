@@ -40,14 +40,14 @@ class MyApp extends StatelessWidget {
 class MainTestPage extends StatelessWidget {
   MainTestPage({Key? key}) : super(key: key);
 
-  late GSForm form;
+  late DataForm form;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('GSForm example'),
+          title: const Text('DataForm example'),
         ),
         body: Center(
           child: Padding(
@@ -87,20 +87,20 @@ class SingleSectionForm extends StatefulWidget {
   SingleSectionForm({Key? key}) : super(key: key);
   String? value;
 
-  late GSFieldStatusEnum status;
+  late FormFieldStatusEnum status;
 
   @override
   State<SingleSectionForm> createState() => _SingleSectionFormState();
 }
 
 class _SingleSectionFormState extends State<SingleSectionForm> {
-  late GSForm form;
+  late DataForm form;
   int id = 0;
 
   @override
   void initState() {
     widget.value = 'dfhbdkfhbdasffffteryuiei577y ';
-    widget.status = GSFieldStatusEnum.normal;
+    widget.status = FormFieldStatusEnum.normal;
     super.initState();
   }
 
@@ -118,8 +118,8 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
               child: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: form = GSForm.singleSection(
-                      style: GSFormStyle(titleStyle: const TextStyle(color: Colors.black87, fontSize: 16.0)),
+                  child: form = DataForm.singleSection(
+                      style: FormStyle(titleStyle: const TextStyle(color: Colors.black87, fontSize: 16.0)),
                       context,
                       fields: [
                         DataFormField.email(
@@ -206,7 +206,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
 class MultiSectionForm extends StatelessWidget {
   MultiSectionForm({Key? key}) : super(key: key);
 
-  late GSForm form;
+  late DataForm form;
 
   @override
   Widget build(BuildContext context) {
@@ -220,8 +220,8 @@ class MultiSectionForm extends StatelessWidget {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: form = GSForm.multiSection(context, sections: [
-                  GSSection(sectionTitle: 'User information', fields: [
+                child: form = DataForm.multiSection(context, sections: [
+                  FormSection(sectionTitle: 'User information', fields: [
                     DataFormField.text(
                       value: 'Some text',
                       tag: 'name',
@@ -268,11 +268,11 @@ class MultiSectionForm extends StatelessWidget {
                       title: 'DatePicker',
                       weight: 12,
                       required: false,
-                      initialDate: GSDate(day: 10, month: 5, year: 2023),
+                      initialDate: DataDate(day: 10, month: 5, year: 2023),
                       errorMessage: 'please enter a name',
                     ),
                     DataFormField.text(
-                      value: 'سعید دسترس3',
+                      value: 'Pauline',
                       tag: 'lastName',
                       title: 'Last name',
                       minLine: 1,
@@ -315,7 +315,7 @@ class MultiSectionForm extends StatelessWidget {
                       errorMessage: 'some error',
                     ),
                   ]),
-                  GSSection(
+                  FormSection(
                     sectionTitle: 'Market information',
                     fields: [
                       DataFormField.text(

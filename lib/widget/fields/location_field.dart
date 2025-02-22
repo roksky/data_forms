@@ -10,16 +10,16 @@ import 'package:data_forms/model/state_manager.dart';
 import 'package:provider/provider.dart';
 import 'notifyable_stateful_widget.dart';
 
-class GSLocationField extends NotifiableStatefulWidget
-    implements GSFieldCallBack {
-  late GSLocationModel model;
-  final GSFormStyle formStyle;
+class FormLocationField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
+  late FormLocationModel model;
+  final FormStyle formStyle;
 
-  GSLocationField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormLocationField(this.model, this.formStyle, {Key? key}) : super(key: key);
   Position? _currentLocation;
 
   @override
-  State<GSLocationField> createState() => _GSLocationFieldState();
+  State<FormLocationField> createState() => _GSLocationFieldState();
 
   @override
   getValue() {
@@ -38,7 +38,7 @@ class GSLocationField extends NotifiableStatefulWidget
   }
 }
 
-class _GSLocationFieldState extends State<GSLocationField> {
+class _GSLocationFieldState extends State<FormLocationField> {
   String _currentLocation = 'Location not fetched';
   bool isLoading = false;
 
@@ -144,7 +144,7 @@ class _GSLocationFieldState extends State<GSLocationField> {
                               child: Text(
                                 widget.formStyle.requiredText,
                                 style: const TextStyle(
-                                  color: GSFormColors.red,
+                                  color: FormColors.red,
                                   fontSize: 10,
                                 ),
                               ),

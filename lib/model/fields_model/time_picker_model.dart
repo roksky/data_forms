@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'field_model.dart';
 
-class GSTimePickerModel extends GSFieldModel {
+class FormTimePickerModel extends FormFieldModel {
   String? hint;
   TimeOfDay? initialTime;
 
-  GSTimePickerModel({
+  FormTimePickerModel({
     type,
     tag,
     title,

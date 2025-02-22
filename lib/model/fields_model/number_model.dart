@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class GSNumberModel extends GSFieldModel {
+class FormNumberModel extends FormFieldModel {
   int? maxLength;
   String? hint;
   bool? showCounter;
 
-  GSNumberModel(
+  FormNumberModel(
       {type,
       tag,
       title,

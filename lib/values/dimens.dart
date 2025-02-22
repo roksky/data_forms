@@ -1,1 +1,1 @@
-class GSFormDimens {}
+class FormDimens {}
