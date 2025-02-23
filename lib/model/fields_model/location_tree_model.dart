@@ -30,8 +30,8 @@ class FormLocationTreeModel extends FormFieldModel {
       enableReadOnly,
       dependsOn,
       this.targetLevel,
-  required this.fetchLocations,
-  required this.fetchLocationById,
+      required this.fetchLocations,
+      required this.fetchLocationById,
       onTap,
       this.hint})
       : super(

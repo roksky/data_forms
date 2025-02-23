@@ -4,7 +4,6 @@ import 'package:data_forms/core/form_style.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-
 class QrScannerScreen extends StatefulWidget {
   final ValueSetter<Barcode> callback;
 
@@ -58,5 +57,4 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
       ),
     );
   }
-
 }

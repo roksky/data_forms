@@ -97,7 +97,8 @@ class _GSLocationFieldState extends State<FormLocationField> {
       _currentLocation =
           'Latitude: ${position.latitude}, Longitude: ${position.longitude}';
       widget._currentLocation = position;
-      stateManager.set(widget.model.tag, widget._currentLocation); // Update the model
+      stateManager.set(
+          widget.model.tag, widget._currentLocation); // Update the model
       isLoading = false;
     });
   }

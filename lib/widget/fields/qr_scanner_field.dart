@@ -9,7 +9,8 @@ import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormQRScannerField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormQRScannerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   final FormQRScannerModel model;
   final FormStyle formStyle;
 

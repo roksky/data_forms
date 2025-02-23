@@ -48,9 +48,9 @@ class FormDatePickerField extends NotifiableStatefulWidget
     return selectedGregorianDate == null
         ? null
         : DateDataModel(
-        dateServerType: selectedGregorianDate!,
-        timeStamp: selectedGregorianDate!.millisecondsSinceEpoch,
-        showDateStr: selectedDateText);
+            dateServerType: selectedGregorianDate!,
+            timeStamp: selectedGregorianDate!.millisecondsSinceEpoch,
+            showDateStr: selectedDateText);
   }
 }
 

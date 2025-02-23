@@ -2,7 +2,6 @@ import 'package:data_forms/values/colors.dart';
 import 'package:data_forms/values/theme.dart';
 import 'package:flutter/material.dart';
 
-
 class FormStyle {
   TextStyle titleTextStyle;
   TextStyle fieldHintStyle;
@@ -42,15 +41,13 @@ class FormStyle {
             backgroundFieldColor ?? FormColors.colorBackground,
         backgroundFieldColorDisable =
             backgroundFieldColorDisable ?? FormColors.colorBackgroundDisable,
-        titleTextStyle =
-            titleStyle ?? FormTheme.textThemeStyle.displayMedium!,
+        titleTextStyle = titleStyle ?? FormTheme.textThemeStyle.displayMedium!,
         fieldRadius = fieldRadius ?? 10.0,
         sectionRadius = sectionRadius ?? 4.0,
         sectionCardElevation = sectionCardElevation ?? 2.0,
         sectionCardPadding = sectionCardPadding ?? 2.0,
         requiredText = requiredText ?? '',
-        fieldHintStyle =
-            fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
+        fieldHintStyle = fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
         fieldTextStyle =
             fieldTextStyle ?? FormTheme.textThemeStyle.displayMedium!,
         errorTextStyle =

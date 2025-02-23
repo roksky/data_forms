@@ -23,9 +23,9 @@ class SmoothRadius extends Radius {
   /// and then adding the result to another radius is equivalent to subtracting
   /// a radius of one pixel from the other.
   Radius operator -() => SmoothRadius(
-    cornerRadius: -cornerRadius,
-    cornerSmoothing: cornerSmoothing,
-  );
+        cornerRadius: -cornerRadius,
+        cornerSmoothing: cornerSmoothing,
+      );
 
   /// Binary subtraction operator.
   ///
@@ -69,9 +69,9 @@ class SmoothRadius extends Radius {
   /// left-hand-side operand (a radius) multiplied by the scalar
   /// right-hand-side operand (a double).
   SmoothRadius operator *(double operand) => SmoothRadius(
-    cornerRadius: cornerRadius * operand,
-    cornerSmoothing: cornerSmoothing * operand,
-  );
+        cornerRadius: cornerRadius * operand,
+        cornerSmoothing: cornerSmoothing * operand,
+      );
 
   /// Division operator.
   ///
@@ -79,9 +79,9 @@ class SmoothRadius extends Radius {
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double).
   SmoothRadius operator /(double operand) => SmoothRadius(
-    cornerRadius: cornerRadius / operand,
-    cornerSmoothing: cornerSmoothing / operand,
-  );
+        cornerRadius: cornerRadius / operand,
+        cornerSmoothing: cornerSmoothing / operand,
+      );
 
   /// Integer (truncating) division operator.
   ///
@@ -89,9 +89,9 @@ class SmoothRadius extends Radius {
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double), rounded towards zero.
   SmoothRadius operator ~/(double operand) => SmoothRadius(
-    cornerRadius: (cornerRadius ~/ operand).toDouble(),
-    cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
-  );
+        cornerRadius: (cornerRadius ~/ operand).toDouble(),
+        cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
+      );
 
   /// Modulo (remainder) operator.
   ///
@@ -99,9 +99,9 @@ class SmoothRadius extends Radius {
   /// coordinates of the left-hand-side operand (a radius) by the scalar
   /// right-hand-side operand (a double).
   SmoothRadius operator %(double operand) => SmoothRadius(
-    cornerRadius: cornerRadius % operand,
-    cornerSmoothing: cornerSmoothing % operand,
-  );
+        cornerRadius: cornerRadius % operand,
+        cornerSmoothing: cornerSmoothing % operand,
+      );
 
   /// Linearly interpolate between two smooth radii.
   ///
@@ -139,7 +139,7 @@ class SmoothRadius extends Radius {
         return SmoothRadius(
           cornerRadius: lerpDouble(a.cornerRadius, b.cornerRadius, t) ?? 0,
           cornerSmoothing:
-          lerpDouble(a.cornerSmoothing, b.cornerSmoothing, t) ?? 0,
+              lerpDouble(a.cornerSmoothing, b.cornerSmoothing, t) ?? 0,
         );
       }
     }

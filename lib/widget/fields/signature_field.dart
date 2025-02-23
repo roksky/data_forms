@@ -8,7 +8,8 @@ import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormSignatureScreenField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormSignatureScreenField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   late FormSignatureModel model;
   final FormStyle formStyle;
 

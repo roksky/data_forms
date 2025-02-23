@@ -17,7 +17,7 @@ enum ImageFormat { JPEG, PNG, WEBP }
 
 class VideoThumbnail {
   static const MethodChannel _channel =
-  const MethodChannel('plugins.justsoft.xyz/video_thumbnail');
+      const MethodChannel('plugins.justsoft.xyz/video_thumbnail');
 
   /// Generates a thumbnail file under specified thumbnail folder or given full path and name which matches expected ext.
   /// The video can be a local video file, or an URL repreents iOS or Android native supported video format.
@@ -26,13 +26,13 @@ class VideoThumbnail {
   /// The lower quality value creates lower quality of the thumbnail image, but it gets ignored for PNG format.
   static Future<String?> thumbnailFile(
       {required String video,
-        Map<String, String>? headers,
-        String? thumbnailPath,
-        ImageFormat imageFormat = ImageFormat.PNG,
-        int maxHeight = 0,
-        int maxWidth = 0,
-        int timeMs = 0,
-        int quality = 10}) async {
+      Map<String, String>? headers,
+      String? thumbnailPath,
+      ImageFormat imageFormat = ImageFormat.PNG,
+      int maxHeight = 0,
+      int maxWidth = 0,
+      int timeMs = 0,
+      int quality = 10}) async {
     assert(video.isNotEmpty);
     if (video.isEmpty) return null;
     final reqMap = <String, dynamic>{

@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 
 class StateManager extends ChangeNotifier {
@@ -11,7 +9,7 @@ class StateManager extends ChangeNotifier {
   }
 
   dynamic get(String? key) {
-    if(key == null) return null;
+    if (key == null) return null;
 
     return _state[key];
   }

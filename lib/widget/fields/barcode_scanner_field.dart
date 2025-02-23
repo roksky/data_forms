@@ -7,7 +7,8 @@ import 'package:data_forms/model/fields_model/barcode_scanner_model.dart';
 import 'package:data_forms/values/colors.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormBarcodeScannerField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormBarcodeScannerField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   final FormBarCodeModel model;
   final FormStyle formStyle;
 

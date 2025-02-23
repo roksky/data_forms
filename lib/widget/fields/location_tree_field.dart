@@ -16,7 +16,8 @@ class FormLocationTreeField extends NotifiableStatefulWidget
   final FormStyle formStyle;
   LocationItem? result = null;
 
-  FormLocationTreeField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormLocationTreeField(this.model, this.formStyle, {Key? key})
+      : super(key: key);
 
   @override
   State<FormLocationTreeField> createState() => _GSLocationTreeFieldState();
@@ -75,13 +76,14 @@ class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
                         1)
                 : widget.model.hierarchy,
             fetchLocations: widget.model.fetchLocations,
-              fetchLocationById: widget.model.fetchLocationById,
+            fetchLocationById: widget.model.fetchLocationById,
             onSave: (selectedLocations) {
               // Handle the selected locations and update the UI accordingly.
               setState(() {
                 widget.result = selectedLocations
                     .last; // Update the box with the final selected location
-                stateManager.set(widget.model.tag, widget.result); // Update the model
+                stateManager.set(
+                    widget.model.tag, widget.result); // Update the model
               });
             },
           ),
@@ -126,13 +128,13 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
   }
 
   void recomputeHierarchy(String? rootLocation) async {
-    if(rootLocation != null){
+    if (rootLocation != null) {
       LocationItem? item = await widget.fetchLocationById(rootLocation);
-      if(item != null){
+      if (item != null) {
         var mylevel = item.level;
         // subset the hierarchy
         var index = hierarchy.indexOf(mylevel!);
-        if(index != -1) {
+        if (index != -1) {
           hierarchy = hierarchy.sublist(index);
         }
       }

@@ -34,7 +34,8 @@ class FormDateRangePickerField extends NotifiableStatefulWidget
       : super(key: key);
 
   @override
-  State<FormDateRangePickerField> createState() => _GSDateRangePickerFieldState();
+  State<FormDateRangePickerField> createState() =>
+      _GSDateRangePickerFieldState();
 
   @override
   getValue() {
@@ -53,16 +54,15 @@ class FormDateRangePickerField extends NotifiableStatefulWidget
 
   _getData() {
     return (selectedGregorianEndDate == null &&
-        selectedGregorianStartDate == null)
+            selectedGregorianStartDate == null)
         ? null
         : DateDataRangeModel(
-        startDateServerType: selectedGregorianStartDate!,
-        endDateServerType: selectedGregorianEndDate!,
-        startTimeStamp:
-        selectedGregorianStartDate!.millisecondsSinceEpoch,
-        endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
-        displayStartDateStr: selectedDateText,
-        displayEndDateStr: selectedDateText);
+            startDateServerType: selectedGregorianStartDate!,
+            endDateServerType: selectedGregorianEndDate!,
+            startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
+            endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
+            displayStartDateStr: selectedDateText,
+            displayEndDateStr: selectedDateText);
   }
 }
 
