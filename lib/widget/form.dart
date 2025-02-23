@@ -5,7 +5,7 @@ import 'package:data_forms/enums/field_status.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:provider/provider.dart';
 
-import '../model/state_manager.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'field.dart';
 import 'section.dart';
 

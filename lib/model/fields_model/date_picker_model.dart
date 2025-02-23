@@ -1,6 +1,5 @@
+import 'package:data_forms/model/data_model/date_data_model.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
-
-import '../data_model/date_data_model.dart';
 
 class FormDatePickerModel extends FormFieldModel {
   String? hint;

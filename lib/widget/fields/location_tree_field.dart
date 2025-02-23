@@ -4,9 +4,9 @@ import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/location_tree_model.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/data_model/location_item_model.dart';
+import 'package:data_forms/model/data_model/location_item_model.dart';
 import 'package:data_forms/model/state_manager.dart';
-import '../../util/value_util.dart';
+import 'package:data_forms/util/value_util.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable

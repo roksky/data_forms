@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/form_style.dart';
-import '../../model/fields_model/price_model.dart';
+import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/model/fields_model/price_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 

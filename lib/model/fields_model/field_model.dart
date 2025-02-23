@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../enums/field_status.dart';
-import '../../enums/filed_type.dart';
+import 'package:data_forms/enums/field_status.dart';
+import 'package:data_forms/enums/filed_type.dart';
 
 abstract class FormFieldModel {
   FormFieldTypeEnum? type;

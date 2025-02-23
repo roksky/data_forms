@@ -1,7 +1,6 @@
+import 'package:data_forms/model/data_model/location_item_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../data_model/location_item_model.dart';
-import 'field_model.dart';
 
 class FormLocationTreeModel extends FormFieldModel {
   int? maxLength;

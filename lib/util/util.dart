@@ -6,9 +6,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 
-import '../core/form_style.dart';
-import '../enums/field_status.dart';
-import '../values/colors.dart';
+import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/enums/field_status.dart';
+import 'package:data_forms/values/colors.dart';
 import 'package:data_forms/widget/squircle/smooth_border_radius.dart';
 import 'package:data_forms/widget/squircle/smooth_rectangle_border.dart';
 

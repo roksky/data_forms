@@ -1,7 +1,6 @@
+import 'package:data_forms/model/data_model/spinner_data_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 import 'package:flutter/cupertino.dart';
-
-import '../data_model/spinner_data_model.dart';
-import 'field_model.dart';
 
 class FormSpinnerModel extends FormFieldModel {
   List<SpinnerDataModel> items;

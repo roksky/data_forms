@@ -6,7 +6,7 @@ import 'package:data_forms/model/fields_model/checkbox_model.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/field_callback.dart';
+import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 

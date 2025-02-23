@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/core/field_callback.dart';
 
-import '../../core/form_style.dart';
-import '../../model/fields_model/number_model.dart';
+import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/model/fields_model/number_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
@@ -90,5 +90,25 @@ class _GSNumberFieldState extends State<FormNumberField> {
         ),
       ),
     );
+  }
+}
+
+class GSIntegerField extends FormNumberField {
+  GSIntegerField(super.model, super.formStyle);
+
+  @override
+  getValue() {
+    var value = controller!.text.replaceAll(",", "");
+    return int.parse(value);
+  }
+}
+
+class GSDoubleField extends FormNumberField {
+  GSDoubleField(super.model, super.formStyle);
+
+  @override
+  getValue() {
+    var value = controller!.text.replaceAll(",", "");
+    return double.parse(value);
   }
 }

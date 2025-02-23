@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/model/fields_model/image_picker_model.dart';
 
-import 'field_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 
 class FormMultiImagePickerModel extends FormFieldModel {
   String? hint;

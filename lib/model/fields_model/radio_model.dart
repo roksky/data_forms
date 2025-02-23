@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/model/data_model/radio_data_model.dart';
 
-import 'field_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 
 class FormRadioModel extends FormFieldModel {
   List<RadioDataModel> items;

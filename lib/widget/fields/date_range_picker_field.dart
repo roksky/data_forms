@@ -7,7 +7,7 @@ import 'package:data_forms/model/fields_model/date_range_picker_model.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/form_style.dart';
+import 'package:data_forms/core/form_style.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormDateRangePickerField extends NotifiableStatefulWidget

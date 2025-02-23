@@ -1,4 +1,4 @@
-import 'field_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 
 class FormTextModel extends FormFieldModel {
   int? maxLength;

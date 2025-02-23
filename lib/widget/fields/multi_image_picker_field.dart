@@ -10,7 +10,7 @@ import 'package:data_forms/values/colors.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../model/fields_model/multi_image_picker_model.dart';
+import 'package:data_forms/model/fields_model/multi_image_picker_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
