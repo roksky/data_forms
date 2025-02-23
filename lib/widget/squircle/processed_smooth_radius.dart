@@ -23,10 +23,10 @@ class ProcessedSmoothRadius {
   });
 
   factory ProcessedSmoothRadius(
-      SmoothRadius radius, {
-        required double width,
-        required double height,
-      }) {
+    SmoothRadius radius, {
+    required double width,
+    required double height,
+  }) {
     final cornerSmoothing = radius.cornerSmoothing;
     var cornerRadius = radius.cornerRadius;
 

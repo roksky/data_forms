@@ -1,12 +1,7 @@
-import 'package:flutter/cupertino.dart';
-
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class FormLocationModel extends FormFieldModel {
-  String? hint;
-  Widget? iconWidget;
-
-  FormLocationModel({
+class FormBoolSwitchModel extends FormFieldModel {
+  FormBoolSwitchModel({
     type,
     tag,
     title,
@@ -16,9 +11,7 @@ class FormLocationModel extends FormFieldModel {
     status,
     weight,
     showTitle,
-    dependsOn,
-    this.hint,
-    this.iconWidget,
+    enableReadOnly,
   }) : super(
           type: type,
           tag: tag,
@@ -28,7 +21,7 @@ class FormLocationModel extends FormFieldModel {
           required: required,
           status: status,
           weight: weight,
-          dependsOn: dependsOn,
           showTitle: showTitle,
+          enableReadOnly: enableReadOnly,
         );
 }

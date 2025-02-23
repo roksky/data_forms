@@ -1,12 +1,14 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class FormLocationModel extends FormFieldModel {
+class FormSignatureModel extends FormFieldModel {
   String? hint;
   Widget? iconWidget;
+  Color color;
+  bool fit;
 
-  FormLocationModel({
+  FormSignatureModel({
     type,
     tag,
     title,
@@ -16,9 +18,10 @@ class FormLocationModel extends FormFieldModel {
     status,
     weight,
     showTitle,
-    dependsOn,
     this.hint,
     this.iconWidget,
+    this.color = Colors.black,
+    this.fit = false,
   }) : super(
           type: type,
           tag: tag,
@@ -28,7 +31,6 @@ class FormLocationModel extends FormFieldModel {
           required: required,
           status: status,
           weight: weight,
-          dependsOn: dependsOn,
           showTitle: showTitle,
         );
 }

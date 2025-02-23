@@ -115,10 +115,10 @@ class SmoothRectangleBorder extends OutlinedBorder {
   }
 
   Path _getPath(
-      Rect rect,
-      SmoothBorderRadius radius, {
-        TextDirection? textDirection,
-      }) {
+    Rect rect,
+    SmoothBorderRadius radius, {
+    TextDirection? textDirection,
+  }) {
     if ([radius.bottomLeft, radius.bottomRight, radius.topLeft, radius.topRight]
         .every((x) => x.cornerSmoothing == 0.0)) {
       return Path()..addRRect(radius.resolve(textDirection).toRRect(rect));
@@ -147,8 +147,8 @@ class SmoothRectangleBorder extends OutlinedBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-      // Since the stroke is painted at the center, we need to adjust the rect
-      // according to the [borderAlign].
+        // Since the stroke is painted at the center, we need to adjust the rect
+        // according to the [borderAlign].
         final adjustedRect = () {
           switch (borderAlign) {
             case BorderAlign.inside:

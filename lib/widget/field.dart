@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:data_forms/core/form_style.dart';
@@ -46,11 +47,23 @@ import 'package:data_forms/widget/fields/text_field.dart';
 import 'package:data_forms/widget/fields/text_plain_field.dart';
 import 'package:data_forms/widget/fields/time_picker_field.dart';
 
-import '../enums/required_check_list_enum.dart';
-import '../model/data_model/location_item_model.dart';
-import '../model/state_manager.dart';
-import 'fields/location_tree_field.dart';
-import 'fields/multi_image_picker_field.dart';
+import 'package:data_forms/enums/required_check_list_enum.dart';
+import 'package:data_forms/model/data_model/location_item_model.dart';
+import 'package:data_forms/model/fields_model/barcode_scanner_model.dart';
+import 'package:data_forms/model/fields_model/bool_switch_model.dart';
+import 'package:data_forms/model/fields_model/file_picker_model.dart';
+import 'package:data_forms/model/fields_model/multi_media_picker_model.dart';
+import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
+import 'package:data_forms/model/fields_model/signature_model.dart';
+import 'package:data_forms/model/state_manager.dart';
+import 'package:data_forms/widget/fields/barcode_scanner_field.dart';
+import 'package:data_forms/widget/fields/bool_field.dart';
+import 'package:data_forms/widget/fields/file_picker_field.dart';
+import 'package:data_forms/widget/fields/location_tree_field.dart';
+import 'package:data_forms/widget/fields/multi_image_picker_field.dart';
+import 'package:data_forms/widget/fields/multi_media_picker_field.dart';
+import 'package:data_forms/widget/fields/qr_scanner_field.dart';
+import 'package:data_forms/widget/fields/signature_field.dart';
 
 // ignore: must_be_immutable
 class DataFormField extends StatefulWidget {
@@ -63,6 +76,37 @@ class DataFormField extends StatefulWidget {
 
   update() {
     onUpdate!.call();
+  }
+
+  DataFormField.qrScanner({
+    Key? key,
+    required String tag,
+    String? title,
+    bool? showTitle,
+    String? errorMessage,
+    String? helpMessage,
+    bool? required,
+    FormFieldStatusEnum? status,
+    int? weight,
+    String? hint,
+    Widget? iconWidget,
+    Color? iconColor,
+    bool? enableReadOnly,
+  }) : super(key: key) {
+    model = FormQRScannerModel(
+      type: FormFieldTypeEnum.qrScanner,
+      tag: tag,
+      showTitle: showTitle ?? false,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
+      hint: hint,
+      iconWidget: iconWidget,
+      enableReadOnly: enableReadOnly,
+    );
   }
 
   DataFormField.imagePicker({
@@ -226,7 +270,7 @@ class DataFormField extends StatefulWidget {
       Icon? searchIcon,
       BoxDecoration? searchBoxDecoration,
       required List<RadioDataModel> items,
-        String? dependsOn,
+      String? dependsOn,
       required ValueChanged<RadioDataModel> callBack})
       : super(key: key) {
     model = FormRadioModel(
@@ -337,7 +381,7 @@ class DataFormField extends StatefulWidget {
       String? hint,
       bool? readOnly,
       FocusNode? focusNode,
-        String? dependsOn,
+      String? dependsOn,
       FocusNode? nextFocusNode})
       : super(key: key) {
     model = FormTextModel(
@@ -527,6 +571,84 @@ class DataFormField extends StatefulWidget {
     );
   }
 
+  DataFormField.integer({
+    Key? key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    FormFieldStatusEnum? status,
+    int? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    bool? showTitle,
+    bool? showCounter,
+    String? hint,
+    bool? readOnly,
+  }) : super(key: key) {
+    model = FormNumberModel(
+      type: FormFieldTypeEnum.integer,
+      showTitle: showTitle ?? true,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      prefixWidget: prefixWidget,
+      postfixWidget: postfixWidget,
+      required: required,
+      status: status,
+      value: value,
+      weight: weight,
+      maxLength: maxLength,
+      hint: hint,
+      showCounter: showCounter,
+      enableReadOnly: readOnly,
+    );
+  }
+
+  DataFormField.double({
+    Key? key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    FormFieldStatusEnum? status,
+    double? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    bool? showTitle,
+    bool? showCounter,
+    String? hint,
+    bool? readOnly,
+  }) : super(key: key) {
+    model = FormNumberModel(
+      type: FormFieldTypeEnum.double,
+      showTitle: showTitle ?? true,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      prefixWidget: prefixWidget,
+      postfixWidget: postfixWidget,
+      required: required,
+      status: status,
+      value: value,
+      weight: weight,
+      maxLength: maxLength,
+      hint: hint,
+      showCounter: showCounter,
+      enableReadOnly: readOnly,
+    );
+  }
+
   DataFormField.datePicker({
     Key? key,
     required String tag,
@@ -705,7 +827,7 @@ class DataFormField extends StatefulWidget {
     bool? required,
     bool? showTitle,
     FormFieldStatusEnum? status,
-    String? value,
+    double? value,
     int? weight,
     RegExp? validateRegEx,
     int? maxLength,
@@ -752,7 +874,7 @@ class DataFormField extends StatefulWidget {
       RegExp? validateRegEx,
       int? minLine,
       int? maxLine,
-        String? dependsOn,
+      String? dependsOn,
       String? hint})
       : super(key: key) {
     model = FormBankCardModel(
@@ -773,6 +895,161 @@ class DataFormField extends StatefulWidget {
     );
   }
 
+  DataFormField.filePicker(
+      {Key? key,
+      required String tag,
+      String? title,
+      String? errorMessage,
+      String? helpMessage,
+      Widget? prefixWidget,
+      Widget? postfixWidget,
+      bool? required,
+      bool? showTitle,
+      FormFieldStatusEnum? status,
+      String? value,
+      int? weight,
+      RegExp? validateRegEx,
+      int? maxLength,
+      int? minLine,
+      int? maxLine,
+      String? hint,
+      bool? readOnly,
+      FocusNode? focusNode,
+      FocusNode? nextFocusNode,
+      bool? allowMultiple,
+      List<String>? allowedExtensions,
+      FileType? fileType})
+      : super(key: key) {
+    model = FormFilePickerModel(
+      type: FormFieldTypeEnum.filePicker,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      value: value,
+      weight: weight,
+      hint: hint,
+      allowMultiple: allowMultiple ?? true,
+      fileType: fileType ?? FileType.any,
+      allowedExtensions: allowedExtensions,
+    );
+  }
+
+  DataFormField.multiMediaPicker(
+      {Key? key,
+      required String tag,
+      String? title,
+      String? errorMessage,
+      String? helpMessage,
+      Widget? prefixWidget,
+      Widget? postfixWidget,
+      bool? required,
+      bool? showTitle,
+      FormFieldStatusEnum? status,
+      String? value,
+      int? weight,
+      RegExp? validateRegEx,
+      int? maxLength,
+      int? minLine,
+      int? maxLine,
+      String? hint,
+      bool? readOnly,
+      FocusNode? focusNode,
+      FocusNode? nextFocusNode})
+      : super(key: key) {
+    model = FormMultiMediaPickerModel(
+      type: FormFieldTypeEnum.multiMediaPicker,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
+    );
+  }
+
+  DataFormField.signature(
+      {Key? key,
+      required String tag,
+      String? title,
+      String? errorMessage,
+      String? helpMessage,
+      Widget? prefixWidget,
+      Widget? postfixWidget,
+      bool? required,
+      bool? showTitle,
+      FormFieldStatusEnum? status,
+      String? value,
+      int? weight,
+      RegExp? validateRegEx,
+      int? maxLength,
+      int? minLine,
+      int? maxLine,
+      String? hint,
+      bool? readOnly,
+      FocusNode? focusNode,
+      FocusNode? nextFocusNode,
+      Widget? iconWidget,
+      Color? color,
+      bool fit = false})
+      : super(key: key) {
+    model = FormSignatureModel(
+      type: FormFieldTypeEnum.signature,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
+      color: color ?? Colors.black,
+      fit: fit,
+      hint: hint,
+      iconWidget: iconWidget,
+    );
+  }
+
+  DataFormField.barcode(
+      {Key? key,
+      required String tag,
+      String? title,
+      String? errorMessage,
+      String? helpMessage,
+      Widget? prefixWidget,
+      Widget? postfixWidget,
+      bool? required,
+      bool? showTitle,
+      FormFieldStatusEnum? status,
+      String? value,
+      int? weight,
+      RegExp? validateRegEx,
+      int? maxLength,
+      int? minLine,
+      int? maxLine,
+      String? hint,
+      bool? readOnly,
+      FocusNode? focusNode,
+      FocusNode? nextFocusNode})
+      : super(key: key) {
+    model = FormBarCodeModel(
+      type: FormFieldTypeEnum.barcode,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
+    );
+  }
+
   DataFormField.locationTree({
     Key? key,
     required String tag,
@@ -790,9 +1067,9 @@ class DataFormField extends StatefulWidget {
     String? targetLevel,
     String? dependsOn,
     required Future<List<LocationItem>> Function(String? parentId)
-    fetchLocations,
+        fetchLocations,
     required Future<LocationItem?> Function(String locationId)
-    fetchLocationById,
+        fetchLocationById,
   }) : super(key: key) {
     model = FormLocationTreeModel(
         type: FormFieldTypeEnum.locationTree,
@@ -832,7 +1109,7 @@ class DataFormField extends StatefulWidget {
       int? maxLine,
       String? hint,
       bool? readOnly,
-        String? dependsOn,
+      String? dependsOn,
       FocusNode? focusNode,
       FocusNode? nextFocusNode})
       : super(key: key) {
@@ -847,6 +1124,41 @@ class DataFormField extends StatefulWidget {
       status: status,
       weight: weight,
       dependsOn: dependsOn,
+    );
+  }
+
+  DataFormField.boolSwitch(
+      {Key? key,
+      required String tag,
+      String? title,
+      String? errorMessage,
+      String? helpMessage,
+      Widget? prefixWidget,
+      Widget? postfixWidget,
+      bool? required,
+      bool? showTitle,
+      FormFieldStatusEnum? status,
+      bool? value,
+      int? weight,
+      RegExp? validateRegEx,
+      int? maxLength,
+      int? minLine,
+      int? maxLine,
+      String? hint,
+      bool? readOnly,
+      FocusNode? focusNode,
+      FocusNode? nextFocusNode})
+      : super(key: key) {
+    model = FormBoolSwitchModel(
+      type: FormFieldTypeEnum.boolean,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
     );
   }
 
@@ -997,6 +1309,14 @@ class _GSFieldState extends State<DataFormField> {
         widget.child =
             FormTextField(widget.model as FormTextModel, widget.formStyle!);
         break;
+      case FormFieldTypeEnum.integer:
+        widget.child =
+            GSIntegerField(widget.model as FormNumberModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.double:
+        widget.child =
+            GSDoubleField(widget.model as FormNumberModel, widget.formStyle!);
+        break;
       case FormFieldTypeEnum.number:
         widget.child =
             FormNumberField(widget.model as FormNumberModel, widget.formStyle!);
@@ -1010,8 +1330,8 @@ class _GSFieldState extends State<DataFormField> {
             FormMobileField(widget.model as FormMobileModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.password:
-        widget.child =
-            FormPasswordField(widget.model as FormPasswordModel, widget.formStyle!);
+        widget.child = FormPasswordField(
+            widget.model as FormPasswordModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.date:
         widget.child = FormDatePickerField(
@@ -1034,16 +1354,16 @@ class _GSFieldState extends State<DataFormField> {
             FormPriceField(widget.model as FormPriceModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.bankCard:
-        widget.child =
-            FormBankCardField(widget.model as FormBankCardModel, widget.formStyle!);
+        widget.child = FormBankCardField(
+            widget.model as FormBankCardModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.spinner:
-        widget.child =
-            FormSpinnerField(widget.model as FormSpinnerModel, widget.formStyle!);
+        widget.child = FormSpinnerField(
+            widget.model as FormSpinnerModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.radioGroup:
-        widget.child =
-            FormRadioGroupField(widget.model as FormRadioModel, widget.formStyle!);
+        widget.child = FormRadioGroupField(
+            widget.model as FormRadioModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.checkList:
         widget.child = FormCheckListField(
@@ -1053,17 +1373,41 @@ class _GSFieldState extends State<DataFormField> {
         widget.child = FormImagePickerField(
             widget.model as FormImagePickerModel, widget.formStyle!);
         break;
+      case FormFieldTypeEnum.qrScanner:
+        widget.child = FormQRScannerField(
+            widget.model as FormQRScannerModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.filePicker:
+        widget.child = FormFilePickerField(
+            widget.model as FormFilePickerModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.multiMediaPicker:
+        widget.child = FormMultiMediaAttachmentField(
+            widget.model as FormMultiMediaPickerModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.signature:
+        widget.child = FormSignatureScreenField(
+            widget.model as FormSignatureModel, widget.formStyle!);
+        break;
       case FormFieldTypeEnum.multiImagePicker:
         widget.child = FormMultiImagePickerField(
             widget.model as FormMultiImagePickerModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.barcode:
+        widget.child = FormBarcodeScannerField(
+            widget.model as FormBarCodeModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.locationTree:
         widget.child = FormLocationTreeField(
             widget.model as FormLocationTreeModel, widget.formStyle!);
         break;
       case FormFieldTypeEnum.location:
-        widget.child =
-            FormLocationField(widget.model as FormLocationModel, widget.formStyle!);
+        widget.child = FormLocationField(
+            widget.model as FormLocationModel, widget.formStyle!);
+        break;
+      case FormFieldTypeEnum.boolean:
+        widget.child = FormBoolSwitchField(
+            widget.model as FormBoolSwitchModel, widget.formStyle!);
         break;
 
       default:

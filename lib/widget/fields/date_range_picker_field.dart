@@ -7,7 +7,7 @@ import 'package:data_forms/model/fields_model/date_range_picker_model.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/form_style.dart';
+import 'package:data_forms/core/form_style.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormDateRangePickerField extends NotifiableStatefulWidget
@@ -34,7 +34,8 @@ class FormDateRangePickerField extends NotifiableStatefulWidget
       : super(key: key);
 
   @override
-  State<FormDateRangePickerField> createState() => _GSDateRangePickerFieldState();
+  State<FormDateRangePickerField> createState() =>
+      _GSDateRangePickerFieldState();
 
   @override
   getValue() {
@@ -53,16 +54,15 @@ class FormDateRangePickerField extends NotifiableStatefulWidget
 
   _getData() {
     return (selectedGregorianEndDate == null &&
-        selectedGregorianStartDate == null)
+            selectedGregorianStartDate == null)
         ? null
         : DateDataRangeModel(
-        startDateServerType: selectedGregorianStartDate!,
-        endDateServerType: selectedGregorianEndDate!,
-        startTimeStamp:
-        selectedGregorianStartDate!.millisecondsSinceEpoch,
-        endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
-        displayStartDateStr: selectedDateText,
-        displayEndDateStr: selectedDateText);
+            startDateServerType: selectedGregorianStartDate!,
+            endDateServerType: selectedGregorianEndDate!,
+            startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
+            endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
+            displayStartDateStr: selectedDateText,
+            displayEndDateStr: selectedDateText);
   }
 }
 

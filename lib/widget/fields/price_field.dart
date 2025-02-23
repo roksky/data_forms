@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:intl/intl.dart';
 
-import '../../core/form_style.dart';
-import '../../model/fields_model/price_model.dart';
+import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/model/fields_model/price_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormPriceField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormPriceField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   late FormPriceModel model;
   FormStyle formStyle;
   TextEditingController? controller;
@@ -21,7 +22,7 @@ class FormPriceField extends NotifiableStatefulWidget implements FormFieldCallBa
 
   @override
   getValue() {
-    return controller!.text.replaceAll(',', '');
+    return double.parse(controller!.text.replaceAll(',', ''));
   }
 
   @override
@@ -46,13 +47,12 @@ class _GSPriceFieldState extends State<FormPriceField> {
   void initState() {
     widget.controller ??= TextEditingController();
     if (widget.model.value != null) {
-      widget.model.value =
-          widget._formatNumber(widget.model.value.replaceAll(',', ''));
       widget.controller?.value = TextEditingValue(
-        text: widget.model.value,
-        selection: TextSelection.collapsed(offset: widget.model.value.length),
+        text: widget.model.value.toString(),
+        selection: TextSelection.collapsed(
+            offset: widget.model.value.toString().length),
       );
-      widget.controller?.text = widget.model.value;
+      widget.controller?.text = widget.model.value.toString();
     }
     super.initState();
   }
@@ -60,17 +60,16 @@ class _GSPriceFieldState extends State<FormPriceField> {
   @override
   void didUpdateWidget(covariant FormPriceField oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (oldWidget.model.value == widget.model.value) {
+    if (oldWidget.model.value == widget.model.value.toString()) {
       widget.controller = oldWidget.controller;
     } else {
       widget.controller ??= TextEditingController();
-      widget.model.value =
-          widget._formatNumber(widget.model.value.replaceAll(',', ''));
       widget.controller?.value = TextEditingValue(
-        text: widget.model.value,
-        selection: TextSelection.collapsed(offset: widget.model.value.length),
+        text: widget.model.value.toString(),
+        selection: TextSelection.collapsed(
+            offset: widget.model.value.toString().length),
       );
-      widget.controller?.text = widget.model.value;
+      widget.controller?.text = widget.model.value.toString();
     }
   }
 

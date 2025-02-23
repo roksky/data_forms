@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:data_forms/core/constant.dart';
 import 'package:data_forms/core/field_callback.dart';
 
-import '../../core/form_style.dart';
-import '../../model/fields_model/email_model.dart';
+import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/model/fields_model/email_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormEmailField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormEmailField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   final FormEmailModel model;
   final FormStyle formStyle;
   TextEditingController? controller = TextEditingController();

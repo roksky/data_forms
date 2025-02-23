@@ -58,8 +58,11 @@ class MainTestPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil<dynamic>(
                       context,
-                      MaterialPageRoute<dynamic>(builder: (BuildContext context) => MultiSectionForm()),
-                          (route) => true, //if you want to disable back feature set to false
+                      MaterialPageRoute<dynamic>(
+                          builder: (BuildContext context) =>
+                              MultiSectionForm()),
+                      (route) =>
+                          true, //if you want to disable back feature set to false
                     );
                   },
                   child: const Text('Multi Section form'),
@@ -68,8 +71,10 @@ class MainTestPage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushAndRemoveUntil<dynamic>(
                         context,
-                        MaterialPageRoute<dynamic>(builder: (BuildContext context) => SingleSectionForm()),
-                            (route) => true);
+                        MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
+                                SingleSectionForm()),
+                        (route) => true);
                   },
                   child: const Text('Single Section form'),
                 ),
@@ -119,7 +124,9 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: form = DataForm.singleSection(
-                      style: FormStyle(titleStyle: const TextStyle(color: Colors.black87, fontSize: 16.0)),
+                      style: FormStyle(
+                          titleStyle: const TextStyle(
+                              color: Colors.black87, fontSize: 16.0)),
                       context,
                       fields: [
                         DataFormField.email(
@@ -162,13 +169,15 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                           title: 'Gender',
                           onChange: (model) {},
                           items: [
-                            SpinnerDataModel(name: '3', id: 0, isSelected: id == 0),
+                            SpinnerDataModel(
+                                name: '3', id: 0, isSelected: id == 0),
                             SpinnerDataModel(
                               name: '4',
                               id: 1,
                               isSelected: id == 1,
                             ),
-                            SpinnerDataModel(name: '8', id: 2, isSelected: id == 2),
+                            SpinnerDataModel(
+                                name: '8', id: 2, isSelected: id == 2),
                           ],
                         ),
                       ]),
@@ -335,7 +344,8 @@ class MultiSectionForm extends StatelessWidget {
                         maxLength: 233,
                         showCounter: false,
                         weight: 12,
-                        prefixWidget: const Icon(Icons.location_city, color: Colors.blue),
+                        prefixWidget:
+                            const Icon(Icons.location_city, color: Colors.blue),
                         required: true,
                       ),
                       DataFormField.spinner(
@@ -362,6 +372,75 @@ class MultiSectionForm extends StatelessWidget {
                         weight: 6,
                         required: false,
                         errorMessage: 'some error',
+                      ),
+                      DataFormField.integer(
+                        tag: 'integer_field',
+                        title: 'Integer Field',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please enter a valid integer',
+                      ),
+                      DataFormField.double(
+                        tag: 'double_field',
+                        title: 'Double Field',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please enter a valid double',
+                      ),
+                      DataFormField.qrScanner(
+                        tag: 'qr_scanner',
+                        title: 'QR Scanner',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please scan a valid QR code',
+                      ),
+                      DataFormField.filePicker(
+                        tag: 'file_picker',
+                        title: 'File Picker',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please select a file',
+                      ),
+                      DataFormField.multiMediaPicker(
+                        tag: 'multi_media_picker',
+                        title: 'Multi Media Picker',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please select media files',
+                      ),
+                      DataFormField.signature(
+                        tag: 'signature',
+                        title: 'Signature',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please provide a signature',
+                      ),
+                      DataFormField.barcode(
+                        tag: 'barcode',
+                        title: 'Barcode Scanner',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please scan a valid barcode',
+                      ),
+                      DataFormField.boolSwitch(
+                        tag: 'boolean',
+                        title: 'Boolean Switch',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please select a boolean value',
+                      ),
+                      DataFormField.locationTree(
+                        tag: 'location_tree',
+                        title: 'Location Tree',
+                        weight: 6,
+                        required: true,
+                        errorMessage: 'Please select a location',
+                        fetchLocations: (String? parentId) {
+                          return Future.value([]);
+                        },
+                        fetchLocationById: (String locationId) {
+                          return Future.value(null);
+                        },
                       ),
                     ],
                   ),

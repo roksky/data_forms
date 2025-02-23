@@ -6,7 +6,8 @@ import 'package:data_forms/model/fields_model/text_filed_model.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormTextField extends NotifiableStatefulWidget implements FormFieldCallBack {
+class FormTextField extends NotifiableStatefulWidget
+    implements FormFieldCallBack {
   final FormTextModel model;
   final FormStyle formStyle;
   TextEditingController? controller;

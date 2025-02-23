@@ -19,7 +19,8 @@ class FormImagePickerField extends NotifiableStatefulWidget
   final FormImagePickerModel model;
   final FormStyle formStyle;
 
-  FormImagePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormImagePickerField(this.model, this.formStyle, {Key? key})
+      : super(key: key);
   String? _croppedFilePath;
 
   @override

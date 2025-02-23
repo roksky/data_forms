@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:data_forms/model/fields_model/field_model.dart';
 
-class FormLocationModel extends FormFieldModel {
+class FormMultiMediaPickerModel extends FormFieldModel {
   String? hint;
   Widget? iconWidget;
 
-  FormLocationModel({
+  FormMultiMediaPickerModel({
     type,
     tag,
     title,
@@ -16,7 +16,6 @@ class FormLocationModel extends FormFieldModel {
     status,
     weight,
     showTitle,
-    dependsOn,
     this.hint,
     this.iconWidget,
   }) : super(
@@ -28,7 +27,6 @@ class FormLocationModel extends FormFieldModel {
           required: required,
           status: status,
           weight: weight,
-          dependsOn: dependsOn,
           showTitle: showTitle,
         );
 }

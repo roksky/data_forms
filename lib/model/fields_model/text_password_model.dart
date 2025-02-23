@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import 'field_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 
 class FormPasswordModel extends FormFieldModel {
   int? maxLength;

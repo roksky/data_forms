@@ -10,13 +10,21 @@ enum FormFieldTypeEnum {
   time,
   price,
   number,
+  integer,
+  double,
   checkList,
   radioGroup,
   pinCode,
   masked,
   bankCard,
   imagePicker,
+  qrScanner,
   multiImagePicker,
-  locationTree,
+  filePicker,
+  multiMediaPicker, // video and images
+  signature,
+  barcode,
   location,
+  boolean,
+  locationTree
 }

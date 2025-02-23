@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:data_forms/enums/required_check_list_enum.dart';
 import 'package:data_forms/model/data_model/check_data_model.dart';
 
-import 'field_model.dart';
+import 'package:data_forms/model/fields_model/field_model.dart';
 
 class FormCheckBoxModel extends FormFieldModel {
   List<CheckDataModel> items;
