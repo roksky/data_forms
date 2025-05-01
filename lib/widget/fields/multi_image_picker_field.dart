@@ -281,7 +281,7 @@ class ImageBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4.0),
               ),
               child: SvgPicture.asset(
-                'packages/gsform/assets/ic_trash.svg',
+                'packages/data_forms/assets/ic_trash.svg',
                 height: 15,
                 width: 15,
                 colorFilter:

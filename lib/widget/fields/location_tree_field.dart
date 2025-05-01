@@ -94,7 +94,7 @@ class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
 }
 
 class LocationPickerDialog extends StatefulWidget {
-  final String? rootLocation;
+  final LocationItem? rootLocation;
   final List<String> hierarchy;
   final Future<List<LocationItem>> Function(String? parentId) fetchLocations;
   final Future<LocationItem?> Function(String locationId) fetchLocationById;
@@ -122,12 +122,20 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
   void initState() {
     super.initState();
     hierarchy = widget.hierarchy;
-    recomputeHierarchy(widget.rootLocation);
-    loadLocationsForLevel(
-        widget.rootLocation, 0); // Load root locations initially
+    asyncInit();
   }
 
-  void recomputeHierarchy(String? rootLocation) async {
+  Future<void> asyncInit() async {
+    await recomputeHierarchy(widget.rootLocation?.id);
+    await loadLocationsForLevel(
+        widget.rootLocation?.id, 0); // Load root locations initially
+  }
+
+  Future<void> recomputeHierarchy(String? rootLocation) async {
+    setState(() {
+      isLoading = true; // Show loading indicator when fetching locations
+    });
+
     if (rootLocation != null) {
       LocationItem? item = await widget.fetchLocationById(rootLocation);
       if (item != null) {
@@ -139,9 +147,13 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
         }
       }
     }
+
+    setState(() {
+      isLoading = false;
+    });
   }
 
-  void loadLocationsForLevel(String? parentId, int level) async {
+  Future<void> loadLocationsForLevel(String? parentId, int level) async {
     // Clear locations down the hierarchy
     while (locations.length > level) {
       locations.removeLast();

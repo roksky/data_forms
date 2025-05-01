@@ -1,7 +1,7 @@
 name: data_forms
-description: "A new Flutter package project."
-version: 0.0.1
-homepage:
+description: "A forms library for Flutter"
+version: 2.0.2
+homepage: https://github.com/roksky/data_forms.git
 
 environment:
   sdk: ^3.6.1
@@ -39,7 +39,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
-    - packages/data_forms/assets/ic_alret.svg
+    - packages/data_forms/assets/ic_alert.svg
     - packages/data_forms/assets/ic_info.svg
     - packages/data_forms/assets/ic_trash.svg
   # For details regarding assets in packages, see
