@@ -13,8 +13,7 @@ class FormSection extends StatelessWidget {
   String? sectionTitle;
 
   FormSection(
-      {Key? key, required this.fields, this.style, required this.sectionTitle})
-      : super(key: key);
+      {super.key, required this.fields, this.style, required this.sectionTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +46,6 @@ class FormSection extends StatelessWidget {
           field.formStyle = style!;
           i++;
 
-          // این شرط برای فاصله انداختن بین ویجت هاست به طوری روی اولین ویجت اعمال نشود
           if (weightSum != 12) {
             childrenAtRow.add(const SizedBox(
               width: 12,
