@@ -189,26 +189,6 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
     });
   }
 
-  Future<void> onLocationChanged2(String? parentId, int level) async {
-    // Clear locations down the hierarchy
-    while (locations.length > level) {
-      locations.removeLast();
-      selectedLocations.removeLast();
-    }
-
-    setState(() {
-      isLoading = true; // Show loading indicator when fetching locations
-    });
-
-    final newLocations = await widget.fetchLocations(parentId);
-
-    setState(() {
-      locations.add(newLocations);
-      selectedLocations.add(null); // Add null for the newly loaded level
-      isLoading = false; // Stop loading indicator after fetching
-    });
-  }
-
   bool isLastItemSelected() {
     return selectedLocations.length >= hierarchy.length;
   }

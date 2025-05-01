@@ -1,6 +1,6 @@
 name: data_forms
-description: "A new Flutter package project."
-version: 2.0.1
+description: "A forms library for Flutter"
+version: 2.0.2
 homepage: https://github.com/roksky/data_forms.git
 
 environment:
