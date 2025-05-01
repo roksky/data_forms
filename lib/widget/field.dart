@@ -1278,8 +1278,8 @@ class _GSFieldState extends State<DataFormField> {
                         height: 8.0,
                         child: SvgPicture.asset(
                           widget.model?.status == FormFieldStatusEnum.error
-                              ? 'packages/gsform/assets/ic_alret.svg'
-                              : 'packages/gsform/assets/ic_info.svg',
+                              ? 'packages/data_forms/assets/ic_alert.svg'
+                              : 'packages/data_forms/assets/ic_info.svg',
                         ),
                       ),
                       const SizedBox(width: 1.0),
