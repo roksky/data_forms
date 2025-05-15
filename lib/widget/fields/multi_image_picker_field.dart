@@ -16,7 +16,6 @@ import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormMultiImagePickerField extends NotifiableStatefulWidget<List<String>> {
-
   final FormMultiImagePickerModel model;
   final FormStyle formStyle;
 

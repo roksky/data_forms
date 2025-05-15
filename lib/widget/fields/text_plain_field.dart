@@ -8,7 +8,6 @@ import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormTextPlainField extends NotifiableStatefulWidget<String> {
-
   final FormTextPlainModel model;
   final FormStyle formStyle;
   TextEditingController? controller;

@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormLocationField extends NotifiableStatefulWidget<PositionResponse> {
-
   late FormLocationModel model;
   final FormStyle formStyle;
 

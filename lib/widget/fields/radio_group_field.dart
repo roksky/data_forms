@@ -10,7 +10,6 @@ import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormRadioGroupField extends NotifiableStatefulWidget<RadioDataModel> {
-
   final FormRadioModel model;
   final FormStyle? formStyle;
   TextEditingController textController = TextEditingController();

@@ -9,7 +9,6 @@ import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormSignatureScreenField extends NotifiableStatefulWidget<String> {
-
   late FormSignatureModel model;
   final FormStyle formStyle;
 

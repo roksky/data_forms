@@ -10,7 +10,6 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormPriceField extends NotifiableStatefulWidget<double> {
-
   late FormPriceModel model;
   FormStyle formStyle;
   TextEditingController? controller;

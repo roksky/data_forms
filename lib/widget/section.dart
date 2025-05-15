@@ -13,7 +13,10 @@ class FormSection extends StatelessWidget {
   String? sectionTitle;
 
   FormSection(
-      {super.key, required this.fields, this.style, required this.sectionTitle});
+      {super.key,
+      required this.fields,
+      this.style,
+      required this.sectionTitle});
 
   @override
   Widget build(BuildContext context) {

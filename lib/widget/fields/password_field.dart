@@ -9,7 +9,6 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormPasswordField extends NotifiableStatefulWidget<String> {
-
   late FormPasswordModel model;
   FormStyle formStyle;
   void Function(void Function())? state;

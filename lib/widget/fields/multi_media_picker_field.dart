@@ -10,7 +10,8 @@ import 'package:data_forms/model/fields_model/multi_media_picker_model.dart';
 import 'package:data_forms/util/video_thumbnail.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormMultiMediaAttachmentField extends NotifiableStatefulWidget<List<Attachment>> {
+class FormMultiMediaAttachmentField
+    extends NotifiableStatefulWidget<List<Attachment>> {
   late FormMultiMediaPickerModel model;
   final FormStyle formStyle;
 

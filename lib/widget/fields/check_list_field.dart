@@ -11,7 +11,8 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormCheckListField extends NotifiableStatefulWidget<List<CheckDataModel>> {
+class FormCheckListField
+    extends NotifiableStatefulWidget<List<CheckDataModel>> {
   final FormCheckBoxModel model;
   final FormStyle? formStyle;
   ScrollController controller = ScrollController();

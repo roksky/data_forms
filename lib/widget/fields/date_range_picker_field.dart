@@ -10,8 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormDateRangePickerField extends NotifiableStatefulWidget<DateDataRangeModel> {
-
+class FormDateRangePickerField
+    extends NotifiableStatefulWidget<DateDataRangeModel> {
   final FormDateRangePickerModel model;
   final FormStyle formStyle;
 

@@ -36,7 +36,6 @@ class FormBankCardField extends NotifiableStatefulWidget<String> {
   FormFieldValue<String> getValue() {
     return FormFieldValue.string(controller!.text.replaceAll(' ', ''));
   }
-
 }
 
 class _GSBankCardFieldState extends State<FormBankCardField> {

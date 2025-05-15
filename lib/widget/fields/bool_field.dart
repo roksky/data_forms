@@ -6,7 +6,7 @@ import 'package:data_forms/model/fields_model/bool_switch_model.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormBoolSwitchField extends NotifiableStatefulWidget<bool>{
+class FormBoolSwitchField extends NotifiableStatefulWidget<bool> {
   final FormBoolSwitchModel model;
   final FormStyle formStyle;
   bool? value;
