@@ -10,8 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:data_forms/model/fields_model/date_picker_model.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormDatePickerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormDatePickerField extends NotifiableStatefulWidget<DateDataModel> {
   late FormDatePickerModel model;
   final FormStyle formStyle;
 
@@ -31,8 +30,9 @@ class FormDatePickerField extends NotifiableStatefulWidget
   State<FormDatePickerField> createState() => _GSDatePickerFieldState();
 
   @override
-  getValue() {
-    return _getData();
+  FormFieldValue<DateDataModel> getValue() {
+    DateDataModel? value = _getData();
+    return FormFieldValue.dateData(value);
   }
 
   @override

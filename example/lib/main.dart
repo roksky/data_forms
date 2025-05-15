@@ -1,3 +1,4 @@
+import 'package:data_forms/core/field_callback.dart';
 import 'package:flutter/material.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/enums/field_status.dart';
@@ -193,7 +194,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
                     child: ElevatedButton(
                       onPressed: () {
                         bool isValid = form.isValid();
-                        Map<String, dynamic> map = form.onSubmit();
+                        Map<String, FormFieldValue> map = form.onSubmit();
                         debugPrint(map.toString());
                         debugPrint(isValid.toString());
                         setState(() {});
@@ -456,7 +457,7 @@ class MultiSectionForm extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         bool isValid = form.isValid();
-                        Map<String, dynamic> map = form.onSubmit();
+                        Map<String, FormFieldValue> map = form.onSubmit();
                         debugPrint(isValid.toString());
                         debugPrint(map.toString());
                       },

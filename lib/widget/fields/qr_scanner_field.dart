@@ -9,8 +9,7 @@ import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormQRScannerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormQRScannerField extends NotifiableStatefulWidget<String> {
   final FormQRScannerModel model;
   final FormStyle formStyle;
 
@@ -21,8 +20,8 @@ class FormQRScannerField extends NotifiableStatefulWidget
   State<FormQRScannerField> createState() => _GSQRScannerFieldState();
 
   @override
-  getValue() {
-    return _scannedValue;
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.string(_scannedValue);
   }
 
   @override

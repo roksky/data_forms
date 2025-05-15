@@ -9,8 +9,7 @@ import 'package:data_forms/model/fields_model/price_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormPriceField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormPriceField extends NotifiableStatefulWidget<double> {
   late FormPriceModel model;
   FormStyle formStyle;
   TextEditingController? controller;
@@ -21,8 +20,9 @@ class FormPriceField extends NotifiableStatefulWidget
   State<FormPriceField> createState() => _GSPriceFieldState();
 
   @override
-  getValue() {
-    return double.parse(controller!.text.replaceAll(',', ''));
+  FormFieldValue<double> getValue() {
+    var value = double.parse(controller!.text.replaceAll(',', ''));
+    return FormFieldValue.double(value);
   }
 
   @override

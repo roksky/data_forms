@@ -7,8 +7,7 @@ import 'package:data_forms/model/fields_model/barcode_scanner_model.dart';
 import 'package:data_forms/values/colors.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormBarcodeScannerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormBarcodeScannerField extends NotifiableStatefulWidget<String> {
   final FormBarCodeModel model;
   final FormStyle formStyle;
 
@@ -20,8 +19,8 @@ class FormBarcodeScannerField extends NotifiableStatefulWidget
   State<FormBarcodeScannerField> createState() => _GSBarcodeScannerFieldState();
 
   @override
-  getValue() {
-    return _scannedValue;
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.string(_scannedValue);
   }
 
   @override

@@ -7,8 +7,7 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormMobileField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormMobileField extends NotifiableStatefulWidget<String> {
   final FormMobileModel model;
   final FormStyle formStyle;
   TextEditingController? controller;
@@ -19,8 +18,8 @@ class FormMobileField extends NotifiableStatefulWidget
   State<FormMobileField> createState() => _GSMobileFieldState();
 
   @override
-  getValue() {
-    return controller!.text;
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.string(controller!.text);
   }
 
   @override

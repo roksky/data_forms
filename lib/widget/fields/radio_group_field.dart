@@ -9,8 +9,7 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormRadioGroupField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormRadioGroupField extends NotifiableStatefulWidget<RadioDataModel> {
   final FormRadioModel model;
   final FormStyle? formStyle;
   TextEditingController textController = TextEditingController();
@@ -25,8 +24,8 @@ class FormRadioGroupField extends NotifiableStatefulWidget
   State<FormRadioGroupField> createState() => _GSRadioGroupFieldState();
 
   @override
-  getValue() {
-    return returnedData;
+  FormFieldValue<RadioDataModel> getValue() {
+    return FormFieldValue.radioData(returnedData);
   }
 
   @override

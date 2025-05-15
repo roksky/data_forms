@@ -10,8 +10,7 @@ import 'package:data_forms/model/state_manager.dart';
 import 'package:provider/provider.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormLocationField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormLocationField extends NotifiableStatefulWidget<PositionResponse> {
   late FormLocationModel model;
   final FormStyle formStyle;
 
@@ -22,10 +21,11 @@ class FormLocationField extends NotifiableStatefulWidget
   State<FormLocationField> createState() => _GSLocationFieldState();
 
   @override
-  getValue() {
-    return _currentLocation == null
+  FormFieldValue<PositionResponse> getValue() {
+    var result = _currentLocation == null
         ? null
-        : PositionResponse.fromPosition(_currentLocation!).toString();
+        : PositionResponse.fromPosition(_currentLocation!);
+    return FormFieldValue.position(result);
   }
 
   @override
