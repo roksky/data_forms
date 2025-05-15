@@ -15,7 +15,7 @@ dynamic getLocationValue(dynamic value) {
   if (value == null) {
     return null;
   } else if (value is SpinnerDataModel) {
-    return LocationItem(id: value.data, name: value.name);
+    return LocationItem(id: value.spinnerValue, name: value.name);
   }
 
   return value;
