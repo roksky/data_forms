@@ -15,8 +15,8 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormMultiImagePickerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormMultiImagePickerField extends NotifiableStatefulWidget<List<String>> {
+
   final FormMultiImagePickerModel model;
   final FormStyle formStyle;
 
@@ -29,8 +29,8 @@ class FormMultiImagePickerField extends NotifiableStatefulWidget
       _GSMultiImagePickerFieldState();
 
   @override
-  getValue() {
-    return _croppedFilePaths;
+  FormFieldValue<List<String>> getValue() {
+    return FormFieldValue.filePaths(_croppedFilePaths);
   }
 
   @override
@@ -209,7 +209,7 @@ class SelectItem extends StatelessWidget {
       compressQuality: 100,
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'ویرایش تصویر',
+            toolbarTitle: 'Edit Image',
             toolbarColor: FormColors.white,
             toolbarWidgetColor: Colors.black,
             initAspectRatio: CropAspectRatioPreset.original,

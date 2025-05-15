@@ -9,8 +9,7 @@ import 'package:data_forms/util/util.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormBankCardField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormBankCardField extends NotifiableStatefulWidget<String> {
   final FormBankCardModel model;
   final FormStyle formStyle;
   TextEditingController? controller;
@@ -19,11 +18,6 @@ class FormBankCardField extends NotifiableStatefulWidget
 
   @override
   State<FormBankCardField> createState() => _GSBankCardFieldState();
-
-  @override
-  getValue() {
-    return controller!.text.replaceAll(' ', '');
-  }
 
   @override
   bool isValid() {
@@ -37,6 +31,12 @@ class FormBankCardField extends NotifiableStatefulWidget
       return model.validateRegEx!.hasMatch(controller!.text);
     }
   }
+
+  @override
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.string(controller!.text.replaceAll(' ', ''));
+  }
+
 }
 
 class _GSBankCardFieldState extends State<FormBankCardField> {

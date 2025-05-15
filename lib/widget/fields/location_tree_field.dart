@@ -10,8 +10,8 @@ import 'package:data_forms/util/value_util.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormLocationTreeField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormLocationTreeField extends NotifiableStatefulWidget<LocationItem> {
+
   final FormLocationTreeModel model;
   final FormStyle formStyle;
   LocationItem? result = null;
@@ -23,8 +23,8 @@ class FormLocationTreeField extends NotifiableStatefulWidget
   State<FormLocationTreeField> createState() => _GSLocationTreeFieldState();
 
   @override
-  getValue() {
-    return result;
+  FormFieldValue<LocationItem> getValue() {
+    return FormFieldValue.locationItem(result);
   }
 
   @override
@@ -67,7 +67,7 @@ class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
         return FractionallySizedBox(
           heightFactor: 0.9, // Covers most of the screen height
           child: LocationPickerDialog(
-            rootLocation: getValue(stateManager.get(widget.model.dependsOn)),
+            rootLocation: getLocationValue(stateManager.get(widget.model.dependsOn)),
             hierarchy: widget.model.targetLevel != null &&
                     widget.model.hierarchy.contains(widget.model.targetLevel)
                 ? widget.model.hierarchy.sublist(

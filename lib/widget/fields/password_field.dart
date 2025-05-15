@@ -8,8 +8,8 @@ import 'package:data_forms/model/fields_model/text_password_model.dart';
 import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormPasswordField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormPasswordField extends NotifiableStatefulWidget<String> {
+
   late FormPasswordModel model;
   FormStyle formStyle;
   void Function(void Function())? state;
@@ -23,8 +23,8 @@ class FormPasswordField extends NotifiableStatefulWidget
   State<FormPasswordField> createState() => _GSPasswordFieldState();
 
   @override
-  getValue() {
-    return controller!.text;
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.string(controller!.text);
   }
 
   @override

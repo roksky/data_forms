@@ -24,6 +24,10 @@ class DateDataRangeModel {
       required this.endTimeStamp,
       required this.displayStartDateStr,
       required this.displayEndDateStr});
+
+  String toIso8601String() {
+    return '${startDateServerType.toUtc().toIso8601String()}/${endDateServerType.toUtc().toIso8601String()}';
+  }
 }
 
 enum GSDateFormatType {

@@ -86,8 +86,8 @@ class DataForm extends StatelessWidget {
     return isValid;
   }
 
-  Map<String, dynamic> onSubmit() {
-    Map<String, dynamic> data = {};
+  Map<String, FormFieldValue> onSubmit() {
+    Map<String, FormFieldValue> data = {};
     for (var section in sections) {
       for (var filed in section.fields) {
         if (filed is DataFormField) {

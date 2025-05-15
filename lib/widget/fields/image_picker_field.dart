@@ -14,8 +14,7 @@ import 'package:data_forms/widget/squircle/smooth_radius.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormImagePickerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormImagePickerField extends NotifiableStatefulWidget<String> {
   final FormImagePickerModel model;
   final FormStyle formStyle;
 
@@ -27,8 +26,8 @@ class FormImagePickerField extends NotifiableStatefulWidget
   State<FormImagePickerField> createState() => _GSImagePickerFieldState();
 
   @override
-  getValue() {
-    return _croppedFilePath;
+  FormFieldValue<String> getValue() {
+    return FormFieldValue.filePath(_croppedFilePath);
   }
 
   @override

@@ -10,8 +10,7 @@ import 'package:data_forms/model/state_manager.dart';
 import 'package:provider/provider.dart';
 import 'notifyable_stateful_widget.dart';
 
-class FormSpinnerField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormSpinnerField extends NotifiableStatefulWidget<SpinnerDataModel> {
   final hintIndex = -1;
 
   FormSpinnerModel model;
@@ -24,8 +23,8 @@ class FormSpinnerField extends NotifiableStatefulWidget
   State<FormSpinnerField> createState() => _GSSpinnerFieldState();
 
   @override
-  getValue() {
-    return returnedData;
+  FormFieldValue<SpinnerDataModel> getValue() {
+    return FormFieldValue.spinnerData(returnedData);
   }
 
   @override

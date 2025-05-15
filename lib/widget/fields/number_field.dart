@@ -7,8 +7,8 @@ import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormNumberField extends NotifiableStatefulWidget
-    implements FormFieldCallBack {
+class FormNumberField<T> extends NotifiableStatefulWidget<T> {
+
   final FormNumberModel model;
   final FormStyle formStyle;
   TextEditingController? controller;
@@ -19,8 +19,8 @@ class FormNumberField extends NotifiableStatefulWidget
   State<FormNumberField> createState() => _GSNumberFieldState();
 
   @override
-  getValue() {
-    return controller!.text;
+  FormFieldValue<T> getValue() {
+    return FormFieldValue.string(controller!.text);
   }
 
   @override
@@ -93,22 +93,22 @@ class _GSNumberFieldState extends State<FormNumberField> {
   }
 }
 
-class GSIntegerField extends FormNumberField {
-  GSIntegerField(super.model, super.formStyle);
+class GSIntegerField extends FormNumberField<int> {
+  GSIntegerField(super.model, super.formStyle, {super.key});
 
   @override
-  getValue() {
+  FormFieldValue<int> getValue() {
     var value = controller!.text.replaceAll(",", "");
-    return int.parse(value);
+    return FormFieldValue.int(int.parse(value));
   }
 }
 
-class GSDoubleField extends FormNumberField {
-  GSDoubleField(super.model, super.formStyle);
+class GSDoubleField extends FormNumberField<double> {
+  GSDoubleField(super.model, super.formStyle, {super.key});
 
   @override
-  getValue() {
+  FormFieldValue<double> getValue() {
     var value = controller!.text.replaceAll(",", "");
-    return double.parse(value);
+    return FormFieldValue.double(double.parse(value));
   }
 }
