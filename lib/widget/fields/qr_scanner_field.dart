@@ -54,63 +54,64 @@ class _GSQRScannerFieldState extends State<FormQRScannerField> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-            customBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            onTap: () {
-              _route(
-                context,
-                QrScannerScreen(
-                  callback: (value) {
-                    widget._scannedValue = value.rawValue;
-                    setState(() {});
-                  },
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  widget.model.iconWidget ?? Container(),
-                  const SizedBox(height: 6.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: widget.model.required ?? false,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 4, left: 4),
-                          child: Text(
-                            widget.formStyle.requiredText,
-                            style: const TextStyle(
-                              color: FormColors.red,
-                              fontSize: 10,
-                            ),
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          onTap: () {
+            _route(
+              context,
+              QrScannerScreen(
+                callback: (value) {
+                  widget._scannedValue = value.rawValue;
+                  setState(() {});
+                },
+              ),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget.model.iconWidget ?? Container(),
+                const SizedBox(height: 6.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: widget.model.required ?? false,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4, left: 4),
+                        child: Text(
+                          widget.formStyle.requiredText,
+                          style: const TextStyle(
+                            color: FormColors.red,
+                            fontSize: 10,
                           ),
                         ),
                       ),
-                      Text(
-                        widget.model.title ?? '',
-                        style: widget.formStyle.titleTextStyle,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  widget._scannedValue == null
-                      ? Text(
-                          widget.model.hint ?? '',
-                          style: widget.formStyle.fieldHintStyle,
-                        )
-                      : Text(
-                          widget._scannedValue ?? '',
-                          style: widget.formStyle.fieldTextStyle,
-                        ),
-                ],
-              ),
-            )),
+                    ),
+                    Text(
+                      widget.model.title ?? '',
+                      style: widget.formStyle.titleTextStyle,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4.0),
+                widget._scannedValue == null
+                    ? Text(
+                      widget.model.hint ?? '',
+                      style: widget.formStyle.fieldHintStyle,
+                    )
+                    : Text(
+                      widget._scannedValue ?? '',
+                      style: widget.formStyle.fieldTextStyle,
+                    ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -118,9 +119,7 @@ class _GSQRScannerFieldState extends State<FormQRScannerField> {
   _route(BuildContext context, Widget screen) {
     Navigator.push(
       context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => screen,
-      ),
+      MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
     );
   }
 }

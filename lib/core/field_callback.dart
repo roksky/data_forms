@@ -18,72 +18,72 @@ class FormFieldValue<T> {
   FormFieldValue(this.value, this.valueType);
 
   FormFieldValue.string(String? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.string;
+    : value = value as T?,
+      valueType = FormFieldValueType.string;
 
   FormFieldValue.int(int? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.int;
+    : value = value as T?,
+      valueType = FormFieldValueType.int;
 
   FormFieldValue.double(double? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.double;
+    : value = value as T?,
+      valueType = FormFieldValueType.double;
 
   FormFieldValue.bool(bool? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.bool;
+    : value = value as T?,
+      valueType = FormFieldValueType.bool;
 
   FormFieldValue.dateTime(DateTime? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.dateTime;
+    : value = value as T?,
+      valueType = FormFieldValueType.dateTime;
 
   FormFieldValue.date(DateTime? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.date;
+    : value = value as T?,
+      valueType = FormFieldValueType.date;
 
   FormFieldValue.filePath(String? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.filePath;
+    : value = value as T?,
+      valueType = FormFieldValueType.filePath;
 
   FormFieldValue.checkDataList(List<CheckDataModel> value)
-      : value = value as T,
-        valueType = FormFieldValueType.checkDataList;
+    : value = value as T,
+      valueType = FormFieldValueType.checkDataList;
 
   FormFieldValue.radioData(RadioDataModel? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.radioData;
+    : value = value as T?,
+      valueType = FormFieldValueType.radioData;
 
   FormFieldValue.spinnerData(SpinnerDataModel? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.spinnerData;
+    : value = value as T?,
+      valueType = FormFieldValueType.spinnerData;
 
   FormFieldValue.platFormFiles(List<PlatformFile> value)
-      : value = value as T,
-        valueType = FormFieldValueType.platFormFile;
+    : value = value as T,
+      valueType = FormFieldValueType.platFormFile;
 
   FormFieldValue.filePaths(List<String> value)
-      : value = value as T,
-        valueType = FormFieldValueType.filePathList;
+    : value = value as T,
+      valueType = FormFieldValueType.filePathList;
 
   FormFieldValue.position(PositionResponse? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.position;
+    : value = value as T?,
+      valueType = FormFieldValueType.position;
 
   FormFieldValue.locationItem(LocationItem? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.locationItem;
+    : value = value as T?,
+      valueType = FormFieldValueType.locationItem;
 
   FormFieldValue.attachments(List<Attachment> value)
-      : value = value as T,
-        valueType = FormFieldValueType.attachments;
+    : value = value as T,
+      valueType = FormFieldValueType.attachments;
 
   FormFieldValue.dateData(DateDataModel? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.dateData;
+    : value = value as T?,
+      valueType = FormFieldValueType.dateData;
 
   FormFieldValue.dateDataRange(DateDataRangeModel? value)
-      : value = value as T?,
-        valueType = FormFieldValueType.dateDataRange;
+    : value = value as T?,
+      valueType = FormFieldValueType.dateDataRange;
 
   T? value;
   FormFieldValueType valueType;
@@ -107,5 +107,5 @@ enum FormFieldValueType {
   filePathList,
   position,
   locationItem,
-  attachments
+  attachments,
 }

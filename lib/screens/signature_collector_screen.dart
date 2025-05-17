@@ -1,4 +1,3 @@
-
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +24,7 @@ class SignatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Signature Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
         backgroundColor: Colors.deepPurpleAccent,
         body: SafeArea(
@@ -71,8 +68,10 @@ class SignatureScreen extends StatelessWidget {
                         onPressed: () {
                           control.clear();
                         },
-                        child: Text('Clear',
-                            style: TextStyle(color: Colors.white)),
+                        child: Text(
+                          'Clear',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       CupertinoButton(
                         onPressed: () async {
@@ -84,14 +83,14 @@ class SignatureScreen extends StatelessWidget {
                           setValue(svg);
                           Navigator.pop(context);
                         },
-                        child:
-                            Text('Save', style: TextStyle(color: Colors.white)),
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
+                  SizedBox(height: 16.0),
                 ],
               ),
             ],

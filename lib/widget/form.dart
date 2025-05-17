@@ -16,33 +16,31 @@ class DataForm extends StatelessWidget {
   late List<Widget> fields;
   StateManager stateManager = StateManager();
 
-  DataForm.singleSection(BuildContext context,
-      {super.key, this.style, required this.fields}) {
-    style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
-        : FormStyle.singleSectionFormDefaultStyle;
-    sections = [
-      FormSection(
-        style: style,
-        sectionTitle: null,
-        fields: fields,
-      )
-    ];
-    DataForm.multiSection(
-      context,
-      style: style,
-      sections: sections,
-    );
+  DataForm.singleSection(
+    BuildContext context, {
+    super.key,
+    this.style,
+    required this.fields,
+  }) {
+    style ??=
+        GSFormUtils.checkIfDarkModeEnabled(context)
+            ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
+            : FormStyle.singleSectionFormDefaultStyle;
+    sections = [FormSection(style: style, sectionTitle: null, fields: fields)];
+    DataForm.multiSection(context, style: style, sections: sections);
   }
 
-  DataForm.multiSection(BuildContext context,
-      {super.key,
-      this.style,
-      required this.sections,
-      StateManager? myStateManager}) {
-    style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
-        : FormStyle.multiSectionFormDefaultStyle;
+  DataForm.multiSection(
+    BuildContext context, {
+    super.key,
+    this.style,
+    required this.sections,
+    StateManager? myStateManager,
+  }) {
+    style ??=
+        GSFormUtils.checkIfDarkModeEnabled(context)
+            ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
+            : FormStyle.multiSectionFormDefaultStyle;
     if (myStateManager != null) {
       stateManager = myStateManager;
     }
@@ -61,9 +59,7 @@ class DataForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => stateManager,
-      child: Column(
-        children: sections,
-      ),
+      child: Column(children: sections),
     );
   }
 
@@ -73,9 +69,10 @@ class DataForm extends StatelessWidget {
       for (var field in section.fields) {
         if (field is DataFormField) {
           bool fieldValidation = (field.child as FormFieldCallBack).isValid();
-          field.model?.status = fieldValidation
-              ? FormFieldStatusEnum.success
-              : FormFieldStatusEnum.error;
+          field.model?.status =
+              fieldValidation
+                  ? FormFieldStatusEnum.success
+                  : FormFieldStatusEnum.error;
           isValid = isValid && fieldValidation;
           field.update();
         }

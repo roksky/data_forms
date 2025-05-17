@@ -5,37 +5,35 @@ import 'processed_smooth_radius.dart';
 import 'smooth_radius.dart';
 
 class SmoothBorderRadius extends BorderRadius {
-  SmoothBorderRadius({
-    required double cornerRadius,
-    double cornerSmoothing = 0,
-  }) : this.only(
-          topLeft: SmoothRadius(
-            cornerRadius: cornerRadius,
-            cornerSmoothing: cornerSmoothing,
-          ),
-          topRight: SmoothRadius(
-            cornerRadius: cornerRadius,
-            cornerSmoothing: cornerSmoothing,
-          ),
-          bottomLeft: SmoothRadius(
-            cornerRadius: cornerRadius,
-            cornerSmoothing: cornerSmoothing,
-          ),
-          bottomRight: SmoothRadius(
-            cornerRadius: cornerRadius,
-            cornerSmoothing: cornerSmoothing,
-          ),
-        );
+  SmoothBorderRadius({required double cornerRadius, double cornerSmoothing = 0})
+    : this.only(
+        topLeft: SmoothRadius(
+          cornerRadius: cornerRadius,
+          cornerSmoothing: cornerSmoothing,
+        ),
+        topRight: SmoothRadius(
+          cornerRadius: cornerRadius,
+          cornerSmoothing: cornerSmoothing,
+        ),
+        bottomLeft: SmoothRadius(
+          cornerRadius: cornerRadius,
+          cornerSmoothing: cornerSmoothing,
+        ),
+        bottomRight: SmoothRadius(
+          cornerRadius: cornerRadius,
+          cornerSmoothing: cornerSmoothing,
+        ),
+      );
 
   /// Creates a border radius where all radii are [radius].
 
   const SmoothBorderRadius.all(SmoothRadius radius)
-      : this.only(
-          topLeft: radius,
-          topRight: radius,
-          bottomLeft: radius,
-          bottomRight: radius,
-        );
+    : this.only(
+        topLeft: radius,
+        topRight: radius,
+        bottomLeft: radius,
+        bottomRight: radius,
+      );
 
   /// Creates a vertically symmetric border radius where the top and bottom
   /// sides of the rectangle have the same radii.
@@ -43,11 +41,11 @@ class SmoothBorderRadius extends BorderRadius {
     SmoothRadius top = SmoothRadius.zero,
     SmoothRadius bottom = SmoothRadius.zero,
   }) : this.only(
-          topLeft: top,
-          topRight: top,
-          bottomLeft: bottom,
-          bottomRight: bottom,
-        );
+         topLeft: top,
+         topRight: top,
+         bottomLeft: bottom,
+         bottomRight: bottom,
+       );
 
   /// Creates a horizontally symmetrical border radius where the left and right
   /// sides of the rectangle have the same radii.
@@ -55,11 +53,11 @@ class SmoothBorderRadius extends BorderRadius {
     SmoothRadius left = SmoothRadius.zero,
     SmoothRadius right = SmoothRadius.zero,
   }) : this.only(
-          topLeft: left,
-          topRight: right,
-          bottomLeft: left,
-          bottomRight: right,
-        );
+         topLeft: left,
+         topRight: right,
+         bottomLeft: left,
+         bottomRight: right,
+       );
 
   /// Creates a border radius with only the given non-zero values. The other
   /// corners will be right angles.
@@ -69,11 +67,11 @@ class SmoothBorderRadius extends BorderRadius {
     this.bottomLeft = SmoothRadius.zero,
     this.bottomRight = SmoothRadius.zero,
   }) : super.only(
-          topLeft: topLeft,
-          bottomRight: topRight,
-          topRight: topRight,
-          bottomLeft: bottomLeft,
-        );
+         topLeft: topLeft,
+         bottomRight: topRight,
+         topRight: topRight,
+         bottomLeft: bottomLeft,
+       );
 
   /// Returns a copy of this BorderRadius with the given fields replaced with
   /// the new values.
@@ -93,8 +91,9 @@ class SmoothBorderRadius extends BorderRadius {
   }
 
   /// A border radius with all zero radii.
-  static const SmoothBorderRadius zero =
-      SmoothBorderRadius.all(SmoothRadius.zero);
+  static const SmoothBorderRadius zero = SmoothBorderRadius.all(
+    SmoothRadius.zero,
+  );
 
   /// The top-left [SmoothRadius].
   @override
@@ -135,27 +134,18 @@ class SmoothBorderRadius extends BorderRadius {
       width: width,
       height: height,
     );
-    final processedBottomLeft = topLeft == bottomLeft
-        ? processedTopLeft
-        : ProcessedSmoothRadius(
-            bottomLeft,
-            width: width,
-            height: height,
-          );
-    final processedBottomRight = bottomLeft == bottomRight
-        ? processedBottomLeft
-        : ProcessedSmoothRadius(
-            bottomRight,
-            width: width,
-            height: height,
-          );
-    final processedTopRight = topRight == bottomRight
-        ? processedBottomRight
-        : ProcessedSmoothRadius(
-            topRight,
-            width: width,
-            height: height,
-          );
+    final processedBottomLeft =
+        topLeft == bottomLeft
+            ? processedTopLeft
+            : ProcessedSmoothRadius(bottomLeft, width: width, height: height);
+    final processedBottomRight =
+        bottomLeft == bottomRight
+            ? processedBottomLeft
+            : ProcessedSmoothRadius(bottomRight, width: width, height: height);
+    final processedTopRight =
+        topRight == bottomRight
+            ? processedBottomRight
+            : ProcessedSmoothRadius(topRight, width: width, height: height);
 
     result
       ..addSmoothTopRight(processedTopRight, rect)
@@ -272,7 +262,10 @@ class SmoothBorderRadius extends BorderRadius {
   ///
   /// {@macro dart.ui.shadow.lerp}
   static SmoothBorderRadius? lerp(
-      SmoothBorderRadius? a, SmoothBorderRadius? b, double t) {
+    SmoothBorderRadius? a,
+    SmoothBorderRadius? b,
+    double t,
+  ) {
     if (a == null && b == null) return null;
     if (a == null) return b! * t;
     if (b == null) return a * (1.0 - t);
@@ -286,11 +279,11 @@ class SmoothBorderRadius extends BorderRadius {
 
   @override
   BorderRadius resolve(TextDirection? direction) => BorderRadius.only(
-        topLeft: topLeft,
-        topRight: topRight,
-        bottomLeft: bottomLeft,
-        bottomRight: bottomRight,
-      );
+    topLeft: topLeft,
+    topRight: topRight,
+    bottomLeft: bottomLeft,
+    bottomRight: bottomRight,
+  );
 
   @override
   String toString() {

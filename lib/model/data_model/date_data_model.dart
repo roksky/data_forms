@@ -3,10 +3,11 @@ class DateDataModel {
   int timeStamp;
   String showDateStr;
 
-  DateDataModel(
-      {required this.dateServerType,
-      required this.timeStamp,
-      required this.showDateStr});
+  DateDataModel({
+    required this.dateServerType,
+    required this.timeStamp,
+    required this.showDateStr,
+  });
 }
 
 class DateDataRangeModel {
@@ -17,13 +18,14 @@ class DateDataRangeModel {
   String displayStartDateStr;
   String displayEndDateStr;
 
-  DateDataRangeModel(
-      {required this.startDateServerType,
-      required this.endDateServerType,
-      required this.startTimeStamp,
-      required this.endTimeStamp,
-      required this.displayStartDateStr,
-      required this.displayEndDateStr});
+  DateDataRangeModel({
+    required this.startDateServerType,
+    required this.endDateServerType,
+    required this.startTimeStamp,
+    required this.endTimeStamp,
+    required this.displayStartDateStr,
+    required this.displayEndDateStr,
+  });
 
   String toIso8601String() {
     return '${startDateServerType.toUtc().toIso8601String()}/${endDateServerType.toUtc().toIso8601String()}';

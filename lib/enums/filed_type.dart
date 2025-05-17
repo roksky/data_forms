@@ -26,5 +26,5 @@ enum FormFieldTypeEnum {
   barcode,
   location,
   boolean,
-  locationTree
+  locationTree,
 }

@@ -5,11 +5,11 @@ class SpinnerDataModel {
   dynamic data;
   dynamic spinnerValue;
 
-  SpinnerDataModel(
-      {required this.name,
-      required this.id,
-      this.data,
-      bool? isSelected,
-      this.spinnerValue})
-      : isSelected = isSelected ?? false;
+  SpinnerDataModel({
+    required this.name,
+    required this.id,
+    this.data,
+    bool? isSelected,
+    this.spinnerValue,
+  }) : isSelected = isSelected ?? false;
 }

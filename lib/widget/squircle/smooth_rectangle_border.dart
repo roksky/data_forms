@@ -4,11 +4,7 @@ import 'package:data_forms/widget/squircle/smooth_radius.dart';
 
 import 'smooth_border_radius.dart';
 
-enum BorderAlign {
-  inside,
-  center,
-  outside,
-}
+enum BorderAlign { inside, center, outside }
 
 class SmoothRectangleBorder extends OutlinedBorder {
   const SmoothRectangleBorder({
@@ -83,10 +79,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
         case BorderAlign.inside:
           return borderRadius -
               SmoothBorderRadius.all(
-                SmoothRadius(
-                  cornerRadius: side.width,
-                  cornerSmoothing: 1.0,
-                ),
+                SmoothRadius(cornerRadius: side.width, cornerSmoothing: 1.0),
               );
         case BorderAlign.center:
           return borderRadius -
@@ -101,8 +94,12 @@ class SmoothRectangleBorder extends OutlinedBorder {
       }
     }();
 
-    if ([radius.bottomLeft, radius.bottomRight, radius.topLeft, radius.topRight]
-        .every((x) => x.cornerSmoothing == 0.0)) {
+    if ([
+      radius.bottomLeft,
+      radius.bottomRight,
+      radius.topLeft,
+      radius.topRight,
+    ].every((x) => x.cornerSmoothing == 0.0)) {
       return Path()..addRRect(radius.resolve(textDirection).toRRect(innerRect));
     }
 
@@ -119,8 +116,12 @@ class SmoothRectangleBorder extends OutlinedBorder {
     SmoothBorderRadius radius, {
     TextDirection? textDirection,
   }) {
-    if ([radius.bottomLeft, radius.bottomRight, radius.topLeft, radius.topRight]
-        .every((x) => x.cornerSmoothing == 0.0)) {
+    if ([
+      radius.bottomLeft,
+      radius.bottomRight,
+      radius.topLeft,
+      radius.topRight,
+    ].every((x) => x.cornerSmoothing == 0.0)) {
       return Path()..addRRect(radius.resolve(textDirection).toRRect(rect));
     }
 
@@ -188,10 +189,7 @@ class SmoothRectangleBorder extends OutlinedBorder {
           textDirection: textDirection,
         );
 
-        canvas.drawPath(
-          outerPath,
-          side.toPaint(),
-        );
+        canvas.drawPath(outerPath, side.toPaint());
 
         break;
     }

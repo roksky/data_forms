@@ -61,10 +61,11 @@ class _GSSpinnerFieldState extends State<FormSpinnerField> {
         widget.model.items.insert(
           0,
           SpinnerDataModel(
-              name: widget.model.hint!,
-              id: widget.hintIndex,
-              data: null,
-              isSelected: false),
+            name: widget.model.hint!,
+            id: widget.hintIndex,
+            data: null,
+            isSelected: false,
+          ),
         );
       }
     }
@@ -103,42 +104,47 @@ class _GSSpinnerFieldState extends State<FormSpinnerField> {
       children: [
         Expanded(
           child: DropdownButton<SpinnerDataModel>(
-              underline: const SizedBox(),
-              iconSize: 0,
-              icon: const Padding(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: Icon(
-                  Icons.keyboard_arrow_down,
-                  size: 20,
-                ),
-              ),
-              isExpanded: true,
-              value: widget.returnedData,
-              items: widget.model.items
-                  .map((e) => DropdownMenuItem(
-                      value: e,
-                      child: Padding(
-                        padding: const EdgeInsetsDirectional.only(start: 8.0),
-                        child: Text(
-                          e.name,
-                          style: e.id == widget.hintIndex
-                              ? widget.formStyle.fieldHintStyle
-                              : widget.formStyle.fieldTextStyle,
+            underline: const SizedBox(),
+            iconSize: 0,
+            icon: const Padding(
+              padding: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Icon(Icons.keyboard_arrow_down, size: 20),
+            ),
+            isExpanded: true,
+            value: widget.returnedData,
+            items:
+                widget.model.items
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 8.0),
+                          child: Text(
+                            e.name,
+                            style:
+                                e.id == widget.hintIndex
+                                    ? widget.formStyle.fieldHintStyle
+                                    : widget.formStyle.fieldTextStyle,
+                          ),
                         ),
-                      )))
-                  .toList(),
-              onChanged: (value) {
-                if (value?.id != widget.hintIndex) {
-                  widget.model.items
-                      .firstWhere((element) => element.id == value!.id)
-                      .isSelected = true;
-                  value?.isSelected = true;
-                  widget.returnedData = value;
-                  widget.model.onChange?.call(value);
-                  stateManager.set(widget.model.tag, value);
-                  setState(() => {});
-                }
-              }),
+                      ),
+                    )
+                    .toList(),
+            onChanged: (value) {
+              if (value?.id != widget.hintIndex) {
+                widget
+                    .model
+                    .items
+                    .firstWhere((element) => element.id == value!.id)
+                    .isSelected = true;
+                value?.isSelected = true;
+                widget.returnedData = value;
+                widget.model.onChange?.call(value);
+                stateManager.set(widget.model.tag, value);
+                setState(() => {});
+              }
+            },
+          ),
         ),
       ],
     );

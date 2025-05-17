@@ -57,12 +57,13 @@ class FormDateRangePickerField
             selectedGregorianStartDate == null)
         ? null
         : DateDataRangeModel(
-            startDateServerType: selectedGregorianStartDate!,
-            endDateServerType: selectedGregorianEndDate!,
-            startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
-            endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
-            displayStartDateStr: selectedDateText,
-            displayEndDateStr: selectedDateText);
+          startDateServerType: selectedGregorianStartDate!,
+          endDateServerType: selectedGregorianEndDate!,
+          startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
+          endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
+          displayStartDateStr: selectedDateText,
+          displayEndDateStr: selectedDateText,
+        );
   }
 }
 
@@ -85,8 +86,12 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     return SizedBox(
       height: 48.0,
       child: Padding(
-        padding:
-            const EdgeInsets.only(right: 10.0, left: 10.0, top: 16, bottom: 16),
+        padding: const EdgeInsets.only(
+          right: 10.0,
+          left: 10.0,
+          top: 16,
+          bottom: 16,
+        ),
         child: InkWell(
           child: Row(
             children: [
@@ -96,15 +101,16 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
                       widget.model.dateFormatType == GSDateFormatType.numeric
                           ? Alignment.centerLeft
                           : GSFormUtils.isDirectionRTL(context)
-                              ? Alignment.centerRight
-                              : Alignment.centerLeft,
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                   child: Text(
                     widget.selectedDateText.isEmpty
                         ? widget.model.hint ?? ''
                         : widget.selectedDateText,
-                    style: widget.isDateSelected
-                        ? widget.formStyle.fieldTextStyle
-                        : widget.formStyle.fieldHintStyle,
+                    style:
+                        widget.isDateSelected
+                            ? widget.formStyle.fieldTextStyle
+                            : widget.formStyle.fieldHintStyle,
                   ),
                 ),
               ),
@@ -152,20 +158,23 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
       widget.gregorianInitialStartDate = DateTime.now();
     } else {
       widget.gregorianInitialStartDate = DateTime(
-          widget.model.initialStartDate!.year,
-          widget.model.initialStartDate!.month,
-          widget.model.initialStartDate!.day);
+        widget.model.initialStartDate!.year,
+        widget.model.initialStartDate!.month,
+        widget.model.initialStartDate!.day,
+      );
       widget.selectedGregorianStartDate = widget.gregorianInitialStartDate;
     }
 
     if (widget.model.initialEndDate == null) {
-      widget.gregorianInitialEndDate =
-          DateTime.now().add(const Duration(days: 2));
+      widget.gregorianInitialEndDate = DateTime.now().add(
+        const Duration(days: 2),
+      );
     } else {
       widget.gregorianInitialEndDate = DateTime(
-          widget.model.initialEndDate!.year,
-          widget.model.initialEndDate!.month,
-          widget.model.initialEndDate!.day);
+        widget.model.initialEndDate!.year,
+        widget.model.initialEndDate!.month,
+        widget.model.initialEndDate!.day,
+      );
       widget.selectedGregorianEndDate = widget.gregorianInitialEndDate;
     }
     if (widget.model.initialEndDate != null &&
@@ -176,8 +185,11 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     if (widget.model.availableTo == null) {
       widget.gregorianAvailableTo = DateTime(2100, 1, 1);
     } else {
-      widget.gregorianAvailableTo = DateTime(widget.model.availableTo!.year,
-          widget.model.availableTo!.month, widget.model.availableTo!.day);
+      widget.gregorianAvailableTo = DateTime(
+        widget.model.availableTo!.year,
+        widget.model.availableTo!.month,
+        widget.model.availableTo!.day,
+      );
     }
 
     _initialGregorianAvailableFromDate();
@@ -187,9 +199,10 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     if (widget.model.isPastAvailable ?? false) {
       if (widget.model.availableFrom != null) {
         widget.gregorianAvailableFrom = DateTime(
-            widget.model.availableFrom!.year,
-            widget.model.availableFrom!.month,
-            widget.model.availableFrom!.day);
+          widget.model.availableFrom!.year,
+          widget.model.availableFrom!.month,
+          widget.model.availableFrom!.day,
+        );
       } else {
         widget.gregorianAvailableFrom = DateTime(1700, 1, 1);
       }
@@ -212,16 +225,18 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
               '${widget.model.from}: ${DateFormat.yMd().format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat.yMd().format(widget.selectedGregorianEndDate!)}';
           break;
         case GSDateFormatType.fullText:
-          widget.selectedDateText =
-              '${widget.model.from}: ${DateFormat('EEE, MMM d, ' 'yyyy').format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat('EEE, MMM d, ' 'yyyy').format(widget.selectedGregorianEndDate!)}';
+          widget.selectedDateText = '${widget.model.from}: ${DateFormat('EEE, MMM d, '
+          'yyyy').format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat('EEE, MMM d, '
+          'yyyy').format(widget.selectedGregorianEndDate!)}';
           break;
         case GSDateFormatType.mediumText:
           widget.selectedDateText =
               '${widget.model.from}: ${DateFormat('EEE, MMM d').format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat('EEE, MMM d').format(widget.selectedGregorianEndDate!)}';
           break;
         case GSDateFormatType.shortText:
-          widget.selectedDateText =
-              '${widget.model.from}: ${DateFormat('MMM d, ' 'yyyy').format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat('MMM d, ' 'yyyy').format(widget.selectedGregorianEndDate!)}';
+          widget.selectedDateText = '${widget.model.from}: ${DateFormat('MMM d, '
+          'yyyy').format(widget.selectedGregorianStartDate!)}   ${widget.model.to}: ${DateFormat('MMM d, '
+          'yyyy').format(widget.selectedGregorianEndDate!)}';
           break;
 
         default:

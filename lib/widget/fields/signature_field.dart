@@ -41,73 +41,73 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-            customBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            onTap: () {
-              _route(
-                context,
-                SignatureScreen(
-                  model: widget.model,
-                  svgCallback: (value) {
-                    widget._signatureSVG = value;
-                    setState(() {});
-                  },
-                  //byteCallback: (byteData) {},
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  widget.model.iconWidget ?? Container(),
-                  const SizedBox(height: 6.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: widget.model.required ?? false,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 4, left: 4),
-                          child: Text(
-                            widget.formStyle.requiredText,
-                            style: const TextStyle(
-                              color: FormColors.red,
-                              fontSize: 10,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        widget.model.title ?? '',
-                        style: widget.formStyle.titleTextStyle,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  widget._signatureSVG == null
-                      ? Text(
-                          widget.model.hint ?? '',
-                          style: widget.formStyle.fieldHintStyle,
-                        )
-                      : Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: SvgPicture.string(
-                            widget._signatureSVG!,
-                            placeholderBuilder: (_) => Container(
-                              color: Colors.lightBlueAccent,
-                              child: Center(
-                                child: Text('parsing data(svg)'),
-                              ),
-                            ),
-                          ),
-                        ),
-                ],
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          onTap: () {
+            _route(
+              context,
+              SignatureScreen(
+                model: widget.model,
+                svgCallback: (value) {
+                  widget._signatureSVG = value;
+                  setState(() {});
+                },
+                //byteCallback: (byteData) {},
               ),
-            )),
+            );
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget.model.iconWidget ?? Container(),
+                const SizedBox(height: 6.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: widget.model.required ?? false,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4, left: 4),
+                        child: Text(
+                          widget.formStyle.requiredText,
+                          style: const TextStyle(
+                            color: FormColors.red,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      widget.model.title ?? '',
+                      style: widget.formStyle.titleTextStyle,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4.0),
+                widget._signatureSVG == null
+                    ? Text(
+                      widget.model.hint ?? '',
+                      style: widget.formStyle.fieldHintStyle,
+                    )
+                    : Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SvgPicture.string(
+                        widget._signatureSVG!,
+                        placeholderBuilder:
+                            (_) => Container(
+                              color: Colors.lightBlueAccent,
+                              child: Center(child: Text('parsing data(svg)')),
+                            ),
+                      ),
+                    ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -115,9 +115,7 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
   _route(BuildContext context, Widget screen) {
     Navigator.push(
       context,
-      MaterialPageRoute<dynamic>(
-        builder: (BuildContext context) => screen,
-      ),
+      MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
     );
   }
 }

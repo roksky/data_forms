@@ -1,4 +1,3 @@
-
 import 'package:data_forms/core/form_style.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
@@ -27,10 +26,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
           width: 20,
           height: 20,
           child: GestureDetector(
-            child: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black54,
-            ),
+            child: const Icon(Icons.arrow_back_ios, color: Colors.black54),
             onTap: () {
               Navigator.pop(context);
             },

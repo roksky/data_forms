@@ -81,33 +81,31 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
               },
             );
           } else if (widget.model.imageSource == GSImageSource.camera) {
-            GSFormUtils.pickImage(ImageSource.camera).then(
-              (imageFile) {
-                if (imageFile != null) {
-                  _fillImagePath(imageFile);
-                }
-              },
-            );
+            GSFormUtils.pickImage(ImageSource.camera).then((imageFile) {
+              if (imageFile != null) {
+                _fillImagePath(imageFile);
+              }
+            });
           } else {
-            GSFormUtils.pickImage(ImageSource.gallery).then(
-              (imageFile) {
-                if (imageFile != null) {
-                  _fillImagePath(imageFile);
-                }
-              },
-            );
+            GSFormUtils.pickImage(ImageSource.gallery).then((imageFile) {
+              if (imageFile != null) {
+                _fillImagePath(imageFile);
+              }
+            });
           }
         },
-        child: widget._croppedFilePath == null
-            ? NormalView(model: widget.model, formStyle: widget.formStyle)
-            : ImagePickedView(
-                croppedFilePath: widget._croppedFilePath!,
-                model: widget.model,
-                formStyle: widget.formStyle,
-                onDeleteImage: () {
-                  widget._croppedFilePath = null;
-                  setState(() {});
-                }),
+        child:
+            widget._croppedFilePath == null
+                ? NormalView(model: widget.model, formStyle: widget.formStyle)
+                : ImagePickedView(
+                  croppedFilePath: widget._croppedFilePath!,
+                  model: widget.model,
+                  formStyle: widget.formStyle,
+                  onDeleteImage: () {
+                    widget._croppedFilePath = null;
+                    setState(() {});
+                  },
+                ),
       ),
     );
   }
@@ -137,14 +135,13 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
       compressQuality: 100,
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'ویرایش تصویر',
-            toolbarColor: FormColors.white,
-            toolbarWidgetColor: Colors.black,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
-        IOSUiSettings(
-          title: 'Cropper',
+          toolbarTitle: 'ویرایش تصویر',
+          toolbarColor: FormColors.white,
+          toolbarWidgetColor: Colors.black,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
         ),
+        IOSUiSettings(title: 'Cropper'),
       ],
     );
     if (croppedFile != null) {
@@ -188,24 +185,15 @@ class NormalView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 4, left: 4),
                   child: Text(
                     formStyle.requiredText,
-                    style: const TextStyle(
-                      color: FormColors.red,
-                      fontSize: 10,
-                    ),
+                    style: const TextStyle(color: FormColors.red, fontSize: 10),
                   ),
                 ),
               ),
-              Text(
-                model.title ?? '',
-                style: formStyle.titleTextStyle,
-              ),
+              Text(model.title ?? '', style: formStyle.titleTextStyle),
             ],
           ),
           const SizedBox(height: 6.0),
-          Text(
-            model.hint ?? '',
-            style: formStyle.fieldHintStyle,
-          ),
+          Text(model.hint ?? '', style: formStyle.fieldHintStyle),
         ],
       ),
     );
@@ -219,12 +207,13 @@ class ImagePickedView extends StatelessWidget {
   final FormStyle formStyle;
   final VoidCallback onDeleteImage;
 
-  ImagePickedView(
-      {required this.croppedFilePath,
-      super.key,
-      required this.model,
-      required this.formStyle,
-      required this.onDeleteImage});
+  ImagePickedView({
+    required this.croppedFilePath,
+    super.key,
+    required this.model,
+    required this.formStyle,
+    required this.onDeleteImage,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -234,9 +223,7 @@ class ImagePickedView extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.file(File(croppedFilePath), fit: BoxFit.contain),
-            ],
+            children: [Image.file(File(croppedFilePath), fit: BoxFit.contain)],
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -262,8 +249,9 @@ class ImagePickedView extends StatelessWidget {
                     children: [
                       Text(
                         model.title!,
-                        style: formStyle.titleTextStyle
-                            .copyWith(color: Colors.white),
+                        style: formStyle.titleTextStyle.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
                       const Spacer(),
                       SizedBox(
@@ -272,7 +260,8 @@ class ImagePickedView extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                           onPressed: () {
                             onDeleteImage.call();
@@ -284,19 +273,20 @@ class ImagePickedView extends StatelessWidget {
                               Text(
                                 'حذف',
                                 maxLines: 1,
-                                style: formStyle.titleTextStyle
-                                    .copyWith(color: Colors.white),
+                                style: formStyle.titleTextStyle.copyWith(
+                                  color: Colors.white,
+                                ),
                               ),
                             ],
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
     );

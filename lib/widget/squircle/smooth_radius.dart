@@ -9,10 +9,7 @@ class SmoothRadius extends Radius {
   final double cornerSmoothing;
   double get cornerRadius => x;
 
-  static const zero = SmoothRadius(
-    cornerRadius: 0,
-    cornerSmoothing: 0,
-  );
+  static const zero = SmoothRadius(cornerRadius: 0, cornerSmoothing: 0);
 
   /// Unary negation operator.
   ///
@@ -24,9 +21,9 @@ class SmoothRadius extends Radius {
   /// a radius of one pixel from the other.
   @override
   Radius operator -() => SmoothRadius(
-        cornerRadius: -cornerRadius,
-        cornerSmoothing: cornerSmoothing,
-      );
+    cornerRadius: -cornerRadius,
+    cornerSmoothing: cornerSmoothing,
+  );
 
   /// Binary subtraction operator.
   ///
@@ -73,9 +70,9 @@ class SmoothRadius extends Radius {
   /// right-hand-side operand (a double).
   @override
   SmoothRadius operator *(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius * operand,
-        cornerSmoothing: cornerSmoothing * operand,
-      );
+    cornerRadius: cornerRadius * operand,
+    cornerSmoothing: cornerSmoothing * operand,
+  );
 
   /// Division operator.
   ///
@@ -84,9 +81,9 @@ class SmoothRadius extends Radius {
   /// operand (a double).
   @override
   SmoothRadius operator /(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius / operand,
-        cornerSmoothing: cornerSmoothing / operand,
-      );
+    cornerRadius: cornerRadius / operand,
+    cornerSmoothing: cornerSmoothing / operand,
+  );
 
   /// Integer (truncating) division operator.
   ///
@@ -95,9 +92,9 @@ class SmoothRadius extends Radius {
   /// operand (a double), rounded towards zero.
   @override
   SmoothRadius operator ~/(double operand) => SmoothRadius(
-        cornerRadius: (cornerRadius ~/ operand).toDouble(),
-        cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
-      );
+    cornerRadius: (cornerRadius ~/ operand).toDouble(),
+    cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
+  );
 
   /// Modulo (remainder) operator.
   ///
@@ -106,9 +103,9 @@ class SmoothRadius extends Radius {
   /// right-hand-side operand (a double).
   @override
   SmoothRadius operator %(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius % operand,
-        cornerSmoothing: cornerSmoothing % operand,
-      );
+    cornerRadius: cornerRadius % operand,
+    cornerSmoothing: cornerSmoothing % operand,
+  );
 
   /// Linearly interpolate between two smooth radii.
   ///

@@ -19,9 +19,7 @@ class ClipSmoothRect extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipPath.shape(
       clipBehavior: clipBehavior,
-      shape: SmoothRectangleBorder(
-        borderRadius: radius,
-      ),
+      shape: SmoothRectangleBorder(borderRadius: radius),
       child: child,
     );
   }

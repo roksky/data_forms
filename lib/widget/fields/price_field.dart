@@ -49,7 +49,8 @@ class _GSPriceFieldState extends State<FormPriceField> {
       widget.controller?.value = TextEditingValue(
         text: widget.model.value.toString(),
         selection: TextSelection.collapsed(
-            offset: widget.model.value.toString().length),
+          offset: widget.model.value.toString().length,
+        ),
       );
       widget.controller?.text = widget.model.value.toString();
     }
@@ -66,7 +67,8 @@ class _GSPriceFieldState extends State<FormPriceField> {
       widget.controller?.value = TextEditingValue(
         text: widget.model.value.toString(),
         selection: TextSelection.collapsed(
-            offset: widget.model.value.toString().length),
+          offset: widget.model.value.toString().length,
+        ),
       );
       widget.controller?.text = widget.model.value.toString();
     }
@@ -84,9 +86,10 @@ class _GSPriceFieldState extends State<FormPriceField> {
         textAlign: TextAlign.left,
         focusNode: widget.model.focusNode,
         style: widget.formStyle.fieldTextStyle,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

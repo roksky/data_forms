@@ -65,24 +65,34 @@ class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
         return FractionallySizedBox(
           heightFactor: 0.9, // Covers most of the screen height
           child: LocationPickerDialog(
-            rootLocation:
-                getLocationValue(stateManager.get(widget.model.dependsOn)),
-            hierarchy: widget.model.targetLevel != null &&
-                    widget.model.hierarchy.contains(widget.model.targetLevel)
-                ? widget.model.hierarchy.sublist(
-                    0,
-                    widget.model.hierarchy.indexOf(widget.model.targetLevel!) +
-                        1)
-                : widget.model.hierarchy,
+            rootLocation: getLocationValue(
+              stateManager.get(widget.model.dependsOn),
+            ),
+            hierarchy:
+                widget.model.targetLevel != null &&
+                        widget.model.hierarchy.contains(
+                          widget.model.targetLevel,
+                        )
+                    ? widget.model.hierarchy.sublist(
+                      0,
+                      widget.model.hierarchy.indexOf(
+                            widget.model.targetLevel!,
+                          ) +
+                          1,
+                    )
+                    : widget.model.hierarchy,
             fetchLocations: widget.model.fetchLocations,
             fetchLocationById: widget.model.fetchLocationById,
             onSave: (selectedLocations) {
               // Handle the selected locations and update the UI accordingly.
               setState(() {
-                widget.result = selectedLocations
-                    .last; // Update the box with the final selected location
+                widget.result =
+                    selectedLocations
+                        .last; // Update the box with the final selected location
                 stateManager.set(
-                    widget.model.tag, widget.result); // Update the model
+                  widget.model.tag,
+                  widget.result,
+                ); // Update the model
               });
             },
           ),
@@ -99,7 +109,8 @@ class LocationPickerDialog extends StatefulWidget {
   final Future<LocationItem?> Function(String locationId) fetchLocationById;
   final Function(List<LocationItem>) onSave;
 
-  const LocationPickerDialog({super.key, 
+  const LocationPickerDialog({
+    super.key,
     this.rootLocation,
     required this.hierarchy,
     required this.fetchLocations,
@@ -127,7 +138,9 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
   Future<void> asyncInit() async {
     await recomputeHierarchy(widget.rootLocation?.id);
     await loadLocationsForLevel(
-        widget.rootLocation?.id, 0); // Load root locations initially
+      widget.rootLocation?.id,
+      0,
+    ); // Load root locations initially
   }
 
   Future<void> recomputeHierarchy(String? rootLocation) async {
@@ -213,17 +226,22 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   }
                   return Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 16.0, vertical: 8.0),
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
                     child: DropdownButton<LocationItem>(
                       value: selectedLocations[index],
                       hint: Text('Select ${hierarchy[index]}'),
                       isExpanded: true,
-                      items: locations[index]
-                          .map((location) => DropdownMenuItem<LocationItem>(
-                                value: location,
-                                child: Text(location.name),
-                              ))
-                          .toList(),
+                      items:
+                          locations[index]
+                              .map(
+                                (location) => DropdownMenuItem<LocationItem>(
+                                  value: location,
+                                  child: Text(location.name),
+                                ),
+                              )
+                              .toList(),
                       onChanged: (LocationItem? newValue) {
                         onLocationChanged(newValue, index);
                       },
@@ -250,14 +268,17 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                   child: Text('Cancel'),
                 ),
                 ElevatedButton(
-                  onPressed: isLastItemSelected()
-                      ? () {
-                          widget.onSave(selectedLocations
-                              .whereType<LocationItem>()
-                              .toList());
-                          Navigator.of(context).pop();
-                        }
-                      : null, // Disable button if the last item is not selected
+                  onPressed:
+                      isLastItemSelected()
+                          ? () {
+                            widget.onSave(
+                              selectedLocations
+                                  .whereType<LocationItem>()
+                                  .toList(),
+                            );
+                            Navigator.of(context).pop();
+                          }
+                          : null, // Disable button if the last item is not selected
                   child: Text('Save'),
                 ),
               ],
