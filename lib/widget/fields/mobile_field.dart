@@ -3,7 +3,6 @@ import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/mobile_model.dart';
 
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -12,7 +11,7 @@ class FormMobileField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormMobileField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormMobileField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormMobileField> createState() => _GSMobileFieldState();
@@ -70,9 +69,10 @@ class _GSMobileFieldState extends State<FormMobileField> {
         style: widget.formStyle.fieldTextStyle,
         keyboardType: TextInputType.phone,
         focusNode: widget.model.focusNode,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

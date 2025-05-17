@@ -11,7 +11,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:data_forms/model/fields_model/multi_image_picker_model.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -19,8 +18,7 @@ class FormMultiImagePickerField extends NotifiableStatefulWidget<List<String>> {
   final FormMultiImagePickerModel model;
   final FormStyle formStyle;
 
-  FormMultiImagePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormMultiImagePickerField(this.model, this.formStyle, {super.key});
   List<String> _croppedFilePaths = [];
 
   @override
@@ -68,35 +66,37 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: GridView.builder(
-          physics: const NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: 1.0,
-            mainAxisSpacing: 10.0,
-            crossAxisSpacing: 10.0,
-          ),
-          itemCount: widget._croppedFilePaths.length + 1,
-          itemBuilder: (context, index) {
-            return index == 0
-                ? SelectItem(
-                    model: widget.model,
-                    style: widget.formStyle,
-                    isEnable: _enableSelectImageButton(),
-                    callBack: (imagePath) {
-                      widget._croppedFilePaths.add(imagePath);
-                      setState(() {});
-                    },
-                  )
-                : ImageBox(
-                    imagePath: widget._croppedFilePaths[index - 1],
-                    onDelete: (value) {
-                      widget._croppedFilePaths
-                          .removeWhere((element) => element == value);
-                      setState(() {});
-                    },
+        physics: const NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          childAspectRatio: 1.0,
+          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 10.0,
+        ),
+        itemCount: widget._croppedFilePaths.length + 1,
+        itemBuilder: (context, index) {
+          return index == 0
+              ? SelectItem(
+                model: widget.model,
+                style: widget.formStyle,
+                isEnable: _enableSelectImageButton(),
+                callBack: (imagePath) {
+                  widget._croppedFilePaths.add(imagePath);
+                  setState(() {});
+                },
+              )
+              : ImageBox(
+                imagePath: widget._croppedFilePaths[index - 1],
+                onDelete: (value) {
+                  widget._croppedFilePaths.removeWhere(
+                    (element) => element == value,
                   );
-          }),
+                  setState(() {});
+                },
+              );
+        },
+      ),
     );
   }
 
@@ -114,13 +114,13 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
 }
 
 class SelectItem extends StatelessWidget {
-  const SelectItem(
-      {required this.model,
-      required this.style,
-      required this.callBack,
-      required this.isEnable,
-      Key? key})
-      : super(key: key);
+  const SelectItem({
+    required this.model,
+    required this.style,
+    required this.callBack,
+    required this.isEnable,
+    super.key,
+  });
 
   final FormMultiImagePickerModel model;
   final FormStyle style;
@@ -135,10 +135,9 @@ class SelectItem extends StatelessWidget {
         absorbing: !isEnable,
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(
-                Radius.circular(10),
-              ),
-              border: Border.all(color: Colors.black45, width: 1)),
+            borderRadius: const BorderRadius.all(Radius.circular(10)),
+            border: Border.all(color: Colors.black45, width: 1),
+          ),
           height: 90,
           width: 90,
           child: InkWell(
@@ -158,21 +157,17 @@ class SelectItem extends StatelessWidget {
                   },
                 );
               } else if (model.imageSource == GSImageSource.camera) {
-                GSFormUtils.pickImage(ImageSource.camera).then(
-                  (imageFile) {
-                    if (imageFile != null) {
-                      _fillImagePath(imageFile);
-                    }
-                  },
-                );
+                GSFormUtils.pickImage(ImageSource.camera).then((imageFile) {
+                  if (imageFile != null) {
+                    _fillImagePath(imageFile);
+                  }
+                });
               } else {
-                GSFormUtils.pickImage(ImageSource.gallery).then(
-                  (imageFile) {
-                    if (imageFile != null) {
-                      _fillImagePath(imageFile);
-                    }
-                  },
-                );
+                GSFormUtils.pickImage(ImageSource.gallery).then((imageFile) {
+                  if (imageFile != null) {
+                    _fillImagePath(imageFile);
+                  }
+                });
               }
             },
             child: Container(
@@ -208,14 +203,13 @@ class SelectItem extends StatelessWidget {
       compressQuality: 100,
       uiSettings: [
         AndroidUiSettings(
-            toolbarTitle: 'Edit Image',
-            toolbarColor: FormColors.white,
-            toolbarWidgetColor: Colors.black,
-            initAspectRatio: CropAspectRatioPreset.original,
-            lockAspectRatio: false),
-        IOSUiSettings(
-          title: 'Cropper',
+          toolbarTitle: 'Edit Image',
+          toolbarColor: FormColors.white,
+          toolbarWidgetColor: Colors.black,
+          initAspectRatio: CropAspectRatioPreset.original,
+          lockAspectRatio: false,
         ),
+        IOSUiSettings(title: 'Cropper'),
       ],
     );
     if (croppedFile != null) {
@@ -233,11 +227,7 @@ class SelectItem extends StatelessWidget {
 }
 
 class ImageBox extends StatelessWidget {
-  const ImageBox({
-    Key? key,
-    required this.imagePath,
-    required this.onDelete,
-  }) : super(key: key);
+  const ImageBox({super.key, required this.imagePath, required this.onDelete});
   final String imagePath;
   final ValueChanged<String> onDelete;
 
@@ -246,50 +236,56 @@ class ImageBox extends StatelessWidget {
     return SizedBox(
       width: 100,
       height: 100,
-      child: Stack(fit: StackFit.expand, children: [
-        Container(
-          width: 90,
-          height: 90,
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
-          clipBehavior: Clip.hardEdge,
-          child: imagePath.contains('http')
-              ? Image.network(
-                  imagePath,
-                  width: 90,
-                  height: 90,
-                  fit: BoxFit.fill,
-                )
-              : Image.file(
-                  File(imagePath),
-                  width: 90,
-                  height: 90,
-                  fit: BoxFit.fill,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Container(
+            width: 90,
+            height: 90,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
+            clipBehavior: Clip.hardEdge,
+            child:
+                imagePath.contains('http')
+                    ? Image.network(
+                      imagePath,
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.fill,
+                    )
+                    : Image.file(
+                      File(imagePath),
+                      width: 90,
+                      height: 90,
+                      fit: BoxFit.fill,
+                    ),
+          ),
+          Positioned(
+            bottom: 8.0,
+            left: 8.0,
+            child: InkWell(
+              onTap: () {
+                onDelete.call(imagePath);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  borderRadius: BorderRadius.circular(4.0),
                 ),
-        ),
-        Positioned(
-          bottom: 8.0,
-          left: 8.0,
-          child: InkWell(
-            onTap: () {
-              onDelete.call(imagePath);
-            },
-            child: Container(
-              padding: const EdgeInsets.all(4.0),
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(4.0),
-              ),
-              child: SvgPicture.asset(
-                'packages/data_forms/assets/ic_trash.svg',
-                height: 15,
-                width: 15,
-                colorFilter:
-                    const ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                child: SvgPicture.asset(
+                  'packages/data_forms/assets/ic_trash.svg',
+                  height: 15,
+                  width: 15,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }

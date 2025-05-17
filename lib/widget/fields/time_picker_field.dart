@@ -19,8 +19,7 @@ class FormTimePickerField extends NotifiableStatefulWidget
   TimeOfDay? selectedTime;
   late BuildContext context;
 
-  FormTimePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key) {
+  FormTimePickerField(this.model, this.formStyle, {super.key}) {
     selectedTimeText = model.hint ?? 'Choose the time';
   }
 
@@ -49,9 +48,10 @@ class FormTimePickerField extends NotifiableStatefulWidget
     return selectedTime == null
         ? null
         : TimeDataModel(
-            displayTime: selectedTime!.format(context),
-            hour: selectedTime!.hour,
-            minute: selectedTime!.minute);
+          displayTime: selectedTime!.format(context),
+          hour: selectedTime!.hour,
+          minute: selectedTime!.minute,
+        );
   }
 }
 
@@ -84,17 +84,22 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
   Widget build(BuildContext context) {
     widget.context = context;
     return Padding(
-      padding:
-          const EdgeInsets.only(right: 10.0, left: 10.0, top: 16, bottom: 16),
+      padding: const EdgeInsets.only(
+        right: 10.0,
+        left: 10.0,
+        top: 16,
+        bottom: 16,
+      ),
       child: InkWell(
         child: Row(
           children: [
             Expanded(
               child: Text(
                 widget.selectedTimeText!,
-                style: widget.isTimeSelected
-                    ? widget.formStyle.fieldTextStyle
-                    : widget.formStyle.fieldHintStyle,
+                style:
+                    widget.isTimeSelected
+                        ? widget.formStyle.fieldTextStyle
+                        : widget.formStyle.fieldHintStyle,
               ),
             ),
           ],
@@ -131,12 +136,14 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
   }
 
   _displayTime(TimeOfDay time) {
-    String hour = time.hour.toString().length == 1
-        ? '0${time.hour}'
-        : time.hour.toString();
-    String minute = time.minute.toString().length == 1
-        ? '0${time.minute}'
-        : time.minute.toString();
+    String hour =
+        time.hour.toString().length == 1
+            ? '0${time.hour}'
+            : time.hour.toString();
+    String minute =
+        time.minute.toString().length == 1
+            ? '0${time.minute}'
+            : time.minute.toString();
     widget.selectedTimeText = '$hour:$minute';
   }
 }

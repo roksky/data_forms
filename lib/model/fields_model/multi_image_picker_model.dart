@@ -41,15 +41,15 @@ class FormMultiImagePickerModel extends FormFieldModel {
     this.imageSource,
     this.hint,
   }) : super(
-          type: type,
-          tag: tag,
-          title: title,
-          errorMessage: errorMessage,
-          helpMessage: helpMessage,
-          required: required,
-          status: status,
-          weight: weight,
-          showTitle: showTitle,
-          dependsOn: dependsOn,
-        );
+         type: type,
+         tag: tag,
+         title: title,
+         errorMessage: errorMessage,
+         helpMessage: helpMessage,
+         required: required,
+         status: status,
+         weight: weight,
+         showTitle: showTitle,
+         dependsOn: dependsOn,
+       );
 }

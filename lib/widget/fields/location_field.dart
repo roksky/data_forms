@@ -14,7 +14,7 @@ class FormLocationField extends NotifiableStatefulWidget<PositionResponse> {
   late FormLocationModel model;
   final FormStyle formStyle;
 
-  FormLocationField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormLocationField(this.model, this.formStyle, {super.key});
   Position? _currentLocation;
 
   @override
@@ -22,9 +22,10 @@ class FormLocationField extends NotifiableStatefulWidget<PositionResponse> {
 
   @override
   FormFieldValue<PositionResponse> getValue() {
-    var result = _currentLocation == null
-        ? null
-        : PositionResponse.fromPosition(_currentLocation!);
+    var result =
+        _currentLocation == null
+            ? null
+            : PositionResponse.fromPosition(_currentLocation!);
     return FormFieldValue.position(result);
   }
 
@@ -92,13 +93,16 @@ class _GSLocationFieldState extends State<FormLocationField> {
     // When we reach here, permissions are granted and we can
     // continue accessing the position of the device.
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
+      desiredAccuracy: LocationAccuracy.high,
+    );
     setState(() {
       _currentLocation =
           'Latitude: ${position.latitude}, Longitude: ${position.longitude}';
       widget._currentLocation = position;
       stateManager.set(
-          widget.model.tag, widget._currentLocation); // Update the model
+        widget.model.tag,
+        widget._currentLocation,
+      ); // Update the model
       isLoading = false;
     });
   }
@@ -110,61 +114,67 @@ class _GSLocationFieldState extends State<FormLocationField> {
       padding: const EdgeInsets.all(16.0),
       child: Material(
         color: Colors.transparent,
-        child: isLoading
-            ? Container(
-                color:
-                    Colors.black54, // Optional: To give a dim background effect
-                child: Center(
-                  child: CircularProgressIndicator(),
-                  // You can use the flutter_spinkit package for more options:
-                  // child: SpinKitCircle(color: Colors.white),
-                ),
-              )
-            : InkWell(
-                customBorder: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                onTap: () {
-                  _getCurrentLocation(stateManager);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      widget.model.iconWidget ?? Container(),
-                      const SizedBox(height: 6.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Visibility(
-                            visible: widget.model.required ?? false,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 4, left: 4),
-                              child: Text(
-                                widget.formStyle.requiredText,
-                                style: const TextStyle(
-                                  color: FormColors.red,
-                                  fontSize: 10,
+        child:
+            isLoading
+                ? Container(
+                  color:
+                      Colors
+                          .black54, // Optional: To give a dim background effect
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                    // You can use the flutter_spinkit package for more options:
+                    // child: SpinKitCircle(color: Colors.white),
+                  ),
+                )
+                : InkWell(
+                  customBorder: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  onTap: () {
+                    _getCurrentLocation(stateManager);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        widget.model.iconWidget ?? Container(),
+                        const SizedBox(height: 6.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Visibility(
+                              visible: widget.model.required ?? false,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                  right: 4,
+                                  left: 4,
+                                ),
+                                child: Text(
+                                  widget.formStyle.requiredText,
+                                  style: const TextStyle(
+                                    color: FormColors.red,
+                                    fontSize: 10,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Text(
-                            widget.model.title ?? '',
-                            style: widget.formStyle.titleTextStyle,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 4.0),
-                      Text(
-                        _currentLocation,
-                        style: widget.formStyle.fieldTextStyle,
-                      ),
-                    ],
+                            Text(
+                              widget.model.title ?? '',
+                              style: widget.formStyle.titleTextStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4.0),
+                        Text(
+                          _currentLocation,
+                          style: widget.formStyle.fieldTextStyle,
+                        ),
+                      ],
+                    ),
                   ),
-                )),
+                ),
       ),
     );
   }

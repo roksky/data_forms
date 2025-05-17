@@ -42,6 +42,6 @@ abstract class FormFieldModel {
     this.onTap,
     FormFieldStatusEnum? status,
     bool? enableReadOnly,
-  })  : status = status ?? FormFieldStatusEnum.normal,
-        enableReadOnly = enableReadOnly ?? false;
+  }) : status = status ?? FormFieldStatusEnum.normal,
+       enableReadOnly = enableReadOnly ?? false;
 }

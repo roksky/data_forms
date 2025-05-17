@@ -24,7 +24,7 @@ class FormImagePickerModel extends FormFieldModel {
     status,
     weight,
     showTitle,
-    value,
+    super.value,
     dependsOn,
     required this.iconWidget,
     this.cameraPopupIcon,
@@ -37,17 +37,17 @@ class FormImagePickerModel extends FormFieldModel {
     this.maximumSizePerImageInBytes,
     this.onErrorSizeItem,
   }) : super(
-            type: type,
-            tag: tag,
-            title: title,
-            errorMessage: errorMessage,
-            helpMessage: helpMessage,
-            required: required,
-            status: status,
-            weight: weight,
-            showTitle: showTitle,
-            dependsOn: dependsOn,
-            value: value);
+         type: type,
+         tag: tag,
+         title: title,
+         errorMessage: errorMessage,
+         helpMessage: helpMessage,
+         required: required,
+         status: status,
+         weight: weight,
+         showTitle: showTitle,
+         dependsOn: dependsOn,
+       );
 }
 
 enum GSImageSource { camera, gallery, both }

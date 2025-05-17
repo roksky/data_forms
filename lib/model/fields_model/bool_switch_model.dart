@@ -13,15 +13,15 @@ class FormBoolSwitchModel extends FormFieldModel {
     showTitle,
     enableReadOnly,
   }) : super(
-          type: type,
-          tag: tag,
-          title: title,
-          errorMessage: errorMessage,
-          helpMessage: helpMessage,
-          required: required,
-          status: status,
-          weight: weight,
-          showTitle: showTitle,
-          enableReadOnly: enableReadOnly,
-        );
+         type: type,
+         tag: tag,
+         title: title,
+         errorMessage: errorMessage,
+         helpMessage: helpMessage,
+         required: required,
+         status: status,
+         weight: weight,
+         showTitle: showTitle,
+         enableReadOnly: enableReadOnly,
+       );
 }

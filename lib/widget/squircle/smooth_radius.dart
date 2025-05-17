@@ -9,10 +9,7 @@ class SmoothRadius extends Radius {
   final double cornerSmoothing;
   double get cornerRadius => x;
 
-  static const zero = SmoothRadius(
-    cornerRadius: 0,
-    cornerSmoothing: 0,
-  );
+  static const zero = SmoothRadius(cornerRadius: 0, cornerSmoothing: 0);
 
   /// Unary negation operator.
   ///
@@ -22,16 +19,18 @@ class SmoothRadius extends Radius {
   /// occur as part of expressions. For example, negating a radius of one pixel
   /// and then adding the result to another radius is equivalent to subtracting
   /// a radius of one pixel from the other.
+  @override
   Radius operator -() => SmoothRadius(
-        cornerRadius: -cornerRadius,
-        cornerSmoothing: cornerSmoothing,
-      );
+    cornerRadius: -cornerRadius,
+    cornerSmoothing: cornerSmoothing,
+  );
 
   /// Binary subtraction operator.
   ///
   /// Returns a radius whose [x] value is the left-hand-side operand's [x]
   /// minus the right-hand-side operand's [x] and whose [y] value is the
   /// left-hand-side operand's [y] minus the right-hand-side operand's [y].
+  @override
   Radius operator -(Radius other) {
     if (other is SmoothRadius) {
       return SmoothRadius(
@@ -50,6 +49,7 @@ class SmoothRadius extends Radius {
   /// Returns a radius whose [x] value is the sum of the [x] values of the
   /// two operands, and whose [y] value is the sum of the [y] values of the
   /// two operands.
+  @override
   Radius operator +(Radius other) {
     if (other is SmoothRadius) {
       return SmoothRadius(
@@ -68,40 +68,44 @@ class SmoothRadius extends Radius {
   /// Returns a radius whose coordinates are the coordinates of the
   /// left-hand-side operand (a radius) multiplied by the scalar
   /// right-hand-side operand (a double).
+  @override
   SmoothRadius operator *(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius * operand,
-        cornerSmoothing: cornerSmoothing * operand,
-      );
+    cornerRadius: cornerRadius * operand,
+    cornerSmoothing: cornerSmoothing * operand,
+  );
 
   /// Division operator.
   ///
   /// Returns a radius whose coordinates are the coordinates of the
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double).
+  @override
   SmoothRadius operator /(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius / operand,
-        cornerSmoothing: cornerSmoothing / operand,
-      );
+    cornerRadius: cornerRadius / operand,
+    cornerSmoothing: cornerSmoothing / operand,
+  );
 
   /// Integer (truncating) division operator.
   ///
   /// Returns a radius whose coordinates are the coordinates of the
   /// left-hand-side operand (a radius) divided by the scalar right-hand-side
   /// operand (a double), rounded towards zero.
+  @override
   SmoothRadius operator ~/(double operand) => SmoothRadius(
-        cornerRadius: (cornerRadius ~/ operand).toDouble(),
-        cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
-      );
+    cornerRadius: (cornerRadius ~/ operand).toDouble(),
+    cornerSmoothing: (cornerSmoothing ~/ operand).toDouble(),
+  );
 
   /// Modulo (remainder) operator.
   ///
   /// Returns a radius whose coordinates are the remainder of dividing the
   /// coordinates of the left-hand-side operand (a radius) by the scalar
   /// right-hand-side operand (a double).
+  @override
   SmoothRadius operator %(double operand) => SmoothRadius(
-        cornerRadius: cornerRadius % operand,
-        cornerSmoothing: cornerSmoothing % operand,
-      );
+    cornerRadius: cornerRadius % operand,
+    cornerSmoothing: cornerSmoothing % operand,
+  );
 
   /// Linearly interpolate between two smooth radii.
   ///

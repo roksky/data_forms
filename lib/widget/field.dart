@@ -79,7 +79,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.qrScanner({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     bool? showTitle,
@@ -92,7 +92,7 @@ class DataFormField extends StatefulWidget {
     Widget? iconWidget,
     Color? iconColor,
     bool? enableReadOnly,
-  }) : super(key: key) {
+  }) {
     model = FormQRScannerModel(
       type: FormFieldTypeEnum.qrScanner,
       tag: tag,
@@ -110,7 +110,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.imagePicker({
-    Key? key,
+    super.key,
     required String tag,
     required Widget iconWidget,
     String? defaultImagePathValue,
@@ -132,7 +132,7 @@ class DataFormField extends StatefulWidget {
     double? maximumSizePerImageInBytes,
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormImagePickerModel(
       type: FormFieldTypeEnum.imagePicker,
       tag: tag,
@@ -159,7 +159,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.multiImagePicker({
-    Key? key,
+    super.key,
     required String tag,
     required Widget iconWidget,
     List<String>? defaultImagePathValues,
@@ -182,7 +182,7 @@ class DataFormField extends StatefulWidget {
     double? maximumImageCount,
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormMultiImagePickerModel(
       type: FormFieldTypeEnum.multiImagePicker,
       tag: tag,
@@ -210,7 +210,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.spinner({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -226,82 +226,84 @@ class DataFormField extends StatefulWidget {
     required List<SpinnerDataModel> items,
     String? hint,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormSpinnerModel(
-        type: FormFieldTypeEnum.spinner,
-        tag: tag,
-        showTitle: showTitle ?? true,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        prefixWidget: prefixWidget,
-        required: required,
-        status: status,
-        weight: weight,
-        items: items,
-        hint: hint,
-        onChange: onChange,
-        value: value,
-        dependsOn: dependsOn);
+      type: FormFieldTypeEnum.spinner,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      prefixWidget: prefixWidget,
+      required: required,
+      status: status,
+      weight: weight,
+      items: items,
+      hint: hint,
+      onChange: onChange,
+      value: value,
+      dependsOn: dependsOn,
+    );
   }
 
-  DataFormField.radioGroup(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      int? weight,
-      RegExp? validateRegEx,
-      String? hint,
-      Axis? scrollDirection,
-      Widget? selectedIcon,
-      Widget? unSelectedIcon,
-      bool? scrollable,
-      double? height,
-      bool? showScrollBar,
-      Color? scrollBarColor,
-      required bool searchable,
-      String? searchHint,
-      Icon? searchIcon,
-      BoxDecoration? searchBoxDecoration,
-      required List<RadioDataModel> items,
-      String? dependsOn,
-      required ValueChanged<RadioDataModel> callBack})
-      : super(key: key) {
+  DataFormField.radioGroup({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    int? weight,
+    RegExp? validateRegEx,
+    String? hint,
+    Axis? scrollDirection,
+    Widget? selectedIcon,
+    Widget? unSelectedIcon,
+    bool? scrollable,
+    double? height,
+    bool? showScrollBar,
+    Color? scrollBarColor,
+    required bool searchable,
+    String? searchHint,
+    Icon? searchIcon,
+    BoxDecoration? searchBoxDecoration,
+    required List<RadioDataModel> items,
+    String? dependsOn,
+    required ValueChanged<RadioDataModel> callBack,
+  }) {
     model = FormRadioModel(
-        type: FormFieldTypeEnum.radioGroup,
-        tag: tag,
-        showTitle: showTitle ?? true,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        required: required,
-        status: status,
-        weight: weight,
-        showScrollBar: showScrollBar,
-        scrollBarColor: scrollBarColor,
-        hint: hint,
-        items: items,
-        callBack: callBack,
-        scrollDirection: scrollDirection,
-        unSelectedIcon: unSelectedIcon,
-        selectedIcon: selectedIcon,
-        scrollable: scrollable ?? false,
-        height: height,
-        searchable: searchable,
-        searchHint: searchHint,
-        searchIcon: searchIcon,
-        dependsOn: dependsOn,
-        searchBoxDecoration: searchBoxDecoration);
+      type: FormFieldTypeEnum.radioGroup,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      weight: weight,
+      showScrollBar: showScrollBar,
+      scrollBarColor: scrollBarColor,
+      hint: hint,
+      items: items,
+      callBack: callBack,
+      scrollDirection: scrollDirection,
+      unSelectedIcon: unSelectedIcon,
+      selectedIcon: selectedIcon,
+      scrollable: scrollable ?? false,
+      height: height,
+      searchable: searchable,
+      searchHint: searchHint,
+      searchIcon: searchIcon,
+      dependsOn: dependsOn,
+      searchBoxDecoration: searchBoxDecoration,
+    );
   }
 
   DataFormField.checkList({
-    Key? key,
+    super.key,
     required String tag,
     required bool searchable,
     required List<CheckDataModel> items,
@@ -327,63 +329,64 @@ class DataFormField extends StatefulWidget {
     Icon? searchIcon,
     BoxDecoration? searchBoxDecoration,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     bool isRequired = false;
     if (requiredCheckListEnum != null &&
         requiredCheckListEnum != RequiredCheckListEnum.none) {
       isRequired = true;
     }
     model = FormCheckBoxModel(
-        type: FormFieldTypeEnum.checkList,
-        tag: tag,
-        showTitle: showTitle ?? true,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        required: isRequired,
-        status: status,
-        weight: weight,
-        showScrollBar: showScrollBar,
-        scrollBarColor: scrollBarColor,
-        hint: hint,
-        items: items,
-        callBack: callBack,
-        scrollDirection: scrollDirection,
-        unSelectedIcon: unSelectedIcon,
-        selectedIcon: selectedIcon,
-        scrollable: scrollable ?? false,
-        height: height,
-        searchable: searchable,
-        searchHint: searchHint,
-        searchIcon: searchIcon,
-        searchBoxDecoration: searchBoxDecoration,
-        dependsOn: dependsOn,
-        requiredCheckListEnum: requiredCheckListEnum);
+      type: FormFieldTypeEnum.checkList,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: isRequired,
+      status: status,
+      weight: weight,
+      showScrollBar: showScrollBar,
+      scrollBarColor: scrollBarColor,
+      hint: hint,
+      items: items,
+      callBack: callBack,
+      scrollDirection: scrollDirection,
+      unSelectedIcon: unSelectedIcon,
+      selectedIcon: selectedIcon,
+      scrollable: scrollable ?? false,
+      height: height,
+      searchable: searchable,
+      searchHint: searchHint,
+      searchIcon: searchIcon,
+      searchBoxDecoration: searchBoxDecoration,
+      dependsOn: dependsOn,
+      requiredCheckListEnum: requiredCheckListEnum,
+    );
   }
 
-  DataFormField.text(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      String? dependsOn,
-      FocusNode? nextFocusNode})
-      : super(key: key) {
+  DataFormField.text({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    String? dependsOn,
+    FocusNode? nextFocusNode,
+  }) {
     model = FormTextModel(
       type: FormFieldTypeEnum.text,
       tag: tag,
@@ -407,7 +410,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.password({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -426,7 +429,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormPasswordModel(
       type: FormFieldTypeEnum.password,
       showTitle: showTitle ?? true,
@@ -447,7 +450,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.textPlain({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -467,7 +470,7 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormTextPlainModel(
       type: FormFieldTypeEnum.textPlain,
       tag: tag,
@@ -492,7 +495,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.mobile({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -509,7 +512,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormMobileModel(
       type: FormFieldTypeEnum.mobile,
       tag: tag,
@@ -531,7 +534,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.number({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -549,7 +552,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.number,
       showTitle: showTitle ?? true,
@@ -572,7 +575,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.integer({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -589,7 +592,7 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     String? hint,
     bool? readOnly,
-  }) : super(key: key) {
+  }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.integer,
       showTitle: showTitle ?? true,
@@ -611,7 +614,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.double({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -628,7 +631,7 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     String? hint,
     bool? readOnly,
-  }) : super(key: key) {
+  }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.double,
       showTitle: showTitle ?? true,
@@ -650,7 +653,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.datePicker({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -670,30 +673,31 @@ class DataFormField extends StatefulWidget {
     DataDate? availableFrom,
     DataDate? availableTo,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormDatePickerModel(
-        type: FormFieldTypeEnum.date,
-        tag: tag,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        showTitle: showTitle ?? true,
-        prefixWidget: prefixWidget,
-        postfixWidget: postfixWidget,
-        required: required,
-        status: status,
-        weight: weight,
-        hint: hint,
-        dependsOn: dependsOn,
-        isPastAvailable: isPastAvailable,
-        dateFormatType: displayDateType,
-        initialDate: initialDate,
-        availableFrom: availableTo,
-        availableTo: availableTo);
+      type: FormFieldTypeEnum.date,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      showTitle: showTitle ?? true,
+      prefixWidget: prefixWidget,
+      postfixWidget: postfixWidget,
+      required: required,
+      status: status,
+      weight: weight,
+      hint: hint,
+      dependsOn: dependsOn,
+      isPastAvailable: isPastAvailable,
+      dateFormatType: displayDateType,
+      initialDate: initialDate,
+      availableFrom: availableTo,
+      availableTo: availableTo,
+    );
   }
 
   DataFormField.dateRangePicker({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -716,33 +720,34 @@ class DataFormField extends StatefulWidget {
     DataDate? availableFrom,
     DataDate? availableTo,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormDateRangePickerModel(
-        type: FormFieldTypeEnum.dateRage,
-        tag: tag,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        from: from ?? 'From ',
-        to: to ?? 'To ',
-        prefixWidget: prefixWidget,
-        postfixWidget: postfixWidget,
-        showTitle: showTitle ?? true,
-        required: required,
-        status: status,
-        weight: weight,
-        hint: hint,
-        isPastAvailable: isPastAvailable,
-        dateFormatType: displayDateType,
-        initialStartDate: initialStartDate,
-        initialEndDate: initialEndDate,
-        availableFrom: availableTo,
-        availableTo: availableTo,
-        dependsOn: dependsOn);
+      type: FormFieldTypeEnum.dateRage,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      from: from ?? 'From ',
+      to: to ?? 'To ',
+      prefixWidget: prefixWidget,
+      postfixWidget: postfixWidget,
+      showTitle: showTitle ?? true,
+      required: required,
+      status: status,
+      weight: weight,
+      hint: hint,
+      isPastAvailable: isPastAvailable,
+      dateFormatType: displayDateType,
+      initialStartDate: initialStartDate,
+      initialEndDate: initialEndDate,
+      availableFrom: availableTo,
+      availableTo: availableTo,
+      dependsOn: dependsOn,
+    );
   }
 
   DataFormField.time({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -758,7 +763,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     TimeOfDay? initialTime,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormTimePickerModel(
       type: FormFieldTypeEnum.time,
       tag: tag,
@@ -778,7 +783,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.email({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -795,7 +800,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormEmailModel(
       type: FormFieldTypeEnum.email,
       tag: tag,
@@ -817,7 +822,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.price({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -834,7 +839,7 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
-  }) : super(key: key) {
+  }) {
     model = FormPriceModel(
       type: FormFieldTypeEnum.price,
       tag: tag,
@@ -858,25 +863,25 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.bankCard(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? minLine,
-      int? maxLine,
-      String? dependsOn,
-      String? hint})
-      : super(key: key) {
+  DataFormField.bankCard({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? minLine,
+    int? maxLine,
+    String? dependsOn,
+    String? hint,
+  }) {
     model = FormBankCardModel(
       type: FormFieldTypeEnum.bankCard,
       tag: tag,
@@ -895,31 +900,31 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.filePicker(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode,
-      bool? allowMultiple,
-      List<String>? allowedExtensions,
-      FileType? fileType})
-      : super(key: key) {
+  DataFormField.filePicker({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+    bool? allowMultiple,
+    List<String>? allowedExtensions,
+    FileType? fileType,
+  }) {
     model = FormFilePickerModel(
       type: FormFieldTypeEnum.filePicker,
       tag: tag,
@@ -938,28 +943,28 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.multiMediaPicker(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode})
-      : super(key: key) {
+  DataFormField.multiMediaPicker({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+  }) {
     model = FormMultiMediaPickerModel(
       type: FormFieldTypeEnum.multiMediaPicker,
       tag: tag,
@@ -973,31 +978,31 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.signature(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode,
-      Widget? iconWidget,
-      Color? color,
-      bool fit = false})
-      : super(key: key) {
+  DataFormField.signature({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+    Widget? iconWidget,
+    Color? color,
+    bool fit = false,
+  }) {
     model = FormSignatureModel(
       type: FormFieldTypeEnum.signature,
       tag: tag,
@@ -1015,28 +1020,28 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.barcode(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode})
-      : super(key: key) {
+  DataFormField.barcode({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+  }) {
     model = FormBarCodeModel(
       type: FormFieldTypeEnum.barcode,
       tag: tag,
@@ -1051,7 +1056,7 @@ class DataFormField extends StatefulWidget {
   }
 
   DataFormField.locationTree({
-    Key? key,
+    super.key,
     required String tag,
     String? title,
     String? errorMessage,
@@ -1067,52 +1072,53 @@ class DataFormField extends StatefulWidget {
     String? targetLevel,
     String? dependsOn,
     required Future<List<LocationItem>> Function(String? parentId)
-        fetchLocations,
+    fetchLocations,
     required Future<LocationItem?> Function(String locationId)
-        fetchLocationById,
-  }) : super(key: key) {
+    fetchLocationById,
+  }) {
     model = FormLocationTreeModel(
-        type: FormFieldTypeEnum.locationTree,
-        tag: tag,
-        showTitle: showTitle ?? true,
-        title: title,
-        errorMessage: errorMessage,
-        helpMessage: helpMessage,
-        prefixWidget: prefixWidget,
-        required: required,
-        status: status,
-        weight: weight,
-        hint: hint,
-        value: value,
-        fetchLocations: fetchLocations,
-        fetchLocationById: fetchLocationById,
-        targetLevel: targetLevel,
-        dependsOn: dependsOn);
+      type: FormFieldTypeEnum.locationTree,
+      tag: tag,
+      showTitle: showTitle ?? true,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      prefixWidget: prefixWidget,
+      required: required,
+      status: status,
+      weight: weight,
+      hint: hint,
+      value: value,
+      fetchLocations: fetchLocations,
+      fetchLocationById: fetchLocationById,
+      targetLevel: targetLevel,
+      dependsOn: dependsOn,
+    );
   }
 
-  DataFormField.location(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      String? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      String? dependsOn,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode})
-      : super(key: key) {
+  DataFormField.location({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    String? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    String? dependsOn,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+  }) {
     model = FormLocationModel(
       type: FormFieldTypeEnum.location,
       tag: tag,
@@ -1127,28 +1133,28 @@ class DataFormField extends StatefulWidget {
     );
   }
 
-  DataFormField.boolSwitch(
-      {Key? key,
-      required String tag,
-      String? title,
-      String? errorMessage,
-      String? helpMessage,
-      Widget? prefixWidget,
-      Widget? postfixWidget,
-      bool? required,
-      bool? showTitle,
-      FormFieldStatusEnum? status,
-      bool? value,
-      int? weight,
-      RegExp? validateRegEx,
-      int? maxLength,
-      int? minLine,
-      int? maxLine,
-      String? hint,
-      bool? readOnly,
-      FocusNode? focusNode,
-      FocusNode? nextFocusNode})
-      : super(key: key) {
+  DataFormField.boolSwitch({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    Widget? prefixWidget,
+    Widget? postfixWidget,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    bool? value,
+    int? weight,
+    RegExp? validateRegEx,
+    int? maxLength,
+    int? minLine,
+    int? maxLine,
+    String? hint,
+    bool? readOnly,
+    FocusNode? focusNode,
+    FocusNode? nextFocusNode,
+  }) {
     model = FormBoolSwitchModel(
       type: FormFieldTypeEnum.boolean,
       tag: tag,
@@ -1206,15 +1212,19 @@ class _GSFieldState extends State<DataFormField> {
                     children: [
                       Row(
                         children: [
-                          Text(widget.model?.title ?? "",
-                              style: widget.formStyle!.titleTextStyle),
+                          Text(
+                            widget.model?.title ?? "",
+                            style: widget.formStyle!.titleTextStyle,
+                          ),
                           const SizedBox(width: 4.0),
                           Opacity(
                             opacity: widget.model?.required ?? false ? 1 : 0,
                             child: Text(
                               widget.formStyle!.requiredText,
                               style: const TextStyle(
-                                  color: FormColors.red, fontSize: 10),
+                                color: FormColors.red,
+                                fontSize: 10,
+                              ),
                             ),
                           ),
                         ],
@@ -1225,7 +1235,9 @@ class _GSFieldState extends State<DataFormField> {
                 ),
                 Container(
                   decoration: GSFormUtils.getFieldDecoration(
-                      widget.formStyle!, widget.model?.status),
+                    widget.formStyle!,
+                    widget.model?.status,
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -1246,9 +1258,7 @@ class _GSFieldState extends State<DataFormField> {
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: widget.child!,
-                      ),
+                      Expanded(child: widget.child!),
                       Visibility(
                         visible:
                             widget.model?.postfixWidget == null ? false : true,
@@ -1266,11 +1276,12 @@ class _GSFieldState extends State<DataFormField> {
                 ),
                 const SizedBox(height: 4.0),
                 Opacity(
-                  opacity: (widget.model?.status == FormFieldStatusEnum.error &&
-                              widget.model?.errorMessage != null) ||
-                          widget.model?.helpMessage != null
-                      ? 1
-                      : 0,
+                  opacity:
+                      (widget.model?.status == FormFieldStatusEnum.error &&
+                                  widget.model?.errorMessage != null) ||
+                              widget.model?.helpMessage != null
+                          ? 1
+                          : 0,
                   child: Row(
                     children: [
                       SizedBox(
@@ -1287,9 +1298,10 @@ class _GSFieldState extends State<DataFormField> {
                         widget.model?.status == FormFieldStatusEnum.error
                             ? widget.model?.errorMessage ?? ''
                             : widget.model?.helpMessage ?? '',
-                        style: widget.model?.status == FormFieldStatusEnum.error
-                            ? widget.formStyle!.errorTextStyle
-                            : widget.formStyle!.helpTextStyle,
+                        style:
+                            widget.model?.status == FormFieldStatusEnum.error
+                                ? widget.formStyle!.errorTextStyle
+                                : widget.formStyle!.helpTextStyle,
                       ),
                     ],
                   ),
@@ -1306,108 +1318,160 @@ class _GSFieldState extends State<DataFormField> {
   _fillChild() {
     switch (widget.model?.type) {
       case FormFieldTypeEnum.text:
-        widget.child =
-            FormTextField(widget.model as FormTextModel, widget.formStyle!);
+        widget.child = FormTextField(
+          widget.model as FormTextModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.integer:
-        widget.child =
-            GSIntegerField(widget.model as FormNumberModel, widget.formStyle!);
+        widget.child = GSIntegerField(
+          widget.model as FormNumberModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.double:
-        widget.child =
-            GSDoubleField(widget.model as FormNumberModel, widget.formStyle!);
+        widget.child = GSDoubleField(
+          widget.model as FormNumberModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.number:
-        widget.child =
-            FormNumberField(widget.model as FormNumberModel, widget.formStyle!);
+        widget.child = FormNumberField(
+          widget.model as FormNumberModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.textPlain:
         widget.child = FormTextPlainField(
-            widget.model as FormTextPlainModel, widget.formStyle!);
+          widget.model as FormTextPlainModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.mobile:
-        widget.child =
-            FormMobileField(widget.model as FormMobileModel, widget.formStyle!);
+        widget.child = FormMobileField(
+          widget.model as FormMobileModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.password:
         widget.child = FormPasswordField(
-            widget.model as FormPasswordModel, widget.formStyle!);
+          widget.model as FormPasswordModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.date:
         widget.child = FormDatePickerField(
-            widget.model as FormDatePickerModel, widget.formStyle!);
+          widget.model as FormDatePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.dateRage:
         widget.child = FormDateRangePickerField(
-            widget.model as FormDateRangePickerModel, widget.formStyle!);
+          widget.model as FormDateRangePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.time:
         widget.child = FormTimePickerField(
-            widget.model as FormTimePickerModel, widget.formStyle!);
+          widget.model as FormTimePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.email:
-        widget.child =
-            FormEmailField(widget.model as FormEmailModel, widget.formStyle!);
+        widget.child = FormEmailField(
+          widget.model as FormEmailModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.price:
-        widget.child =
-            FormPriceField(widget.model as FormPriceModel, widget.formStyle!);
+        widget.child = FormPriceField(
+          widget.model as FormPriceModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.bankCard:
         widget.child = FormBankCardField(
-            widget.model as FormBankCardModel, widget.formStyle!);
+          widget.model as FormBankCardModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.spinner:
         widget.child = FormSpinnerField(
-            widget.model as FormSpinnerModel, widget.formStyle!);
+          widget.model as FormSpinnerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.radioGroup:
         widget.child = FormRadioGroupField(
-            widget.model as FormRadioModel, widget.formStyle!);
+          widget.model as FormRadioModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.checkList:
         widget.child = FormCheckListField(
-            widget.model as FormCheckBoxModel, widget.formStyle!);
+          widget.model as FormCheckBoxModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.imagePicker:
         widget.child = FormImagePickerField(
-            widget.model as FormImagePickerModel, widget.formStyle!);
+          widget.model as FormImagePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.qrScanner:
         widget.child = FormQRScannerField(
-            widget.model as FormQRScannerModel, widget.formStyle!);
+          widget.model as FormQRScannerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.filePicker:
         widget.child = FormFilePickerField(
-            widget.model as FormFilePickerModel, widget.formStyle!);
+          widget.model as FormFilePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.multiMediaPicker:
         widget.child = FormMultiMediaAttachmentField(
-            widget.model as FormMultiMediaPickerModel, widget.formStyle!);
+          widget.model as FormMultiMediaPickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.signature:
         widget.child = FormSignatureScreenField(
-            widget.model as FormSignatureModel, widget.formStyle!);
+          widget.model as FormSignatureModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.multiImagePicker:
         widget.child = FormMultiImagePickerField(
-            widget.model as FormMultiImagePickerModel, widget.formStyle!);
+          widget.model as FormMultiImagePickerModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.barcode:
         widget.child = FormBarcodeScannerField(
-            widget.model as FormBarCodeModel, widget.formStyle!);
+          widget.model as FormBarCodeModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.locationTree:
         widget.child = FormLocationTreeField(
-            widget.model as FormLocationTreeModel, widget.formStyle!);
+          widget.model as FormLocationTreeModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.location:
         widget.child = FormLocationField(
-            widget.model as FormLocationModel, widget.formStyle!);
+          widget.model as FormLocationModel,
+          widget.formStyle!,
+        );
         break;
       case FormFieldTypeEnum.boolean:
         widget.child = FormBoolSwitchField(
-            widget.model as FormBoolSwitchModel, widget.formStyle!);
+          widget.model as FormBoolSwitchModel,
+          widget.formStyle!,
+        );
         break;
 
       default:

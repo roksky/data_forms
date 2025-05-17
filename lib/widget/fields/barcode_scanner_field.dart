@@ -11,8 +11,7 @@ class FormBarcodeScannerField extends NotifiableStatefulWidget<String> {
   final FormBarCodeModel model;
   final FormStyle formStyle;
 
-  FormBarcodeScannerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormBarcodeScannerField(this.model, this.formStyle, {super.key});
   String? _scannedValue;
 
   @override
@@ -53,64 +52,65 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-            customBorder: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            onTap: () async {
-              try {
-                var result = await BarcodeScanner.scan();
-                setState(() {
-                  widget._scannedValue = result.rawContent;
-                });
-              } catch (e) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Failed to get barcode')),
-                );
-              }
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  widget.model.iconWidget ?? Container(),
-                  const SizedBox(height: 6.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Visibility(
-                        visible: widget.model.required ?? false,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 4, left: 4),
-                          child: Text(
-                            widget.formStyle.requiredText,
-                            style: const TextStyle(
-                              color: FormColors.red,
-                              fontSize: 10,
-                            ),
+          customBorder: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          onTap: () async {
+            try {
+              var result = await BarcodeScanner.scan();
+              setState(() {
+                widget._scannedValue = result.rawContent;
+              });
+            } catch (e) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Failed to get barcode')),
+              );
+            }
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                widget.model.iconWidget ?? Container(),
+                const SizedBox(height: 6.0),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Visibility(
+                      visible: widget.model.required ?? false,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right: 4, left: 4),
+                        child: Text(
+                          widget.formStyle.requiredText,
+                          style: const TextStyle(
+                            color: FormColors.red,
+                            fontSize: 10,
                           ),
                         ),
                       ),
-                      Text(
-                        widget.model.title ?? '',
-                        style: widget.formStyle.titleTextStyle,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 4.0),
-                  widget._scannedValue == null
-                      ? Text(
-                          widget.model.hint ?? '',
-                          style: widget.formStyle.fieldHintStyle,
-                        )
-                      : Text(
-                          widget._scannedValue ?? '',
-                          style: widget.formStyle.fieldTextStyle,
-                        ),
-                ],
-              ),
-            )),
+                    ),
+                    Text(
+                      widget.model.title ?? '',
+                      style: widget.formStyle.titleTextStyle,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4.0),
+                widget._scannedValue == null
+                    ? Text(
+                      widget.model.hint ?? '',
+                      style: widget.formStyle.fieldHintStyle,
+                    )
+                    : Text(
+                      widget._scannedValue ?? '',
+                      style: widget.formStyle.fieldTextStyle,
+                    ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

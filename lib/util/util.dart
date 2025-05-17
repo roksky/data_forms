@@ -19,8 +19,10 @@ class GSFormUtils {
   }
 
   static Decoration getFieldDecoration(
-      FormStyle style, FormFieldStatusEnum? status,
-      {double? borderWidth = 1.0}) {
+    FormStyle style,
+    FormFieldStatusEnum? status, {
+    double? borderWidth = 1.0,
+  }) {
     Color backgroundColor;
     Color borderColor;
 
@@ -101,20 +103,20 @@ class GSFormUtils {
                             children: [
                               cameraAssets == null
                                   ? const Icon(
-                                      Icons.camera,
-                                      size: 40.0,
-                                      color: Colors.blue,
-                                    )
+                                    Icons.camera,
+                                    size: 40.0,
+                                    color: Colors.blue,
+                                  )
                                   : SvgPicture.asset(
-                                      cameraAssets,
-                                      width: 40.0,
-                                      height: 40.0,
-                                    ),
+                                    cameraAssets,
+                                    width: 40.0,
+                                    height: 40.0,
+                                  ),
                               const SizedBox(height: 10.0),
                               Text(
                                 cameraName ?? 'Camera',
                                 style: FormStyle().titleTextStyle,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -134,20 +136,20 @@ class GSFormUtils {
                             children: [
                               galleryAssets == null
                                   ? const Icon(
-                                      Icons.photo_library,
-                                      size: 40.0,
-                                      color: Colors.blue,
-                                    )
+                                    Icons.photo_library,
+                                    size: 40.0,
+                                    color: Colors.blue,
+                                  )
                                   : SvgPicture.asset(
-                                      galleryAssets,
-                                      width: 40.0,
-                                      height: 40.0,
-                                    ),
+                                    galleryAssets,
+                                    width: 40.0,
+                                    height: 40.0,
+                                  ),
                               const SizedBox(height: 10.0),
                               Text(
                                 galleryName ?? 'Gallery',
                                 style: FormStyle().titleTextStyle,
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -188,14 +190,17 @@ class CardNumberFormatter extends TextInputFormatter {
 
   @override
   TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
     if (newValue.text.length > oldValue.text.length) {
       if (newValue.text.length > sampleNumber.length) {
         return oldValue;
       }
 
-      final lastEnteredLetter =
-          newValue.text.substring(newValue.text.length - 1);
+      final lastEnteredLetter = newValue.text.substring(
+        newValue.text.length - 1,
+      );
       if (!RegExp(r'[0-9]').hasMatch(lastEnteredLetter)) {
         return oldValue;
       }
@@ -205,8 +210,9 @@ class CardNumberFormatter extends TextInputFormatter {
         return TextEditingValue(
           text:
               '${oldValue.text} ${newValue.text.substring(newValue.text.length - 1)}',
-          selection:
-              TextSelection.collapsed(offset: newValue.selection.end + 1),
+          selection: TextSelection.collapsed(
+            offset: newValue.selection.end + 1,
+          ),
         );
       }
     }

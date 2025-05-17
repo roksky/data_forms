@@ -1,10 +1,10 @@
 name: data_forms
 description: "A forms library for Flutter"
-version: 2.1.0
+version: 2.2.0
 homepage: https://github.com/roksky/data_forms.git
 
 environment:
-  sdk: ^3.6.1
+  sdk: ^3.7.2
   flutter: ">=1.17.0"
 
 dependencies:
@@ -23,6 +23,7 @@ dependencies:
   hand_signature: ^3.0.3
   mobile_scanner: ">=6.0.6 <8.0.0"
 
+  vector_math: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

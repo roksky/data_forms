@@ -14,7 +14,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   // This widget is the root of your application.
   @override
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
 
 // ignore: must_be_immutable
 class MainTestPage extends StatelessWidget {
-  MainTestPage({Key? key}) : super(key: key);
+  MainTestPage({super.key});
 
   late DataForm form;
 
@@ -90,7 +90,7 @@ class MainTestPage extends StatelessWidget {
 
 // ignore: must_be_immutable
 class SingleSectionForm extends StatefulWidget {
-  SingleSectionForm({Key? key}) : super(key: key);
+  SingleSectionForm({super.key});
   String? value;
 
   late FormFieldStatusEnum status;
@@ -214,7 +214,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
 
 // ignore: must_be_immutable
 class MultiSectionForm extends StatelessWidget {
-  MultiSectionForm({Key? key}) : super(key: key);
+  MultiSectionForm({super.key});
 
   late DataForm form;
 

@@ -1,12 +1,9 @@
-import 'dart:typed_data';
-
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hand_signature/signature.dart';
 
-HandSignatureControl control = new HandSignatureControl(
+HandSignatureControl control = HandSignatureControl(
   threshold: 0.01,
   smoothRatio: 0.65,
   velocityRange: 2.0,
@@ -16,8 +13,7 @@ class SignatureScreen extends StatelessWidget {
   final ValueSetter<String?> svgCallback;
   late FormSignatureModel model;
 
-  SignatureScreen({required this.svgCallback, required this.model, Key? key})
-      : super(key: key);
+  SignatureScreen({required this.svgCallback, required this.model, super.key});
 
   setValue(String? value) {
     svgCallback.call(value);
@@ -28,9 +24,7 @@ class SignatureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Signature Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: Scaffold(
         backgroundColor: Colors.deepPurpleAccent,
         body: SafeArea(
@@ -74,8 +68,10 @@ class SignatureScreen extends StatelessWidget {
                         onPressed: () {
                           control.clear();
                         },
-                        child: Text('Clear',
-                            style: TextStyle(color: Colors.white)),
+                        child: Text(
+                          'Clear',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                       CupertinoButton(
                         onPressed: () async {
@@ -87,14 +83,14 @@ class SignatureScreen extends StatelessWidget {
                           setValue(svg);
                           Navigator.pop(context);
                         },
-                        child:
-                            Text('Save', style: TextStyle(color: Colors.white)),
+                        child: Text(
+                          'Save',
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: 16.0,
-                  ),
+                  SizedBox(height: 16.0),
                 ],
               ),
             ],

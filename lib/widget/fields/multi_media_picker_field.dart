@@ -15,9 +15,8 @@ class FormMultiMediaAttachmentField
   late FormMultiMediaPickerModel model;
   final FormStyle formStyle;
 
-  FormMultiMediaAttachmentField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
-  List<Attachment> _attachments = [];
+  FormMultiMediaAttachmentField(this.model, this.formStyle, {super.key});
+  final List<Attachment> _attachments = [];
 
   @override
   State<FormMultiMediaAttachmentField> createState() =>
@@ -41,21 +40,31 @@ class FormMultiMediaAttachmentField
 class _GSMultiMediaAttachmentFieldState
     extends State<FormMultiMediaAttachmentField> {
   void _pickFiles() async {
-    final result = await FilePicker.platform
-        .pickFiles(allowMultiple: true, type: FileType.media);
+    final result = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.media,
+    );
     if (result != null) {
       setState(() {
         for (var file in result.files) {
           if (file.extension == 'jpg' ||
               file.extension == 'jpeg' ||
               file.extension == 'png') {
-            widget._attachments.add(Attachment(
-                filePath: file.path!, fileType: AttachmentFileType.image));
+            widget._attachments.add(
+              Attachment(
+                filePath: file.path!,
+                fileType: AttachmentFileType.image,
+              ),
+            );
           } else if (file.extension == 'mp4' ||
               file.extension == 'avi' ||
               file.extension == 'mov') {
-            widget._attachments.add(Attachment(
-                filePath: file.path!, fileType: AttachmentFileType.video));
+            widget._attachments.add(
+              Attachment(
+                filePath: file.path!,
+                fileType: AttachmentFileType.video,
+              ),
+            );
           }
         }
       });
@@ -83,18 +92,15 @@ class _GSMultiMediaAttachmentFieldState
               // Number of items in the list
               itemBuilder: (context, index) {
                 return index == 0
-                    ? SelectItem(
-                        model: widget.model,
-                        onTap: _pickFiles,
-                      )
+                    ? SelectItem(model: widget.model, onTap: _pickFiles)
                     : SizedBox(
-                        width: 90,
-                        height: 90, // Set a fixe
-                        child: MediaPreview(
-                          widget._attachments[index - 1],
-                          (attachment) => _removeAttachment(index - 1),
-                        ),
-                      );
+                      width: 90,
+                      height: 90, // Set a fixe
+                      child: MediaPreview(
+                        widget._attachments[index - 1],
+                        (attachment) => _removeAttachment(index - 1),
+                      ),
+                    );
               },
             ),
           ),
@@ -109,8 +115,7 @@ class _GSMultiMediaAttachmentFieldState
 }
 
 class SelectItem extends StatelessWidget {
-  const SelectItem({required this.model, required this.onTap, Key? key})
-      : super(key: key);
+  const SelectItem({required this.model, required this.onTap, super.key});
 
   final FormMultiMediaPickerModel model;
   final Function() onTap;
@@ -120,7 +125,8 @@ class SelectItem extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(),
       child: Card(
-        child: model.iconWidget ??
+        child:
+            model.iconWidget ??
             Icon(Icons.attachment, color: Colors.black, size: 85),
       ),
     );
@@ -131,19 +137,17 @@ class MediaPreview extends StatelessWidget {
   final Attachment attachment;
   final Function(Attachment attachement) onTap;
 
-  MediaPreview(this.attachment, this.onTap);
+  const MediaPreview(this.attachment, this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTap(attachment),
       child: Card(
-        child: attachment.fileType == AttachmentFileType.image
-            ? Image.file(
-                File(attachment.filePath),
-                fit: BoxFit.cover,
-              )
-            : VideoThumbnailWithPlayButton(attachment.filePath),
+        child:
+            attachment.fileType == AttachmentFileType.image
+                ? Image.file(File(attachment.filePath), fit: BoxFit.cover)
+                : VideoThumbnailWithPlayButton(attachment.filePath),
       ),
     );
   }
@@ -152,7 +156,7 @@ class MediaPreview extends StatelessWidget {
 class VideoThumbnailWithPlayButton extends StatelessWidget {
   final String filePath;
 
-  VideoThumbnailWithPlayButton(this.filePath);
+  const VideoThumbnailWithPlayButton(this.filePath, {super.key});
 
   Future<String> _getThumbnail(String videoPath) async {
     final tempDir = await getTemporaryDirectory();

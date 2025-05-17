@@ -36,27 +36,27 @@ class FormStyle {
     TextStyle? helpTextStyle,
     String? requiredText,
     TextStyle? sectionTitleStyle,
-  })  : backgroundSectionColor = backgroundSectionColor ?? FormColors.white,
-        backgroundFieldColor =
-            backgroundFieldColor ?? FormColors.colorBackground,
-        backgroundFieldColorDisable =
-            backgroundFieldColorDisable ?? FormColors.colorBackgroundDisable,
-        titleTextStyle = titleStyle ?? FormTheme.textThemeStyle.displayMedium!,
-        fieldRadius = fieldRadius ?? 10.0,
-        sectionRadius = sectionRadius ?? 4.0,
-        sectionCardElevation = sectionCardElevation ?? 2.0,
-        sectionCardPadding = sectionCardPadding ?? 2.0,
-        requiredText = requiredText ?? '',
-        fieldHintStyle = fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
-        fieldTextStyle =
-            fieldTextStyle ?? FormTheme.textThemeStyle.displayMedium!,
-        errorTextStyle =
-            errorTextStyle ?? FormTheme.textThemeStyle.headlineSmall!,
-        helpTextStyle =
-            helpTextStyle ?? FormTheme.textThemeStyle.headlineMedium!,
-        sectionTitleStyle =
-            sectionTitleStyle ?? FormTheme.textThemeStyle.displayLarge!,
-        fieldBorderColor = fieldBorderColor ?? FormColors.white;
+  }) : backgroundSectionColor = backgroundSectionColor ?? FormColors.white,
+       backgroundFieldColor =
+           backgroundFieldColor ?? FormColors.colorBackground,
+       backgroundFieldColorDisable =
+           backgroundFieldColorDisable ?? FormColors.colorBackgroundDisable,
+       titleTextStyle = titleStyle ?? FormTheme.textThemeStyle.displayMedium!,
+       fieldRadius = fieldRadius ?? 10.0,
+       sectionRadius = sectionRadius ?? 4.0,
+       sectionCardElevation = sectionCardElevation ?? 2.0,
+       sectionCardPadding = sectionCardPadding ?? 2.0,
+       requiredText = requiredText ?? '',
+       fieldHintStyle = fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
+       fieldTextStyle =
+           fieldTextStyle ?? FormTheme.textThemeStyle.displayMedium!,
+       errorTextStyle =
+           errorTextStyle ?? FormTheme.textThemeStyle.headlineSmall!,
+       helpTextStyle =
+           helpTextStyle ?? FormTheme.textThemeStyle.headlineMedium!,
+       sectionTitleStyle =
+           sectionTitleStyle ?? FormTheme.textThemeStyle.displayLarge!,
+       fieldBorderColor = fieldBorderColor ?? FormColors.white;
 
   static FormStyle singleSectionFormDefaultStyle = FormStyle(
     backgroundFieldColor: FormColors.white,

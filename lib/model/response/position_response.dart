@@ -14,19 +14,16 @@ class PositionResponse {
   }
 
   PositionResponse.fromPosition(Position position)
-      : latitude = position.latitude,
-        longitude = position.longitude;
+    : latitude = position.latitude,
+      longitude = position.longitude;
 
   // to json
   Map<String, dynamic> toJson() {
-    return {
-      'latitude': latitude,
-      'longitude': longitude,
-    };
+    return {'latitude': latitude, 'longitude': longitude};
   }
 
   @override
   String toString() {
-    return "${latitude},${longitude}";
+    return "$latitude,$longitude";
   }
 }

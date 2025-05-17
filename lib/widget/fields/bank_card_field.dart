@@ -14,7 +14,7 @@ class FormBankCardField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormBankCardField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormBankCardField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormBankCardField> createState() => _GSBankCardFieldState();
@@ -75,9 +75,10 @@ class _GSBankCardFieldState extends State<FormBankCardField> {
         style: widget.formStyle.fieldTextStyle,
         keyboardType: TextInputType.number,
         focusNode: widget.model.focusNode,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

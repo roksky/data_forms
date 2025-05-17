@@ -5,7 +5,6 @@ import 'package:data_forms/core/field_callback.dart';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/text_password_model.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormPasswordField extends NotifiableStatefulWidget<String> {
@@ -16,7 +15,7 @@ class FormPasswordField extends NotifiableStatefulWidget<String> {
 
   TextEditingController? controller;
 
-  FormPasswordField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormPasswordField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormPasswordField> createState() => _GSPasswordFieldState();
@@ -75,9 +74,10 @@ class _GSPasswordFieldState extends State<FormPasswordField> {
         style: widget.formStyle.fieldTextStyle,
         controller: widget.controller,
         obscuringCharacter: '●',
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

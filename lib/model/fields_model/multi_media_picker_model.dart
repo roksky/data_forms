@@ -19,14 +19,14 @@ class FormMultiMediaPickerModel extends FormFieldModel {
     this.hint,
     this.iconWidget,
   }) : super(
-          type: type,
-          tag: tag,
-          title: title,
-          errorMessage: errorMessage,
-          helpMessage: helpMessage,
-          required: required,
-          status: status,
-          weight: weight,
-          showTitle: showTitle,
-        );
+         type: type,
+         tag: tag,
+         title: title,
+         errorMessage: errorMessage,
+         helpMessage: helpMessage,
+         required: required,
+         status: status,
+         weight: weight,
+         showTitle: showTitle,
+       );
 }

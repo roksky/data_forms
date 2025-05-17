@@ -12,7 +12,7 @@ class FormFilePickerField extends NotifiableStatefulWidget<List<PlatformFile>> {
   late FormFilePickerModel model;
   final FormStyle formStyle;
 
-  FormFilePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormFilePickerField(this.model, this.formStyle, {super.key});
   List<PlatformFile> _files = [];
 
   @override
@@ -80,9 +80,10 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           ),
           SizedBox(height: 10),
           Center(
-            child: widget._files.isNotEmpty
-                ? Text("You have selected ${widget._files.length} files")
-                : Text('No files attached'),
+            child:
+                widget._files.isNotEmpty
+                    ? Text("You have selected ${widget._files.length} files")
+                    : Text('No files attached'),
           ),
         ],
       ),
@@ -135,7 +136,7 @@ class FilePreview extends StatelessWidget {
   final PlatformFile file;
   final Function(PlatformFile file) onTap;
 
-  FilePreview(this.file, this.onTap);
+  const FilePreview(this.file, this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -146,12 +147,13 @@ class FilePreview extends StatelessWidget {
         onTap: () => onTap(file),
         child: Card(
           child: Center(
-              child: Column(
-            children: [
-              _getFileIcon(file.extension ?? ''),
-              Text(file.name, style: TextStyle(fontSize: 10)),
-            ],
-          )),
+            child: Column(
+              children: [
+                _getFileIcon(file.extension ?? ''),
+                Text(file.name, style: TextStyle(fontSize: 10)),
+              ],
+            ),
+          ),
         ),
       ),
     );

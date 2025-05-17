@@ -11,7 +11,7 @@ class FormTextField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormTextField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormTextField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormTextField> createState() => _GSTextFieldState();
@@ -67,9 +67,10 @@ class _GSTextFieldState extends State<FormTextField> {
         style: widget.formStyle.fieldTextStyle,
         keyboardType: TextInputType.text,
         focusNode: widget.model.focusNode,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

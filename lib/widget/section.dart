@@ -12,11 +12,12 @@ class FormSection extends StatelessWidget {
   FormStyle? style;
   String? sectionTitle;
 
-  FormSection(
-      {super.key,
-      required this.fields,
-      this.style,
-      required this.sectionTitle});
+  FormSection({
+    super.key,
+    required this.fields,
+    this.style,
+    required this.sectionTitle,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +34,7 @@ class FormSection extends StatelessWidget {
         while (weightSum < 12 && i <= fields.length - 1) {
           DataFormField field = fields[i] as DataFormField;
           childrenAtRow.add(
-            Expanded(
-              flex: field.model?.weight ?? 12,
-              child: field,
-            ),
+            Expanded(flex: field.model?.weight ?? 12, child: field),
           );
 
           weightSum += field.model?.weight ?? 12;
@@ -50,26 +48,18 @@ class FormSection extends StatelessWidget {
           i++;
 
           if (weightSum != 12) {
-            childrenAtRow.add(const SizedBox(
-              width: 12,
-            ));
+            childrenAtRow.add(const SizedBox(width: 12));
           }
         }
-        rows.add(Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: childrenAtRow));
-        weightSum = 0;
-      } else {
         rows.add(
           Row(
-            children: [
-              Expanded(
-                flex: 12,
-                child: fields[i],
-              )
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: childrenAtRow,
           ),
         );
+        weightSum = 0;
+      } else {
+        rows.add(Row(children: [Expanded(flex: 12, child: fields[i])]));
         i++;
       }
     }
@@ -78,22 +68,23 @@ class FormSection extends StatelessWidget {
       children: [
         sectionTitle != null
             ? Padding(
-                padding: const EdgeInsetsDirectional.only(start: 4),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          sectionTitle!,
-                          style: style?.sectionTitleStyle ??
-                              FormTheme.textThemeStyle.displayLarge,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 6.0),
-                  ],
-                ),
-              )
+              padding: const EdgeInsetsDirectional.only(start: 4),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        sectionTitle!,
+                        style:
+                            style?.sectionTitleStyle ??
+                            FormTheme.textThemeStyle.displayLarge,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 6.0),
+                ],
+              ),
+            )
             : Container(),
         Card(
           color: style?.backgroundSectionColor,
@@ -106,17 +97,19 @@ class FormSection extends StatelessWidget {
           ),
           child: Padding(
             padding: EdgeInsets.only(
-                left: style!.sectionCardPadding,
-                right: style!.sectionCardPadding,
-                top: style!.sectionCardPadding,
-                bottom: style!.sectionCardPadding),
+              left: style!.sectionCardPadding,
+              right: style!.sectionCardPadding,
+              top: style!.sectionCardPadding,
+              bottom: style!.sectionCardPadding,
+            ),
             child: ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: rows.length,
-                itemBuilder: (context, index) {
-                  return rows[index];
-                }),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: rows.length,
+              itemBuilder: (context, index) {
+                return rows[index];
+              },
+            ),
           ),
         ),
       ],
