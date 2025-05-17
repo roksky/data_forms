@@ -15,9 +15,8 @@ class FormMultiMediaAttachmentField
   late FormMultiMediaPickerModel model;
   final FormStyle formStyle;
 
-  FormMultiMediaAttachmentField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
-  List<Attachment> _attachments = [];
+  FormMultiMediaAttachmentField(this.model, this.formStyle, {super.key});
+  final List<Attachment> _attachments = [];
 
   @override
   State<FormMultiMediaAttachmentField> createState() =>
@@ -109,8 +108,7 @@ class _GSMultiMediaAttachmentFieldState
 }
 
 class SelectItem extends StatelessWidget {
-  const SelectItem({required this.model, required this.onTap, Key? key})
-      : super(key: key);
+  const SelectItem({required this.model, required this.onTap, super.key});
 
   final FormMultiMediaPickerModel model;
   final Function() onTap;
@@ -131,7 +129,7 @@ class MediaPreview extends StatelessWidget {
   final Attachment attachment;
   final Function(Attachment attachement) onTap;
 
-  MediaPreview(this.attachment, this.onTap);
+  const MediaPreview(this.attachment, this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +150,7 @@ class MediaPreview extends StatelessWidget {
 class VideoThumbnailWithPlayButton extends StatelessWidget {
   final String filePath;
 
-  VideoThumbnailWithPlayButton(this.filePath);
+  const VideoThumbnailWithPlayButton(this.filePath, {super.key});
 
   Future<String> _getThumbnail(String videoPath) async {
     final tempDir = await getTemporaryDirectory();

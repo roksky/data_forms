@@ -5,7 +5,6 @@ import 'package:data_forms/model/fields_model/radio_model.dart';
 import 'package:data_forms/values/colors.dart';
 
 import 'package:data_forms/core/field_callback.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -14,7 +13,7 @@ class FormRadioGroupField extends NotifiableStatefulWidget<RadioDataModel> {
   final FormStyle? formStyle;
   TextEditingController textController = TextEditingController();
 
-  FormRadioGroupField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormRadioGroupField(this.model, this.formStyle, {super.key});
 
   RadioDataModel? returnedData;
   List<RadioDataModel> filteredItems = [];
@@ -190,8 +189,7 @@ class RadioItem extends StatelessWidget {
   final FormStyle formStyle;
   final FormRadioModel _model;
 
-  const RadioItem(this._item, this._model, this.formStyle, {Key? key})
-      : super(key: key);
+  const RadioItem(this._item, this._model, this.formStyle, {super.key});
 
   @override
   Widget build(BuildContext context) {

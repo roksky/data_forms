@@ -11,8 +11,7 @@ class FormBarcodeScannerField extends NotifiableStatefulWidget<String> {
   final FormBarCodeModel model;
   final FormStyle formStyle;
 
-  FormBarcodeScannerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormBarcodeScannerField(this.model, this.formStyle, {super.key});
   String? _scannedValue;
 
   @override

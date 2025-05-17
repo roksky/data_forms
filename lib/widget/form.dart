@@ -17,8 +17,7 @@ class DataForm extends StatelessWidget {
   StateManager stateManager = StateManager();
 
   DataForm.singleSection(BuildContext context,
-      {Key? key, this.style, required this.fields})
-      : super(key: key) {
+      {super.key, this.style, required this.fields}) {
     style ??= GSFormUtils.checkIfDarkModeEnabled(context)
         ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
         : FormStyle.singleSectionFormDefaultStyle;
@@ -37,11 +36,10 @@ class DataForm extends StatelessWidget {
   }
 
   DataForm.multiSection(BuildContext context,
-      {Key? key,
+      {super.key,
       this.style,
       required this.sections,
-      StateManager? myStateManager})
-      : super(key: key) {
+      StateManager? myStateManager}) {
     style ??= GSFormUtils.checkIfDarkModeEnabled(context)
         ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
         : FormStyle.multiSectionFormDefaultStyle;

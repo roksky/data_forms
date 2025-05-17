@@ -11,7 +11,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:data_forms/model/fields_model/multi_image_picker_model.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -19,8 +18,7 @@ class FormMultiImagePickerField extends NotifiableStatefulWidget<List<String>> {
   final FormMultiImagePickerModel model;
   final FormStyle formStyle;
 
-  FormMultiImagePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormMultiImagePickerField(this.model, this.formStyle, {super.key});
   List<String> _croppedFilePaths = [];
 
   @override
@@ -119,8 +117,7 @@ class SelectItem extends StatelessWidget {
       required this.style,
       required this.callBack,
       required this.isEnable,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   final FormMultiImagePickerModel model;
   final FormStyle style;
@@ -234,10 +231,10 @@ class SelectItem extends StatelessWidget {
 
 class ImageBox extends StatelessWidget {
   const ImageBox({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.onDelete,
-  }) : super(key: key);
+  });
   final String imagePath;
   final ValueChanged<String> onDelete;
 

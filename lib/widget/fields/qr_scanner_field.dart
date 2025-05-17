@@ -13,7 +13,7 @@ class FormQRScannerField extends NotifiableStatefulWidget<String> {
   final FormQRScannerModel model;
   final FormStyle formStyle;
 
-  FormQRScannerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormQRScannerField(this.model, this.formStyle, {super.key});
   String? _scannedValue;
 
   @override

@@ -18,8 +18,7 @@ class FormImagePickerField extends NotifiableStatefulWidget<String> {
   final FormImagePickerModel model;
   final FormStyle formStyle;
 
-  FormImagePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormImagePickerField(this.model, this.formStyle, {super.key});
   String? _croppedFilePath;
 
   @override
@@ -166,8 +165,7 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
 }
 
 class NormalView extends StatelessWidget {
-  const NormalView({required this.model, required this.formStyle, Key? key})
-      : super(key: key);
+  const NormalView({required this.model, required this.formStyle, super.key});
   final FormImagePickerModel model;
   final FormStyle formStyle;
 
@@ -223,11 +221,10 @@ class ImagePickedView extends StatelessWidget {
 
   ImagePickedView(
       {required this.croppedFilePath,
-      Key? key,
+      super.key,
       required this.model,
       required this.formStyle,
-      required this.onDeleteImage})
-      : super(key: key);
+      required this.onDeleteImage});
 
   @override
   Widget build(BuildContext context) {

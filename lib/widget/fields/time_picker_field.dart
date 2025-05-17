@@ -19,8 +19,7 @@ class FormTimePickerField extends NotifiableStatefulWidget
   TimeOfDay? selectedTime;
   late BuildContext context;
 
-  FormTimePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key) {
+  FormTimePickerField(this.model, this.formStyle, {super.key}) {
     selectedTimeText = model.hint ?? 'Choose the time';
   }
 

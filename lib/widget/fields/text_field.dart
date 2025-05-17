@@ -11,7 +11,7 @@ class FormTextField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormTextField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormTextField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormTextField> createState() => _GSTextFieldState();

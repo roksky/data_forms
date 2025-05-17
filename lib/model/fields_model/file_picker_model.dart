@@ -1,5 +1,4 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
 
 import 'package:data_forms/model/fields_model/field_model.dart';
 
@@ -19,7 +18,7 @@ class FormFilePickerModel extends FormFieldModel {
     status,
     weight,
     showTitle,
-    value,
+    super.value,
     required this.allowMultiple,
     required this.fileType,
     this.hint,
@@ -33,8 +32,7 @@ class FormFilePickerModel extends FormFieldModel {
             required: required,
             status: status,
             weight: weight,
-            showTitle: showTitle,
-            value: value);
+            showTitle: showTitle);
 }
 
 enum GSPickerType { single, multiple }

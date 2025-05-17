@@ -1,12 +1,10 @@
-import 'dart:typed_data';
 
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hand_signature/signature.dart';
 
-HandSignatureControl control = new HandSignatureControl(
+HandSignatureControl control = HandSignatureControl(
   threshold: 0.01,
   smoothRatio: 0.65,
   velocityRange: 2.0,
@@ -16,8 +14,7 @@ class SignatureScreen extends StatelessWidget {
   final ValueSetter<String?> svgCallback;
   late FormSignatureModel model;
 
-  SignatureScreen({required this.svgCallback, required this.model, Key? key})
-      : super(key: key);
+  SignatureScreen({required this.svgCallback, required this.model, super.key});
 
   setValue(String? value) {
     svgCallback.call(value);

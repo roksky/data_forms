@@ -12,7 +12,7 @@ class FormFilePickerField extends NotifiableStatefulWidget<List<PlatformFile>> {
   late FormFilePickerModel model;
   final FormStyle formStyle;
 
-  FormFilePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormFilePickerField(this.model, this.formStyle, {super.key});
   List<PlatformFile> _files = [];
 
   @override
@@ -135,7 +135,7 @@ class FilePreview extends StatelessWidget {
   final PlatformFile file;
   final Function(PlatformFile file) onTap;
 
-  FilePreview(this.file, this.onTap);
+  const FilePreview(this.file, this.onTap, {super.key});
 
   @override
   Widget build(BuildContext context) {

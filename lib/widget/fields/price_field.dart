@@ -6,7 +6,6 @@ import 'package:intl/intl.dart';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/price_model.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormPriceField extends NotifiableStatefulWidget<double> {
@@ -14,7 +13,7 @@ class FormPriceField extends NotifiableStatefulWidget<double> {
   FormStyle formStyle;
   TextEditingController? controller;
 
-  FormPriceField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormPriceField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormPriceField> createState() => _GSPriceFieldState();

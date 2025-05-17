@@ -11,7 +11,7 @@ class FormBoolSwitchField extends NotifiableStatefulWidget<bool> {
   final FormStyle formStyle;
   bool? value;
 
-  FormBoolSwitchField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormBoolSwitchField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormBoolSwitchField> createState() => _GSBoolSwitchFieldState();

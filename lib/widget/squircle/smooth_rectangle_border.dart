@@ -12,10 +12,10 @@ enum BorderAlign {
 
 class SmoothRectangleBorder extends OutlinedBorder {
   const SmoothRectangleBorder({
-    BorderSide side = BorderSide.none,
+    super.side,
     this.borderRadius = SmoothBorderRadius.zero,
     this.borderAlign = BorderAlign.inside,
-  }) : super(side: side);
+  });
 
   /// The radius for each corner.
   ///

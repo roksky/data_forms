@@ -12,8 +12,7 @@ class FormSignatureScreenField extends NotifiableStatefulWidget<String> {
   late FormSignatureModel model;
   final FormStyle formStyle;
 
-  FormSignatureScreenField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormSignatureScreenField(this.model, this.formStyle, {super.key});
   String? _signatureSVG;
 
   @override

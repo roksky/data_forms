@@ -24,7 +24,7 @@ class FormDatePickerField extends NotifiableStatefulWidget<DateDataModel> {
 
   bool isDateSelected = false;
 
-  FormDatePickerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormDatePickerField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormDatePickerField> createState() => _GSDatePickerFieldState();

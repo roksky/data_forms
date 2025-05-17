@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 class QrScannerScreen extends StatefulWidget {
   final ValueSetter<Barcode> callback;
 
-  QrScannerScreen({required this.callback, Key? key}) : super(key: key);
+  const QrScannerScreen({required this.callback, super.key});
 
   @override
   _QrScannerScreenState createState() => _QrScannerScreenState();
@@ -48,7 +47,7 @@ class _QrScannerScreenState extends State<QrScannerScreen> {
             for (final barcode in barcodes) {
               debugPrint('Barcode found! ${barcode.rawValue}');
               setState(() {
-                this.qrText = barcode.rawValue ?? 'Failed to scan';
+                qrText = barcode.rawValue ?? 'Failed to scan';
                 widget.callback(barcode);
               });
             }

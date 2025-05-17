@@ -19,7 +19,7 @@ class FormDatePickerModel extends FormFieldModel {
     postfixWidget,
     required,
     status,
-    value,
+    super.value,
     weight,
     showTitle,
     dependsOn,
@@ -39,7 +39,6 @@ class FormDatePickerModel extends FormFieldModel {
             postfixWidget: postfixWidget,
             required: required,
             status: status,
-            value: value,
             weight: weight,
             dependsOn: dependsOn,
             showTitle: showTitle);

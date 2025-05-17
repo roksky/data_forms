@@ -14,7 +14,7 @@ class FormBankCardField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormBankCardField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormBankCardField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormBankCardField> createState() => _GSBankCardFieldState();

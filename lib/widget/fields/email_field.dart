@@ -4,7 +4,6 @@ import 'package:data_forms/core/field_callback.dart';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/email_model.dart';
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -13,7 +12,7 @@ class FormEmailField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller = TextEditingController();
 
-  FormEmailField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormEmailField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormEmailField> createState() => _GSEmailFieldState();

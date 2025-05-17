@@ -14,7 +14,7 @@ class FormLocationField extends NotifiableStatefulWidget<PositionResponse> {
   late FormLocationModel model;
   final FormStyle formStyle;
 
-  FormLocationField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormLocationField(this.model, this.formStyle, {super.key});
   Position? _currentLocation;
 
   @override

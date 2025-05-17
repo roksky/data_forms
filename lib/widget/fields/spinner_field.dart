@@ -17,7 +17,7 @@ class FormSpinnerField extends NotifiableStatefulWidget<SpinnerDataModel> {
   FormStyle formStyle;
   SpinnerDataModel? returnedData;
 
-  FormSpinnerField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormSpinnerField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormSpinnerField> createState() => _GSSpinnerFieldState();

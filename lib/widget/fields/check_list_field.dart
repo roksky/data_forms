@@ -21,7 +21,7 @@ class FormCheckListField
 
   String keyword = "";
 
-  FormCheckListField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormCheckListField(this.model, this.formStyle, {super.key});
 
   List<CheckDataModel> valueObject = [];
 
@@ -188,8 +188,7 @@ class CheckBoxItem extends StatelessWidget {
   final FormStyle formStyle;
   final FormCheckBoxModel _model;
 
-  const CheckBoxItem(this._item, this._model, this.formStyle, {Key? key})
-      : super(key: key);
+  const CheckBoxItem(this._item, this._model, this.formStyle, {super.key});
 
   @override
   Widget build(BuildContext context) {

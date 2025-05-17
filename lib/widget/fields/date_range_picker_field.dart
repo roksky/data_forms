@@ -30,8 +30,7 @@ class FormDateRangePickerField
 
   bool isDateSelected = false;
 
-  FormDateRangePickerField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormDateRangePickerField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormDateRangePickerField> createState() =>

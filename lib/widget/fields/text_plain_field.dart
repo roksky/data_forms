@@ -3,7 +3,6 @@ import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/text_plain_model.dart';
 
-import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -12,7 +11,7 @@ class FormTextPlainField extends NotifiableStatefulWidget<String> {
   final FormStyle formStyle;
   TextEditingController? controller;
 
-  FormTextPlainField(this.model, this.formStyle, {Key? key}) : super(key: key);
+  FormTextPlainField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormTextPlainField> createState() => _GSTextPlainFieldState();

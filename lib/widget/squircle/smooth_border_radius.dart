@@ -77,6 +77,7 @@ class SmoothBorderRadius extends BorderRadius {
 
   /// Returns a copy of this BorderRadius with the given fields replaced with
   /// the new values.
+  @override
   SmoothBorderRadius copyWith({
     Radius? topLeft,
     Radius? topRight,
@@ -96,15 +97,19 @@ class SmoothBorderRadius extends BorderRadius {
       SmoothBorderRadius.all(SmoothRadius.zero);
 
   /// The top-left [SmoothRadius].
+  @override
   final SmoothRadius topLeft;
 
   /// The top-right [SmoothRadius].
+  @override
   final SmoothRadius topRight;
 
   /// The bottom-left [SmoothRadius].
+  @override
   final SmoothRadius bottomLeft;
 
   /// The bottom-right [SmoothRadius].
+  @override
   final SmoothRadius bottomRight;
 
   /// Needed by internals of Flutter framework.
@@ -176,19 +181,22 @@ class SmoothBorderRadius extends BorderRadius {
   }
 
   /// Returns the difference between two [BorderRadius] objects.
+  @override
   SmoothBorderRadius operator -(BorderRadius other) {
-    if (other is SmoothBorderRadius)
+    if (other is SmoothBorderRadius) {
       return SmoothBorderRadius.only(
         topLeft: (topLeft - other.topLeft) as SmoothRadius,
         topRight: (topRight - other.topRight) as SmoothRadius,
         bottomLeft: (bottomLeft - other.bottomLeft) as SmoothRadius,
         bottomRight: (bottomRight - other.bottomRight) as SmoothRadius,
       );
+    }
 
     return this;
   }
 
   /// Returns the sum of two [BorderRadius] objects.
+  @override
   SmoothBorderRadius operator +(BorderRadius other) {
     if (other is SmoothBorderRadius) {
       return SmoothBorderRadius.only(

@@ -13,10 +13,9 @@ import 'notifyable_stateful_widget.dart';
 class FormLocationTreeField extends NotifiableStatefulWidget<LocationItem> {
   final FormLocationTreeModel model;
   final FormStyle formStyle;
-  LocationItem? result = null;
+  LocationItem? result;
 
-  FormLocationTreeField(this.model, this.formStyle, {Key? key})
-      : super(key: key);
+  FormLocationTreeField(this.model, this.formStyle, {super.key});
 
   @override
   State<FormLocationTreeField> createState() => _GSLocationTreeFieldState();
@@ -100,7 +99,7 @@ class LocationPickerDialog extends StatefulWidget {
   final Future<LocationItem?> Function(String locationId) fetchLocationById;
   final Function(List<LocationItem>) onSave;
 
-  LocationPickerDialog({
+  const LocationPickerDialog({super.key, 
     this.rootLocation,
     required this.hierarchy,
     required this.fetchLocations,

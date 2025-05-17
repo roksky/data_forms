@@ -27,6 +27,6 @@ class PositionResponse {
 
   @override
   String toString() {
-    return "${latitude},${longitude}";
+    return "$latitude,$longitude";
   }
 }
