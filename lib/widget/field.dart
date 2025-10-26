@@ -27,6 +27,7 @@ import 'package:data_forms/model/fields_model/text_filed_model.dart';
 import 'package:data_forms/model/fields_model/text_password_model.dart';
 import 'package:data_forms/model/fields_model/text_plain_model.dart';
 import 'package:data_forms/model/fields_model/time_picker_model.dart';
+import 'package:data_forms/model/fields_model/repeating_group_model.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:data_forms/values/theme.dart';
@@ -64,6 +65,7 @@ import 'package:data_forms/widget/fields/multi_image_picker_field.dart';
 import 'package:data_forms/widget/fields/multi_media_picker_field.dart';
 import 'package:data_forms/widget/fields/qr_scanner_field.dart';
 import 'package:data_forms/widget/fields/signature_field.dart';
+import 'package:data_forms/widget/fields/repeating_group_field.dart';
 
 // ignore: must_be_immutable
 class DataFormField extends StatefulWidget {
@@ -1168,6 +1170,50 @@ class DataFormField extends StatefulWidget {
     );
   }
 
+  DataFormField.repeatingGroup({
+    super.key,
+    required String tag,
+    required List<FormFieldModel> fields,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    int? weight,
+    int? minItems,
+    int? maxItems,
+    String? addButtonText,
+    String? removeButtonText,
+    bool? allowReorder,
+    Widget? addIcon,
+    Widget? removeIcon,
+    Widget? reorderIcon,
+    String? dependsOn,
+  }) {
+    model = FormRepeatingGroupModel(
+      type: FormFieldTypeEnum.repeatingGroup,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      showTitle: showTitle ?? true,
+      weight: weight,
+      dependsOn: dependsOn,
+      fields: fields,
+      minItems: minItems,
+      maxItems: maxItems,
+      addButtonText: addButtonText,
+      removeButtonText: removeButtonText,
+      allowReorder: allowReorder ?? true,
+      addIcon: addIcon,
+      removeIcon: removeIcon,
+      reorderIcon: reorderIcon,
+    );
+  }
+
   //</editor-fold>
 
   @override
@@ -1470,6 +1516,12 @@ class _GSFieldState extends State<DataFormField> {
       case FormFieldTypeEnum.boolean:
         widget.child = FormBoolSwitchField(
           widget.model as FormBoolSwitchModel,
+          widget.formStyle!,
+        );
+        break;
+      case FormFieldTypeEnum.repeatingGroup:
+        widget.child = FormRepeatingGroupField(
+          widget.model as FormRepeatingGroupModel,
           widget.formStyle!,
         );
         break;

@@ -27,4 +27,5 @@ enum FormFieldTypeEnum {
   location,
   boolean,
   locationTree,
+  repeatingGroup,
 }
