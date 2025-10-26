@@ -1173,7 +1173,7 @@ class DataFormField extends StatefulWidget {
   DataFormField.repeatingGroup({
     super.key,
     required String tag,
-    required List<FormFieldModel> fields,
+    required List<DataFormField> fields,
     String? title,
     String? errorMessage,
     String? helpMessage,

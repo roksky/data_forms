@@ -521,32 +521,28 @@ class RepeatingGroupForm extends StatelessWidget {
                         removeButtonText: 'Remove',
                         required: true,
                         fields: [
-                          FormTextModel(
+                          DataFormField.text(
                             tag: 'contact_name',
                             title: 'Contact Name',
                             required: true,
-                            showTitle: true,
                             weight: 12,
                           ),
-                          FormEmailModel(
+                          DataFormField.email(
                             tag: 'contact_email',
                             title: 'Email Address',
                             required: false,
-                            showTitle: true,
                             weight: 12,
                           ),
-                          FormMobileModel(
+                          DataFormField.mobile(
                             tag: 'contact_phone',
                             title: 'Phone Number',
                             required: true,
-                            showTitle: true,
                             weight: 12,
                           ),
-                          FormTextModel(
+                          DataFormField.text(
                             tag: 'relationship',
                             title: 'Relationship',
                             required: false,
-                            showTitle: true,
                             weight: 12,
                           ),
                         ],
@@ -566,33 +562,58 @@ class RepeatingGroupForm extends StatelessWidget {
                         removeButtonText: 'Remove Job',
                         required: false,
                         fields: [
-                          FormTextModel(
+                          DataFormField.text(
                             tag: 'company_name',
                             title: 'Company Name',
                             required: true,
-                            showTitle: true,
                             weight: 12,
                           ),
-                          FormTextModel(
+                          DataFormField.text(
                             tag: 'job_title',
                             title: 'Job Title',
                             required: true,
-                            showTitle: true,
                             weight: 12,
                           ),
-                          FormNumberModel(
+                          DataFormField.integer(
                             tag: 'years_worked',
                             title: 'Years Worked',
                             required: false,
-                            showTitle: true,
                             weight: 6,
                           ),
-                          FormTextModel(
+                          DataFormField.text(
                             tag: 'job_description',
                             title: 'Job Description',
                             required: false,
-                            showTitle: true,
                             weight: 12,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  FormSection(
+                    sectionTitle: 'Weigh',
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'animal_weights',
+                        title: 'New Weights',
+                        showTitle: true,
+                        minItems: 0,
+                        maxItems: 10,
+                        addButtonText: 'Record Weight',
+                        removeButtonText: 'Remove Weight',
+                        required: false,
+                        fields: [
+                          DataFormField.text(
+                            tag: 'tag_number',
+                            title: 'Tag Number',
+                            required: true,
+                            weight: 6,
+                          ),
+                          DataFormField.integer(
+                            tag: 'weight',
+                            title: 'Weight',
+                            required: false,
+                            weight: 6,
                           ),
                         ],
                       ),

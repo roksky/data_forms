@@ -5,13 +5,15 @@ import 'package:data_forms/model/fields_model/field_model.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/state_manager.dart';
+import '../field.dart';
+import 'package:uuid/uuid.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, dynamic>>> {
   final FormRepeatingGroupModel model;
   final FormStyle formStyle;
-  List<List<FormFieldModel>> groupInstances = [];
+  List<List<DataFormField>> groupInstances = [];
 
   FormRepeatingGroupField(this.model, this.formStyle, {super.key}) {
     // Initialize with at least one group if minItems is set or default to 1
@@ -27,7 +29,8 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
   State<FormRepeatingGroupField> createState() => _FormRepeatingGroupFieldState();
 
   void _addNewGroup() {
-    List<FormFieldModel> newGroup = model.fields.map((field) => _copyFieldModel(field, groupInstances.length)).toList();
+    var groupId = const Uuid().v4();
+    List<DataFormField> newGroup = model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
     groupInstances.add(newGroup);
   }
 
@@ -37,11 +40,11 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
     }
   }
 
-  FormFieldModel _copyFieldModel(FormFieldModel field, int groupIndex) {
+  DataFormField _copyFieldModel(DataFormField field, String groupId) {
     // Create a deep copy of the field model with a new tag
     var copiedField = field; // This is a shallow copy for now
-    copiedField.tag = '${field.tag.split('_')[0]}_group_$groupIndex';
-    copiedField.value = null; // Reset value for new instance
+    copiedField.model!.tag = '${field.model!.tag.split('_')[0]}_group_$groupId';
+    copiedField.model!.value = null; // Reset value for new instance
     return copiedField;
   }
 
@@ -55,9 +58,9 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
     // Validate all fields in all groups
     for (var group in groupInstances) {
       for (var field in group) {
-        if (field.required ?? false) {
+        if (field.model!.required ?? false) {
           // Basic validation - you may need to implement more sophisticated validation
-          if (field.value == null || field.value == '') {
+          if (field.model!.value == null || field.model!.value == '') {
             return false;
           }
         }
@@ -73,7 +76,7 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
     for (var group in groupInstances) {
       Map<String, dynamic> groupValue = {};
       for (var field in group) {
-        groupValue[field.tag] = field.value;
+        groupValue[field.model!.tag] = (field.child as FormFieldCallBack).getValue();
       }
       values.add(groupValue);
     }
@@ -83,18 +86,48 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
 }
 
 class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
-  
-  Widget _buildFieldWidget(FormFieldModel fieldModel) {
-    // For now, return a simple text field as placeholder
-    // You would need to implement proper field creation based on field type
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey),
-        borderRadius: BorderRadius.circular(4.0),
-      ),
-      child: Text('Field: ${fieldModel.tag} (${fieldModel.type})'),
-    );
+
+  // receives a collection of fields and returns the widgets
+  Widget _buildFieldWidgets(List<DataFormField> fields) {
+    List<Widget> rows = [];
+    List<Widget> currentRow = [];
+    int currentRowSum = 0;
+
+    for (DataFormField field in fields) {
+      field.formStyle = field.formStyle ?? FormStyle();
+      int fieldWeight = field.model?.weight ?? 12;
+      
+      // If adding this field would exceed 12 or we have no space, start a new row
+      if (currentRowSum + fieldWeight > 12 && currentRow.isNotEmpty) {
+        rows.add(Row(children: currentRow));
+        currentRow = [];
+        currentRowSum = 0;
+      }
+      
+      // Add field to current row
+      currentRow.add(Expanded(
+        flex: fieldWeight,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: field,
+        ),
+      ));
+      currentRowSum += fieldWeight;
+      
+      // If we've reached exactly 12, complete the row
+      if (currentRowSum == 12) {
+        rows.add(Row(children: currentRow));
+        currentRow = [];
+        currentRowSum = 0;
+      }
+    }
+    
+    // Add any remaining fields in the last row
+    if (currentRow.isNotEmpty) {
+      rows.add(Row(children: currentRow));
+    }
+    
+    return Column(children: rows);
   }
 
   @override
@@ -105,7 +138,7 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
       children: [
         ...widget.groupInstances.asMap().entries.map((entry) {
           int groupIndex = entry.key;
-          List<FormFieldModel> group = entry.value;
+          List<DataFormField> group = entry.value;
           
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -136,12 +169,10 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                     ),
                   
                   // Fields in this group
-                  ...group.map((fieldModel) {
-                    return Padding(
+                  Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: _buildFieldWidget(fieldModel),
-                    );
-                  }),
+                      child: _buildFieldWidgets(group),
+                  ),
                 ],
               ),
             ),

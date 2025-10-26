@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
 
+import '../../widget/field.dart';
+
 class FormRepeatingGroupModel extends FormFieldModel {
-  List<FormFieldModel> fields;
+  List<DataFormField> fields;
   int? minItems;
   int? maxItems;
   String? addButtonText;
@@ -60,13 +62,12 @@ class FormRepeatingGroupModel extends FormFieldModel {
          dependsOn: dependsOn,
        );
 
-  /// Creates a copy of this model with new field instances
-  FormRepeatingGroupModel copyForNewGroup(int groupIndex) {
-    List<FormFieldModel> copiedFields = fields.map((field) => _copyFieldModel(field, groupIndex)).toList();
+  FormRepeatingGroupModel copyForNewGroup(String groupId) {
+    List<DataFormField> copiedFields = fields.map((field) => _copyFieldModel(field, groupId)).toList();
     
     return FormRepeatingGroupModel(
       type: type,
-      tag: '${tag}_$groupIndex',
+      tag: '${tag}_$groupId',
       title: title,
       errorMessage: errorMessage,
       helpMessage: helpMessage,
@@ -95,11 +96,8 @@ class FormRepeatingGroupModel extends FormFieldModel {
     );
   }
 
-  /// Helper method to copy field model with new tag
-  FormFieldModel _copyFieldModel(FormFieldModel field, int groupIndex) {
-    // This is a basic copy - you may need to implement specific copying logic
-    // for each field type based on your field model implementations
-    field.tag = '${field.tag}_$groupIndex';
+  DataFormField _copyFieldModel(DataFormField field, String groupId) {
+    field.model!.tag = '${field.model!.tag}_$groupId';
     return field;
   }
 }
