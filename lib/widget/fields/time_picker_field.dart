@@ -44,7 +44,7 @@ class FormTimePickerField extends NotifiableStatefulWidget
     }
   }
 
-  _provideData(BuildContext context) {
+  TimeDataModel? _provideData(BuildContext context) {
     return selectedTime == null
         ? null
         : TimeDataModel(
@@ -111,7 +111,7 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
     );
   }
 
-  _openTimePicker() async {
+  Future<void> _openTimePicker() async {
     var picked = await showTimePicker(
       context: widget.context,
       initialTime: widget.selectedTime ?? TimeOfDay.now(),
@@ -129,13 +129,13 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
     }
   }
 
-  update() {
+  void update() {
     if (mounted) {
       setState(() {});
     }
   }
 
-  _displayTime(TimeOfDay time) {
+  void _displayTime(TimeOfDay time) {
     String hour =
         time.hour.toString().length == 1
             ? '0${time.hour}'

@@ -112,7 +112,7 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
     );
   }
 
-  _route(BuildContext context, Widget screen) {
+  void _route(BuildContext context, Widget screen) {
     Navigator.push(
       context,
       MaterialPageRoute<dynamic>(builder: (BuildContext context) => screen),
