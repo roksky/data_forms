@@ -9,7 +9,7 @@ void main() {
       minItems: 1,
       maxItems: 3,
     );
-    
+
     expect(model.tag, 'test_group');
     expect(model.minItems, 1);
     expect(model.maxItems, 3);

@@ -10,7 +10,8 @@ import 'package:uuid/uuid.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
-class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, dynamic>>> {
+class FormRepeatingGroupField
+    extends NotifiableStatefulWidget<List<Map<String, dynamic>>> {
   final FormRepeatingGroupModel model;
   final FormStyle formStyle;
   List<List<DataFormField>> groupInstances = [];
@@ -26,11 +27,13 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
   }
 
   @override
-  State<FormRepeatingGroupField> createState() => _FormRepeatingGroupFieldState();
+  State<FormRepeatingGroupField> createState() =>
+      _FormRepeatingGroupFieldState();
 
   void _addNewGroup() {
     var groupId = const Uuid().v4();
-    List<DataFormField> newGroup = model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
+    List<DataFormField> newGroup =
+        model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
     groupInstances.add(newGroup);
   }
 
@@ -51,7 +54,8 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
   @override
   bool isValid() {
     // Check if minimum items requirement is met
-    if ((model.minItems ?? 0) > 0 && groupInstances.length < (model.minItems ?? 0)) {
+    if ((model.minItems ?? 0) > 0 &&
+        groupInstances.length < (model.minItems ?? 0)) {
       return false;
     }
 
@@ -72,21 +76,21 @@ class FormRepeatingGroupField extends NotifiableStatefulWidget<List<Map<String, 
   @override
   FormFieldValue<List<Map<String, dynamic>>> getValue() {
     List<Map<String, dynamic>> values = [];
-    
+
     for (var group in groupInstances) {
       Map<String, dynamic> groupValue = {};
       for (var field in group) {
-        groupValue[field.model!.tag] = (field.child as FormFieldCallBack).getValue();
+        groupValue[field.model!.tag] =
+            (field.child as FormFieldCallBack).getValue();
       }
       values.add(groupValue);
     }
-    
+
     return FormFieldValue.repeatingGroup(values);
   }
 }
 
 class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
-
   // receives a collection of fields and returns the widgets
   Widget _buildFieldWidgets(List<DataFormField> fields) {
     List<Widget> rows = [];
@@ -96,24 +100,23 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
     for (DataFormField field in fields) {
       field.formStyle = field.formStyle ?? FormStyle();
       int fieldWeight = field.model?.weight ?? 12;
-      
+
       // If adding this field would exceed 12 or we have no space, start a new row
       if (currentRowSum + fieldWeight > 12 && currentRow.isNotEmpty) {
         rows.add(Row(children: currentRow));
         currentRow = [];
         currentRowSum = 0;
       }
-      
+
       // Add field to current row
-      currentRow.add(Expanded(
-        flex: fieldWeight,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: field,
+      currentRow.add(
+        Expanded(
+          flex: fieldWeight,
+          child: Padding(padding: const EdgeInsets.all(4.0), child: field),
         ),
-      ));
+      );
       currentRowSum += fieldWeight;
-      
+
       // If we've reached exactly 12, complete the row
       if (currentRowSum == 12) {
         rows.add(Row(children: currentRow));
@@ -121,25 +124,25 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
         currentRowSum = 0;
       }
     }
-    
+
     // Add any remaining fields in the last row
     if (currentRow.isNotEmpty) {
       rows.add(Row(children: currentRow));
     }
-    
+
     return Column(children: rows);
   }
 
   @override
   Widget build(BuildContext context) {
     final stateManager = Provider.of<StateManager>(context);
-    
+
     return Column(
       children: [
         ...widget.groupInstances.asMap().entries.map((entry) {
           int groupIndex = entry.key;
           List<DataFormField> group = entry.value;
-          
+
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 8.0),
             child: Padding(
@@ -147,7 +150,8 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
               child: Column(
                 children: [
                   // Group header with remove button
-                  if (widget.groupInstances.length > (widget.model.minItems ?? 0))
+                  if (widget.groupInstances.length >
+                      (widget.model.minItems ?? 0))
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -156,32 +160,38 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                           style: widget.formStyle.titleTextStyle,
                         ),
                         IconButton(
-                          icon: widget.model.removeIcon ?? const Icon(Icons.remove_circle_outline),
+                          icon:
+                              widget.model.removeIcon ??
+                              const Icon(Icons.remove_circle_outline),
                           onPressed: () {
                             setState(() {
                               widget._removeGroup(groupIndex);
                             });
                             // Update state manager
-                            stateManager.set(widget.model.tag, widget.getValue().value);
+                            stateManager.set(
+                              widget.model.tag,
+                              widget.getValue().value,
+                            );
                           },
                         ),
                       ],
                     ),
-                  
+
                   // Fields in this group
                   Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4.0),
-                      child: _buildFieldWidgets(group),
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: _buildFieldWidgets(group),
                   ),
                 ],
               ),
             ),
           );
         }),
-        
+
         // Add button
-        if (widget.model.maxItems == null || 
-            widget.groupInstances.length < (widget.model.maxItems ?? double.infinity))
+        if (widget.model.maxItems == null ||
+            widget.groupInstances.length <
+                (widget.model.maxItems ?? double.infinity))
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: ElevatedButton.icon(

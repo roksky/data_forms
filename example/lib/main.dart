@@ -634,14 +634,15 @@ class RepeatingGroupForm extends StatelessWidget {
                         Map<String, FormFieldValue> map = form.onSubmit();
                         debugPrint('Form is valid: $isValid');
                         debugPrint('Form values: $map');
-                        
+
                         // Show validation result to user
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text(isValid 
-                              ? 'Form submitted successfully!' 
-                              : 'Please check required fields'),
-                            backgroundColor: isValid ? Colors.green : Colors.red,
+                            content: Text(isValid
+                                ? 'Form submitted successfully!'
+                                : 'Please check required fields'),
+                            backgroundColor:
+                                isValid ? Colors.green : Colors.red,
                           ),
                         );
                       },
