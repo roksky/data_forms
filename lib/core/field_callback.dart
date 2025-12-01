@@ -85,6 +85,10 @@ class FormFieldValue<T> {
     : value = value as T?,
       valueType = FormFieldValueType.dateDataRange;
 
+  FormFieldValue.repeatingGroup(List<Map<String, dynamic>> value)
+    : value = value as T,
+      valueType = FormFieldValueType.repeatingGroup;
+
   T? value;
   FormFieldValueType valueType;
 }
@@ -108,4 +112,5 @@ enum FormFieldValueType {
   position,
   locationItem,
   attachments,
+  repeatingGroup,
 }

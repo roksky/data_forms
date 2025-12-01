@@ -84,10 +84,10 @@ class DataForm extends StatelessWidget {
   Map<String, FormFieldValue> onSubmit() {
     Map<String, FormFieldValue> data = {};
     for (var section in sections) {
-      for (var filed in section.fields) {
-        if (filed is DataFormField) {
-          data[filed.model?.tag ?? ''] =
-              (filed.child as FormFieldCallBack).getValue();
+      for (var field in section.fields) {
+        if (field is DataFormField) {
+          data[field.model?.tag ?? ''] =
+              (field.child as FormFieldCallBack).getValue();
         }
       }
     }

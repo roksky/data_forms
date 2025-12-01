@@ -5,6 +5,10 @@ import 'package:data_forms/enums/field_status.dart';
 import 'package:data_forms/model/data_model/date_data_model.dart';
 import 'package:data_forms/model/data_model/radio_data_model.dart';
 import 'package:data_forms/model/data_model/spinner_data_model.dart';
+import 'package:data_forms/model/fields_model/text_filed_model.dart';
+import 'package:data_forms/model/fields_model/email_model.dart';
+import 'package:data_forms/model/fields_model/mobile_model.dart';
+import 'package:data_forms/model/fields_model/number_model.dart';
 import 'package:data_forms/widget/field.dart';
 import 'package:data_forms/widget/form.dart';
 import 'package:data_forms/widget/section.dart';
@@ -78,6 +82,17 @@ class MainTestPage extends StatelessWidget {
                         (route) => true);
                   },
                   child: const Text('Single Section form'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
+                                RepeatingGroupForm()),
+                        (route) => true);
+                  },
+                  child: const Text('Repeating Group form'),
                 ),
               ],
             ),
@@ -462,6 +477,176 @@ class MultiSectionForm extends StatelessWidget {
                         debugPrint(map.toString());
                       },
                       child: const Text('Submit'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ignore: must_be_immutable
+class RepeatingGroupForm extends StatelessWidget {
+  RepeatingGroupForm({super.key});
+
+  late DataForm form;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Repeating Group Example'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.only(left: 12.0, right: 12, top: 24),
+        child: Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: form = DataForm.multiSection(context, sections: [
+                  FormSection(
+                    sectionTitle: 'Contact Information',
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'contacts',
+                        title: 'Emergency Contacts',
+                        showTitle: true,
+                        minItems: 1,
+                        maxItems: 5,
+                        addButtonText: 'Add Contact',
+                        removeButtonText: 'Remove',
+                        required: true,
+                        fields: [
+                          DataFormField.text(
+                            tag: 'contact_name',
+                            title: 'Contact Name',
+                            required: true,
+                            weight: 12,
+                          ),
+                          DataFormField.email(
+                            tag: 'contact_email',
+                            title: 'Email Address',
+                            required: false,
+                            weight: 12,
+                          ),
+                          DataFormField.mobile(
+                            tag: 'contact_phone',
+                            title: 'Phone Number',
+                            required: true,
+                            weight: 12,
+                          ),
+                          DataFormField.text(
+                            tag: 'relationship',
+                            title: 'Relationship',
+                            required: false,
+                            weight: 12,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  FormSection(
+                    sectionTitle: 'Work Experience',
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'work_experience',
+                        title: 'Previous Jobs',
+                        showTitle: true,
+                        minItems: 0,
+                        maxItems: 10,
+                        addButtonText: 'Add Job Experience',
+                        removeButtonText: 'Remove Job',
+                        required: false,
+                        fields: [
+                          DataFormField.text(
+                            tag: 'company_name',
+                            title: 'Company Name',
+                            required: true,
+                            weight: 12,
+                          ),
+                          DataFormField.text(
+                            tag: 'job_title',
+                            title: 'Job Title',
+                            required: true,
+                            weight: 12,
+                          ),
+                          DataFormField.integer(
+                            tag: 'years_worked',
+                            title: 'Years Worked',
+                            required: false,
+                            weight: 6,
+                          ),
+                          DataFormField.text(
+                            tag: 'job_description',
+                            title: 'Job Description',
+                            required: false,
+                            weight: 12,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  FormSection(
+                    sectionTitle: 'Weigh',
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'animal_weights',
+                        title: 'New Weights',
+                        showTitle: true,
+                        minItems: 0,
+                        maxItems: 10,
+                        addButtonText: 'Record Weight',
+                        removeButtonText: 'Remove Weight',
+                        required: false,
+                        fields: [
+                          DataFormField.text(
+                            tag: 'tag_number',
+                            title: 'Tag Number',
+                            required: true,
+                            weight: 6,
+                          ),
+                          DataFormField.integer(
+                            tag: 'weight',
+                            title: 'Weight',
+                            required: false,
+                            weight: 6,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ]),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        bool isValid = form.isValid();
+                        Map<String, FormFieldValue> map = form.onSubmit();
+                        debugPrint('Form is valid: $isValid');
+                        debugPrint('Form values: $map');
+
+                        // Show validation result to user
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(isValid
+                                ? 'Form submitted successfully!'
+                                : 'Please check required fields'),
+                            backgroundColor:
+                                isValid ? Colors.green : Colors.red,
+                          ),
+                        );
+                      },
+                      child: const Text('Submit Form'),
                     ),
                   ),
                 ],
