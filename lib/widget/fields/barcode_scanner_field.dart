@@ -100,13 +100,13 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                 const SizedBox(height: 4.0),
                 widget._scannedValue == null
                     ? Text(
-                      widget.model.hint ?? '',
-                      style: widget.formStyle.fieldHintStyle,
-                    )
+                        widget.model.hint ?? '',
+                        style: widget.formStyle.fieldHintStyle,
+                      )
                     : Text(
-                      widget._scannedValue ?? '',
-                      style: widget.formStyle.fieldTextStyle,
-                    ),
+                        widget._scannedValue ?? '',
+                        style: widget.formStyle.fieldTextStyle,
+                      ),
               ],
             ),
           ),

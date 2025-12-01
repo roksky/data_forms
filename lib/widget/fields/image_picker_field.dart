@@ -94,18 +94,17 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
             });
           }
         },
-        child:
-            widget._croppedFilePath == null
-                ? NormalView(model: widget.model, formStyle: widget.formStyle)
-                : ImagePickedView(
-                  croppedFilePath: widget._croppedFilePath!,
-                  model: widget.model,
-                  formStyle: widget.formStyle,
-                  onDeleteImage: () {
-                    widget._croppedFilePath = null;
-                    setState(() {});
-                  },
-                ),
+        child: widget._croppedFilePath == null
+            ? NormalView(model: widget.model, formStyle: widget.formStyle)
+            : ImagePickedView(
+                croppedFilePath: widget._croppedFilePath!,
+                model: widget.model,
+                formStyle: widget.formStyle,
+                onDeleteImage: () {
+                  widget._croppedFilePath = null;
+                  setState(() {});
+                },
+              ),
       ),
     );
   }

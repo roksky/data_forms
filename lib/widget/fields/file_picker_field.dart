@@ -80,10 +80,9 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           ),
           SizedBox(height: 10),
           Center(
-            child:
-                widget._files.isNotEmpty
-                    ? Text("You have selected ${widget._files.length} files")
-                    : Text('No files attached'),
+            child: widget._files.isNotEmpty
+                ? Text("You have selected ${widget._files.length} files")
+                : Text('No files attached'),
           ),
         ],
       ),

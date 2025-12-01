@@ -134,18 +134,15 @@ class SmoothBorderRadius extends BorderRadius {
       width: width,
       height: height,
     );
-    final processedBottomLeft =
-        topLeft == bottomLeft
-            ? processedTopLeft
-            : ProcessedSmoothRadius(bottomLeft, width: width, height: height);
-    final processedBottomRight =
-        bottomLeft == bottomRight
-            ? processedBottomLeft
-            : ProcessedSmoothRadius(bottomRight, width: width, height: height);
-    final processedTopRight =
-        topRight == bottomRight
-            ? processedBottomRight
-            : ProcessedSmoothRadius(topRight, width: width, height: height);
+    final processedBottomLeft = topLeft == bottomLeft
+        ? processedTopLeft
+        : ProcessedSmoothRadius(bottomLeft, width: width, height: height);
+    final processedBottomRight = bottomLeft == bottomRight
+        ? processedBottomLeft
+        : ProcessedSmoothRadius(bottomRight, width: width, height: height);
+    final processedTopRight = topRight == bottomRight
+        ? processedBottomRight
+        : ProcessedSmoothRadius(topRight, width: width, height: height);
 
     result
       ..addSmoothTopRight(processedTopRight, rect)

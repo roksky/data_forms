@@ -78,23 +78,23 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
         itemBuilder: (context, index) {
           return index == 0
               ? SelectItem(
-                model: widget.model,
-                style: widget.formStyle,
-                isEnable: _enableSelectImageButton(),
-                callBack: (imagePath) {
-                  widget._croppedFilePaths.add(imagePath);
-                  setState(() {});
-                },
-              )
+                  model: widget.model,
+                  style: widget.formStyle,
+                  isEnable: _enableSelectImageButton(),
+                  callBack: (imagePath) {
+                    widget._croppedFilePaths.add(imagePath);
+                    setState(() {});
+                  },
+                )
               : ImageBox(
-                imagePath: widget._croppedFilePaths[index - 1],
-                onDelete: (value) {
-                  widget._croppedFilePaths.removeWhere(
-                    (element) => element == value,
-                  );
-                  setState(() {});
-                },
-              );
+                  imagePath: widget._croppedFilePaths[index - 1],
+                  onDelete: (value) {
+                    widget._croppedFilePaths.removeWhere(
+                      (element) => element == value,
+                    );
+                    setState(() {});
+                  },
+                );
         },
       ),
     );
@@ -244,20 +244,19 @@ class ImageBox extends StatelessWidget {
             height: 90,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(5.0)),
             clipBehavior: Clip.hardEdge,
-            child:
-                imagePath.contains('http')
-                    ? Image.network(
-                      imagePath,
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.fill,
-                    )
-                    : Image.file(
-                      File(imagePath),
-                      width: 90,
-                      height: 90,
-                      fit: BoxFit.fill,
-                    ),
+            child: imagePath.contains('http')
+                ? Image.network(
+                    imagePath,
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.fill,
+                  )
+                : Image.file(
+                    File(imagePath),
+                    width: 90,
+                    height: 90,
+                    fit: BoxFit.fill,
+                  ),
           ),
           Positioned(
             bottom: 8.0,

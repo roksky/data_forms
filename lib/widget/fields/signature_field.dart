@@ -90,20 +90,19 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
                 const SizedBox(height: 4.0),
                 widget._signatureSVG == null
                     ? Text(
-                      widget.model.hint ?? '',
-                      style: widget.formStyle.fieldHintStyle,
-                    )
+                        widget.model.hint ?? '',
+                        style: widget.formStyle.fieldHintStyle,
+                      )
                     : Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: SvgPicture.string(
-                        widget._signatureSVG!,
-                        placeholderBuilder:
-                            (_) => Container(
-                              color: Colors.lightBlueAccent,
-                              child: Center(child: Text('parsing data(svg)')),
-                            ),
+                        padding: EdgeInsets.all(8.0),
+                        child: SvgPicture.string(
+                          widget._signatureSVG!,
+                          placeholderBuilder: (_) => Container(
+                            color: Colors.lightBlueAccent,
+                            child: Center(child: Text('parsing data(svg)')),
+                          ),
+                        ),
                       ),
-                    ),
               ],
             ),
           ),

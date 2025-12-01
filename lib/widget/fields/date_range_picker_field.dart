@@ -57,13 +57,13 @@ class FormDateRangePickerField
             selectedGregorianStartDate == null)
         ? null
         : DateDataRangeModel(
-          startDateServerType: selectedGregorianStartDate!,
-          endDateServerType: selectedGregorianEndDate!,
-          startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
-          endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
-          displayStartDateStr: selectedDateText,
-          displayEndDateStr: selectedDateText,
-        );
+            startDateServerType: selectedGregorianStartDate!,
+            endDateServerType: selectedGregorianEndDate!,
+            startTimeStamp: selectedGregorianStartDate!.millisecondsSinceEpoch,
+            endTimeStamp: selectedGregorianEndDate!.millisecondsSinceEpoch,
+            displayStartDateStr: selectedDateText,
+            displayEndDateStr: selectedDateText,
+          );
   }
 }
 
@@ -99,18 +99,17 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
                 child: Align(
                   alignment:
                       widget.model.dateFormatType == GSDateFormatType.numeric
-                          ? Alignment.centerLeft
-                          : GSFormUtils.isDirectionRTL(context)
-                          ? Alignment.centerRight
-                          : Alignment.centerLeft,
+                      ? Alignment.centerLeft
+                      : GSFormUtils.isDirectionRTL(context)
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                   child: Text(
                     widget.selectedDateText.isEmpty
                         ? widget.model.hint ?? ''
                         : widget.selectedDateText,
-                    style:
-                        widget.isDateSelected
-                            ? widget.formStyle.fieldTextStyle
-                            : widget.formStyle.fieldHintStyle,
+                    style: widget.isDateSelected
+                        ? widget.formStyle.fieldTextStyle
+                        : widget.formStyle.fieldHintStyle,
                   ),
                 ),
               ),

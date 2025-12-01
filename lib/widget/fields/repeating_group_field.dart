@@ -32,8 +32,9 @@ class FormRepeatingGroupField
 
   void _addNewGroup() {
     var groupId = const Uuid().v4();
-    List<DataFormField> newGroup =
-        model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
+    List<DataFormField> newGroup = model.fields
+        .map((field) => _copyFieldModel(field, groupId))
+        .toList();
     groupInstances.add(newGroup);
   }
 
@@ -80,8 +81,8 @@ class FormRepeatingGroupField
     for (var group in groupInstances) {
       Map<String, dynamic> groupValue = {};
       for (var field in group) {
-        groupValue[field.model!.tag] =
-            (field.child as FormFieldCallBack).getValue();
+        groupValue[field.model!.tag] = (field.child as FormFieldCallBack)
+            .getValue();
       }
       values.add(groupValue);
     }

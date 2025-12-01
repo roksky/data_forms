@@ -68,23 +68,23 @@ class FormSection extends StatelessWidget {
       children: [
         sectionTitle != null
             ? Padding(
-              padding: const EdgeInsetsDirectional.only(start: 4),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        sectionTitle!,
-                        style:
-                            style?.sectionTitleStyle ??
-                            FormTheme.textThemeStyle.displayLarge,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6.0),
-                ],
-              ),
-            )
+                padding: const EdgeInsetsDirectional.only(start: 4),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          sectionTitle!,
+                          style:
+                              style?.sectionTitleStyle ??
+                              FormTheme.textThemeStyle.displayLarge,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 6.0),
+                  ],
+                ),
+              )
             : Container(),
         Card(
           color: style?.backgroundSectionColor,
