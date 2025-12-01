@@ -71,62 +71,60 @@ class _GSCheckListFieldState extends State<FormCheckListField> {
       children: [
         widget.model.searchable
             ? Container(
-                margin: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-                height: 44.0,
-                decoration:
-                    widget.model.searchBoxDecoration ??
-                    BoxDecoration(
-                      border: Border.all(
-                        color: const Color(0xffEAEAEA),
-                        width: 1,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
+              margin: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+              height: 44.0,
+              decoration:
+                  widget.model.searchBoxDecoration ??
+                  BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xffEAEAEA),
+                      width: 1,
                     ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: widget.textController,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(top: 8),
-                          hintText: widget.model.searchHint,
-                          prefixIcon:
-                              widget.model.searchIcon ??
-                              const Icon(Icons.search),
-                          border: InputBorder.none,
-                        ),
-                        onChanged: (text) {
-                          setState(() {
-                            widget.keyword = text;
-                            widget.filteredItems = widget.model.items
-                                .where(
-                                  (i) =>
-                                      i.title.contains(widget.keyword) == true,
-                                )
-                                .toList();
-                          });
-                        },
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: widget.textController,
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.only(top: 8),
+                        hintText: widget.model.searchHint,
+                        prefixIcon:
+                            widget.model.searchIcon ?? const Icon(Icons.search),
+                        border: InputBorder.none,
                       ),
-                    ),
-                    InkWell(
-                      onTap: () {
-                        widget.keyword = '';
-                        widget.textController.text = '';
-                        widget.filteredItems = widget.model.items;
-
-                        setState(() {});
+                      onChanged: (text) {
+                        setState(() {
+                          widget.keyword = text;
+                          widget.filteredItems =
+                              widget.model.items
+                                  .where(
+                                    (i) =>
+                                        i.title.contains(widget.keyword) ==
+                                        true,
+                                  )
+                                  .toList();
+                        });
                       },
-                      child: const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Icon(
-                          Icons.close,
-                          color: FormColors.hintTextColor,
-                        ),
-                      ),
                     ),
-                  ],
-                ),
-              )
+                  ),
+                  InkWell(
+                    onTap: () {
+                      widget.keyword = '';
+                      widget.textController.text = '';
+                      widget.filteredItems = widget.model.items;
+
+                      setState(() {});
+                    },
+                    child: const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Icon(Icons.close, color: FormColors.hintTextColor),
+                    ),
+                  ),
+                ],
+              ),
+            )
             : const SizedBox(height: 0),
         SizedBox(
           height: widget.model.height,
@@ -142,12 +140,14 @@ class _GSCheckListFieldState extends State<FormCheckListField> {
             child: ListView.builder(
               controller: widget.controller,
               itemCount: widget.filteredItems.length,
-              shrinkWrap: widget.model.scrollable == null
-                  ? false
-                  : !widget.model.scrollable!,
-              physics: !widget.model.scrollable!
-                  ? const NeverScrollableScrollPhysics()
-                  : const BouncingScrollPhysics(),
+              shrinkWrap:
+                  widget.model.scrollable == null
+                      ? false
+                      : !widget.model.scrollable!,
+              physics:
+                  !widget.model.scrollable!
+                      ? const NeverScrollableScrollPhysics()
+                      : const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
                 return Material(
                   color: Colors.transparent,
@@ -209,28 +209,29 @@ class CheckBoxItem extends StatelessWidget {
             children: [
               _model.unSelectedIcon == null
                   ? Container(
-                      width: 18,
-                      height: 18,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.4),
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                    )
+                    width: 18,
+                    height: 18,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(0.4),
+                      shape: BoxShape.rectangle,
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                  )
                   : _model.unSelectedIcon!,
               Visibility(
                 visible: _item.isSelected,
-                child: _model.selectedIcon == null
-                    ? Container(
-                        width: 10,
-                        height: 10,
-                        decoration: BoxDecoration(
-                          color: Colors.blue,
-                          shape: BoxShape.rectangle,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                      )
-                    : _model.selectedIcon!,
+                child:
+                    _model.selectedIcon == null
+                        ? Container(
+                          width: 10,
+                          height: 10,
+                          decoration: BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.rectangle,
+                            borderRadius: BorderRadius.circular(3),
+                          ),
+                        )
+                        : _model.selectedIcon!,
               ),
             ],
           ),

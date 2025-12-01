@@ -86,9 +86,10 @@ class _GSPriceFieldState extends State<FormPriceField> {
         textAlign: TextAlign.left,
         focusNode: widget.model.focusNode,
         style: widget.formStyle.fieldTextStyle,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

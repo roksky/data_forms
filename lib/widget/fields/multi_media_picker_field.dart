@@ -94,13 +94,13 @@ class _GSMultiMediaAttachmentFieldState
                 return index == 0
                     ? SelectItem(model: widget.model, onTap: _pickFiles)
                     : SizedBox(
-                        width: 90,
-                        height: 90, // Set a fixe
-                        child: MediaPreview(
-                          widget._attachments[index - 1],
-                          (attachment) => _removeAttachment(index - 1),
-                        ),
-                      );
+                      width: 90,
+                      height: 90, // Set a fixe
+                      child: MediaPreview(
+                        widget._attachments[index - 1],
+                        (attachment) => _removeAttachment(index - 1),
+                      ),
+                    );
               },
             ),
           ),
@@ -144,9 +144,10 @@ class MediaPreview extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(attachment),
       child: Card(
-        child: attachment.fileType == AttachmentFileType.image
-            ? Image.file(File(attachment.filePath), fit: BoxFit.cover)
-            : VideoThumbnailWithPlayButton(attachment.filePath),
+        child:
+            attachment.fileType == AttachmentFileType.image
+                ? Image.file(File(attachment.filePath), fit: BoxFit.cover)
+                : VideoThumbnailWithPlayButton(attachment.filePath),
       ),
     );
   }

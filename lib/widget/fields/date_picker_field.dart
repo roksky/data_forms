@@ -48,10 +48,10 @@ class FormDatePickerField extends NotifiableStatefulWidget<DateDataModel> {
     return selectedGregorianDate == null
         ? null
         : DateDataModel(
-            dateServerType: selectedGregorianDate!,
-            timeStamp: selectedGregorianDate!.millisecondsSinceEpoch,
-            showDateStr: selectedDateText,
-          );
+          dateServerType: selectedGregorianDate!,
+          timeStamp: selectedGregorianDate!.millisecondsSinceEpoch,
+          showDateStr: selectedDateText,
+        );
   }
 }
 
@@ -92,17 +92,18 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
               child: Align(
                 alignment:
                     widget.model.dateFormatType == GSDateFormatType.numeric
-                    ? Alignment.centerLeft
-                    : GSFormUtils.isDirectionRTL(context)
-                    ? Alignment.centerRight
-                    : Alignment.centerLeft,
+                        ? Alignment.centerLeft
+                        : GSFormUtils.isDirectionRTL(context)
+                        ? Alignment.centerRight
+                        : Alignment.centerLeft,
                 child: Text(
                   widget.selectedDateText.isEmpty
                       ? widget.model.hint ?? ''
                       : widget.selectedDateText,
-                  style: widget.isDateSelected
-                      ? widget.formStyle.fieldTextStyle
-                      : widget.formStyle.fieldHintStyle,
+                  style:
+                      widget.isDateSelected
+                          ? widget.formStyle.fieldTextStyle
+                          : widget.formStyle.fieldHintStyle,
                   maxLines: 1,
                 ),
               ),

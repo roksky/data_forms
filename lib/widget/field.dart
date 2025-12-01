@@ -1288,9 +1288,8 @@ class _GSFieldState extends State<DataFormField> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Visibility(
-                        visible: widget.model?.prefixWidget == null
-                            ? false
-                            : true,
+                        visible:
+                            widget.model?.prefixWidget == null ? false : true,
                         child: Row(
                           children: [
                             const SizedBox(width: 8.0),
@@ -1307,9 +1306,8 @@ class _GSFieldState extends State<DataFormField> {
                       ),
                       Expanded(child: widget.child!),
                       Visibility(
-                        visible: widget.model?.postfixWidget == null
-                            ? false
-                            : true,
+                        visible:
+                            widget.model?.postfixWidget == null ? false : true,
                         child: Row(
                           children: [
                             const SizedBox(width: 10.0),
@@ -1326,10 +1324,10 @@ class _GSFieldState extends State<DataFormField> {
                 Opacity(
                   opacity:
                       (widget.model?.status == FormFieldStatusEnum.error &&
-                              widget.model?.errorMessage != null) ||
-                          widget.model?.helpMessage != null
-                      ? 1
-                      : 0,
+                                  widget.model?.errorMessage != null) ||
+                              widget.model?.helpMessage != null
+                          ? 1
+                          : 0,
                   child: Row(
                     children: [
                       SizedBox(
@@ -1346,9 +1344,10 @@ class _GSFieldState extends State<DataFormField> {
                         widget.model?.status == FormFieldStatusEnum.error
                             ? widget.model?.errorMessage ?? ''
                             : widget.model?.helpMessage ?? '',
-                        style: widget.model?.status == FormFieldStatusEnum.error
-                            ? widget.formStyle!.errorTextStyle
-                            : widget.formStyle!.helpTextStyle,
+                        style:
+                            widget.model?.status == FormFieldStatusEnum.error
+                                ? widget.formStyle!.errorTextStyle
+                                : widget.formStyle!.helpTextStyle,
                       ),
                     ],
                   ),

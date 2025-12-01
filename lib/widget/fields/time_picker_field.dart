@@ -48,10 +48,10 @@ class FormTimePickerField extends NotifiableStatefulWidget
     return selectedTime == null
         ? null
         : TimeDataModel(
-            displayTime: selectedTime!.format(context),
-            hour: selectedTime!.hour,
-            minute: selectedTime!.minute,
-          );
+          displayTime: selectedTime!.format(context),
+          hour: selectedTime!.hour,
+          minute: selectedTime!.minute,
+        );
   }
 }
 
@@ -96,9 +96,10 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
             Expanded(
               child: Text(
                 widget.selectedTimeText!,
-                style: widget.isTimeSelected
-                    ? widget.formStyle.fieldTextStyle
-                    : widget.formStyle.fieldHintStyle,
+                style:
+                    widget.isTimeSelected
+                        ? widget.formStyle.fieldTextStyle
+                        : widget.formStyle.fieldHintStyle,
               ),
             ),
           ],
@@ -135,12 +136,14 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
   }
 
   _displayTime(TimeOfDay time) {
-    String hour = time.hour.toString().length == 1
-        ? '0${time.hour}'
-        : time.hour.toString();
-    String minute = time.minute.toString().length == 1
-        ? '0${time.minute}'
-        : time.minute.toString();
+    String hour =
+        time.hour.toString().length == 1
+            ? '0${time.hour}'
+            : time.hour.toString();
+    String minute =
+        time.minute.toString().length == 1
+            ? '0${time.minute}'
+            : time.minute.toString();
     widget.selectedTimeText = '$hour:$minute';
   }
 }

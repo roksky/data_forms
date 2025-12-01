@@ -22,9 +22,10 @@ class DataForm extends StatelessWidget {
     this.style,
     required this.fields,
   }) {
-    style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
-        : FormStyle.singleSectionFormDefaultStyle;
+    style ??=
+        GSFormUtils.checkIfDarkModeEnabled(context)
+            ? style ?? FormStyle.singleSectionFormDefaultDarkStyle
+            : FormStyle.singleSectionFormDefaultStyle;
     sections = [FormSection(style: style, sectionTitle: null, fields: fields)];
     DataForm.multiSection(context, style: style, sections: sections);
   }
@@ -36,9 +37,10 @@ class DataForm extends StatelessWidget {
     required this.sections,
     StateManager? myStateManager,
   }) {
-    style ??= GSFormUtils.checkIfDarkModeEnabled(context)
-        ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
-        : FormStyle.multiSectionFormDefaultStyle;
+    style ??=
+        GSFormUtils.checkIfDarkModeEnabled(context)
+            ? style ?? FormStyle.multiSectionFormDefaultDarkStyle
+            : FormStyle.multiSectionFormDefaultStyle;
     if (myStateManager != null) {
       stateManager = myStateManager;
     }
@@ -67,9 +69,10 @@ class DataForm extends StatelessWidget {
       for (var field in section.fields) {
         if (field is DataFormField) {
           bool fieldValidation = (field.child as FormFieldCallBack).isValid();
-          field.model?.status = fieldValidation
-              ? FormFieldStatusEnum.success
-              : FormFieldStatusEnum.error;
+          field.model?.status =
+              fieldValidation
+                  ? FormFieldStatusEnum.success
+                  : FormFieldStatusEnum.error;
           isValid = isValid && fieldValidation;
           field.update();
         }
@@ -83,8 +86,8 @@ class DataForm extends StatelessWidget {
     for (var section in sections) {
       for (var field in section.fields) {
         if (field is DataFormField) {
-          data[field.model?.tag ?? ''] = (field.child as FormFieldCallBack)
-              .getValue();
+          data[field.model?.tag ?? ''] =
+              (field.child as FormFieldCallBack).getValue();
         }
       }
     }

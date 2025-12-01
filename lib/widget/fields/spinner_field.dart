@@ -112,28 +112,31 @@ class _GSSpinnerFieldState extends State<FormSpinnerField> {
             ),
             isExpanded: true,
             value: widget.returnedData,
-            items: widget.model.items
-                .map(
-                  (e) => DropdownMenuItem(
-                    value: e,
-                    child: Padding(
-                      padding: const EdgeInsetsDirectional.only(start: 8.0),
-                      child: Text(
-                        e.name,
-                        style: e.id == widget.hintIndex
-                            ? widget.formStyle.fieldHintStyle
-                            : widget.formStyle.fieldTextStyle,
+            items:
+                widget.model.items
+                    .map(
+                      (e) => DropdownMenuItem(
+                        value: e,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.only(start: 8.0),
+                          child: Text(
+                            e.name,
+                            style:
+                                e.id == widget.hintIndex
+                                    ? widget.formStyle.fieldHintStyle
+                                    : widget.formStyle.fieldTextStyle,
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                )
-                .toList(),
+                    )
+                    .toList(),
             onChanged: (value) {
               if (value?.id != widget.hintIndex) {
-                widget.model.items
-                        .firstWhere((element) => element.id == value!.id)
-                        .isSelected =
-                    true;
+                widget
+                    .model
+                    .items
+                    .firstWhere((element) => element.id == value!.id)
+                    .isSelected = true;
                 value?.isSelected = true;
                 widget.returnedData = value;
                 widget.model.onChange?.call(value);

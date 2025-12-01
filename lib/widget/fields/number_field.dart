@@ -69,16 +69,16 @@ class _GSNumberFieldState extends State<FormNumberField> {
         style: widget.formStyle.fieldTextStyle,
         keyboardType: TextInputType.phone,
         focusNode: widget.model.focusNode,
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },
         decoration: InputDecoration(
-          counter: (widget.model.showCounter ?? false)
-              ? null
-              : const Offstage(),
+          counter:
+              (widget.model.showCounter ?? false) ? null : const Offstage(),
           hintText: widget.model.hint,
           counterStyle: widget.formStyle.fieldHintStyle,
           focusedBorder: InputBorder.none,

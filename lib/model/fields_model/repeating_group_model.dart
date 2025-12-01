@@ -63,9 +63,8 @@ class FormRepeatingGroupModel extends FormFieldModel {
        );
 
   FormRepeatingGroupModel copyForNewGroup(String groupId) {
-    List<DataFormField> copiedFields = fields
-        .map((field) => _copyFieldModel(field, groupId))
-        .toList();
+    List<DataFormField> copiedFields =
+        fields.map((field) => _copyFieldModel(field, groupId)).toList();
 
     return FormRepeatingGroupModel(
       type: type,

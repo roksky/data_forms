@@ -74,9 +74,10 @@ class _GSPasswordFieldState extends State<FormPasswordField> {
         style: widget.formStyle.fieldTextStyle,
         controller: widget.controller,
         obscuringCharacter: '●',
-        textInputAction: widget.model.nextFocusNode != null
-            ? TextInputAction.next
-            : TextInputAction.done,
+        textInputAction:
+            widget.model.nextFocusNode != null
+                ? TextInputAction.next
+                : TextInputAction.done,
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },
