@@ -28,7 +28,7 @@ class FormTimePickerField extends NotifiableStatefulWidget
 
   @override
   getValue() {
-    return _provideData(context);
+    return FormFieldValue.time(_provideData(context));
   }
 
   @override
