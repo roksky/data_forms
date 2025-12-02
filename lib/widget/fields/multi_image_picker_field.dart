@@ -180,7 +180,7 @@ class SelectItem extends StatelessWidget {
     );
   }
 
-  _fillImagePath(File image) {
+  void _fillImagePath(File image) {
     if (model.showCropper ?? false) {
       _cropImage(image);
     } else {

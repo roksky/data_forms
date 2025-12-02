@@ -45,7 +45,7 @@ class _GSBoolSwitchFieldState extends State<FormBoolSwitchField> {
       child: Switch(
         // This bool value toggles the switch.
         value: widget.value ?? false,
-        activeColor: Colors.red,
+        activeThumbColor: Colors.red,
         onChanged: (bool value) {
           // This is called when the user toggles the switch.
           setState(() {

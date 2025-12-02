@@ -52,7 +52,7 @@ class FormDateRangePickerField
     }
   }
 
-  _getData() {
+  DateDataRangeModel? _getData() {
     return (selectedGregorianEndDate == null &&
             selectedGregorianStartDate == null)
         ? null
@@ -124,7 +124,7 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     );
   }
 
-  _openGregorianDateRangePicker() async {
+  Future<void> _openGregorianDateRangePicker() async {
     var picked = await showDateRangePicker(
       context: widget.context,
       initialEntryMode: DatePickerEntryMode.calendar,
@@ -149,11 +149,11 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     }
   }
 
-  _initialDates() {
+  void _initialDates() {
     _initialGregorianDates();
   }
 
-  _initialGregorianDates() {
+  void _initialGregorianDates() {
     if (widget.model.initialStartDate == null) {
       widget.gregorianInitialStartDate = DateTime.now();
     } else {
@@ -195,7 +195,7 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     _initialGregorianAvailableFromDate();
   }
 
-  _initialGregorianAvailableFromDate() {
+  void _initialGregorianAvailableFromDate() {
     if (widget.model.isPastAvailable ?? false) {
       if (widget.model.availableFrom != null) {
         widget.gregorianAvailableFrom = DateTime(
@@ -211,13 +211,13 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
     }
   }
 
-  update() {
+  void update() {
     if (mounted) {
       setState(() {});
     }
   }
 
-  _displayGregorianDate() {
+  void _displayGregorianDate() {
     if (widget.model.dateFormatType != null) {
       switch (widget.model.dateFormatType) {
         case GSDateFormatType.numeric:

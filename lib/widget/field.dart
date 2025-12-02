@@ -76,7 +76,7 @@ class DataFormField extends StatefulWidget {
 
   VoidCallback? onUpdate;
 
-  update() {
+  void update() {
     onUpdate!.call();
   }
 
@@ -1361,7 +1361,7 @@ class _GSFieldState extends State<DataFormField> {
     );
   }
 
-  _fillChild() {
+  void _fillChild() {
     switch (widget.model?.type) {
       case FormFieldTypeEnum.text:
         widget.child = FormTextField(

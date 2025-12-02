@@ -5,6 +5,7 @@ import '../model/data_model/date_data_model.dart';
 import '../model/data_model/location_item_model.dart';
 import '../model/data_model/radio_data_model.dart';
 import '../model/data_model/spinner_data_model.dart';
+import '../model/data_model/time_data_model.dart';
 import '../model/response/position_response.dart';
 import '../widget/fields/multi_media_picker_field.dart';
 
@@ -85,6 +86,10 @@ class FormFieldValue<T> {
     : value = value as T?,
       valueType = FormFieldValueType.dateDataRange;
 
+  FormFieldValue.time(TimeDataModel? value)
+      : value = value as T?,
+        valueType = FormFieldValueType.time;
+
   FormFieldValue.repeatingGroup(List<Map<String, dynamic>> value)
     : value = value as T,
       valueType = FormFieldValueType.repeatingGroup;
@@ -112,5 +117,6 @@ enum FormFieldValueType {
   position,
   locationItem,
   attachments,
+  time,
   repeatingGroup,
 }

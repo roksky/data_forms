@@ -110,7 +110,7 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
     );
   }
 
-  _fillImagePath(File image) {
+  void _fillImagePath(File image) {
     if (widget.model.showCropper ?? false) {
       _cropImage(image);
     } else {

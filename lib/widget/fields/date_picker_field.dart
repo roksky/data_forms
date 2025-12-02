@@ -44,7 +44,7 @@ class FormDatePickerField extends NotifiableStatefulWidget<DateDataModel> {
     }
   }
 
-  _getData() {
+  DateDataModel? _getData() {
     return selectedGregorianDate == null
         ? null
         : DateDataModel(
@@ -117,11 +117,11 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
     );
   }
 
-  _initialDates() {
+  void _initialDates() {
     _initialGregorianDates();
   }
 
-  _initialGregorianDates() {
+  void _initialGregorianDates() {
     if (widget.model.initialDate == null) {
       widget.gregorianInitialDate = DateTime.now();
     } else {
@@ -147,7 +147,7 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
     _initialGregorianAvailableFromDate();
   }
 
-  _initialGregorianAvailableFromDate() {
+  void _initialGregorianAvailableFromDate() {
     if (widget.model.isPastAvailable ?? false) {
       if (widget.model.availableFrom != null) {
         widget.gregorianAvailableFrom = DateTime(
@@ -163,7 +163,7 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
     }
   }
 
-  _openGregorianPicker() async {
+  Future<void> _openGregorianPicker() async {
     DateTime? picked = await showDatePicker(
       context: widget.context,
       initialDate: widget.gregorianInitialDate,
@@ -181,13 +181,13 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
     }
   }
 
-  update() {
+  void update() {
     if (mounted) {
       setState(() {});
     }
   }
 
-  _displayGregorianDate() {
+  void _displayGregorianDate() {
     if (widget.model.dateFormatType != null) {
       switch (widget.model.dateFormatType) {
         case GSDateFormatType.numeric:

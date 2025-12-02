@@ -15,7 +15,7 @@ class SignatureScreen extends StatelessWidget {
 
   SignatureScreen({required this.svgCallback, required this.model, super.key});
 
-  setValue(String? value) {
+  void setValue(String? value) {
     svgCallback.call(value);
   }
 

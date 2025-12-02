@@ -59,7 +59,7 @@ class GSFormUtils {
     );
   }
 
-  static showImagePickerBottomSheet(
+  static void showImagePickerBottomSheet(
     BuildContext context,
     void Function(File image) callback, {
     String? galleryName = 'Gallery',
