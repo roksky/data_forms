@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/core/form_style.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/values/theme.dart';
 import 'package:data_forms/widget/field.dart';
 import 'package:data_forms/widget/fields/text_plain_field.dart';
 import 'package:data_forms/widget/squircle/smooth_border_radius.dart';
 import 'package:data_forms/widget/squircle/smooth_rectangle_border.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class FormSection extends StatelessWidget {
@@ -12,11 +14,16 @@ class FormSection extends StatelessWidget {
   FormStyle? style;
   String? sectionTitle;
 
+  /// Optional identifier used by the rules engine to control this section's
+  /// visibility. Leave `null` if visibility rules are not needed.
+  String? tag;
+
   FormSection({
     super.key,
     required this.fields,
     this.style,
     required this.sectionTitle,
+    this.tag,
   });
 
   @override
@@ -64,7 +71,7 @@ class FormSection extends StatelessWidget {
       }
     }
 
-    return Column(
+    final sectionContent = Column(
       children: [
         sectionTitle != null
             ? Padding(
@@ -81,7 +88,7 @@ class FormSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6.0),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             )
@@ -102,10 +109,11 @@ class FormSection extends StatelessWidget {
               top: style!.sectionCardPadding,
               bottom: style!.sectionCardPadding,
             ),
-            child: ListView.builder(
+            child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: rows.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 4.0),
               itemBuilder: (context, index) {
                 return rows[index];
               },
@@ -113,6 +121,27 @@ class FormSection extends StatelessWidget {
           ),
         ),
       ],
+    );
+
+    // If no tag is set, render the section directly (no rule evaluation needed).
+    if (tag == null) return sectionContent;
+
+    // Otherwise wrap with a Consumer to react to rule changes smoothly.
+    return Consumer<StateManager>(
+      builder: (context, stateManager, _) {
+        final isVisible = stateManager.isVisible(tag!);
+
+        return AnimatedCrossFade(
+          duration: const Duration(milliseconds: 280),
+          sizeCurve: Curves.easeInOut,
+          firstCurve: Curves.easeOut,
+          secondCurve: Curves.easeIn,
+          crossFadeState:
+              isVisible ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          firstChild: sectionContent,
+          secondChild: const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

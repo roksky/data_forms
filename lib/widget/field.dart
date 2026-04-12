@@ -57,6 +57,7 @@ import 'package:data_forms/model/fields_model/multi_media_picker_model.dart';
 import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'package:data_forms/model/state_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/widget/fields/barcode_scanner_field.dart';
 import 'package:data_forms/widget/fields/bool_field.dart';
 import 'package:data_forms/widget/fields/file_picker_field.dart';
@@ -1244,6 +1245,31 @@ class _GSFieldState extends State<DataFormField> {
       }
     };
 
+    // Wrap in Consumer so that StateManager changes (field value updates) trigger
+    // a rule re-evaluation and smooth animated hide/show.
+    return Consumer<StateManager>(
+      builder: (context, stateManager, _) {
+        final tag = widget.model?.tag ?? '';
+        final isVisible = tag.isEmpty || stateManager.isVisible(tag);
+
+        // Keep isHiddenByRule in sync so callers can inspect it at any time.
+        widget.model?.isHiddenByRule = !isVisible;
+
+        return AnimatedCrossFade(
+          duration: const Duration(milliseconds: 280),
+          sizeCurve: Curves.easeInOut,
+          firstCurve: Curves.easeOut,
+          secondCurve: Curves.easeIn,
+          crossFadeState:
+              isVisible ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          firstChild: _buildFieldContent(),
+          secondChild: const SizedBox.shrink(),
+        );
+      },
+    );
+  }
+
+  Widget _buildFieldContent() {
     return AbsorbPointer(
       absorbing: widget.model?.status == FormFieldStatusEnum.disabled,
       child: Row(
@@ -1269,7 +1295,8 @@ class _GSFieldState extends State<DataFormField> {
                               widget.formStyle!.requiredText,
                               style: const TextStyle(
                                 color: FormColors.red,
-                                fontSize: 10,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -1280,6 +1307,7 @@ class _GSFieldState extends State<DataFormField> {
                   ),
                 ),
                 Container(
+                  constraints: const BoxConstraints(minHeight: 52.0),
                   decoration: GSFormUtils.getFieldDecoration(
                     widget.formStyle!,
                     widget.model?.status,
@@ -1320,7 +1348,7 @@ class _GSFieldState extends State<DataFormField> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 6.0),
                 Opacity(
                   opacity:
                       (widget.model?.status == FormFieldStatusEnum.error &&
@@ -1331,15 +1359,15 @@ class _GSFieldState extends State<DataFormField> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 8.0,
-                        height: 8.0,
+                        width: 14.0,
+                        height: 14.0,
                         child: SvgPicture.asset(
                           widget.model?.status == FormFieldStatusEnum.error
                               ? 'packages/data_forms/assets/ic_alert.svg'
                               : 'packages/data_forms/assets/ic_info.svg',
                         ),
                       ),
-                      const SizedBox(width: 1.0),
+                      const SizedBox(width: 4.0),
                       Text(
                         widget.model?.status == FormFieldStatusEnum.error
                             ? widget.model?.errorMessage ?? ''
@@ -1352,7 +1380,7 @@ class _GSFieldState extends State<DataFormField> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 5.0),
+                const SizedBox(height: 8.0),
               ],
             ),
           ),

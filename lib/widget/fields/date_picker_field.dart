@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/data_model/date_data_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:intl/intl.dart';
 
@@ -56,6 +58,8 @@ class FormDatePickerField extends NotifiableStatefulWidget<DateDataModel> {
 }
 
 class _GSDatePickerFieldState extends State<FormDatePickerField> {
+  StateManager? _stateManager;
+
   @override
   void initState() {
     _initialDates();
@@ -77,15 +81,11 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     widget.context = context;
     return InkWell(
       child: Padding(
-        padding: const EdgeInsets.only(
-          right: 10.0,
-          left: 10.0,
-          top: 18,
-          bottom: 18,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
         child: Row(
           children: [
             Expanded(
@@ -175,6 +175,7 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
       widget.isDateSelected = true;
       widget.gregorianInitialDate = picked;
       _displayGregorianDate();
+      _stateManager?.set(widget.model.tag, widget._getData());
       update();
     } else {
       widget.isDateSelected = false;

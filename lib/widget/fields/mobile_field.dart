@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/mobile_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 
 import 'notifyable_stateful_widget.dart';
 
@@ -59,32 +61,35 @@ class _GSMobileFieldState extends State<FormMobileField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-      child: TextField(
-        readOnly: widget.model.enableReadOnly ?? false,
-        textAlign: TextAlign.left,
-        controller: widget.controller,
-        maxLength: widget.model.maxLength ?? 11,
-        style: widget.formStyle.fieldTextStyle,
-        keyboardType: TextInputType.phone,
-        focusNode: widget.model.focusNode,
-        textInputAction:
-            widget.model.nextFocusNode != null
-                ? TextInputAction.next
-                : TextInputAction.done,
-        onSubmitted: (_) {
-          FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
-        },
-        decoration: InputDecoration(
-          hintText: widget.model.hint,
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          counterText: '',
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          hintStyle: widget.formStyle.fieldHintStyle,
+    final stateManager = Provider.of<StateManager>(context, listen: false);
+    return TextField(
+      readOnly: widget.model.enableReadOnly ?? false,
+      textAlign: TextAlign.left,
+      controller: widget.controller,
+      maxLength: widget.model.maxLength ?? 11,
+      style: widget.formStyle.fieldTextStyle,
+      keyboardType: TextInputType.phone,
+      focusNode: widget.model.focusNode,
+      textInputAction:
+          widget.model.nextFocusNode != null
+              ? TextInputAction.next
+              : TextInputAction.done,
+      onChanged: (value) => stateManager.set(widget.model.tag, value),
+      onSubmitted: (_) {
+        FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
+      },
+      decoration: InputDecoration(
+        hintText: widget.model.hint,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14.0,
+          vertical: 14.0,
         ),
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        counterText: '',
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        hintStyle: widget.formStyle.fieldHintStyle,
       ),
     );
   }

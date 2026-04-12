@@ -2,10 +2,12 @@
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/file_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormFilePickerField extends NotifiableStatefulWidget<List<PlatformFile>> {
@@ -34,6 +36,8 @@ class FormFilePickerField extends NotifiableStatefulWidget<List<PlatformFile>> {
 }
 
 class _GSFilePickerFieldState extends State<FormFilePickerField> {
+  StateManager? _stateManager;
+
   Future<void> _pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: widget.model.allowMultiple,
@@ -44,6 +48,7 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
     if (result != null) {
       setState(() {
         widget._files = result.files;
+        _stateManager?.set(widget.model.tag, widget._files);
       });
     }
   }
@@ -51,6 +56,7 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
   void _removeAttachment(int index) {
     setState(() {
       widget._files.removeAt(index);
+      _stateManager?.set(widget.model.tag, widget._files);
     });
   }
 
@@ -92,6 +98,7 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(

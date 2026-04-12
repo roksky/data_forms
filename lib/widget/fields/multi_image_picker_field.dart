@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/image_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -63,6 +65,7 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: GridView.builder(
@@ -83,6 +86,7 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
                 isEnable: _enableSelectImageButton(),
                 callBack: (imagePath) {
                   widget._croppedFilePaths.add(imagePath);
+                  stateManager.set(widget.model.tag, List.of(widget._croppedFilePaths));
                   setState(() {});
                 },
               )
@@ -92,6 +96,7 @@ class _GSMultiImagePickerFieldState extends State<FormMultiImagePickerField> {
                   widget._croppedFilePaths.removeWhere(
                     (element) => element == value,
                   );
+                  stateManager.set(widget.model.tag, List.of(widget._croppedFilePaths));
                   setState(() {});
                 },
               );

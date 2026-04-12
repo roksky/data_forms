@@ -7,32 +7,32 @@ class FormTheme {
     displayLarge: TextStyle(
       color: FormColors.textColorHeader,
       fontWeight: FontWeight.w700,
-      fontSize: 12.0,
+      fontSize: 14.0,
     ),
     displayMedium: TextStyle(
       color: FormColors.textColor,
-      fontWeight: FontWeight.w700,
-      fontSize: 11.0,
+      fontWeight: FontWeight.w600,
+      fontSize: 14.0,
     ),
     displaySmall: TextStyle(
       color: FormColors.hintTextColor,
       fontWeight: FontWeight.w500,
-      fontSize: 9.0,
+      fontSize: 12.0,
     ),
     headlineMedium: TextStyle(
       color: FormColors.hintTextColor,
       fontWeight: FontWeight.w400,
-      fontSize: 7.0,
+      fontSize: 12.0,
     ),
     headlineSmall: TextStyle(
       color: FormColors.red,
-      fontWeight: FontWeight.w400,
-      fontSize: 7.0,
+      fontWeight: FontWeight.w500,
+      fontSize: 12.0,
     ),
     bodyMedium: TextStyle(
       color: FormColors.hintTextColor,
       fontWeight: FontWeight.w400,
-      fontSize: 11.0,
+      fontSize: 14.0,
     ),
   );
 
@@ -40,32 +40,32 @@ class FormTheme {
     displayLarge: TextStyle(
       color: FormColors.textDarkColorHeader,
       fontWeight: FontWeight.w700,
-      fontSize: 12.0,
+      fontSize: 14.0,
     ),
     displayMedium: TextStyle(
       color: FormColors.textColorDark,
-      fontWeight: FontWeight.w700,
-      fontSize: 11.0,
+      fontWeight: FontWeight.w600,
+      fontSize: 14.0,
     ),
     displaySmall: TextStyle(
       color: FormColors.hintTextDarkColor,
       fontWeight: FontWeight.w500,
-      fontSize: 9.0,
+      fontSize: 12.0,
     ),
     headlineMedium: TextStyle(
       color: FormColors.hintTextDarkColor,
       fontWeight: FontWeight.w400,
-      fontSize: 7.0,
+      fontSize: 12.0,
     ),
     headlineSmall: TextStyle(
       color: FormColors.red,
-      fontWeight: FontWeight.w400,
-      fontSize: 7.0,
+      fontWeight: FontWeight.w500,
+      fontSize: 12.0,
     ),
     bodyMedium: TextStyle(
       color: FormColors.hintTextDarkColor,
       fontWeight: FontWeight.w400,
-      fontSize: 11.0,
+      fontSize: 14.0,
     ),
   );
 }

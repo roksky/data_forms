@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/text_filed_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 
 import 'notifyable_stateful_widget.dart';
 
@@ -58,31 +60,34 @@ class _GSTextFieldState extends State<FormTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-      child: TextField(
-        readOnly: widget.model.enableReadOnly ?? false,
-        controller: widget.controller,
-        maxLength: widget.model.maxLength,
-        style: widget.formStyle.fieldTextStyle,
-        keyboardType: TextInputType.text,
-        focusNode: widget.model.focusNode,
-        textInputAction:
-            widget.model.nextFocusNode != null
-                ? TextInputAction.next
-                : TextInputAction.done,
-        onSubmitted: (_) {
-          FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
-        },
-        decoration: InputDecoration(
-          hintText: widget.model.hint,
-          counterText: '',
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          hintStyle: widget.formStyle.fieldHintStyle,
+    final stateManager = Provider.of<StateManager>(context, listen: false);
+    return TextField(
+      readOnly: widget.model.enableReadOnly ?? false,
+      controller: widget.controller,
+      maxLength: widget.model.maxLength,
+      style: widget.formStyle.fieldTextStyle,
+      keyboardType: TextInputType.text,
+      focusNode: widget.model.focusNode,
+      textInputAction:
+          widget.model.nextFocusNode != null
+              ? TextInputAction.next
+              : TextInputAction.done,
+      onChanged: (value) => stateManager.set(widget.model.tag, value),
+      onSubmitted: (_) {
+        FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
+      },
+      decoration: InputDecoration(
+        hintText: widget.model.hint,
+        counterText: '',
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14.0,
+          vertical: 14.0,
         ),
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        hintStyle: widget.formStyle.fieldHintStyle,
       ),
     );
   }

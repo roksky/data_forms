@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/data_model/radio_data_model.dart';
 import 'package:data_forms/model/fields_model/radio_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/values/colors.dart';
 
 import 'package:data_forms/core/field_callback.dart';
@@ -62,6 +64,7 @@ class _GSRadioGroupFieldState extends State<FormRadioGroupField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     widget.filteredItems =
         widget.model.items
             .where((i) => i.title.contains(widget.keyword) == true)
@@ -166,6 +169,7 @@ class _GSRadioGroupFieldState extends State<FormRadioGroupField> {
                       widget.filteredItems[index].isSelected = true;
                       widget.model.callBack(widget.filteredItems[index]);
                       widget.returnedData = widget.filteredItems[index];
+                      stateManager.set(widget.model.tag, widget.filteredItems[index]);
                       setState(() => {});
                     },
                     customBorder: RoundedRectangleBorder(

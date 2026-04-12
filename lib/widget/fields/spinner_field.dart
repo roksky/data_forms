@@ -100,53 +100,63 @@ class _GSSpinnerFieldState extends State<FormSpinnerField> {
   @override
   Widget build(BuildContext context) {
     final stateManager = Provider.of<StateManager>(context);
-    return Row(
-      children: [
-        Expanded(
-          child: DropdownButton<SpinnerDataModel>(
-            underline: const SizedBox(),
-            iconSize: 0,
-            icon: const Padding(
-              padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Icon(Icons.keyboard_arrow_down, size: 20),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: Row(
+        children: [
+          Expanded(
+            child: DropdownButtonHideUnderline(
+              child: ButtonTheme(
+                alignedDropdown: true,
+                child: DropdownButton<SpinnerDataModel>(
+                  underline: const SizedBox(),
+                  iconSize: 0,
+                  icon: const Padding(
+                    padding: EdgeInsets.only(left: 10.0, right: 14.0),
+                    child: Icon(Icons.keyboard_arrow_down_rounded, size: 22),
+                  ),
+                  isExpanded: true,
+                  value: widget.returnedData,
+                  items:
+                      widget.model.items
+                          .map(
+                            (e) => DropdownMenuItem(
+                              value: e,
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.only(
+                                  start: 14.0,
+                                ),
+                                child: Text(
+                                  e.name,
+                                  style:
+                                      e.id == widget.hintIndex
+                                          ? widget.formStyle.fieldHintStyle
+                                          : widget.formStyle.fieldTextStyle,
+                                ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                  onChanged: (value) {
+                    if (value?.id != widget.hintIndex) {
+                      widget
+                          .model
+                          .items
+                          .firstWhere((element) => element.id == value!.id)
+                          .isSelected = true;
+                      value?.isSelected = true;
+                      widget.returnedData = value;
+                      widget.model.onChange?.call(value);
+                      stateManager.set(widget.model.tag, value);
+                      setState(() => {});
+                    }
+                  },
+                ),
+              ),
             ),
-            isExpanded: true,
-            value: widget.returnedData,
-            items:
-                widget.model.items
-                    .map(
-                      (e) => DropdownMenuItem(
-                        value: e,
-                        child: Padding(
-                          padding: const EdgeInsetsDirectional.only(start: 8.0),
-                          child: Text(
-                            e.name,
-                            style:
-                                e.id == widget.hintIndex
-                                    ? widget.formStyle.fieldHintStyle
-                                    : widget.formStyle.fieldTextStyle,
-                          ),
-                        ),
-                      ),
-                    )
-                    .toList(),
-            onChanged: (value) {
-              if (value?.id != widget.hintIndex) {
-                widget
-                    .model
-                    .items
-                    .firstWhere((element) => element.id == value!.id)
-                    .isSelected = true;
-                value?.isSelected = true;
-                widget.returnedData = value;
-                widget.model.onChange?.call(value);
-                stateManager.set(widget.model.tag, value);
-                setState(() => {});
-              }
-            },
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
