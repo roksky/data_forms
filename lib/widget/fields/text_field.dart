@@ -58,31 +58,32 @@ class _GSTextFieldState extends State<FormTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 10.0, left: 10.0),
-      child: TextField(
-        readOnly: widget.model.enableReadOnly ?? false,
-        controller: widget.controller,
-        maxLength: widget.model.maxLength,
-        style: widget.formStyle.fieldTextStyle,
-        keyboardType: TextInputType.text,
-        focusNode: widget.model.focusNode,
-        textInputAction:
-            widget.model.nextFocusNode != null
-                ? TextInputAction.next
-                : TextInputAction.done,
-        onSubmitted: (_) {
-          FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
-        },
-        decoration: InputDecoration(
-          hintText: widget.model.hint,
-          counterText: '',
-          focusedBorder: InputBorder.none,
-          enabledBorder: InputBorder.none,
-          errorBorder: InputBorder.none,
-          disabledBorder: InputBorder.none,
-          hintStyle: widget.formStyle.fieldHintStyle,
+    return TextField(
+      readOnly: widget.model.enableReadOnly ?? false,
+      controller: widget.controller,
+      maxLength: widget.model.maxLength,
+      style: widget.formStyle.fieldTextStyle,
+      keyboardType: TextInputType.text,
+      focusNode: widget.model.focusNode,
+      textInputAction:
+          widget.model.nextFocusNode != null
+              ? TextInputAction.next
+              : TextInputAction.done,
+      onSubmitted: (_) {
+        FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
+      },
+      decoration: InputDecoration(
+        hintText: widget.model.hint,
+        counterText: '',
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14.0,
+          vertical: 14.0,
         ),
+        focusedBorder: InputBorder.none,
+        enabledBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        disabledBorder: InputBorder.none,
+        hintStyle: widget.formStyle.fieldHintStyle,
       ),
     );
   }

@@ -80,12 +80,7 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
     widget.context = context;
     return InkWell(
       child: Padding(
-        padding: const EdgeInsets.only(
-          right: 10.0,
-          left: 10.0,
-          top: 18,
-          bottom: 18,
-        ),
+        padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
         child: Row(
           children: [
             Expanded(

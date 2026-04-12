@@ -8,12 +8,13 @@ class FormColors {
   static const red = Color(0xffef5350);
   static const green = Color(0xff6cd38b);
 
-  static const hintTextColor = Color(0xff999999);
-  static const textColor = Color(0xff3a3a3a);
-  static const textColorHeader = Color(0xff1c1c1c);
-  static const dividerColor = Color(0xffeaeaea);
-  static const colorBackground = Color(0xfff5f5f5);
-  static const colorBackgroundDisable = Color(0xffbbbbbb);
+  static const hintTextColor = Color(0xff9ca3af);
+  static const textColor = Color(0xff374151);
+  static const textColorHeader = Color(0xff111827);
+  static const dividerColor = Color(0xffe5e7eb);
+  static const fieldBorderDefault = Color(0xffd1d5db);
+  static const colorBackground = Color(0xfff9fafb);
+  static const colorBackgroundDisable = Color(0xffe9ecef);
 
   static const black = Color(0xff171717);
 

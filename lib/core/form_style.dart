@@ -46,7 +46,7 @@ class FormStyle {
        sectionRadius = sectionRadius ?? 4.0,
        sectionCardElevation = sectionCardElevation ?? 2.0,
        sectionCardPadding = sectionCardPadding ?? 2.0,
-       requiredText = requiredText ?? '',
+       requiredText = requiredText ?? '*',
        fieldHintStyle = fieldHintStyle ?? FormTheme.textThemeStyle.bodyMedium!,
        fieldTextStyle =
            fieldTextStyle ?? FormTheme.textThemeStyle.displayMedium!,
@@ -56,7 +56,7 @@ class FormStyle {
            helpTextStyle ?? FormTheme.textThemeStyle.headlineMedium!,
        sectionTitleStyle =
            sectionTitleStyle ?? FormTheme.textThemeStyle.displayLarge!,
-       fieldBorderColor = fieldBorderColor ?? FormColors.white;
+       fieldBorderColor = fieldBorderColor ?? FormColors.fieldBorderDefault;
 
   static FormStyle singleSectionFormDefaultStyle = FormStyle(
     backgroundFieldColor: FormColors.white,
@@ -69,9 +69,9 @@ class FormStyle {
     errorTextStyle: FormTheme.textThemeStyle.headlineSmall,
     helpTextStyle: FormTheme.textThemeStyle.headlineMedium,
     sectionTitleStyle: FormTheme.textThemeStyle.displayLarge,
-    sectionRadius: 8,
-    fieldRadius: 8,
-    fieldBorderColor: Colors.white,
+    sectionRadius: 12,
+    fieldRadius: 10,
+    fieldBorderColor: FormColors.fieldBorderDefault,
   );
 
   static FormStyle singleSectionFormDefaultDarkStyle = FormStyle(
@@ -85,25 +85,25 @@ class FormStyle {
     fieldHintStyle: FormTheme.textThemeDarkStyle.bodyMedium,
     errorTextStyle: FormTheme.textThemeDarkStyle.headlineSmall,
     helpTextStyle: FormTheme.textThemeDarkStyle.headlineMedium,
-    sectionRadius: 8,
-    fieldRadius: 8,
-    fieldBorderColor: Colors.white,
+    sectionRadius: 12,
+    fieldRadius: 10,
+    fieldBorderColor: FormColors.dividerColorDark,
   );
 
   static FormStyle multiSectionFormDefaultStyle = FormStyle(
     backgroundFieldColor: FormColors.colorBackground,
     sectionCardElevation: 2.0,
     backgroundSectionColor: FormColors.white,
-    sectionCardPadding: 8.0,
+    sectionCardPadding: 12.0,
     titleStyle: FormTheme.textThemeStyle.displayMedium,
     fieldTextStyle: FormTheme.textThemeStyle.displayMedium,
     fieldHintStyle: FormTheme.textThemeStyle.bodyMedium,
     errorTextStyle: FormTheme.textThemeStyle.headlineSmall,
     helpTextStyle: FormTheme.textThemeStyle.headlineMedium,
     sectionTitleStyle: FormTheme.textThemeStyle.displayLarge,
-    sectionRadius: 8,
-    fieldRadius: 8,
-    fieldBorderColor: Colors.white,
+    sectionRadius: 12,
+    fieldRadius: 10,
+    fieldBorderColor: FormColors.fieldBorderDefault,
   );
 
   static FormStyle multiSectionFormDefaultDarkStyle = FormStyle(
@@ -115,10 +115,10 @@ class FormStyle {
     errorTextStyle: FormTheme.textThemeDarkStyle.headlineSmall,
     helpTextStyle: FormTheme.textThemeDarkStyle.headlineMedium,
     sectionTitleStyle: FormTheme.textThemeDarkStyle.displayLarge,
-    sectionRadius: 8,
+    sectionRadius: 12,
     sectionCardElevation: 2.0,
-    sectionCardPadding: 8.0,
-    fieldRadius: 8,
-    fieldBorderColor: Colors.white,
+    sectionCardPadding: 12.0,
+    fieldRadius: 10,
+    fieldBorderColor: FormColors.dividerColorDark,
   );
 }

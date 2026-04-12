@@ -1269,7 +1269,8 @@ class _GSFieldState extends State<DataFormField> {
                               widget.formStyle!.requiredText,
                               style: const TextStyle(
                                 color: FormColors.red,
-                                fontSize: 10,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -1280,6 +1281,7 @@ class _GSFieldState extends State<DataFormField> {
                   ),
                 ),
                 Container(
+                  constraints: const BoxConstraints(minHeight: 52.0),
                   decoration: GSFormUtils.getFieldDecoration(
                     widget.formStyle!,
                     widget.model?.status,
@@ -1320,7 +1322,7 @@ class _GSFieldState extends State<DataFormField> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 6.0),
                 Opacity(
                   opacity:
                       (widget.model?.status == FormFieldStatusEnum.error &&
@@ -1331,15 +1333,15 @@ class _GSFieldState extends State<DataFormField> {
                   child: Row(
                     children: [
                       SizedBox(
-                        width: 8.0,
-                        height: 8.0,
+                        width: 14.0,
+                        height: 14.0,
                         child: SvgPicture.asset(
                           widget.model?.status == FormFieldStatusEnum.error
                               ? 'packages/data_forms/assets/ic_alert.svg'
                               : 'packages/data_forms/assets/ic_info.svg',
                         ),
                       ),
-                      const SizedBox(width: 1.0),
+                      const SizedBox(width: 4.0),
                       Text(
                         widget.model?.status == FormFieldStatusEnum.error
                             ? widget.model?.errorMessage ?? ''
@@ -1352,7 +1354,7 @@ class _GSFieldState extends State<DataFormField> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 5.0),
+                const SizedBox(height: 8.0),
               ],
             ),
           ),

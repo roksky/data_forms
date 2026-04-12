@@ -84,12 +84,7 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
   Widget build(BuildContext context) {
     widget.context = context;
     return Padding(
-      padding: const EdgeInsets.only(
-        right: 10.0,
-        left: 10.0,
-        top: 16,
-        bottom: 16,
-      ),
+      padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
       child: InkWell(
         child: Row(
           children: [

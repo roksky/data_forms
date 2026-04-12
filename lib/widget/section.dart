@@ -81,7 +81,7 @@ class FormSection extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6.0),
+                  const SizedBox(height: 10.0),
                 ],
               ),
             )
@@ -102,10 +102,11 @@ class FormSection extends StatelessWidget {
               top: style!.sectionCardPadding,
               bottom: style!.sectionCardPadding,
             ),
-            child: ListView.builder(
+            child: ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: rows.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 4.0),
               itemBuilder: (context, index) {
                 return rows[index];
               },
