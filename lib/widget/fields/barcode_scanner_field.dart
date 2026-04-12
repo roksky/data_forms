@@ -1,9 +1,11 @@
 import 'package:barcode_scan2/platform_wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/barcode_scanner_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/values/colors.dart';
 import 'notifyable_stateful_widget.dart';
 
@@ -33,6 +35,8 @@ class FormBarcodeScannerField extends NotifiableStatefulWidget<String> {
 }
 
 class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
+  StateManager? _stateManager;
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +51,7 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Material(
@@ -60,6 +65,7 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
               var result = await BarcodeScanner.scan();
               setState(() {
                 widget._scannedValue = result.rawContent;
+                _stateManager?.set(widget.model.tag, widget._scannedValue);
               });
             } catch (e) {
               ScaffoldMessenger.of(context).showSnackBar(

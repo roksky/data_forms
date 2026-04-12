@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/text_plain_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 
 import 'notifyable_stateful_widget.dart';
 
@@ -58,6 +60,7 @@ class _GSTextPlainFieldState extends State<FormTextPlainField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.only(right: 8.0, left: 8.0, bottom: 8.0),
       child: TextField(
@@ -72,6 +75,7 @@ class _GSTextPlainFieldState extends State<FormTextPlainField> {
         maxLength: widget.model.maxLength,
         style: widget.formStyle.fieldTextStyle,
         textInputAction: TextInputAction.newline,
+        onChanged: (value) => stateManager.set(widget.model.tag, value),
         onSubmitted: (_) {
           FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
         },

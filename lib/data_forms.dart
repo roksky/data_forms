@@ -24,3 +24,7 @@ export 'core/field_callback.dart';
 
 // State management
 export 'model/state_manager.dart';
+
+// Rules engine
+export 'rules/form_rule.dart';
+export 'rules/rules_engine.dart';

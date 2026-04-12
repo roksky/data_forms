@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/bool_switch_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -40,6 +42,7 @@ class _GSBoolSwitchFieldState extends State<FormBoolSwitchField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 10.0),
       child: Switch(
@@ -48,6 +51,7 @@ class _GSBoolSwitchFieldState extends State<FormBoolSwitchField> {
           setState(() {
             widget.value = value;
           });
+          stateManager.set(widget.model.tag, value);
         },
       ),
     );

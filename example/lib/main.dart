@@ -9,6 +9,7 @@ import 'package:data_forms/model/fields_model/text_filed_model.dart';
 import 'package:data_forms/model/fields_model/email_model.dart';
 import 'package:data_forms/model/fields_model/mobile_model.dart';
 import 'package:data_forms/model/fields_model/number_model.dart';
+import 'package:data_forms/rules/form_rule.dart';
 import 'package:data_forms/widget/field.dart';
 import 'package:data_forms/widget/form.dart';
 import 'package:data_forms/widget/section.dart';
@@ -94,6 +95,17 @@ class MainTestPage extends StatelessWidget {
                   },
                   child: const Text('Repeating Group form'),
                 ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
+                                RulesEngineForm()),
+                        (route) => true);
+                  },
+                  child: const Text('Rules Engine form'),
+                ),
               ],
             ),
           ),
@@ -132,7 +144,7 @@ class _SingleSectionFormState extends State<SingleSectionForm> {
         title: const Text('Single section Page'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(0.0),
+        padding: const EdgeInsets.only(left: 12.0, right: 12, top: 24),
         child: Column(
           children: [
             Expanded(
@@ -650,6 +662,292 @@ class RepeatingGroupForm extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Rules Engine example
+//
+// Shows two ways to supply visibility rules:
+//
+//  1. JSON string (rulesJson) — great for remote config or dynamic forms.
+//     Used here for all section-level rules.
+//
+//  2. Dart API on FormFieldModel.rules — set directly on the model after
+//     field construction. Used here to show "Student ID" only when
+//     the Occupation spinner is set to "Student" (independent of the section
+//     rule).
+//
+// Behaviour summary:
+//  • account_type spinner   → reveals Individual or Business section
+//  • occupation  spinner    → within Individual section, reveals Student ID
+//  • has_vehicle bool       → reveals Vehicle section
+// ---------------------------------------------------------------------------
+
+// ignore: must_be_immutable
+class RulesEngineForm extends StatelessWidget {
+  RulesEngineForm({super.key});
+
+  late DataForm form;
+
+  // ── Section + field rules as a JSON string ────────────────────────────────
+  //
+  // SpinnerDataModel values are matched by their `.id` property.
+  // Boolean values are compared directly.
+  static const String _rulesJson = '''
+[
+  {
+    "target": "section_individual",
+    "conditions": [
+      { "field": "account_type", "operator": "equals", "value": 1 }
+    ],
+    "require_all": true,
+    "action": "show"
+  },
+  {
+    "target": "section_business",
+    "conditions": [
+      { "field": "account_type", "operator": "equals", "value": 2 }
+    ],
+    "require_all": true,
+    "action": "show"
+  },
+  {
+    "target": "section_vehicle",
+    "conditions": [
+      { "field": "has_vehicle", "operator": "equals", "value": true }
+    ],
+    "require_all": true,
+    "action": "show"
+  }
+]
+''';
+
+  @override
+  Widget build(BuildContext context) {
+    // ── Build fields that need programmatic (Dart API) field-level rules ────
+    //
+    // "Student ID" is only relevant when occupation == 1 (Student).
+    // We set FormFieldModel.rules directly after construction; DataForm._init()
+    // picks these up automatically and merges them with the JSON rules above.
+    final studentIdField = DataFormField.text(
+      tag: 'student_id',
+      title: 'Student ID',
+      showTitle: true,
+      weight: 12,
+      required: true,
+      errorMessage: 'Student ID is required for students',
+    );
+    studentIdField.model?.rules = [
+      FormRule(
+        target: 'student_id',
+        conditions: [
+          RuleCondition(
+            fieldTag: 'occupation',
+            operator: RuleOperator.equals,
+            value: 1, // id 1 = Student
+          ),
+        ],
+        action: RuleAction.show,
+      ),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Rules Engine')),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 16.0),
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.blue.shade200),
+              ),
+              child: const Text(
+                '1. Pick an account type → matching section appears.\n'
+                '2. Inside Individual, set Occupation to Student → Student ID appears.\n'
+                '3. Toggle "Has Vehicle" → vehicle section slides in/out.',
+                style: TextStyle(fontSize: 13),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: form = DataForm.multiSection(
+                  context,
+
+                  // ── All section rules come from the JSON string ────────────
+                  rulesJson: _rulesJson,
+
+                  sections: [
+                    // ── Always visible ───────────────────────────────────────
+                    FormSection(
+                      sectionTitle: 'Account Setup',
+                      fields: [
+                        DataFormField.spinner(
+                          tag: 'account_type',
+                          title: 'Account Type',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Please select an account type',
+                          hint: 'Select account type…',
+                          items: [
+                            SpinnerDataModel(name: 'Individual', id: 1),
+                            SpinnerDataModel(name: 'Business', id: 2),
+                          ],
+                          onChange: (_) {},
+                        ),
+                        DataFormField.boolSwitch(
+                          tag: 'has_vehicle',
+                          title: 'Has Vehicle?',
+                          showTitle: true,
+                          weight: 12,
+                        ),
+                      ],
+                    ),
+
+                    // ── Individual Details ───────────────────────────────────
+                    // Section tag matches "section_individual" in the JSON rule.
+                    // "Student ID" (studentIdField) uses a Dart-API field rule.
+                    FormSection(
+                      tag: 'section_individual',
+                      sectionTitle: 'Individual Details',
+                      fields: [
+                        DataFormField.text(
+                          tag: 'full_name',
+                          title: 'Full Name',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Full name is required',
+                        ),
+                        DataFormField.datePicker(
+                          tag: 'date_of_birth',
+                          title: 'Date of Birth',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Date of birth is required',
+                        ),
+                        DataFormField.spinner(
+                          tag: 'occupation',
+                          title: 'Occupation',
+                          showTitle: true,
+                          weight: 12,
+                          required: false,
+                          hint: 'Select occupation…',
+                          items: [
+                            SpinnerDataModel(name: 'Student', id: 1),
+                            SpinnerDataModel(name: 'Employee', id: 2),
+                            SpinnerDataModel(name: 'Self-employed', id: 3),
+                          ],
+                          onChange: (_) {},
+                        ),
+                        // Field-level rule set via Dart API above.
+                        studentIdField,
+                      ],
+                    ),
+
+                    // ── Business Details ─────────────────────────────────────
+                    FormSection(
+                      tag: 'section_business',
+                      sectionTitle: 'Business Details',
+                      fields: [
+                        DataFormField.text(
+                          tag: 'company_name',
+                          title: 'Company Name',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Company name is required',
+                        ),
+                        DataFormField.text(
+                          tag: 'tax_number',
+                          title: 'Tax / VAT Number',
+                          showTitle: true,
+                          weight: 6,
+                          required: true,
+                          errorMessage: 'Tax number is required',
+                        ),
+                        DataFormField.mobile(
+                          tag: 'business_phone',
+                          title: 'Business Phone',
+                          showTitle: true,
+                          weight: 6,
+                          required: false,
+                        ),
+                        DataFormField.email(
+                          tag: 'business_email',
+                          title: 'Business Email',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'A valid business email is required',
+                        ),
+                      ],
+                    ),
+
+                    // ── Vehicle Details ──────────────────────────────────────
+                    // Shown when has_vehicle boolean is true (JSON rule).
+                    FormSection(
+                      tag: 'section_vehicle',
+                      sectionTitle: 'Vehicle Details',
+                      fields: [
+                        DataFormField.text(
+                          tag: 'vehicle_registration',
+                          title: 'Registration Number',
+                          showTitle: true,
+                          weight: 6,
+                          required: true,
+                          errorMessage: 'Registration number is required',
+                        ),
+                        DataFormField.text(
+                          tag: 'vehicle_model',
+                          title: 'Make & Model',
+                          showTitle: true,
+                          weight: 6,
+                          required: false,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                onPressed: () {
+                  final isValid = form.isValid();
+                  final values = form.onSubmit();
+                  debugPrint('Valid: $isValid');
+                  debugPrint('Values: $values');
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        isValid
+                            ? 'Submitted — ${values.length} visible field(s) collected.'
+                            : 'Please fill in all required visible fields.',
+                      ),
+                      backgroundColor: isValid ? Colors.green : Colors.red,
+                    ),
+                  );
+                },
+                child: const Text('Submit'),
               ),
             ),
           ],

@@ -1,9 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/model/data_model/date_data_model.dart';
 import 'package:data_forms/model/fields_model/date_range_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:intl/intl.dart';
 
@@ -68,6 +70,8 @@ class FormDateRangePickerField
 }
 
 class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
+  StateManager? _stateManager;
+
   @override
   void initState() {
     _initialDates();
@@ -82,6 +86,7 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     widget.context = context;
     return SizedBox(
       height: 48.0,
@@ -143,6 +148,7 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
       widget.gregorianInitialEndDate = picked.end;
       widget.isDateSelected = true;
       _displayGregorianDate();
+      _stateManager?.set(widget.model.tag, widget._getData());
       update();
     } else {
       widget.isDateSelected = false;

@@ -2,10 +2,12 @@ import 'package:data_forms/screens/signature_collector_screen.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/signature_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormSignatureScreenField extends NotifiableStatefulWidget<String> {
@@ -36,6 +38,7 @@ class FormSignatureScreenField extends NotifiableStatefulWidget<String> {
 class _GSSignatureScreenState extends State<FormSignatureScreenField> {
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Material(
@@ -51,6 +54,7 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
                 model: widget.model,
                 svgCallback: (value) {
                   widget._signatureSVG = value;
+                  stateManager.set(widget.model.tag, value);
                   setState(() {});
                 },
                 //byteCallback: (byteData) {},

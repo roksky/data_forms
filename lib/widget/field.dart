@@ -57,6 +57,7 @@ import 'package:data_forms/model/fields_model/multi_media_picker_model.dart';
 import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
 import 'package:data_forms/model/fields_model/signature_model.dart';
 import 'package:data_forms/model/state_manager.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/widget/fields/barcode_scanner_field.dart';
 import 'package:data_forms/widget/fields/bool_field.dart';
 import 'package:data_forms/widget/fields/file_picker_field.dart';
@@ -1244,6 +1245,31 @@ class _GSFieldState extends State<DataFormField> {
       }
     };
 
+    // Wrap in Consumer so that StateManager changes (field value updates) trigger
+    // a rule re-evaluation and smooth animated hide/show.
+    return Consumer<StateManager>(
+      builder: (context, stateManager, _) {
+        final tag = widget.model?.tag ?? '';
+        final isVisible = tag.isEmpty || stateManager.isVisible(tag);
+
+        // Keep isHiddenByRule in sync so callers can inspect it at any time.
+        widget.model?.isHiddenByRule = !isVisible;
+
+        return AnimatedCrossFade(
+          duration: const Duration(milliseconds: 280),
+          sizeCurve: Curves.easeInOut,
+          firstCurve: Curves.easeOut,
+          secondCurve: Curves.easeIn,
+          crossFadeState:
+              isVisible ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          firstChild: _buildFieldContent(),
+          secondChild: const SizedBox.shrink(),
+        );
+      },
+    );
+  }
+
+  Widget _buildFieldContent() {
     return AbsorbPointer(
       absorbing: widget.model?.status == FormFieldStatusEnum.disabled,
       child: Row(

@@ -3,10 +3,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/multi_media_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/util/video_thumbnail.dart';
 import 'notifyable_stateful_widget.dart';
 
@@ -39,6 +41,8 @@ class FormMultiMediaAttachmentField
 
 class _GSMultiMediaAttachmentFieldState
     extends State<FormMultiMediaAttachmentField> {
+  StateManager? _stateManager;
+
   void _pickFiles() async {
     final result = await FilePicker.platform.pickFiles(
       allowMultiple: true,
@@ -67,6 +71,7 @@ class _GSMultiMediaAttachmentFieldState
             );
           }
         }
+        _stateManager?.set(widget.model.tag, List.of(widget._attachments));
       });
     }
   }
@@ -74,11 +79,13 @@ class _GSMultiMediaAttachmentFieldState
   void _removeAttachment(int index) {
     setState(() {
       widget._attachments.removeAt(index);
+      _stateManager?.set(widget.model.tag, List.of(widget._attachments));
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(

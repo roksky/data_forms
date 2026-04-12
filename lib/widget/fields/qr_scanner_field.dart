@@ -3,10 +3,12 @@
 import 'package:data_forms/screens/qr_scanner_screen.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/qr_scanner_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 class FormQRScannerField extends NotifiableStatefulWidget<String> {
@@ -49,6 +51,7 @@ class _GSQRScannerFieldState extends State<FormQRScannerField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Material(
@@ -63,6 +66,7 @@ class _GSQRScannerFieldState extends State<FormQRScannerField> {
               QrScannerScreen(
                 callback: (value) {
                   widget._scannedValue = value.rawValue;
+                  stateManager.set(widget.model.tag, widget._scannedValue);
                   setState(() {});
                 },
               ),

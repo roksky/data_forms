@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/constant.dart';
 import 'package:data_forms/core/field_callback.dart';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/email_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -60,6 +62,7 @@ class _GSEmailFieldState extends State<FormEmailField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     if (widget.model.value != null) {
       widget.controller?.text = widget.model.value;
     }
@@ -74,6 +77,7 @@ class _GSEmailFieldState extends State<FormEmailField> {
           widget.model.nextFocusNode != null
               ? TextInputAction.next
               : TextInputAction.done,
+      onChanged: (value) => stateManager.set(widget.model.tag, value),
       onSubmitted: (_) {
         FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
       },

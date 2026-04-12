@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/number_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
@@ -59,6 +61,7 @@ class _GSNumberFieldState extends State<FormNumberField> {
 
   @override
   Widget build(BuildContext context) {
+    final stateManager = Provider.of<StateManager>(context, listen: false);
     return TextField(
       readOnly: widget.model.enableReadOnly ?? false,
       textAlignVertical: TextAlignVertical.center,
@@ -71,6 +74,7 @@ class _GSNumberFieldState extends State<FormNumberField> {
           widget.model.nextFocusNode != null
               ? TextInputAction.next
               : TextInputAction.done,
+      onChanged: (value) => stateManager.set(widget.model.tag, value),
       onSubmitted: (_) {
         FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
       },

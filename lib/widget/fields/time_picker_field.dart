@@ -1,10 +1,12 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/data_model/time_data_model.dart';
 import 'package:data_forms/model/fields_model/time_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 
 import 'notifyable_stateful_widget.dart';
 
@@ -56,6 +58,8 @@ class FormTimePickerField extends NotifiableStatefulWidget
 }
 
 class _GSTimePickerFieldState extends State<FormTimePickerField> {
+  StateManager? _stateManager;
+
   @override
   void initState() {
     super.initState();
@@ -82,6 +86,7 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     widget.context = context;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 14.0),
@@ -118,6 +123,14 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
       widget.model.initialTime = picked;
       widget.isTimeSelected = true;
       _displayTime(picked);
+      _stateManager?.set(
+        widget.model.tag,
+        TimeDataModel(
+          displayTime: widget.selectedTimeText ?? '',
+          hour: picked.hour,
+          minute: picked.minute,
+        ),
+      );
       update();
     } else {
       widget.isTimeSelected = false;

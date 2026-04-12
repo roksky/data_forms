@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/fields_model/image_picker_model.dart';
+import 'package:data_forms/model/state_manager.dart';
 import 'package:data_forms/util/util.dart';
 import 'package:data_forms/values/colors.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -40,6 +42,8 @@ class FormImagePickerField extends NotifiableStatefulWidget<String> {
 }
 
 class _GSImagePickerFieldState extends State<FormImagePickerField> {
+  StateManager? _stateManager;
+
   @override
   void initState() {
     super.initState();
@@ -62,6 +66,7 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
 
   @override
   Widget build(BuildContext context) {
+    _stateManager = Provider.of<StateManager>(context, listen: false);
     return Material(
       color: Colors.transparent,
       child: InkWell(
@@ -103,6 +108,7 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
                   formStyle: widget.formStyle,
                   onDeleteImage: () {
                     widget._croppedFilePath = null;
+                    _stateManager?.set(widget.model.tag, null);
                     setState(() {});
                   },
                 ),
@@ -119,11 +125,13 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
         if (image.lengthSync() / 1000 <
             widget.model.maximumSizePerImageInBytes!) {
           widget._croppedFilePath = image.path;
+          _stateManager?.set(widget.model.tag, widget._croppedFilePath);
         } else {
           widget.model.onErrorSizeItem?.call();
         }
       } else {
         widget._croppedFilePath = image.path;
+        _stateManager?.set(widget.model.tag, widget._croppedFilePath);
       }
     }
   }
@@ -150,11 +158,13 @@ class _GSImagePickerFieldState extends State<FormImagePickerField> {
           if (image.lengthSync() / 1000 <
               widget.model.maximumSizePerImageInBytes!) {
             widget._croppedFilePath = image.path;
+            _stateManager?.set(widget.model.tag, widget._croppedFilePath);
           } else {
             widget.model.onErrorSizeItem?.call();
           }
         } else {
           widget._croppedFilePath = image.path;
+          _stateManager?.set(widget.model.tag, widget._croppedFilePath);
         }
       });
     }
