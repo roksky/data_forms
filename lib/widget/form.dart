@@ -69,22 +69,39 @@ class DataForm extends StatelessWidget {
       if (rulesJson != null) ...FormRule.listFromString(rulesJson),
     ];
 
-    // Collect field-level rules from all sections.
+    // Collect section-level and field-level rules from all sections.
     for (final section in sections) {
+      final sectionRules = section.rules;
+      if (sectionRules != null && sectionRules.isNotEmpty) {
+        for (final rule in sectionRules) {
+          final resolved =
+              rule.target.isEmpty && section.tag != null
+                  ? FormRule(
+                    target: section.tag!,
+                    conditions: rule.conditions,
+                    requireAll: rule.requireAll,
+                    action: rule.action,
+                  )
+                  : rule;
+          allRules.add(resolved);
+        }
+      }
+
       for (final widget in section.fields) {
         if (widget is DataFormField) {
           final fieldRules = widget.model?.rules;
           if (fieldRules != null && fieldRules.isNotEmpty) {
             for (final rule in fieldRules) {
               // Auto-fill target with the field's own tag if not already set.
-              final resolved = rule.target.isEmpty
-                  ? FormRule(
-                      target: widget.model!.tag,
-                      conditions: rule.conditions,
-                      requireAll: rule.requireAll,
-                      action: rule.action,
-                    )
-                  : rule;
+              final resolved =
+                  rule.target.isEmpty
+                      ? FormRule(
+                        target: widget.model!.tag,
+                        conditions: rule.conditions,
+                        requireAll: rule.requireAll,
+                        action: rule.action,
+                      )
+                      : rule;
               allRules.add(resolved);
             }
           }
