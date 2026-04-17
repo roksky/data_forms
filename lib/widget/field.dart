@@ -14,6 +14,7 @@ import 'package:data_forms/model/fields_model/date_picker_model.dart';
 import 'package:data_forms/model/fields_model/date_range_picker_model.dart';
 import 'package:data_forms/model/fields_model/email_model.dart';
 import 'package:data_forms/model/fields_model/field_model.dart';
+import 'package:data_forms/rules/form_rule.dart';
 import 'package:data_forms/model/fields_model/image_picker_model.dart';
 import 'package:data_forms/model/fields_model/location_model.dart';
 import 'package:data_forms/model/fields_model/location_tree_model.dart';
@@ -81,6 +82,25 @@ class DataFormField extends StatefulWidget {
     onUpdate!.call();
   }
 
+  static List<FormRule>? _resolveRules(
+    List<FormRule>? rules,
+    String? rulesJson,
+  ) {
+    final resolved = <FormRule>[
+      ...?rules,
+      if (rulesJson != null && rulesJson.trim().isNotEmpty)
+        ..._rulesFromJson(rulesJson),
+    ];
+    return resolved.isEmpty ? null : resolved;
+  }
+
+  static List<FormRule> _rulesFromJson(String rulesJson) {
+    final json = rulesJson.trim();
+    return json.startsWith('[')
+        ? FormRule.listFromString(json)
+        : [FormRule.fromString(json)];
+  }
+
   DataFormField.qrScanner({
     super.key,
     required String tag,
@@ -95,6 +115,8 @@ class DataFormField extends StatefulWidget {
     Widget? iconWidget,
     Color? iconColor,
     bool? enableReadOnly,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormQRScannerModel(
       type: FormFieldTypeEnum.qrScanner,
@@ -109,7 +131,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       iconWidget: iconWidget,
       enableReadOnly: enableReadOnly,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.imagePicker({
@@ -135,6 +157,8 @@ class DataFormField extends StatefulWidget {
     double? maximumSizePerImageInBytes,
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormImagePickerModel(
       type: FormFieldTypeEnum.imagePicker,
@@ -158,7 +182,7 @@ class DataFormField extends StatefulWidget {
       maximumSizePerImageInBytes: maximumSizePerImageInBytes,
       onErrorSizeItem: onErrorSizeItem,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.multiImagePicker({
@@ -185,6 +209,8 @@ class DataFormField extends StatefulWidget {
     double? maximumImageCount,
     VoidCallback? onErrorSizeItem,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormMultiImagePickerModel(
       type: FormFieldTypeEnum.multiImagePicker,
@@ -209,7 +235,7 @@ class DataFormField extends StatefulWidget {
       maximumSizePerImageInKB: maximumSizePerImageInKB,
       onErrorSizeItem: onErrorSizeItem,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.spinner({
@@ -229,6 +255,8 @@ class DataFormField extends StatefulWidget {
     required List<SpinnerDataModel> items,
     String? hint,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormSpinnerModel(
       type: FormFieldTypeEnum.spinner,
@@ -246,7 +274,7 @@ class DataFormField extends StatefulWidget {
       onChange: onChange,
       value: value,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.radioGroup({
@@ -276,6 +304,8 @@ class DataFormField extends StatefulWidget {
     required List<RadioDataModel> items,
     String? dependsOn,
     required ValueChanged<RadioDataModel> callBack,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormRadioModel(
       type: FormFieldTypeEnum.radioGroup,
@@ -302,7 +332,7 @@ class DataFormField extends StatefulWidget {
       searchIcon: searchIcon,
       dependsOn: dependsOn,
       searchBoxDecoration: searchBoxDecoration,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.checkList({
@@ -332,6 +362,8 @@ class DataFormField extends StatefulWidget {
     Icon? searchIcon,
     BoxDecoration? searchBoxDecoration,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     bool isRequired = false;
     if (requiredCheckListEnum != null &&
@@ -364,7 +396,7 @@ class DataFormField extends StatefulWidget {
       searchBoxDecoration: searchBoxDecoration,
       dependsOn: dependsOn,
       requiredCheckListEnum: requiredCheckListEnum,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.text({
@@ -389,6 +421,8 @@ class DataFormField extends StatefulWidget {
     FocusNode? focusNode,
     String? dependsOn,
     FocusNode? nextFocusNode,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormTextModel(
       type: FormFieldTypeEnum.text,
@@ -409,7 +443,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       dependsOn: dependsOn,
       enableReadOnly: readOnly,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.password({
@@ -432,6 +466,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormPasswordModel(
       type: FormFieldTypeEnum.password,
@@ -449,7 +485,7 @@ class DataFormField extends StatefulWidget {
       maxLength: maxLength,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.textPlain({
@@ -473,6 +509,8 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormTextPlainModel(
       type: FormFieldTypeEnum.textPlain,
@@ -494,7 +532,7 @@ class DataFormField extends StatefulWidget {
       showCounter: showCounter,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.mobile({
@@ -515,6 +553,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormMobileModel(
       type: FormFieldTypeEnum.mobile,
@@ -533,7 +573,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.number({
@@ -555,6 +595,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.number,
@@ -574,7 +616,7 @@ class DataFormField extends StatefulWidget {
       showCounter: showCounter,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.integer({
@@ -595,6 +637,8 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     String? hint,
     bool? readOnly,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.integer,
@@ -613,7 +657,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       showCounter: showCounter,
       enableReadOnly: readOnly,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.double({
@@ -634,6 +678,8 @@ class DataFormField extends StatefulWidget {
     bool? showCounter,
     String? hint,
     bool? readOnly,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormNumberModel(
       type: FormFieldTypeEnum.double,
@@ -652,7 +698,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       showCounter: showCounter,
       enableReadOnly: readOnly,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.datePicker({
@@ -676,6 +722,8 @@ class DataFormField extends StatefulWidget {
     DataDate? availableFrom,
     DataDate? availableTo,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormDatePickerModel(
       type: FormFieldTypeEnum.date,
@@ -696,7 +744,7 @@ class DataFormField extends StatefulWidget {
       initialDate: initialDate,
       availableFrom: availableTo,
       availableTo: availableTo,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.dateRangePicker({
@@ -723,6 +771,8 @@ class DataFormField extends StatefulWidget {
     DataDate? availableFrom,
     DataDate? availableTo,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormDateRangePickerModel(
       type: FormFieldTypeEnum.dateRage,
@@ -746,7 +796,7 @@ class DataFormField extends StatefulWidget {
       availableFrom: availableTo,
       availableTo: availableTo,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.time({
@@ -766,6 +816,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     TimeOfDay? initialTime,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormTimePickerModel(
       type: FormFieldTypeEnum.time,
@@ -782,7 +834,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       initialTime: initialTime,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.email({
@@ -803,6 +855,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormEmailModel(
       type: FormFieldTypeEnum.email,
@@ -821,7 +875,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.price({
@@ -842,6 +896,8 @@ class DataFormField extends StatefulWidget {
     String? hint,
     bool? readOnly,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormPriceModel(
       type: FormFieldTypeEnum.price,
@@ -863,7 +919,7 @@ class DataFormField extends StatefulWidget {
       hint: hint,
       enableReadOnly: readOnly,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.bankCard({
@@ -884,6 +940,8 @@ class DataFormField extends StatefulWidget {
     int? maxLine,
     String? dependsOn,
     String? hint,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormBankCardModel(
       type: FormFieldTypeEnum.bankCard,
@@ -900,7 +958,7 @@ class DataFormField extends StatefulWidget {
       weight: weight,
       hint: hint,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.filePicker({
@@ -927,6 +985,8 @@ class DataFormField extends StatefulWidget {
     bool? allowMultiple,
     List<String>? allowedExtensions,
     FileType? fileType,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormFilePickerModel(
       type: FormFieldTypeEnum.filePicker,
@@ -943,7 +1003,7 @@ class DataFormField extends StatefulWidget {
       allowMultiple: allowMultiple ?? true,
       fileType: fileType ?? FileType.any,
       allowedExtensions: allowedExtensions,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.multiMediaPicker({
@@ -967,6 +1027,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     FocusNode? focusNode,
     FocusNode? nextFocusNode,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormMultiMediaPickerModel(
       type: FormFieldTypeEnum.multiMediaPicker,
@@ -978,7 +1040,7 @@ class DataFormField extends StatefulWidget {
       required: required,
       status: status,
       weight: weight,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.signature({
@@ -1005,6 +1067,8 @@ class DataFormField extends StatefulWidget {
     Widget? iconWidget,
     Color? color,
     bool fit = false,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormSignatureModel(
       type: FormFieldTypeEnum.signature,
@@ -1020,7 +1084,7 @@ class DataFormField extends StatefulWidget {
       fit: fit,
       hint: hint,
       iconWidget: iconWidget,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.barcode({
@@ -1044,6 +1108,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     FocusNode? focusNode,
     FocusNode? nextFocusNode,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormBarCodeModel(
       type: FormFieldTypeEnum.barcode,
@@ -1055,7 +1121,7 @@ class DataFormField extends StatefulWidget {
       required: required,
       status: status,
       weight: weight,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.locationTree({
@@ -1078,6 +1144,8 @@ class DataFormField extends StatefulWidget {
     fetchLocations,
     required Future<LocationItem?> Function(String locationId)
     fetchLocationById,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormLocationTreeModel(
       type: FormFieldTypeEnum.locationTree,
@@ -1096,7 +1164,7 @@ class DataFormField extends StatefulWidget {
       fetchLocationById: fetchLocationById,
       targetLevel: targetLevel,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.location({
@@ -1121,6 +1189,8 @@ class DataFormField extends StatefulWidget {
     String? dependsOn,
     FocusNode? focusNode,
     FocusNode? nextFocusNode,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormLocationModel(
       type: FormFieldTypeEnum.location,
@@ -1133,7 +1203,7 @@ class DataFormField extends StatefulWidget {
       status: status,
       weight: weight,
       dependsOn: dependsOn,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.boolSwitch({
@@ -1157,6 +1227,8 @@ class DataFormField extends StatefulWidget {
     bool? readOnly,
     FocusNode? focusNode,
     FocusNode? nextFocusNode,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormBoolSwitchModel(
       type: FormFieldTypeEnum.boolean,
@@ -1168,7 +1240,7 @@ class DataFormField extends StatefulWidget {
       required: required,
       status: status,
       weight: weight,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   DataFormField.repeatingGroup({
@@ -1191,6 +1263,8 @@ class DataFormField extends StatefulWidget {
     Widget? removeIcon,
     Widget? reorderIcon,
     String? dependsOn,
+    List<FormRule>? rules,
+    String? rulesJson,
   }) {
     model = FormRepeatingGroupModel(
       type: FormFieldTypeEnum.repeatingGroup,
@@ -1212,7 +1286,7 @@ class DataFormField extends StatefulWidget {
       addIcon: addIcon,
       removeIcon: removeIcon,
       reorderIcon: reorderIcon,
-    );
+    )..rules = _resolveRules(rules, rulesJson);
   }
 
   //</editor-fold>

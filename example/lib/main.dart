@@ -5,10 +5,6 @@ import 'package:data_forms/enums/field_status.dart';
 import 'package:data_forms/model/data_model/date_data_model.dart';
 import 'package:data_forms/model/data_model/radio_data_model.dart';
 import 'package:data_forms/model/data_model/spinner_data_model.dart';
-import 'package:data_forms/model/fields_model/text_filed_model.dart';
-import 'package:data_forms/model/fields_model/email_model.dart';
-import 'package:data_forms/model/fields_model/mobile_model.dart';
-import 'package:data_forms/model/fields_model/number_model.dart';
 import 'package:data_forms/rules/form_rule.dart';
 import 'package:data_forms/widget/field.dart';
 import 'package:data_forms/widget/form.dart';
@@ -105,6 +101,17 @@ class MainTestPage extends StatelessWidget {
                         (route) => true);
                   },
                   child: const Text('Rules Engine form'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushAndRemoveUntil<dynamic>(
+                        context,
+                        MaterialPageRoute<dynamic>(
+                            builder: (BuildContext context) =>
+                                SectionRulesJsonForm()),
+                        (route) => true);
+                  },
+                  child: const Text('Section rulesJson form'),
                 ),
               ],
             ),
@@ -917,6 +924,194 @@ class RulesEngineForm extends StatelessWidget {
                           showTitle: true,
                           weight: 6,
                           required: false,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size.fromHeight(48),
+                ),
+                onPressed: () {
+                  final isValid = form.isValid();
+                  final values = form.onSubmit();
+                  debugPrint('Valid: $isValid');
+                  debugPrint('Values: $values');
+
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        isValid
+                            ? 'Submitted — ${values.length} visible field(s) collected.'
+                            : 'Please fill in all required visible fields.',
+                      ),
+                      backgroundColor: isValid ? Colors.green : Colors.red,
+                    ),
+                  );
+                },
+                child: const Text('Submit'),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Section constructor rulesJson example
+//
+// Demonstrates the new constructor APIs without changing the existing rules
+// engine example above:
+//  • FormSection.rulesJson controls whole-section visibility.
+//  • DataFormField.rulesJson controls one field inside a visible section.
+//  • Empty JSON targets are resolved to the section tag or field tag.
+// ---------------------------------------------------------------------------
+
+// ignore: must_be_immutable
+class SectionRulesJsonForm extends StatelessWidget {
+  SectionRulesJsonForm({super.key});
+
+  late DataForm form;
+
+  static const String _grantSectionRulesJson = '''
+  {
+    "target": "",
+    "conditions": [
+      { "field": "project_type", "operator": "equals", "value": 1 }
+    ],
+    "require_all": true,
+    "action": "show"
+  }
+''';
+
+  static const String _commercialSectionRulesJson = '''
+  {
+    "target": "",
+    "conditions": [
+      { "field": "project_type", "operator": "equals", "value": 2 }
+    ],
+    "require_all": true,
+    "action": "show"
+  }
+''';
+
+  static const String _budgetFieldRulesJson = '''
+  {
+    "target": "",
+    "conditions": [
+      { "field": "needs_budget", "operator": "equals", "value": true }
+    ],
+    "require_all": true,
+    "action": "show"
+  }
+''';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Section rulesJson')),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 24.0),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(bottom: 16.0),
+              padding: const EdgeInsets.all(12.0),
+              decoration: BoxDecoration(
+                color: Colors.green.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.green.shade200),
+              ),
+              child: const Text(
+                '1. Select Grant or Commercial to reveal a section.\n'
+                '2. In Grant, toggle "Needs budget" to reveal Budget Amount.\n'
+                '3. These rules are passed through section and field constructors.',
+                style: TextStyle(fontSize: 13),
+              ),
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: form = DataForm.multiSection(
+                  context,
+                  sections: [
+                    FormSection(
+                      sectionTitle: 'Project Setup',
+                      fields: [
+                        DataFormField.spinner(
+                          tag: 'project_type',
+                          title: 'Project Type',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Select a project type',
+                          hint: 'Select project type...',
+                          items: [
+                            SpinnerDataModel(name: 'Grant', id: 1),
+                            SpinnerDataModel(name: 'Commercial', id: 2),
+                          ],
+                          onChange: (_) {},
+                        ),
+                      ],
+                    ),
+                    FormSection(
+                      tag: 'section_grant',
+                      sectionTitle: 'Grant Details',
+                      rulesJson: _grantSectionRulesJson,
+                      fields: [
+                        DataFormField.text(
+                          tag: 'grant_name',
+                          title: 'Grant Name',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Grant name is required',
+                        ),
+                        DataFormField.boolSwitch(
+                          tag: 'needs_budget',
+                          title: 'Needs budget?',
+                          showTitle: true,
+                          weight: 12,
+                        ),
+                        DataFormField.price(
+                          tag: 'budget_amount',
+                          title: 'Budget Amount',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Budget amount is required',
+                          currencyName: 'USD',
+                          rulesJson: _budgetFieldRulesJson,
+                        ),
+                      ],
+                    ),
+                    FormSection(
+                      tag: 'section_commercial',
+                      sectionTitle: 'Commercial Details',
+                      rulesJson: _commercialSectionRulesJson,
+                      fields: [
+                        DataFormField.text(
+                          tag: 'client_name',
+                          title: 'Client Name',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Client name is required',
+                        ),
+                        DataFormField.email(
+                          tag: 'client_email',
+                          title: 'Client Email',
+                          showTitle: true,
+                          weight: 12,
+                          required: true,
+                          errorMessage: 'Client email is required',
                         ),
                       ],
                     ),

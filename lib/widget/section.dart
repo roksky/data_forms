@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/state_manager.dart';
+import 'package:data_forms/rules/form_rule.dart';
 import 'package:data_forms/values/theme.dart';
 import 'package:data_forms/widget/field.dart';
 import 'package:data_forms/widget/fields/text_plain_field.dart';
@@ -18,13 +19,40 @@ class FormSection extends StatelessWidget {
   /// visibility. Leave `null` if visibility rules are not needed.
   String? tag;
 
+  /// Section-level visibility rules.
+  ///
+  /// These are merged with form-level and field-level rules by [DataForm].
+  /// Leave a rule's target blank to use this section's [tag].
+  List<FormRule>? rules;
+
   FormSection({
     super.key,
     required this.fields,
     this.style,
     required this.sectionTitle,
     this.tag,
-  });
+    List<FormRule>? rules,
+    String? rulesJson,
+  }) : rules = _resolveRules(rules, rulesJson);
+
+  static List<FormRule>? _resolveRules(
+    List<FormRule>? rules,
+    String? rulesJson,
+  ) {
+    final resolved = <FormRule>[
+      ...?rules,
+      if (rulesJson != null && rulesJson.trim().isNotEmpty)
+        ..._rulesFromJson(rulesJson),
+    ];
+    return resolved.isEmpty ? null : resolved;
+  }
+
+  static List<FormRule> _rulesFromJson(String rulesJson) {
+    final json = rulesJson.trim();
+    return json.startsWith('[')
+        ? FormRule.listFromString(json)
+        : [FormRule.fromString(json)];
+  }
 
   @override
   Widget build(BuildContext context) {
