@@ -160,15 +160,23 @@ class _GSLocationFieldState extends State<FormLocationField> {
                                 ),
                               ),
                             ),
-                            Text(
-                              widget.model.title ?? '',
-                              style: widget.formStyle.titleTextStyle,
+                            Flexible(
+                              child: Text(
+                                widget.model.title ?? '',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: widget.formStyle.titleTextStyle,
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4.0),
                         Text(
                           _currentLocation,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                          textAlign: TextAlign.center,
                           style: widget.formStyle.fieldTextStyle,
                         ),
                       ],

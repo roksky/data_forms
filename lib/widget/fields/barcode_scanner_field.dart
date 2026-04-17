@@ -97,9 +97,14 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                         ),
                       ),
                     ),
-                    Text(
-                      widget.model.title ?? '',
-                      style: widget.formStyle.titleTextStyle,
+                    Flexible(
+                      child: Text(
+                        widget.model.title ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: widget.formStyle.titleTextStyle,
+                      ),
                     ),
                   ],
                 ),
@@ -107,10 +112,16 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                 widget._scannedValue == null
                     ? Text(
                       widget.model.hint ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                       style: widget.formStyle.fieldHintStyle,
                     )
                     : Text(
                       widget._scannedValue ?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.center,
                       style: widget.formStyle.fieldTextStyle,
                     ),
               ],

@@ -96,9 +96,14 @@ class _GSQRScannerFieldState extends State<FormQRScannerField> {
                         ),
                       ),
                     ),
-                    Text(
-                      widget.model.title ?? '',
-                      style: widget.formStyle.titleTextStyle,
+                    Flexible(
+                      child: Text(
+                        widget.model.title ?? '',
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                        style: widget.formStyle.titleTextStyle,
+                      ),
                     ),
                   ],
                 ),

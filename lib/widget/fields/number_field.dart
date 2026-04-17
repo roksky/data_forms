@@ -38,12 +38,14 @@ class FormNumberField<T> extends NotifiableStatefulWidget<T> {
 }
 
 class _GSNumberFieldState extends State<FormNumberField> {
+  String _valueText(Object? value) => value?.toString() ?? '';
+
   @override
   void initState() {
     widget.controller ??= TextEditingController();
 
     if (widget.model.value != null) {
-      widget.controller?.text = widget.model.value;
+      widget.controller?.text = _valueText(widget.model.value);
     }
     super.initState();
   }
@@ -55,7 +57,7 @@ class _GSNumberFieldState extends State<FormNumberField> {
       widget.controller = oldWidget.controller;
     } else {
       widget.controller ??= TextEditingController();
-      widget.controller!.text = widget.model.value;
+      widget.controller!.text = _valueText(widget.model.value);
     }
   }
 
@@ -79,8 +81,7 @@ class _GSNumberFieldState extends State<FormNumberField> {
         FocusScope.of(context).requestFocus(widget.model.nextFocusNode);
       },
       decoration: InputDecoration(
-        counter:
-            (widget.model.showCounter ?? false) ? null : const Offstage(),
+        counter: (widget.model.showCounter ?? false) ? null : const Offstage(),
         hintText: widget.model.hint,
         counterStyle: widget.formStyle.fieldHintStyle,
         contentPadding: const EdgeInsets.symmetric(
@@ -97,6 +98,7 @@ class _GSNumberFieldState extends State<FormNumberField> {
   }
 }
 
+// ignore: must_be_immutable
 class GSIntegerField extends FormNumberField<int> {
   GSIntegerField(super.model, super.formStyle, {super.key});
 
@@ -107,6 +109,7 @@ class GSIntegerField extends FormNumberField<int> {
   }
 }
 
+// ignore: must_be_immutable
 class GSDoubleField extends FormNumberField<double> {
   GSDoubleField(super.model, super.formStyle, {super.key});
 
