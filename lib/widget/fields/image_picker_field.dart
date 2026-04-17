@@ -199,7 +199,15 @@ class NormalView extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(model.title ?? '', style: formStyle.titleTextStyle),
+              Flexible(
+                child: Text(
+                  model.title ?? '',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: formStyle.titleTextStyle,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 6.0),
@@ -257,13 +265,17 @@ class ImagePickedView extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                   child: Row(
                     children: [
-                      Text(
-                        model.title!,
-                        style: formStyle.titleTextStyle.copyWith(
-                          color: Colors.white,
+                      Expanded(
+                        child: Text(
+                          model.title ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: formStyle.titleTextStyle.copyWith(
+                            color: Colors.white,
+                          ),
                         ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: 8.0),
                       SizedBox(
                         height: 20.0,
                         child: ElevatedButton(

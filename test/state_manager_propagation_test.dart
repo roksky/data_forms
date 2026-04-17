@@ -66,9 +66,7 @@ Widget _wrap(StateManager sm, Widget child) {
   return MaterialApp(
     home: ChangeNotifierProvider<StateManager>.value(
       value: sm,
-      child: Scaffold(
-        body: SingleChildScrollView(child: child),
-      ),
+      child: Scaffold(body: SingleChildScrollView(child: child)),
     ),
   );
 }
@@ -81,8 +79,9 @@ void main() {
   // ── Bool field ─────────────────────────────────────────────────────────────
 
   group('FormBoolSwitchField', () {
-    testWidgets('set() is called with true when switch is turned on',
-        (tester) async {
+    testWidgets('set() is called with true when switch is turned on', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormBoolSwitchModel(tag: 'has_vehicle');
 
@@ -97,8 +96,9 @@ void main() {
       expect(sm.get('has_vehicle'), isTrue);
     });
 
-    testWidgets('set() is called with false when switch is turned off',
-        (tester) async {
+    testWidgets('set() is called with false when switch is turned off', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormBoolSwitchModel(tag: 'flag');
 
@@ -217,6 +217,28 @@ void main() {
 
       expect(sm.get('count'), '42');
     });
+
+    testWidgets('renders an integer initial value', (tester) async {
+      final sm = StateManager();
+      final model = FormNumberModel(tag: 'count', value: 7);
+
+      await tester.pumpWidget(_wrap(sm, GSIntegerField(model, _style)));
+      await tester.pump();
+
+      final field = tester.widget<TextField>(find.byType(TextField));
+      expect(field.controller?.text, '7');
+    });
+
+    testWidgets('renders a double initial value', (tester) async {
+      final sm = StateManager();
+      final model = FormNumberModel(tag: 'rate', value: 12.5);
+
+      await tester.pumpWidget(_wrap(sm, GSDoubleField(model, _style)));
+      await tester.pump();
+
+      final field = tester.widget<TextField>(find.byType(TextField));
+      expect(field.controller?.text, '12.5');
+    });
   });
 
   // ── Password field ──────────────────────────────────────────────────────────
@@ -288,7 +310,9 @@ void main() {
       expect(stored!.title, 'Option A');
     });
 
-    testWidgets('set() updates when a different item is tapped', (tester) async {
+    testWidgets('set() updates when a different item is tapped', (
+      tester,
+    ) async {
       final sm = StateManager();
       final items = [
         RadioDataModel(title: 'Cat', isSelected: false),
@@ -330,8 +354,9 @@ void main() {
       expect(find.byType(FormDatePickerField), findsOneWidget);
     });
 
-    testWidgets('set() is called after user confirms date picker',
-        (tester) async {
+    testWidgets('set() is called after user confirms date picker', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormDatePickerModel(tag: 'start_date');
 
@@ -360,19 +385,22 @@ void main() {
       final model = FormDateRangePickerModel(tag: 'trip_dates');
 
       await tester.pumpWidget(
-          _wrap(sm, FormDateRangePickerField(model, _style)));
+        _wrap(sm, FormDateRangePickerField(model, _style)),
+      );
       await tester.pump();
 
       expect(find.byType(FormDateRangePickerField), findsOneWidget);
     });
 
-    testWidgets('set() is called after user confirms date range picker',
-        (tester) async {
+    testWidgets('set() is called after user confirms date range picker', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormDateRangePickerModel(tag: 'range');
 
       await tester.pumpWidget(
-          _wrap(sm, FormDateRangePickerField(model, _style)));
+        _wrap(sm, FormDateRangePickerField(model, _style)),
+      );
       await tester.pump();
 
       // Open the range picker
@@ -402,8 +430,9 @@ void main() {
       expect(find.byType(FormTimePickerField), findsOneWidget);
     });
 
-    testWidgets('set() is called after user confirms time picker',
-        (tester) async {
+    testWidgets('set() is called after user confirms time picker', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormTimePickerModel(tag: 'meeting_time');
 
@@ -427,8 +456,9 @@ void main() {
   // ── Image picker field ──────────────────────────────────────────────────────
 
   group('FormImagePickerField', () {
-    testWidgets('builds without error and _stateManager is assigned',
-        (tester) async {
+    testWidgets('builds without error and _stateManager is assigned', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormImagePickerModel(
         tag: 'avatar',
@@ -461,8 +491,9 @@ void main() {
   // ── Multi image picker field ────────────────────────────────────────────────
 
   group('FormMultiImagePickerField', () {
-    testWidgets('builds without error and _stateManager is assigned',
-        (tester) async {
+    testWidgets('builds without error and _stateManager is assigned', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormMultiImagePickerModel(
         tag: 'gallery',
@@ -470,7 +501,8 @@ void main() {
       );
 
       await tester.pumpWidget(
-          _wrap(sm, FormMultiImagePickerField(model, _style)));
+        _wrap(sm, FormMultiImagePickerField(model, _style)),
+      );
       await tester.pump();
 
       expect(find.byType(FormMultiImagePickerField), findsOneWidget);
@@ -481,8 +513,9 @@ void main() {
   // ── File picker field ───────────────────────────────────────────────────────
 
   group('FormFilePickerField', () {
-    testWidgets('builds without error and _stateManager is assigned',
-        (tester) async {
+    testWidgets('builds without error and _stateManager is assigned', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormFilePickerModel(
         tag: 'attachment',
@@ -501,13 +534,15 @@ void main() {
   // ── Multi media picker field ────────────────────────────────────────────────
 
   group('FormMultiMediaAttachmentField', () {
-    testWidgets('builds without error and _stateManager is assigned',
-        (tester) async {
+    testWidgets('builds without error and _stateManager is assigned', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormMultiMediaPickerModel(tag: 'media');
 
       await tester.pumpWidget(
-          _wrap(sm, FormMultiMediaAttachmentField(model, _style)));
+        _wrap(sm, FormMultiMediaAttachmentField(model, _style)),
+      );
       await tester.pump();
 
       expect(find.byType(FormMultiMediaAttachmentField), findsOneWidget);
@@ -518,13 +553,15 @@ void main() {
   // ── Signature field ─────────────────────────────────────────────────────────
 
   group('FormSignatureScreenField', () {
-    testWidgets('builds without error and stateManager is accessible',
-        (tester) async {
+    testWidgets('builds without error and stateManager is accessible', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormSignatureModel(tag: 'sig');
 
       await tester.pumpWidget(
-          _wrap(sm, FormSignatureScreenField(model, _style)));
+        _wrap(sm, FormSignatureScreenField(model, _style)),
+      );
       await tester.pump();
 
       expect(find.byType(FormSignatureScreenField), findsOneWidget);
@@ -535,8 +572,9 @@ void main() {
   // ── QR scanner field ────────────────────────────────────────────────────────
 
   group('FormQRScannerField', () {
-    testWidgets('builds without error and stateManager is accessible',
-        (tester) async {
+    testWidgets('builds without error and stateManager is accessible', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormQRScannerModel(tag: 'qr_code');
 
@@ -551,13 +589,15 @@ void main() {
   // ── Barcode scanner field ───────────────────────────────────────────────────
 
   group('FormBarcodeScannerField', () {
-    testWidgets('builds without error and _stateManager is assigned',
-        (tester) async {
+    testWidgets('builds without error and _stateManager is assigned', (
+      tester,
+    ) async {
       final sm = StateManager();
       final model = FormBarCodeModel(tag: 'barcode');
 
       await tester.pumpWidget(
-          _wrap(sm, FormBarcodeScannerField(model, _style)));
+        _wrap(sm, FormBarcodeScannerField(model, _style)),
+      );
       await tester.pump();
 
       expect(find.byType(FormBarcodeScannerField), findsOneWidget);
@@ -572,43 +612,52 @@ void main() {
 
   group('Rules engine reacts to field value changes', () {
     testWidgets(
-        'bool field toggle makes isVisible return true for dependent target',
-        (tester) async {
-      final sm = StateManager();
-      sm.setShowOnTrue(const _AlwaysShowOnTrue('has_vehicle', 'section_vehicle'));
+      'bool field toggle makes isVisible return true for dependent target',
+      (tester) async {
+        final sm = StateManager();
+        sm.setShowOnTrue(
+          const _AlwaysShowOnTrue('has_vehicle', 'section_vehicle'),
+        );
 
-      final model = FormBoolSwitchModel(tag: 'has_vehicle');
-      await tester.pumpWidget(_wrap(sm, FormBoolSwitchField(model, _style)));
-      await tester.pump();
+        final model = FormBoolSwitchModel(tag: 'has_vehicle');
+        await tester.pumpWidget(_wrap(sm, FormBoolSwitchField(model, _style)));
+        await tester.pump();
 
-      // Before toggle: rule condition not met → target hidden
-      expect(sm.isVisible('section_vehicle'), isFalse);
+        // Before toggle: rule condition not met → target hidden
+        expect(sm.isVisible('section_vehicle'), isFalse);
 
-      await tester.tap(find.byType(Switch));
-      await tester.pump();
+        await tester.tap(find.byType(Switch));
+        await tester.pump();
 
-      // After toggle: has_vehicle == true → target visible
-      expect(sm.isVisible('section_vehicle'), isTrue);
-    });
+        // After toggle: has_vehicle == true → target visible
+        expect(sm.isVisible('section_vehicle'), isTrue);
+      },
+    );
 
     testWidgets(
-        'text field change makes isVisible return true for dependent target',
-        (tester) async {
-      final sm = StateManager();
-      sm.setShowOnValue(
-          const _AlwaysShowOnValue('account_type', 'business', 'section_business'));
+      'text field change makes isVisible return true for dependent target',
+      (tester) async {
+        final sm = StateManager();
+        sm.setShowOnValue(
+          const _AlwaysShowOnValue(
+            'account_type',
+            'business',
+            'section_business',
+          ),
+        );
 
-      final model = FormTextModel(tag: 'account_type');
-      await tester.pumpWidget(_wrap(sm, FormTextField(model, _style)));
-      await tester.pump();
+        final model = FormTextModel(tag: 'account_type');
+        await tester.pumpWidget(_wrap(sm, FormTextField(model, _style)));
+        await tester.pump();
 
-      expect(sm.isVisible('section_business'), isFalse);
+        expect(sm.isVisible('section_business'), isFalse);
 
-      await tester.enterText(find.byType(TextField), 'business');
-      await tester.pump();
+        await tester.enterText(find.byType(TextField), 'business');
+        await tester.pump();
 
-      expect(sm.isVisible('section_business'), isTrue);
-    });
+        expect(sm.isVisible('section_business'), isTrue);
+      },
+    );
   });
 }
 
