@@ -28,4 +28,5 @@ enum FormFieldTypeEnum {
   boolean,
   locationTree,
   repeatingGroup,
+  colorPicker,
 }

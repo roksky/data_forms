@@ -12,6 +12,7 @@ export 'model/fields_model/email_model.dart';
 export 'model/fields_model/mobile_model.dart';
 export 'model/fields_model/number_model.dart';
 export 'model/fields_model/repeating_group_model.dart';
+export 'model/fields_model/color_picker_model.dart';
 // Add other field models as needed
 
 // Enums
