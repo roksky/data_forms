@@ -68,6 +68,8 @@ import 'package:data_forms/widget/fields/multi_media_picker_field.dart';
 import 'package:data_forms/widget/fields/qr_scanner_field.dart';
 import 'package:data_forms/widget/fields/signature_field.dart';
 import 'package:data_forms/widget/fields/repeating_group_field.dart';
+import 'package:data_forms/model/fields_model/color_picker_model.dart';
+import 'package:data_forms/widget/fields/color_picker_field.dart';
 
 // ignore: must_be_immutable
 class DataFormField extends StatefulWidget {
@@ -1243,6 +1245,40 @@ class DataFormField extends StatefulWidget {
     )..rules = _resolveRules(rules, rulesJson);
   }
 
+  DataFormField.colorPicker({
+    super.key,
+    required String tag,
+    String? title,
+    String? errorMessage,
+    String? helpMessage,
+    bool? required,
+    bool? showTitle,
+    FormFieldStatusEnum? status,
+    int? weight,
+    String? value,
+    bool? readOnly,
+    String? dependsOn,
+    List<Color>? colors,
+    List<FormRule>? rules,
+    String? rulesJson,
+  }) {
+    model = FormColorPickerModel(
+      type: FormFieldTypeEnum.colorPicker,
+      tag: tag,
+      title: title,
+      errorMessage: errorMessage,
+      helpMessage: helpMessage,
+      required: required,
+      status: status,
+      showTitle: showTitle ?? true,
+      weight: weight,
+      value: value,
+      enableReadOnly: readOnly,
+      dependsOn: dependsOn,
+      colors: colors,
+    )..rules = _resolveRules(rules, rulesJson);
+  }
+
   DataFormField.repeatingGroup({
     super.key,
     required String tag,
@@ -1624,6 +1660,12 @@ class _GSFieldState extends State<DataFormField> {
       case FormFieldTypeEnum.repeatingGroup:
         widget.child = FormRepeatingGroupField(
           widget.model as FormRepeatingGroupModel,
+          widget.formStyle!,
+        );
+        break;
+      case FormFieldTypeEnum.colorPicker:
+        widget.child = FormColorPickerField(
+          widget.model as FormColorPickerModel,
           widget.formStyle!,
         );
         break;
