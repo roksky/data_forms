@@ -21,7 +21,7 @@ class FormRepeatingGroupField
     int initialCount = model.minItems ?? 1;
     if (initialCount > 0) {
       for (int i = 0; i < initialCount; i++) {
-        _addNewGroup();
+        addNewGroup();
       }
     }
   }
@@ -30,14 +30,14 @@ class FormRepeatingGroupField
   State<FormRepeatingGroupField> createState() =>
       _FormRepeatingGroupFieldState();
 
-  void _addNewGroup() {
+  void addNewGroup() {
     var groupId = const Uuid().v4();
     List<DataFormField> newGroup =
         model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
     groupInstances.add(newGroup);
   }
 
-  void _removeGroup(int index) {
+  void removeGroup(int index) {
     if (groupInstances.length > (model.minItems ?? 0)) {
       groupInstances.removeAt(index);
     }
@@ -165,7 +165,7 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                               const Icon(Icons.remove_circle_outline),
                           onPressed: () {
                             setState(() {
-                              widget._removeGroup(groupIndex);
+                              widget.removeGroup(groupIndex);
                             });
                             // Update state manager
                             stateManager.set(
@@ -197,7 +197,7 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
             child: ElevatedButton.icon(
               onPressed: () {
                 setState(() {
-                  widget._addNewGroup();
+                  widget.addNewGroup();
                 });
                 // Update state manager
                 stateManager.set(widget.model.tag, widget.getValue().value);
