@@ -103,6 +103,682 @@ class DataFormField extends StatefulWidget {
         : [FormRule.fromString(json)];
   }
 
+  DataFormField.fromModel({super.key, required this.model});
+
+  DataFormField copyWithTag(String tag, {Key? key, bool resetValue = true}) {
+    final copiedField = DataFormField.fromModel(
+      key: key,
+      model: _copyModelWithTag(model!, tag, resetValue: resetValue),
+    );
+    copiedField.formStyle = formStyle;
+    return copiedField;
+  }
+
+  static T _copyCommon<T extends FormFieldModel>(
+    FormFieldModel source,
+    T target,
+  ) {
+    target.rules =
+        source.rules == null ? null : List<FormRule>.from(source.rules!);
+    target.isHiddenByRule = source.isHiddenByRule;
+    return target;
+  }
+
+  static FormFieldModel _copyModelWithTag(
+    FormFieldModel source,
+    String tag, {
+    required bool resetValue,
+  }) {
+    final value = resetValue ? null : source.value;
+
+    switch (source.type) {
+      case FormFieldTypeEnum.text:
+        final model = source as FormTextModel;
+        return _copyCommon(
+          source,
+          FormTextModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            maxLength: model.maxLength,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.textPlain:
+        final model = source as FormTextPlainModel;
+        return _copyCommon(
+          source,
+          FormTextPlainModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            enableReadOnly: model.enableReadOnly,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            minLine: model.minLine,
+            maxLine: model.maxLine,
+            maxLength: model.maxLength,
+            hint: model.hint,
+            showCounter: model.showCounter,
+          ),
+        );
+      case FormFieldTypeEnum.password:
+        final model = source as FormPasswordModel;
+        return _copyCommon(
+          source,
+          FormPasswordModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateReg: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            maxLength: model.maxLength,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.mobile:
+        final model = source as FormMobileModel;
+        return _copyCommon(
+          source,
+          FormMobileModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateReg: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            maxLength: model.maxLength,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.number:
+      case FormFieldTypeEnum.integer:
+      case FormFieldTypeEnum.double:
+        final model = source as FormNumberModel;
+        return _copyCommon(
+          source,
+          FormNumberModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            showCounter: model.showCounter,
+            maxLength: model.maxLength,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.email:
+        final model = source as FormEmailModel;
+        return _copyCommon(
+          source,
+          FormEmailModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            maxLength: model.maxLength,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.price:
+        final model = source as FormPriceModel;
+        return _copyCommon(
+          source,
+          FormPriceModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            maxLength: model.maxLength,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.bankCard:
+        final model = source as FormBankCardModel;
+        return _copyCommon(
+          source,
+          FormBankCardModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.spinner:
+        final model = source as FormSpinnerModel;
+        return _copyCommon(
+          source,
+          FormSpinnerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            onTap: model.onTap,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            items: model.items,
+            onChange: model.onChange,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.radioGroup:
+        final model = source as FormRadioModel;
+        return _copyCommon(
+          source,
+          FormRadioModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            value: value,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            items: model.items,
+            callBack: model.callBack,
+            selectedIcon: model.selectedIcon,
+            unSelectedIcon: model.unSelectedIcon,
+            hint: model.hint,
+            scrollable: model.scrollable,
+            height: model.height,
+            scrollDirection: model.scrollDirection,
+            scrollBarColor: model.scrollBarColor,
+            showScrollBar: model.showScrollBar,
+            searchable: model.searchable,
+            searchHint: model.searchHint,
+            searchIcon: model.searchIcon,
+            searchBoxDecoration: model.searchBoxDecoration,
+          ),
+        );
+      case FormFieldTypeEnum.checkList:
+        final model = source as FormCheckBoxModel;
+        return _copyCommon(
+          source,
+          FormCheckBoxModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            value: value,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            dependsOn: model.dependsOn,
+            items: model.items,
+            callBack: model.callBack,
+            requiredCheckListEnum: model.requiredCheckListEnum,
+            selectedIcon: model.selectedIcon,
+            unSelectedIcon: model.unSelectedIcon,
+            hint: model.hint,
+            scrollable: model.scrollable,
+            height: model.height,
+            scrollDirection: model.scrollDirection,
+            scrollBarColor: model.scrollBarColor,
+            showScrollBar: model.showScrollBar,
+            searchable: model.searchable,
+            searchHint: model.searchHint,
+            searchIcon: model.searchIcon,
+            searchBoxDecoration: model.searchBoxDecoration,
+          ),
+        );
+      case FormFieldTypeEnum.date:
+        final model = source as FormDatePickerModel;
+        return _copyCommon(
+          source,
+          FormDatePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+            dateFormatType: model.dateFormatType,
+            isPastAvailable: model.isPastAvailable,
+            availableFrom: model.availableFrom,
+            availableTo: model.availableTo,
+            initialDate: model.initialDate,
+          ),
+        );
+      case FormFieldTypeEnum.dateRage:
+        final model = source as FormDateRangePickerModel;
+        return _copyCommon(
+          source,
+          FormDateRangePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            showTitle: model.showTitle,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateReg: model.validateRegEx,
+            weight: model.weight,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+            dateFormatType: model.dateFormatType,
+            isPastAvailable: model.isPastAvailable,
+            availableFrom: model.availableFrom,
+            availableTo: model.availableTo,
+            initialStartDate: model.initialStartDate,
+            initialEndDate: model.initialEndDate,
+            from: model.from,
+            to: model.to,
+          ),
+        );
+      case FormFieldTypeEnum.time:
+        final model = source as FormTimePickerModel;
+        return _copyCommon(
+          source,
+          FormTimePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateReg: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+            initialTime: model.initialTime,
+          ),
+        );
+      case FormFieldTypeEnum.imagePicker:
+        final model = source as FormImagePickerModel;
+        return _copyCommon(
+          source,
+          FormImagePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            value: value,
+            dependsOn: model.dependsOn,
+            iconWidget: model.iconWidget,
+            cameraPopupIcon: model.cameraPopupIcon,
+            galleryPopupIcon: model.galleryPopupIcon,
+            showCropper: model.showCropper,
+            cameraPopupTitle: model.cameraPopupTitle,
+            galleryPopupTitle: model.galleryPopupTitle,
+            imageSource: model.imageSource,
+            hint: model.hint,
+            maximumSizePerImageInBytes: model.maximumSizePerImageInBytes,
+            onErrorSizeItem: model.onErrorSizeItem,
+          ),
+        );
+      case FormFieldTypeEnum.multiImagePicker:
+        final model = source as FormMultiImagePickerModel;
+        return _copyCommon(
+          source,
+          FormMultiImagePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            iconWidget: model.iconWidget,
+            maximumImageCount: model.maximumImageCount,
+            onErrorSizeItem: model.onErrorSizeItem,
+            maximumSizePerImageInKB: model.maximumSizePerImageInKB,
+            defaultImagePath: resetValue ? null : model.defaultImagePath,
+            cameraPopupIcon: model.cameraPopupIcon,
+            galleryPopupIcon: model.galleryPopupIcon,
+            showCropper: model.showCropper,
+            cameraPopupTitle: model.cameraPopupTitle,
+            galleryPopupTitle: model.galleryPopupTitle,
+            imageSource: model.imageSource,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.filePicker:
+        final model = source as FormFilePickerModel;
+        return _copyCommon(
+          source,
+          FormFilePickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            value: value,
+            allowMultiple: model.allowMultiple,
+            fileType: model.fileType,
+            hint: model.hint,
+            allowedExtensions: model.allowedExtensions,
+          ),
+        );
+      case FormFieldTypeEnum.multiMediaPicker:
+        final model = source as FormMultiMediaPickerModel;
+        return _copyCommon(
+          source,
+          FormMultiMediaPickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            hint: model.hint,
+            iconWidget: model.iconWidget,
+          ),
+        );
+      case FormFieldTypeEnum.signature:
+        final model = source as FormSignatureModel;
+        return _copyCommon(
+          source,
+          FormSignatureModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            hint: model.hint,
+            iconWidget: model.iconWidget,
+            color: model.color,
+            fit: model.fit,
+          ),
+        );
+      case FormFieldTypeEnum.qrScanner:
+        final model = source as FormQRScannerModel;
+        return _copyCommon(
+          source,
+          FormQRScannerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            hint: model.hint,
+            iconWidget: model.iconWidget,
+          ),
+        );
+      case FormFieldTypeEnum.barcode:
+        final model = source as FormBarCodeModel;
+        return _copyCommon(
+          source,
+          FormBarCodeModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            hint: model.hint,
+            iconWidget: model.iconWidget,
+          ),
+        );
+      case FormFieldTypeEnum.location:
+        final model = source as FormLocationModel;
+        return _copyCommon(
+          source,
+          FormLocationModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            dependsOn: model.dependsOn,
+            hint: model.hint,
+            iconWidget: model.iconWidget,
+          ),
+        );
+      case FormFieldTypeEnum.locationTree:
+        final model = source as FormLocationTreeModel;
+        return _copyCommon(
+          source,
+          FormLocationTreeModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            dependsOn: model.dependsOn,
+            targetLevel: model.targetLevel,
+            fetchLocations: model.fetchLocations,
+            fetchLocationById: model.fetchLocationById,
+            onTap: model.onTap,
+            hint: model.hint,
+          ),
+        );
+      case FormFieldTypeEnum.boolean:
+        final model = source as FormBoolSwitchModel;
+        return _copyCommon(
+          source,
+          FormBoolSwitchModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+          )..value = value,
+        );
+      case FormFieldTypeEnum.repeatingGroup:
+        final model = source as FormRepeatingGroupModel;
+        return _copyCommon(
+          source,
+          FormRepeatingGroupModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            prefixWidget: model.prefixWidget,
+            postfixWidget: model.postfixWidget,
+            required: model.required,
+            status: model.status,
+            value: value,
+            validateRegEx: model.validateRegEx,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            onTap: model.onTap,
+            dependsOn: model.dependsOn,
+            fields: model.fields,
+            minItems: model.minItems,
+            maxItems: model.maxItems,
+            addButtonText: model.addButtonText,
+            removeButtonText: model.removeButtonText,
+            allowReorder: model.allowReorder,
+            addIcon: model.addIcon,
+            removeIcon: model.removeIcon,
+            reorderIcon: model.reorderIcon,
+          ),
+        );
+      case FormFieldTypeEnum.colorPicker:
+        final model = source as FormColorPickerModel;
+        return _copyCommon(
+          source,
+          FormColorPickerModel(
+            type: model.type,
+            tag: tag,
+            title: model.title,
+            errorMessage: model.errorMessage,
+            helpMessage: model.helpMessage,
+            required: model.required,
+            status: model.status,
+            weight: model.weight,
+            showTitle: model.showTitle,
+            enableReadOnly: model.enableReadOnly,
+            value: value,
+            dependsOn: model.dependsOn,
+            colors: model.colors,
+          ),
+        );
+      default:
+        throw UnsupportedError('Unsupported field type: ${source.type}');
+    }
+  }
+
   DataFormField.qrScanner({
     super.key,
     required String tag,

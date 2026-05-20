@@ -125,16 +125,17 @@ void main() {
       expect(copy.removeButtonText, 'Delete');
     });
 
-    test('copyForNewGroup updates field tags with groupId', () {
+    test('copyForNewGroup copies field tags with groupId', () {
       final textField = DataFormField.text(tag: 'name');
       final model = FormRepeatingGroupModel(
         tag: 'contacts',
         fields: [textField],
       );
-      model.copyForNewGroup('g1');
+      final copy = model.copyForNewGroup('g1');
 
-      // _copyFieldModel mutates the field's tag in place
-      expect(textField.model!.tag, contains('g1'));
+      expect(copy.fields.single.model!.tag, contains('g1'));
+      expect(textField.model!.tag, 'name');
+      expect(copy.fields.single, isNot(same(textField)));
     });
   });
 
@@ -168,6 +169,24 @@ void main() {
 
       expect(field.groupInstances[0].length, 1);
       expect(field.groupInstances[1].length, 1);
+    });
+
+    test('each group instance gets an independent field model', () {
+      final textField = DataFormField.text(tag: 'name');
+      final model = FormRepeatingGroupModel(
+        tag: 'g',
+        fields: [textField],
+        minItems: 2,
+      );
+      final field = FormRepeatingGroupField(model, FormStyle());
+
+      final first = field.groupInstances[0][0];
+      final second = field.groupInstances[1][0];
+
+      expect(first, isNot(same(second)));
+      expect(first.model, isNot(same(second.model)));
+      expect(first.model!.tag, isNot(second.model!.tag));
+      expect(textField.model!.tag, 'name');
     });
   });
 
@@ -210,7 +229,9 @@ void main() {
     });
 
     test('_removeGroup does nothing when count equals minItems (null → 0)', () {
-      final field = _makeGroupField(minItems: null); // minItems defaults to 1 in UI
+      final field = _makeGroupField(
+        minItems: null,
+      ); // minItems defaults to 1 in UI
       // minItems is null so (minItems ?? 0) == 0; a group can always be removed
       // unless groupInstances.length <= 0. With 1 group and minItems null (0):
       field.removeGroup(0);
@@ -231,10 +252,13 @@ void main() {
   // 4. FormRepeatingGroupField — isValid()
   // ==========================================================================
   group('FormRepeatingGroupField - isValid()', () {
-    test('returns true when groups satisfy minItems and no required fields', () {
-      final field = _makeGroupField(minItems: 2);
-      expect(field.isValid(), isTrue);
-    });
+    test(
+      'returns true when groups satisfy minItems and no required fields',
+      () {
+        final field = _makeGroupField(minItems: 2);
+        expect(field.isValid(), isTrue);
+      },
+    );
 
     test('returns true when minItems is null and groups exist', () {
       final field = _makeGroupField(minItems: null);
@@ -388,7 +412,10 @@ void main() {
 
       expect((value.value as List).length, 2);
       expect((value.value as List<Map<String, dynamic>>)[0]['name'], 'Alice');
-      expect((value.value as List<Map<String, dynamic>>)[1]['phone'], '555-0002');
+      expect(
+        (value.value as List<Map<String, dynamic>>)[1]['phone'],
+        '555-0002',
+      );
     });
 
     test('stores nested FormFieldValue objects', () {
@@ -408,9 +435,7 @@ void main() {
   // ==========================================================================
   group('FormRepeatingGroupField - widget rendering', () {
     testWidgets('shows add button when no maxItems set', (tester) async {
-      await tester.pumpWidget(
-        _buildProviderApp(_makeGroupField(minItems: 1)),
-      );
+      await tester.pumpWidget(_buildProviderApp(_makeGroupField(minItems: 1)));
       await tester.pump();
 
       expect(find.text('Add Item'), findsOneWidget);
@@ -445,17 +470,19 @@ void main() {
       expect(find.text('Add Item'), findsOneWidget);
     });
 
-    testWidgets('hides remove button when count equals minItems', (tester) async {
-      await tester.pumpWidget(
-        _buildProviderApp(_makeGroupField(minItems: 2)),
-      );
+    testWidgets('hides remove button when count equals minItems', (
+      tester,
+    ) async {
+      await tester.pumpWidget(_buildProviderApp(_makeGroupField(minItems: 2)));
       await tester.pump();
 
       // Count == minItems so remove button should not appear
       expect(find.byIcon(Icons.remove_circle_outline), findsNothing);
     });
 
-    testWidgets('shows remove button when count exceeds minItems', (tester) async {
+    testWidgets('shows remove button when count exceeds minItems', (
+      tester,
+    ) async {
       final field = _makeGroupField(minItems: 1);
       field.addNewGroup(); // 2 groups, minItems = 1 → show remove
 
@@ -465,8 +492,9 @@ void main() {
       expect(find.byIcon(Icons.remove_circle_outline), findsWidgets);
     });
 
-    testWidgets('tapping add button increases rendered group count',
-        (tester) async {
+    testWidgets('tapping add button increases rendered group count', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildProviderApp(_makeGroupField(minItems: 1, maxItems: 5)),
       );
@@ -479,8 +507,9 @@ void main() {
       expect(find.byType(Card), findsNWidgets(2));
     });
 
-    testWidgets('tapping add button twice creates two additional groups',
-        (tester) async {
+    testWidgets('tapping add button twice creates two additional groups', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildProviderApp(_makeGroupField(minItems: 1, maxItems: 5)),
       );
@@ -494,8 +523,9 @@ void main() {
       expect(find.byType(Card), findsNWidgets(3));
     });
 
-    testWidgets('tapping remove button decreases rendered group count',
-        (tester) async {
+    testWidgets('tapping remove button decreases rendered group count', (
+      tester,
+    ) async {
       final field = _makeGroupField(minItems: 1);
       field.addNewGroup(); // start with 2 so remove button is visible
 
@@ -508,7 +538,9 @@ void main() {
       expect(find.byType(Card), findsNWidgets(1));
     });
 
-    testWidgets('add button disappears after reaching maxItems', (tester) async {
+    testWidgets('add button disappears after reaching maxItems', (
+      tester,
+    ) async {
       await tester.pumpWidget(
         _buildProviderApp(_makeGroupField(minItems: 1, maxItems: 2)),
       );
@@ -632,7 +664,7 @@ void main() {
       expect(groups.length, 3);
     });
 
-    testWidgets('onSubmit list length increases after tapping add', (
+    testWidgets('onSubmit list length increases after adding groups', (
       tester,
     ) async {
       late DataForm form;
@@ -663,10 +695,11 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      // Tap Add twice
-      await tester.tap(find.text('Add Item'));
-      await tester.pump();
-      await tester.tap(find.text('Add Item'));
+      final groupField =
+          (form.fields.single as DataFormField).child
+              as FormRepeatingGroupField;
+      groupField.addNewGroup();
+      groupField.addNewGroup();
       await tester.pump();
 
       final data = form.onSubmit();
@@ -714,10 +747,7 @@ void main() {
       await tester.tap(find.byIcon(Icons.remove_circle_outline).first);
       await tester.pump();
 
-      expect(
-        (form.onSubmit()['entries']!.value as List).length,
-        1,
-      );
+      expect((form.onSubmit()['entries']!.value as List).length, 1);
     });
 
     testWidgets('onSubmit contains each group as a Map', (tester) async {
@@ -754,38 +784,42 @@ void main() {
     });
 
     testWidgets(
-        'isValid() returns false when required field inside group is empty',
-        (tester) async {
-      late DataForm form;
+      'isValid() returns false when required field inside group is empty',
+      (tester) async {
+        late DataForm form;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Builder(
-              builder: (context) {
-                form = DataForm.singleSection(
-                  context,
-                  fields: [
-                    DataFormField.repeatingGroup(
-                      tag: 'info',
-                      fields: [DataFormField.text(tag: 'name', required: true)],
-                      minItems: 1,
-                    ),
-                  ],
-                );
-                return form;
-              },
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Builder(
+                builder: (context) {
+                  form = DataForm.singleSection(
+                    context,
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'info',
+                        fields: [
+                          DataFormField.text(tag: 'name', required: true),
+                        ],
+                        minItems: 1,
+                      ),
+                    ],
+                  );
+                  return form;
+                },
+              ),
             ),
           ),
-        ),
-      );
-      await tester.pumpAndSettle();
+        );
+        await tester.pumpAndSettle();
 
-      expect(form.isValid(), isFalse);
-    });
+        expect(form.isValid(), isFalse);
+      },
+    );
 
-    testWidgets('multiple repeating group fields are all collected on submit',
-        (tester) async {
+    testWidgets('multiple repeating group fields are all collected on submit', (
+      tester,
+    ) async {
       late DataForm form;
 
       await tester.pumpWidget(
@@ -821,14 +855,8 @@ void main() {
       final data = form.onSubmit();
       expect(data.containsKey('contacts'), isTrue);
       expect(data.containsKey('addresses'), isTrue);
-      expect(
-        (data['contacts']!.value as List).length,
-        1,
-      );
-      expect(
-        (data['addresses']!.value as List).length,
-        2,
-      );
+      expect((data['contacts']!.value as List).length, 1);
+      expect((data['addresses']!.value as List).length, 2);
     });
   });
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:data_forms/model/fields_model/repeating_group_model.dart';
-import 'package:data_forms/model/fields_model/field_model.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/state_manager.dart';
@@ -44,11 +43,15 @@ class FormRepeatingGroupField
   }
 
   DataFormField _copyFieldModel(DataFormField field, String groupId) {
-    // Create a deep copy of the field model with a new tag
-    var copiedField = field; // This is a shallow copy for now
-    copiedField.model!.tag = '${field.model!.tag.split('_')[0]}_group_$groupId';
-    copiedField.model!.value = null; // Reset value for new instance
-    return copiedField;
+    final sourceTag = field.model!.tag;
+    return field.copyWithTag(
+      '${sourceTag}_group_$groupId',
+      key: ValueKey('${_widgetKeyPrefix(field)}_$groupId'),
+    );
+  }
+
+  String _widgetKeyPrefix(DataFormField field) {
+    return '${model.tag}_${field.model!.tag}';
   }
 
   @override
