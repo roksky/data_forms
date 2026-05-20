@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:data_forms/model/fields_model/repeating_group_model.dart';
-import 'package:data_forms/model/fields_model/field_model.dart';
 import 'package:data_forms/core/field_callback.dart';
 import 'package:data_forms/core/form_style.dart';
 import 'package:data_forms/model/state_manager.dart';
@@ -21,7 +20,7 @@ class FormRepeatingGroupField
     int initialCount = model.minItems ?? 1;
     if (initialCount > 0) {
       for (int i = 0; i < initialCount; i++) {
-        _addNewGroup();
+        addNewGroup();
       }
     }
   }
@@ -30,25 +29,29 @@ class FormRepeatingGroupField
   State<FormRepeatingGroupField> createState() =>
       _FormRepeatingGroupFieldState();
 
-  void _addNewGroup() {
+  void addNewGroup() {
     var groupId = const Uuid().v4();
     List<DataFormField> newGroup =
         model.fields.map((field) => _copyFieldModel(field, groupId)).toList();
     groupInstances.add(newGroup);
   }
 
-  void _removeGroup(int index) {
+  void removeGroup(int index) {
     if (groupInstances.length > (model.minItems ?? 0)) {
       groupInstances.removeAt(index);
     }
   }
 
   DataFormField _copyFieldModel(DataFormField field, String groupId) {
-    // Create a deep copy of the field model with a new tag
-    var copiedField = field; // This is a shallow copy for now
-    copiedField.model!.tag = '${field.model!.tag.split('_')[0]}_group_$groupId';
-    copiedField.model!.value = null; // Reset value for new instance
-    return copiedField;
+    final sourceTag = field.model!.tag;
+    return field.copyWithTag(
+      '${sourceTag}_group_$groupId',
+      key: ValueKey('${_widgetKeyPrefix(field)}_$groupId'),
+    );
+  }
+
+  String _widgetKeyPrefix(DataFormField field) {
+    return '${model.tag}_${field.model!.tag}';
   }
 
   @override
@@ -165,7 +168,7 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                               const Icon(Icons.remove_circle_outline),
                           onPressed: () {
                             setState(() {
-                              widget._removeGroup(groupIndex);
+                              widget.removeGroup(groupIndex);
                             });
                             // Update state manager
                             stateManager.set(
@@ -197,7 +200,7 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
             child: ElevatedButton.icon(
               onPressed: () {
                 setState(() {
-                  widget._addNewGroup();
+                  widget.addNewGroup();
                 });
                 // Update state manager
                 stateManager.set(widget.model.tag, widget.getValue().value);

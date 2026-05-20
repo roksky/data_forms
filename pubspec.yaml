@@ -22,6 +22,7 @@ dependencies:
   barcode_scan2: ^4.5.0
   hand_signature: ^3.0.3
   mobile_scanner: ">=6.0.6 <8.0.0"
+  uuid: ^4.5.2
 
   vector_math: any
 dev_dependencies:

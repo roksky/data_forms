@@ -74,7 +74,7 @@ class FormRepeatingGroupModel extends FormFieldModel {
       helpMessage: helpMessage,
       prefixWidget: prefixWidget,
       postfixWidget: postfixWidget,
-      required: required,
+      required: this.required,
       status: status,
       value: value,
       validateRegEx: validateRegEx,
@@ -98,7 +98,9 @@ class FormRepeatingGroupModel extends FormFieldModel {
   }
 
   DataFormField _copyFieldModel(DataFormField field, String groupId) {
-    field.model!.tag = '${field.model!.tag}_$groupId';
-    return field;
+    return field.copyWithTag(
+      '${field.model!.tag}_$groupId',
+      key: ValueKey('${tag}_${field.model!.tag}_$groupId'),
+    );
   }
 }
