@@ -83,8 +83,11 @@ class FormRepeatingGroupField
     for (var group in groupInstances) {
       Map<String, dynamic> groupValue = {};
       for (var field in group) {
-        groupValue[field.model!.tag] =
-            (field.child as FormFieldCallBack).getValue();
+        final child = field.child;
+        if (child is FormFieldCallBack) {
+          final callback = child as FormFieldCallBack;
+          groupValue[field.model!.tag] = callback.getValue();
+        }
       }
       values.add(groupValue);
     }

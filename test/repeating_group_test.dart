@@ -707,6 +707,38 @@ void main() {
       expect(groups.length, 3);
     });
 
+    testWidgets('tapping Add Item with child fields does not throw', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                return DataForm.singleSection(
+                  context,
+                  fields: [
+                    DataFormField.repeatingGroup(
+                      tag: 'contacts',
+                      fields: [DataFormField.text(tag: 'name')],
+                      minItems: 1,
+                      maxItems: 2,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Add Item'));
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('onSubmit list length decreases after removing a group', (
       tester,
     ) async {
