@@ -10,7 +10,7 @@ import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormRepeatingGroupField
-    extends NotifiableStatefulWidget<List<Map<String, dynamic>>> {
+    extends NotifiableStatefulWidget<List<Map<String, FormFieldValue>>> {
   final FormRepeatingGroupModel model;
   final FormStyle formStyle;
   List<List<DataFormField>> groupInstances = [];
@@ -103,11 +103,11 @@ class FormRepeatingGroupField
   }
 
   @override
-  FormFieldValue<List<Map<String, dynamic>>> getValue() {
-    List<Map<String, dynamic>> values = [];
+  FormFieldValue<List<Map<String, FormFieldValue>>> getValue() {
+    List<Map<String, FormFieldValue>> values = [];
 
     for (var group in groupInstances) {
-      Map<String, dynamic> groupValue = {};
+      Map<String, FormFieldValue> groupValue = {};
       for (var field in group) {
         final child = field.child;
         if (child is FormFieldCallBack) {
