@@ -105,6 +105,10 @@ class GSIntegerField extends FormNumberField<int> {
   @override
   FormFieldValue<int> getValue() {
     var value = controller!.text.replaceAll(",", "");
+    // if is empty string return 0
+    if (value.isEmpty) {
+      return FormFieldValue.int(0);
+    }
     return FormFieldValue.int(int.parse(value));
   }
 }

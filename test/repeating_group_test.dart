@@ -707,6 +707,38 @@ void main() {
       expect(groups.length, 3);
     });
 
+    testWidgets('tapping Add Item with child fields does not throw', (
+      tester,
+    ) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: Builder(
+              builder: (context) {
+                return DataForm.singleSection(
+                  context,
+                  fields: [
+                    DataFormField.repeatingGroup(
+                      tag: 'contacts',
+                      fields: [DataFormField.text(tag: 'name')],
+                      minItems: 1,
+                      maxItems: 2,
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Add Item'));
+      await tester.pump();
+
+      expect(tester.takeException(), isNull);
+    });
+
     testWidgets('onSubmit list length decreases after removing a group', (
       tester,
     ) async {
@@ -814,6 +846,45 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(form.isValid(), isFalse);
+      },
+    );
+
+    testWidgets(
+      'isValid() reads mounted child field values inside repeating groups',
+      (tester) async {
+        late DataForm form;
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Builder(
+                builder: (context) {
+                  form = DataForm.singleSection(
+                    context,
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'info',
+                        fields: [
+                          DataFormField.text(tag: 'name', required: true),
+                        ],
+                        minItems: 1,
+                      ),
+                    ],
+                  );
+                  return form;
+                },
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(form.isValid(), isFalse);
+
+        await tester.enterText(find.byType(TextField), 'Alice');
+        await tester.pump();
+
+        expect(form.isValid(), isTrue);
       },
     );
 

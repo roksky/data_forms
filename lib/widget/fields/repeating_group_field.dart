@@ -10,7 +10,7 @@ import 'notifyable_stateful_widget.dart';
 
 // ignore: must_be_immutable
 class FormRepeatingGroupField
-    extends NotifiableStatefulWidget<List<Map<String, dynamic>>> {
+    extends NotifiableStatefulWidget<List<Map<String, FormFieldValue>>> {
   final FormRepeatingGroupModel model;
   final FormStyle formStyle;
   List<List<DataFormField>> groupInstances = [];
@@ -56,35 +56,64 @@ class FormRepeatingGroupField
 
   @override
   bool isValid() {
-    // Check if minimum items requirement is met
     if ((model.minItems ?? 0) > 0 &&
         groupInstances.length < (model.minItems ?? 0)) {
       return false;
     }
 
-    // Validate all fields in all groups
     for (var group in groupInstances) {
       for (var field in group) {
-        if (field.model!.required ?? false) {
-          // Basic validation - you may need to implement more sophisticated validation
-          if (field.model!.value == null || field.model!.value == '') {
+        final child = field.child;
+        if (child is FormFieldCallBack) {
+          final callback = child as FormFieldCallBack;
+          if (!callback.isValid()) {
             return false;
           }
+        }
+
+        // Before a copied group field is mounted, it has no callback child yet.
+        // Keep direct model validation available for pure unit tests and callers
+        // that validate a repeating group before rendering it.
+        if (child == null && !_isModelValueValid(field)) {
+          return false;
         }
       }
     }
     return true;
   }
 
+  bool _isModelValueValid(DataFormField field) {
+    final fieldModel = field.model;
+    if (fieldModel == null) return true;
+
+    final value = fieldModel.value;
+    final textValue = value?.toString() ?? '';
+
+    if (fieldModel.validateRegEx != null) {
+      return fieldModel.validateRegEx!.hasMatch(textValue);
+    }
+
+    if (fieldModel.required ?? false) {
+      if (value is Iterable) return value.isNotEmpty;
+      if (value is Map) return value.isNotEmpty;
+      return textValue.isNotEmpty;
+    }
+
+    return true;
+  }
+
   @override
-  FormFieldValue<List<Map<String, dynamic>>> getValue() {
-    List<Map<String, dynamic>> values = [];
+  FormFieldValue<List<Map<String, FormFieldValue>>> getValue() {
+    List<Map<String, FormFieldValue>> values = [];
 
     for (var group in groupInstances) {
-      Map<String, dynamic> groupValue = {};
+      Map<String, FormFieldValue> groupValue = {};
       for (var field in group) {
-        groupValue[field.model!.tag] =
-            (field.child as FormFieldCallBack).getValue();
+        final child = field.child;
+        if (child is FormFieldCallBack) {
+          final callback = child as FormFieldCallBack;
+          groupValue[field.model!.tag] = callback.getValue();
+        }
       }
       values.add(groupValue);
     }
