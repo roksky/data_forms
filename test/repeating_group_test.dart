@@ -849,6 +849,45 @@ void main() {
       },
     );
 
+    testWidgets(
+      'isValid() reads mounted child field values inside repeating groups',
+      (tester) async {
+        late DataForm form;
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Builder(
+                builder: (context) {
+                  form = DataForm.singleSection(
+                    context,
+                    fields: [
+                      DataFormField.repeatingGroup(
+                        tag: 'info',
+                        fields: [
+                          DataFormField.text(tag: 'name', required: true),
+                        ],
+                        minItems: 1,
+                      ),
+                    ],
+                  );
+                  return form;
+                },
+              ),
+            ),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(form.isValid(), isFalse);
+
+        await tester.enterText(find.byType(TextField), 'Alice');
+        await tester.pump();
+
+        expect(form.isValid(), isTrue);
+      },
+    );
+
     testWidgets('multiple repeating group fields are all collected on submit', (
       tester,
     ) async {
