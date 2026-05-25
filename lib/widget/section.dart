@@ -108,11 +108,14 @@ class FormSection extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      Text(
-                        sectionTitle!,
-                        style:
-                            style?.sectionTitleStyle ??
-                            FormTheme.textThemeStyle.displayLarge,
+                      Expanded(
+                        child: Text(
+                          sectionTitle!,
+                          style:
+                              style?.sectionTitleStyle ??
+                              FormTheme.textThemeStyle.displayLarge,
+                          softWrap: true,
+                        ),
                       ),
                     ],
                   ),
