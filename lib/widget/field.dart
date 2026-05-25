@@ -2069,13 +2069,13 @@ class _GSFieldState extends State<DataFormField> {
                   child: Column(
                     children: [
                       Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
                             child: Text(
                               widget.model?.title ?? "",
                               style: widget.formStyle!.titleTextStyle,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
+                              softWrap: true,
                             ),
                           ),
                           const SizedBox(width: 4.0),
