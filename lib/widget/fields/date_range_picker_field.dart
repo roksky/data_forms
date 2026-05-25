@@ -88,8 +88,8 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
   Widget build(BuildContext context) {
     _stateManager = Provider.of<StateManager>(context, listen: false);
     widget.context = context;
-    return SizedBox(
-      height: 48.0,
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minHeight: 48.0),
       child: Padding(
         padding: const EdgeInsets.only(
           right: 10.0,
@@ -116,6 +116,7 @@ class _GSDateRangePickerFieldState extends State<FormDateRangePickerField> {
                         widget.isDateSelected
                             ? widget.formStyle.fieldTextStyle
                             : widget.formStyle.fieldHintStyle,
+                    softWrap: true,
                   ),
                 ),
               ),

@@ -31,9 +31,21 @@ const List<Color> _defaultColors = [
 ];
 
 String _toHex(Color color) {
-  final r = (color.r * 255.0).round().clamp(0, 255).toRadixString(16).padLeft(2, '0');
-  final g = (color.g * 255.0).round().clamp(0, 255).toRadixString(16).padLeft(2, '0');
-  final b = (color.b * 255.0).round().clamp(0, 255).toRadixString(16).padLeft(2, '0');
+  final r = (color.r * 255.0)
+      .round()
+      .clamp(0, 255)
+      .toRadixString(16)
+      .padLeft(2, '0');
+  final g = (color.g * 255.0)
+      .round()
+      .clamp(0, 255)
+      .toRadixString(16)
+      .padLeft(2, '0');
+  final b = (color.b * 255.0)
+      .round()
+      .clamp(0, 255)
+      .toRadixString(16)
+      .padLeft(2, '0');
   return '#$r$g$b'.toUpperCase();
 }
 
@@ -78,10 +90,11 @@ class _FormColorPickerFieldState extends State<FormColorPickerField> {
     final colors = widget.model.colors ?? _defaultColors;
     showDialog<Color>(
       context: context,
-      builder: (ctx) => _ColorPickerDialog(
-        colors: colors,
-        selected: _fromHex(widget.value),
-      ),
+      builder:
+          (ctx) => _ColorPickerDialog(
+            colors: colors,
+            selected: _fromHex(widget.value),
+          ),
     ).then((picked) {
       if (picked == null) return;
       final hex = _toHex(picked);
@@ -96,9 +109,10 @@ class _FormColorPickerFieldState extends State<FormColorPickerField> {
     final selectedColor = _fromHex(widget.value);
 
     return InkWell(
-      onTap: widget.model.enableReadOnly == true
-          ? null
-          : () => _openPicker(stateManager),
+      onTap:
+          widget.model.enableReadOnly == true
+              ? null
+              : () => _openPicker(stateManager),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0, vertical: 12.0),
         child: Row(
@@ -116,9 +130,11 @@ class _FormColorPickerFieldState extends State<FormColorPickerField> {
             Expanded(
               child: Text(
                 widget.value ?? (widget.model.value as String? ?? ''),
-                style: widget.value != null
-                    ? widget.formStyle.fieldTextStyle
-                    : widget.formStyle.fieldHintStyle,
+                style:
+                    widget.value != null
+                        ? widget.formStyle.fieldTextStyle
+                        : widget.formStyle.fieldHintStyle,
+                softWrap: true,
               ),
             ),
             Icon(Icons.colorize, color: Colors.grey.shade500, size: 20),
@@ -158,33 +174,36 @@ class _ColorPickerDialogState extends State<_ColorPickerDialog> {
           key: const Key('color_palette'),
           spacing: 8,
           runSpacing: 8,
-          children: widget.colors.map((color) {
-            final isSelected = _selected?.toARGB32() == color.toARGB32();
-            return GestureDetector(
-              onTap: () => setState(() => _selected = color),
-              child: Container(
-                width: 36,
-                height: 36,
-                decoration: BoxDecoration(
-                  color: color,
-                  border: Border.all(
-                    color: isSelected ? Colors.blue : Colors.grey.shade400,
-                    width: isSelected ? 2.5 : 1,
+          children:
+              widget.colors.map((color) {
+                final isSelected = _selected?.toARGB32() == color.toARGB32();
+                return GestureDetector(
+                  onTap: () => setState(() => _selected = color),
+                  child: Container(
+                    width: 36,
+                    height: 36,
+                    decoration: BoxDecoration(
+                      color: color,
+                      border: Border.all(
+                        color: isSelected ? Colors.blue : Colors.grey.shade400,
+                        width: isSelected ? 2.5 : 1,
+                      ),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child:
+                        isSelected
+                            ? Icon(
+                              Icons.check,
+                              size: 18,
+                              color:
+                                  color.computeLuminance() > 0.5
+                                      ? Colors.black
+                                      : Colors.white,
+                            )
+                            : null,
                   ),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: isSelected
-                    ? Icon(
-                        Icons.check,
-                        size: 18,
-                        color: color.computeLuminance() > 0.5
-                            ? Colors.black
-                            : Colors.white,
-                      )
-                    : null,
-              ),
-            );
-          }).toList(),
+                );
+              }).toList(),
         ),
       ),
       actions: [
@@ -193,9 +212,10 @@ class _ColorPickerDialogState extends State<_ColorPickerDialog> {
           child: const Text('Cancel'),
         ),
         TextButton(
-          onPressed: _selected != null
-              ? () => Navigator.of(context).pop(_selected)
-              : null,
+          onPressed:
+              _selected != null
+                  ? () => Navigator.of(context).pop(_selected)
+                  : null,
           child: const Text('Select'),
         ),
       ],

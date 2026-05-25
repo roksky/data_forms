@@ -132,6 +132,7 @@ class _GSSpinnerFieldState extends State<FormSpinnerField> {
                                       e.id == widget.hintIndex
                                           ? widget.formStyle.fieldHintStyle
                                           : widget.formStyle.fieldTextStyle,
+                                  softWrap: true,
                                 ),
                               ),
                             ),

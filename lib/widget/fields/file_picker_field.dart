@@ -70,7 +70,11 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           Center(
             child: ElevatedButton(
               onPressed: _pickFiles,
-              child: Text(widget.model.hint ?? 'Attach Files'),
+              child: Text(
+                widget.model.hint ?? 'Attach Files',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
             ),
           ),
           ListView.builder(
@@ -88,8 +92,16 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           Center(
             child:
                 widget._files.isNotEmpty
-                    ? Text("You have selected ${widget._files.length} files")
-                    : Text('No files attached'),
+                    ? Text(
+                      "You have selected ${widget._files.length} files",
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    )
+                    : Text(
+                      'No files attached',
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                    ),
           ),
         ],
       ),
@@ -106,7 +118,11 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           Center(
             child: ElevatedButton(
               onPressed: _pickFiles,
-              child: Text(widget.model.hint ?? 'Attach Files'),
+              child: Text(
+                widget.model.hint ?? 'Attach Files',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
             ),
           ),
           SizedBox(
@@ -131,8 +147,16 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
           ),
           SizedBox(height: 10),
           widget._files.isNotEmpty
-              ? Text("You have selected ${widget._files.length} files")
-              : Text('No files attached'),
+              ? Text(
+                "You have selected ${widget._files.length} files",
+                textAlign: TextAlign.center,
+                softWrap: true,
+              )
+              : Text(
+                'No files attached',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
         ],
       ),
     );
@@ -157,7 +181,13 @@ class FilePreview extends StatelessWidget {
             child: Column(
               children: [
                 _getFileIcon(file.extension ?? ''),
-                Text(file.name, style: TextStyle(fontSize: 10)),
+                Text(
+                  file.name,
+                  style: TextStyle(fontSize: 10),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
           ),

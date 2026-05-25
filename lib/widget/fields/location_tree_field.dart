@@ -51,6 +51,7 @@ class _GSLocationTreeFieldState extends State<FormLocationTreeField> {
             widget.result?.name ?? widget.model.title ?? 'Select Location',
             style: TextStyle(fontSize: 18),
             textAlign: TextAlign.center,
+            softWrap: true,
           ),
         ),
       ),
@@ -215,6 +216,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
             child: Text(
               'Select Location',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              softWrap: true,
             ),
           ),
           Expanded(
@@ -238,7 +240,7 @@ class _LocationPickerDialogState extends State<LocationPickerDialog> {
                               .map(
                                 (location) => DropdownMenuItem<LocationItem>(
                                   value: location,
-                                  child: Text(location.name),
+                                  child: Text(location.name, softWrap: true),
                                 ),
                               )
                               .toList(),

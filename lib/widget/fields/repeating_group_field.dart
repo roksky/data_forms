@@ -186,10 +186,14 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                       (widget.model.minItems ?? 0))
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${widget.model.title ?? "Group"} ${groupIndex + 1}',
-                          style: widget.formStyle.titleTextStyle,
+                        Expanded(
+                          child: Text(
+                            '${widget.model.title ?? "Group"} ${groupIndex + 1}',
+                            style: widget.formStyle.titleTextStyle,
+                            softWrap: true,
+                          ),
                         ),
                         IconButton(
                           icon:
