@@ -2063,6 +2063,7 @@ class _GSFieldState extends State<DataFormField> {
         children: [
           Expanded(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Visibility(
                   visible: widget.model?.showTitle ?? false,

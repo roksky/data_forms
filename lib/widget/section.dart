@@ -89,12 +89,18 @@ class FormSection extends StatelessWidget {
         rows.add(
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: childrenAtRow,
           ),
         );
         weightSum = 0;
       } else {
-        rows.add(Row(children: [Expanded(flex: 12, child: fields[i])]));
+        rows.add(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [Expanded(flex: 12, child: fields[i])],
+          ),
+        );
         i++;
       }
     }
