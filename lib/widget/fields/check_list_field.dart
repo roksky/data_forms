@@ -203,6 +203,7 @@ class CheckBoxItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
             alignment: Alignment.center,
@@ -212,7 +213,7 @@ class CheckBoxItem extends StatelessWidget {
                     width: 18,
                     height: 18,
                     decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.4),
+                      color: Colors.grey.withValues(alpha: 0.4),
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(4),
                     ),
@@ -236,7 +237,13 @@ class CheckBoxItem extends StatelessWidget {
             ],
           ),
           const SizedBox(width: 8),
-          Expanded(child: Text(_item.title, style: formStyle.fieldTextStyle)),
+          Expanded(
+            child: Text(
+              _item.title,
+              style: formStyle.fieldTextStyle,
+              softWrap: true,
+            ),
+          ),
         ],
       ),
     );

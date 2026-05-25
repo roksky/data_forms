@@ -71,6 +71,7 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
                 const SizedBox(height: 6.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Visibility(
                       visible: widget.model.required ?? false,
@@ -85,9 +86,13 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
                         ),
                       ),
                     ),
-                    Text(
-                      widget.model.title ?? '',
-                      style: widget.formStyle.titleTextStyle,
+                    Flexible(
+                      child: Text(
+                        widget.model.title ?? '',
+                        style: widget.formStyle.titleTextStyle,
+                        textAlign: TextAlign.center,
+                        softWrap: true,
+                      ),
                     ),
                   ],
                 ),
@@ -96,6 +101,8 @@ class _GSSignatureScreenState extends State<FormSignatureScreenField> {
                     ? Text(
                       widget.model.hint ?? '',
                       style: widget.formStyle.fieldHintStyle,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
                     )
                     : Padding(
                       padding: EdgeInsets.all(8.0),

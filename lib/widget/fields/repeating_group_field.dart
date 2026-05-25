@@ -135,7 +135,12 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
 
       // If adding this field would exceed 12 or we have no space, start a new row
       if (currentRowSum + fieldWeight > 12 && currentRow.isNotEmpty) {
-        rows.add(Row(children: currentRow));
+        rows.add(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: currentRow,
+          ),
+        );
         currentRow = [];
         currentRowSum = 0;
       }
@@ -151,7 +156,12 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
 
       // If we've reached exactly 12, complete the row
       if (currentRowSum == 12) {
-        rows.add(Row(children: currentRow));
+        rows.add(
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: currentRow,
+          ),
+        );
         currentRow = [];
         currentRowSum = 0;
       }
@@ -159,7 +169,9 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
 
     // Add any remaining fields in the last row
     if (currentRow.isNotEmpty) {
-      rows.add(Row(children: currentRow));
+      rows.add(
+        Row(crossAxisAlignment: CrossAxisAlignment.start, children: currentRow),
+      );
     }
 
     return Column(children: rows);
@@ -186,10 +198,14 @@ class _FormRepeatingGroupFieldState extends State<FormRepeatingGroupField> {
                       (widget.model.minItems ?? 0))
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '${widget.model.title ?? "Group"} ${groupIndex + 1}',
-                          style: widget.formStyle.titleTextStyle,
+                        Expanded(
+                          child: Text(
+                            '${widget.model.title ?? "Group"} ${groupIndex + 1}',
+                            style: widget.formStyle.titleTextStyle,
+                            softWrap: true,
+                          ),
                         ),
                         IconButton(
                           icon:

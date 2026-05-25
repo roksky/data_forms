@@ -143,6 +143,7 @@ class _GSLocationFieldState extends State<FormLocationField> {
                         const SizedBox(height: 6.0),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Visibility(
                               visible: widget.model.required ?? false,
@@ -163,8 +164,7 @@ class _GSLocationFieldState extends State<FormLocationField> {
                             Flexible(
                               child: Text(
                                 widget.model.title ?? '',
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
+                                softWrap: true,
                                 textAlign: TextAlign.center,
                                 style: widget.formStyle.titleTextStyle,
                               ),
@@ -174,8 +174,7 @@ class _GSLocationFieldState extends State<FormLocationField> {
                         const SizedBox(height: 4.0),
                         Text(
                           _currentLocation,
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                           textAlign: TextAlign.center,
                           style: widget.formStyle.fieldTextStyle,
                         ),

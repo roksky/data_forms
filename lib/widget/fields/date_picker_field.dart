@@ -104,7 +104,7 @@ class _GSDatePickerFieldState extends State<FormDatePickerField> {
                       widget.isDateSelected
                           ? widget.formStyle.fieldTextStyle
                           : widget.formStyle.fieldHintStyle,
-                  maxLines: 1,
+                  softWrap: true,
                 ),
               ),
             ),

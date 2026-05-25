@@ -100,6 +100,7 @@ class _GSTimePickerFieldState extends State<FormTimePickerField> {
                     widget.isTimeSelected
                         ? widget.formStyle.fieldTextStyle
                         : widget.formStyle.fieldHintStyle,
+                softWrap: true,
               ),
             ),
           ],

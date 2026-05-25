@@ -188,6 +188,7 @@ class NormalView extends StatelessWidget {
           const SizedBox(height: 6.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Visibility(
                 visible: model.required ?? false,
@@ -202,8 +203,7 @@ class NormalView extends StatelessWidget {
               Flexible(
                 child: Text(
                   model.title ?? '',
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
                   textAlign: TextAlign.center,
                   style: formStyle.titleTextStyle,
                 ),
@@ -211,7 +211,12 @@ class NormalView extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 6.0),
-          Text(model.hint ?? '', style: formStyle.fieldHintStyle),
+          Text(
+            model.hint ?? '',
+            style: formStyle.fieldHintStyle,
+            textAlign: TextAlign.center,
+            softWrap: true,
+          ),
         ],
       ),
     );
@@ -247,7 +252,7 @@ class ImagePickedView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                height: 32.0,
+                constraints: const BoxConstraints(minHeight: 32.0),
                 decoration: const BoxDecoration(
                   color: Colors.black54,
                   borderRadius: SmoothBorderRadius.only(
@@ -264,12 +269,12 @@ class ImagePickedView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(right: 8.0, left: 8.0),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: Text(
                           model.title ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          softWrap: true,
                           style: formStyle.titleTextStyle.copyWith(
                             color: Colors.white,
                           ),

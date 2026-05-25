@@ -113,8 +113,16 @@ class _GSMultiMediaAttachmentFieldState
           ),
           SizedBox(height: 10),
           widget._attachments.isNotEmpty
-              ? Text("You have selected ${widget._attachments.length} files")
-              : Text('No files attached'),
+              ? Text(
+                "You have selected ${widget._attachments.length} files",
+                textAlign: TextAlign.center,
+                softWrap: true,
+              )
+              : Text(
+                'No files attached',
+                textAlign: TextAlign.center,
+                softWrap: true,
+              ),
         ],
       ),
     );

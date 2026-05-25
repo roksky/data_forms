@@ -83,6 +83,7 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                 const SizedBox(height: 6.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Visibility(
                       visible: widget.model.required ?? false,
@@ -100,8 +101,7 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                     Flexible(
                       child: Text(
                         widget.model.title ?? '',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
                         textAlign: TextAlign.center,
                         style: widget.formStyle.titleTextStyle,
                       ),
@@ -112,15 +112,13 @@ class _GSBarcodeScannerFieldState extends State<FormBarcodeScannerField> {
                 widget._scannedValue == null
                     ? Text(
                       widget.model.hint ?? '',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
                       textAlign: TextAlign.center,
                       style: widget.formStyle.fieldHintStyle,
                     )
                     : Text(
                       widget._scannedValue ?? '',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
+                      softWrap: true,
                       textAlign: TextAlign.center,
                       style: widget.formStyle.fieldTextStyle,
                     ),
