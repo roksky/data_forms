@@ -169,7 +169,10 @@ class _GSRadioGroupFieldState extends State<FormRadioGroupField> {
                       widget.filteredItems[index].isSelected = true;
                       widget.model.callBack(widget.filteredItems[index]);
                       widget.returnedData = widget.filteredItems[index];
-                      stateManager.set(widget.model.tag, widget.filteredItems[index]);
+                      stateManager.set(
+                        widget.model.tag,
+                        widget.filteredItems[index],
+                      );
                       setState(() => {});
                     },
                     customBorder: RoundedRectangleBorder(
@@ -207,44 +210,44 @@ class RadioItem extends StatelessWidget {
       margin: const EdgeInsets.all(8),
       child: Row(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Row(
+          Stack(
+            alignment: Alignment.center,
             children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  _model.unSelectedIcon == null
-                      ? Container(
-                        width: 18,
-                        height: 18,
-                        decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.4),
-                          shape: BoxShape.circle,
-                        ),
-                      )
-                      : _model.unSelectedIcon!,
-                  Visibility(
-                    visible: _item.isSelected,
-                    child:
-                        _model.selectedIcon == null
-                            ? Container(
-                              width: 10,
-                              height: 10,
-                              decoration: const BoxDecoration(
-                                color: Colors.blue,
-                                shape: BoxShape.circle,
-                              ),
-                            )
-                            : _model.selectedIcon!,
-                  ),
-                ],
-              ),
-              const SizedBox(width: 8),
-              Container(
-                margin: const EdgeInsetsDirectional.only(start: 8.0),
-                child: Text(_item.title, style: formStyle.fieldHintStyle),
+              _model.unSelectedIcon == null
+                  ? Container(
+                    width: 18,
+                    height: 18,
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withValues(alpha: 0.4),
+                      shape: BoxShape.circle,
+                    ),
+                  )
+                  : _model.unSelectedIcon!,
+              Visibility(
+                visible: _item.isSelected,
+                child:
+                    _model.selectedIcon == null
+                        ? Container(
+                          width: 10,
+                          height: 10,
+                          decoration: const BoxDecoration(
+                            color: Colors.blue,
+                            shape: BoxShape.circle,
+                          ),
+                        )
+                        : _model.selectedIcon!,
               ),
             ],
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Text(
+              _item.title,
+              style: formStyle.fieldHintStyle,
+              softWrap: true,
+            ),
           ),
         ],
       ),
