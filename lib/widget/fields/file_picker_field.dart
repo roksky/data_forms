@@ -39,7 +39,7 @@ class _GSFilePickerFieldState extends State<FormFilePickerField> {
   StateManager? _stateManager;
 
   Future<void> _pickFiles() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
+    FilePickerResult? result = await FilePicker.pickFiles(
       allowMultiple: widget.model.allowMultiple,
       type: widget.model.fileType,
       allowedExtensions: widget.model.allowedExtensions,
